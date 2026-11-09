@@ -22,7 +22,7 @@ A concept homepage and interactive demo dashboard for the FabWatch satellite mon
 ## Coverage
 
 - **Countries:** South Korea, Taiwan, China, USA, Japan, EU, Singapore
-- **Companies:** Samsung, SK hynix, TSMC, Intel, Micron, SMIC, YMTC, CXMT, Infineon, GlobalFoundries, STMicro, UMC
+- **Companies:** TSMC, Intel, SK hynix, Samsung, Micron, SMIC, YMTC, CXMT, Infineon, GlobalFoundries, STMicro, UMC
 
 ## Tech Stack
 
