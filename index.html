@@ -1,0 +1,2706 @@
+<title>FabWatch</title>
+<meta name="description" content="FabWatch monitors 66 semiconductor fabs across 7 countries using 6 satellite channels. Real-time utilization tracking, construction progress, and geopolitical intelligence for analysts, investors, and policymakers.">
+<meta property="og:title" content="FabWatch — Satellite Intelligence for Semiconductor Fabs">
+<meta property="og:description" content="Monitor 66 semiconductor fabs across 7 countries with 6 satellite channels. Real-time utilization data, construction tracking, and supply chain intelligence.">
+<meta property="og:type" content="website">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="FabWatch — Satellite Intelligence for Semiconductor Fabs">
+<meta name="twitter:description" content="66 fabs. 7 countries. 6 satellite channels. One dashboard.">
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800;900&family=IBM+Plex+Sans:wght@300;400;500;600&family=IBM+Plex+Mono:wght@400;500&family=Noto+Sans+KR:wght@300;400;500;600;700;900&display=swap">
+
+<style>
+:root {
+  --bg: #F8FAFC;
+  --fg: #1E293B;
+  --fg-muted: #64748B;
+  --hero-bg: #0B1628;
+  --hero-fg: #E2E8F0;
+  --accent: #38BDF8;
+  --accent-warm: #F59E0B;
+  --accent-green: #22C55E;
+  --accent-red: #EF4444;
+  --surface: #FFFFFF;
+  --surface-alt: #F1F5F9;
+  --border: #E2E8F0;
+  --card-shadow: 0 1px 3px rgba(0,0,0,0.06), 0 1px 2px rgba(0,0,0,0.04);
+  --font-display: 'Outfit', system-ui, sans-serif;
+  --font-body: 'IBM Plex Sans', system-ui, sans-serif;
+  --font-mono: 'IBM Plex Mono', monospace;
+  --font-ko: 'Noto Sans KR', 'Malgun Gothic', system-ui, sans-serif;
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --bg: #0F172A; --fg: #E2E8F0; --fg-muted: #94A3B8;
+    --hero-bg: #020617; --hero-fg: #E2E8F0;
+    --accent: #38BDF8; --accent-warm: #FBBF24; --accent-green: #4ADE80; --accent-red: #F87171;
+    --surface: #1E293B; --surface-alt: #0F172A; --border: #334155;
+    --card-shadow: 0 1px 3px rgba(0,0,0,0.3);
+    color-scheme: dark;
+  }
+}
+:root[data-theme="dark"] {
+  --bg: #0F172A; --fg: #E2E8F0; --fg-muted: #94A3B8;
+  --hero-bg: #020617; --hero-fg: #E2E8F0;
+  --accent: #38BDF8; --accent-warm: #FBBF24; --accent-green: #4ADE80; --accent-red: #F87171;
+  --surface: #1E293B; --surface-alt: #0F172A; --border: #334155;
+  --card-shadow: 0 1px 3px rgba(0,0,0,0.3);
+  color-scheme: dark;
+}
+
+/* Language switch */
+[data-lang="en"] .ko { display: none !important; }
+[data-lang="ko"] .en { display: none !important; }
+[data-lang="ko"] body,
+[data-lang="ko"] .value-card p,
+[data-lang="ko"] .channel-desc,
+[data-lang="ko"] .section-desc,
+[data-lang="ko"] .hero-sub,
+[data-lang="ko"] .price-features,
+[data-lang="ko"] .insight-card p,
+[data-lang="ko"] .insight-card h3,
+[data-lang="ko"] .cmp-table {
+  font-family: var(--font-ko);
+}
+[data-lang="ko"] h1, [data-lang="ko"] h2, [data-lang="ko"] h3,
+[data-lang="ko"] .section-title, [data-lang="ko"] .price-name,
+[data-lang="ko"] .price-amount, [data-lang="ko"] .stat-num,
+[data-lang="ko"] .lc-label, [data-lang="ko"] .value-card h3 {
+  font-family: 'Noto Sans KR', var(--font-display), sans-serif;
+}
+
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body {
+  background: var(--bg); color: var(--fg);
+  font-family: var(--font-body);
+  font-size: 16px; line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+}
+.inner {
+  max-width: 960px; margin: 0 auto;
+  padding-left: max(16px, env(safe-area-inset-left, 0px));
+  padding-right: max(16px, env(safe-area-inset-right, 0px));
+}
+.section { padding-block: 80px; }
+@media (max-width: 640px) { .section { padding-block: 48px; } }
+
+/* NAV */
+nav {
+  position: sticky; top: env(safe-area-inset-top, 0px); z-index: 100;
+  background: var(--hero-bg);
+  border-bottom: 1px solid rgba(255,255,255,0.08);
+  backdrop-filter: blur(12px);
+}
+body::before {
+  content: ""; position: fixed; inset: 0 0 auto;
+  height: env(safe-area-inset-top, 0px); z-index: 101;
+  background: var(--hero-bg);
+}
+.nav-inner {
+  display: flex; align-items: center; justify-content: space-between;
+  padding-block: 14px; gap: 12px;
+}
+.logo {
+  font-family: var(--font-display); font-weight: 800; font-size: 22px;
+  color: #FFFFFF; letter-spacing: -0.02em; text-decoration: none;
+  display: flex; align-items: center; gap: 8px; flex-shrink: 0;
+}
+.logo-icon {
+  width: 28px; height: 28px; background: var(--accent);
+  border-radius: 6px; display: grid; place-items: center;
+}
+.logo-icon svg { width: 18px; height: 18px; }
+.nav-links { display: flex; gap: 20px; align-items: center; list-style: none; }
+.nav-links a {
+  font-size: 14px; font-weight: 500; color: #94A3B8;
+  text-decoration: none; transition: color 0.15s;
+}
+.nav-links a:hover { color: #FFFFFF; }
+.nav-cta {
+  background: var(--accent) !important; color: var(--hero-bg) !important;
+  padding: 8px 18px; border-radius: 6px;
+  font-weight: 600 !important; font-size: 13px !important;
+  transition: opacity 0.15s;
+}
+.nav-cta:hover { opacity: 0.9; }
+.lang-toggle {
+  background: rgba(255,255,255,0.08); border: 1px solid rgba(255,255,255,0.15);
+  color: #94A3B8; padding: 5px 12px; border-radius: 6px;
+  font-size: 13px; font-weight: 600; cursor: pointer;
+  transition: all 0.15s; font-family: var(--font-body);
+  white-space: nowrap; flex-shrink: 0;
+}
+.lang-toggle:hover { background: rgba(255,255,255,0.14); color: #FFFFFF; }
+@media (max-width: 720px) {
+  .nav-links { gap: 10px; }
+  .nav-links .hide-mobile { display: none; }
+}
+
+/* HERO */
+.hero {
+  background: var(--hero-bg); color: var(--hero-fg);
+  padding-block: 80px 64px; position: relative; overflow: hidden;
+}
+.hero::before {
+  content: ""; position: absolute; top: -40%; right: -20%;
+  width: 600px; height: 600px;
+  background: radial-gradient(circle, rgba(56,189,248,0.08) 0%, transparent 70%);
+  pointer-events: none;
+}
+.hero::after {
+  content: ""; position: absolute; bottom: -30%; left: -15%;
+  width: 500px; height: 500px;
+  background: radial-gradient(circle, rgba(245,158,11,0.05) 0%, transparent 70%);
+  pointer-events: none;
+}
+.hero .inner { position: relative; z-index: 1; }
+.hero-badge {
+  display: inline-flex; align-items: center; gap: 8px;
+  background: rgba(56,189,248,0.1); border: 1px solid rgba(56,189,248,0.2);
+  border-radius: 100px; padding: 6px 16px;
+  font-size: 13px; font-weight: 500; color: var(--accent);
+  margin-bottom: 28px; font-family: var(--font-body);
+}
+.hero-badge .dot {
+  width: 6px; height: 6px; background: var(--accent-green);
+  border-radius: 50%; animation: pulse-dot 2s infinite;
+}
+@keyframes pulse-dot { 0%,100%{opacity:1;} 50%{opacity:0.4;} }
+.hero h1 {
+  font-family: var(--font-display);
+  font-size: clamp(36px, 5.5vw, 56px); font-weight: 800;
+  line-height: 1.08; letter-spacing: -0.03em;
+  text-wrap: balance; margin-bottom: 20px; max-width: 700px;
+}
+.hero h1 .accent-word { color: var(--accent); }
+.hero-sub {
+  font-size: 17px; line-height: 1.6; color: #94A3B8;
+  max-width: 560px; margin-bottom: 36px;
+}
+.hero-actions { display: flex; gap: 12px; flex-wrap: wrap; margin-bottom: 56px; }
+.btn {
+  display: inline-flex; align-items: center; gap: 8px;
+  padding: 14px 28px; border-radius: 8px;
+  font-family: var(--font-body); font-size: 15px; font-weight: 600;
+  text-decoration: none; border: none; cursor: pointer;
+  transition: transform 0.12s, opacity 0.15s;
+}
+.btn:hover { transform: translateY(-1px); }
+.btn-primary { background: var(--accent); color: var(--hero-bg); }
+.btn-outline {
+  background: transparent; color: var(--hero-fg);
+  border: 1px solid rgba(255,255,255,0.2);
+}
+.btn-outline:hover { border-color: rgba(255,255,255,0.4); }
+.stats-bar {
+  display: grid; grid-template-columns: repeat(4, 1fr); gap: 1px;
+  background: rgba(255,255,255,0.06); border-radius: 12px; overflow: hidden;
+  border: 1px solid rgba(255,255,255,0.06);
+}
+.stat { padding: 20px 16px; text-align: center; background: rgba(255,255,255,0.02); }
+.stat-num {
+  font-family: var(--font-display);
+  font-size: clamp(24px, 3.5vw, 32px); font-weight: 700;
+  color: #FFFFFF; letter-spacing: -0.02em;
+}
+.stat-num .highlight { color: var(--accent); }
+.stat-label {
+  font-size: 12px; color: #64748B; text-transform: uppercase;
+  letter-spacing: 0.08em; margin-top: 4px; font-weight: 500;
+}
+@media (max-width: 520px) { .stats-bar { grid-template-columns: repeat(2, 1fr); } }
+
+/* SECTIONS */
+.section-label {
+  font-family: var(--font-mono); font-size: 12px;
+  text-transform: uppercase; letter-spacing: 0.1em;
+  color: var(--accent); font-weight: 500; margin-bottom: 12px;
+}
+.section-title {
+  font-family: var(--font-display);
+  font-size: clamp(28px, 4vw, 40px); font-weight: 700;
+  letter-spacing: -0.02em; line-height: 1.15;
+  text-wrap: balance; margin-bottom: 16px;
+}
+.section-desc {
+  color: var(--fg-muted); font-size: 16px;
+  max-width: 560px; margin-bottom: 48px;
+}
+
+/* VALUE PROPS */
+.values { background: var(--bg); }
+.value-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; }
+@media (max-width: 720px) { .value-grid { grid-template-columns: 1fr; } }
+.value-card {
+  background: var(--surface); border: 1px solid var(--border);
+  border-radius: 12px; padding: 28px 24px;
+  display: flex; flex-direction: column; gap: 12px;
+}
+.value-icon {
+  width: 44px; height: 44px; border-radius: 10px;
+  display: grid; place-items: center;
+}
+.value-icon svg { width: 22px; height: 22px; }
+.value-card h3 {
+  font-family: var(--font-display); font-size: 18px;
+  font-weight: 700; letter-spacing: -0.01em;
+}
+.value-card p { color: var(--fg-muted); font-size: 14px; line-height: 1.6; }
+
+/* COMPARISON */
+.comparison { background: var(--surface-alt); }
+.cmp-table {
+  width: 100%; border-collapse: collapse; font-size: 14px;
+  overflow-x: auto; display: block;
+}
+.cmp-table thead th {
+  text-align: left; padding: 12px 16px;
+  font-family: var(--font-display); font-weight: 600;
+  font-size: 13px; text-transform: uppercase; letter-spacing: 0.05em;
+  border-bottom: 2px solid var(--border); white-space: nowrap;
+}
+.cmp-table thead th:last-child { color: var(--accent); }
+.cmp-table tbody td {
+  padding: 14px 16px; border-bottom: 1px solid var(--border);
+  vertical-align: top; white-space: nowrap;
+}
+.cmp-table tbody tr:last-child td { border-bottom: none; }
+.cmp-table .label-col { font-weight: 600; color: var(--fg); min-width: 100px; }
+.cmp-table .muted { color: var(--fg-muted); }
+.cmp-table .fw-col { color: var(--accent); font-weight: 500; }
+@media (max-width: 640px) {
+  .cmp-table { font-size: 13px; }
+  .cmp-table thead th, .cmp-table tbody td { padding: 10px 10px; }
+}
+
+/* CHANNELS */
+.channels { background: var(--hero-bg); color: var(--hero-fg); }
+.channels .section-label { color: var(--accent); }
+.channels .section-title { color: #FFFFFF; }
+.channels .section-desc { color: #94A3B8; }
+.channel-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; }
+@media (max-width: 720px) { .channel-grid { grid-template-columns: repeat(2, 1fr); } }
+@media (max-width: 480px) { .channel-grid { grid-template-columns: 1fr; } }
+.channel-card {
+  background: rgba(255,255,255,0.04); border: 1px solid rgba(255,255,255,0.06);
+  border-radius: 10px; padding: 20px;
+  display: flex; flex-direction: column; gap: 10px;
+  transition: border-color 0.2s;
+}
+.channel-card:hover { border-color: rgba(56,189,248,0.3); }
+.channel-dot { width: 8px; height: 8px; border-radius: 50%; display: inline-block; }
+.channel-name {
+  font-family: var(--font-display); font-size: 15px; font-weight: 600;
+  color: #FFFFFF; display: flex; align-items: center; gap: 8px;
+}
+.channel-source { font-family: var(--font-mono); font-size: 11px; color: #64748B; }
+.channel-desc { font-size: 13px; color: #94A3B8; line-height: 1.5; }
+
+/* DATA SOURCE LOGOS */
+.trust-strip { background: var(--surface-alt); padding-block: 32px; border-bottom: 1px solid var(--border); }
+.trust-label {
+  font-family: var(--font-mono); font-size: 11px; text-transform: uppercase;
+  letter-spacing: 0.1em; color: var(--fg-muted); text-align: center; margin-bottom: 16px;
+}
+.trust-logos {
+  display: flex; justify-content: center; align-items: center;
+  gap: 32px; flex-wrap: wrap; opacity: 0.55;
+}
+.trust-logos:hover { opacity: 0.8; }
+.trust-logos svg { height: 28px; width: auto; transition: opacity 0.2s; }
+@media (max-width: 520px) { .trust-logos { gap: 20px; } .trust-logos svg { height: 22px; } }
+
+/* DATA PIPELINE */
+.pipeline { background: var(--hero-bg); color: var(--hero-fg); }
+.pipeline .section-label { color: var(--accent); }
+.pipeline .section-title { color: #FFFFFF; }
+.pipeline .section-desc { color: #94A3B8; }
+.pipe-flow {
+  display: flex; align-items: stretch; gap: 0;
+  overflow-x: auto; padding-bottom: 8px;
+}
+.pipe-stage {
+  flex: 1; min-width: 140px; text-align: center;
+  position: relative; padding: 24px 12px 20px;
+  display: flex; flex-direction: column; align-items: center; gap: 10px;
+}
+.pipe-stage::after {
+  content: ""; position: absolute; top: 42px; right: -12px;
+  width: 24px; height: 2px; background: rgba(56,189,248,0.3); z-index: 1;
+}
+.pipe-stage:last-child::after { display: none; }
+.pipe-icon {
+  width: 48px; height: 48px; border-radius: 12px;
+  display: grid; place-items: center;
+  background: rgba(56,189,248,0.1); border: 1px solid rgba(56,189,248,0.2);
+}
+.pipe-icon svg { width: 22px; height: 22px; stroke: var(--accent); fill: none; stroke-width: 1.5; stroke-linecap: round; stroke-linejoin: round; }
+.pipe-name {
+  font-family: var(--font-display); font-size: 14px; font-weight: 600; color: #FFFFFF;
+}
+.pipe-detail { font-size: 12px; color: #64748B; line-height: 1.4; }
+@media (max-width: 640px) {
+  .pipe-flow { flex-wrap: wrap; justify-content: center; }
+  .pipe-stage { min-width: 0; flex-basis: calc(50% - 8px); }
+  .pipe-stage::after { display: none; }
+}
+
+/* LIFECYCLE */
+.lifecycle { background: var(--bg); }
+.lc-track {
+  display: flex; gap: 0; align-items: stretch;
+  overflow-x: auto; padding-bottom: 8px;
+}
+.lc-step {
+  flex: 1; min-width: 120px; text-align: center;
+  position: relative; padding: 16px 8px;
+}
+.lc-step::after {
+  content: ""; position: absolute; top: 30px; right: -1px;
+  width: 100%; height: 3px; background: var(--border); z-index: 0;
+}
+.lc-step:last-child::after { display: none; }
+.lc-dot {
+  width: 16px; height: 16px; border-radius: 50%;
+  display: inline-block; position: relative; z-index: 1;
+  border: 2px solid var(--surface); box-shadow: 0 0 0 2px var(--border);
+}
+.lc-label {
+  font-size: 12px; font-weight: 600; margin-top: 10px;
+  font-family: var(--font-display); color: var(--fg);
+}
+.lc-signal {
+  font-size: 11px; color: var(--fg-muted); margin-top: 4px; line-height: 1.4;
+}
+@media (max-width: 640px) {
+  .lc-track { flex-wrap: wrap; }
+  .lc-step { min-width: 0; flex-basis: calc(25% - 4px); }
+  .lc-step::after { display: none; }
+}
+
+/* PRICING */
+.pricing { background: var(--surface-alt); }
+.price-grid {
+  display: grid; grid-template-columns: repeat(3, 1fr);
+  gap: 20px; align-items: start;
+}
+@media (max-width: 720px) { .price-grid { grid-template-columns: 1fr; max-width: 400px; } }
+.price-card {
+  background: var(--surface); border: 1px solid var(--border);
+  border-radius: 12px; padding: 28px 24px;
+  display: flex; flex-direction: column; gap: 16px;
+}
+.price-card.featured {
+  border-color: var(--accent);
+  box-shadow: 0 0 0 1px var(--accent), 0 8px 24px rgba(56,189,248,0.08);
+  position: relative;
+}
+.price-card.featured::before {
+  position: absolute; top: -11px; left: 50%; transform: translateX(-50%);
+  background: var(--accent); color: var(--hero-bg);
+  font-size: 10px; font-weight: 700; letter-spacing: 0.08em;
+  padding: 3px 12px; border-radius: 100px; font-family: var(--font-display);
+}
+[data-lang="en"] .price-card.featured::before { content: "MOST POPULAR"; }
+[data-lang="ko"] .price-card.featured::before { content: "가장 인기"; }
+.price-name { font-family: var(--font-display); font-size: 18px; font-weight: 700; }
+.price-amount {
+  font-family: var(--font-display); font-size: 40px; font-weight: 800;
+  letter-spacing: -0.03em; line-height: 1;
+}
+.price-amount span { font-size: 15px; font-weight: 400; color: var(--fg-muted); }
+.price-sub { font-size: 13px; color: var(--fg-muted); margin-top: -8px; }
+.price-features {
+  list-style: none; display: flex; flex-direction: column; gap: 10px;
+  font-size: 14px; color: var(--fg-muted);
+}
+.price-features li { display: flex; gap: 8px; align-items: flex-start; }
+.price-features .check { color: var(--accent-green); font-weight: 700; flex-shrink: 0; margin-top: 2px; }
+.price-features .cross { color: var(--fg-muted); opacity: 0.4; flex-shrink: 0; margin-top: 2px; }
+.price-btn {
+  display: block; text-align: center; padding: 12px; border-radius: 8px;
+  font-family: var(--font-body); font-size: 14px; font-weight: 600;
+  text-decoration: none; cursor: pointer;
+  border: 1px solid var(--border); background: var(--surface); color: var(--fg);
+  transition: all 0.15s; margin-top: auto;
+}
+.price-btn:hover { border-color: var(--accent); color: var(--accent); }
+.price-btn.primary { background: var(--accent); color: var(--hero-bg); border-color: var(--accent); }
+.price-btn.primary:hover { opacity: 0.9; }
+
+/* INSIGHTS */
+.insights { background: var(--bg); }
+.insight-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 20px; }
+@media (max-width: 640px) { .insight-grid { grid-template-columns: 1fr; } }
+.insight-card {
+  background: var(--surface); border: 1px solid var(--border);
+  border-radius: 10px; overflow: hidden; transition: box-shadow 0.2s;
+}
+.insight-card:hover { box-shadow: var(--card-shadow); }
+.insight-bar { height: 4px; width: 100%; }
+.insight-body { padding: 20px; }
+.insight-tag {
+  font-family: var(--font-mono); font-size: 11px; text-transform: uppercase;
+  letter-spacing: 0.06em; margin-bottom: 8px; font-weight: 500;
+}
+.insight-card h3 {
+  font-family: var(--font-display); font-size: 16px; font-weight: 600;
+  line-height: 1.35; margin-bottom: 8px;
+}
+.insight-card p { font-size: 13px; color: var(--fg-muted); line-height: 1.5; }
+
+/* CTA */
+.final-cta { background: var(--hero-bg); color: var(--hero-fg); text-align: center; }
+.final-cta .section-title { color: #FFFFFF; margin-inline: auto; max-width: 600px; }
+.final-cta .section-desc { margin-inline: auto; text-align: center; }
+.final-cta .hero-actions { justify-content: center; }
+
+/* FOOTER */
+footer {
+  background: var(--hero-bg); color: #64748B; padding-block: 32px;
+  border-top: 1px solid rgba(255,255,255,0.06); font-size: 13px;
+}
+.footer-inner {
+  display: flex; justify-content: space-between; align-items: center;
+  flex-wrap: wrap; gap: 12px;
+}
+footer a { color: #94A3B8; text-decoration: none; }
+footer a:hover { color: #FFFFFF; }
+
+@media (prefers-reduced-motion: no-preference) { html { scroll-behavior: smooth; } }
+
+/* ===== HERO ILLUSTRATION ===== */
+.hero-visual {
+  position: absolute;
+  top: 50%; right: 5%;
+  transform: translateY(-50%);
+  width: clamp(280px, 35vw, 420px);
+  height: clamp(280px, 35vw, 420px);
+  pointer-events: none;
+  z-index: 0;
+  opacity: 0.85;
+}
+@media (max-width: 860px) {
+  .hero-visual {
+    position: relative; top: auto; right: auto; transform: none;
+    width: 220px; height: 220px;
+    margin: 0 auto 32px;
+    opacity: 0.7;
+  }
+  .hero .inner { display: flex; flex-direction: column; }
+  .hero-visual { order: -1; }
+}
+
+/* Stars */
+.hero-stars {
+  position: absolute; inset: 0; pointer-events: none; z-index: 0; overflow: hidden;
+}
+.hero-star {
+  position: absolute;
+  width: 2px; height: 2px;
+  background: #FFFFFF;
+  border-radius: 50%;
+  animation: twinkle 3s ease-in-out infinite;
+}
+.hero-star:nth-child(2) { width: 3px; height: 3px; animation-delay: 0.8s; animation-duration: 4s; }
+.hero-star:nth-child(3) { animation-delay: 1.5s; animation-duration: 2.5s; }
+.hero-star:nth-child(4) { width: 2.5px; height: 2.5px; animation-delay: 0.3s; animation-duration: 3.5s; }
+.hero-star:nth-child(5) { animation-delay: 2s; animation-duration: 2.8s; }
+.hero-star:nth-child(6) { width: 3px; height: 3px; animation-delay: 1s; animation-duration: 4.2s; }
+.hero-star:nth-child(7) { animation-delay: 0.6s; animation-duration: 3.2s; }
+.hero-star:nth-child(8) { width: 2.5px; height: 2.5px; animation-delay: 1.8s; }
+.hero-star:nth-child(9) { animation-delay: 2.5s; animation-duration: 2.6s; }
+.hero-star:nth-child(10) { width: 3px; height: 3px; animation-delay: 0.4s; animation-duration: 3.8s; }
+.hero-star:nth-child(11) { animation-delay: 1.2s; }
+.hero-star:nth-child(12) { width: 2.5px; height: 2.5px; animation-delay: 2.2s; animation-duration: 4.5s; }
+@keyframes twinkle {
+  0%, 100% { opacity: 0.2; transform: scale(1); }
+  50% { opacity: 1; transform: scale(1.4); }
+}
+
+/* Satellite orbit animation */
+.orbit-ring {
+  animation: orbit-spin 30s linear infinite;
+  transform-origin: 200px 200px;
+}
+@keyframes orbit-spin { from { transform: rotate(0deg); } to { transform: rotate(360deg); } }
+.satellite-body { animation: sat-float 6s ease-in-out infinite; }
+@keyframes sat-float { 0%,100%{transform:translateY(0)} 50%{transform:translateY(-4px)} }
+
+/* Fab silhouette */
+.fab-illustration {
+  position: absolute;
+  bottom: 0; right: 5%;
+  width: clamp(200px, 25vw, 340px);
+  opacity: 0.08;
+  pointer-events: none;
+  z-index: 0;
+}
+@media (max-width: 640px) { .fab-illustration { display: none; } }
+
+/* Earth in CTA */
+.cta-earth {
+  position: absolute;
+  bottom: -60px; right: -40px;
+  width: clamp(200px, 22vw, 300px);
+  height: clamp(200px, 22vw, 300px);
+  opacity: 0.12;
+  pointer-events: none;
+  animation: earth-glow 8s ease-in-out infinite;
+}
+@keyframes earth-glow { 0%,100%{opacity:0.1} 50%{opacity:0.18} }
+.final-cta { position: relative; overflow: hidden; }
+@media (max-width: 640px) { .cta-earth { display: none; } }
+
+/* ===== SERVICE OVERVIEW (모니터링 vs 리포트) ===== */
+.svc-overview { background: var(--bg); }
+.svc-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; }
+@media (max-width: 720px) { .svc-grid { grid-template-columns: 1fr; } }
+.svc-card {
+  background: var(--surface); border: 1px solid var(--border);
+  border-radius: 14px; padding: 32px 28px;
+  display: flex; flex-direction: column; gap: 16px;
+  position: relative; overflow: hidden;
+}
+.svc-card::before {
+  content: ""; position: absolute; top: 0; left: 0; right: 0;
+  height: 4px;
+}
+.svc-card.svc-monitor::before { background: linear-gradient(90deg, var(--accent), #818CF8); }
+.svc-card.svc-report::before { background: linear-gradient(90deg, var(--accent-warm), #F97316); }
+.svc-card-icon {
+  width: 52px; height: 52px; border-radius: 12px;
+  display: grid; place-items: center;
+}
+.svc-card-icon svg { width: 26px; height: 26px; }
+.svc-card h3 {
+  font-family: var(--font-display); font-size: 20px; font-weight: 700;
+  letter-spacing: -0.01em;
+}
+[data-lang="ko"] .svc-card h3 { font-family: 'Noto Sans KR', var(--font-display), sans-serif; }
+.svc-card .svc-desc { color: var(--fg-muted); font-size: 14px; line-height: 1.6; }
+.svc-features {
+  list-style: none; display: flex; flex-direction: column; gap: 8px;
+  font-size: 14px; color: var(--fg); margin-top: 4px;
+}
+.svc-features li { display: flex; gap: 8px; align-items: flex-start; }
+.svc-features .ico { flex-shrink: 0; margin-top: 2px; font-weight: 700; }
+.svc-card-badge {
+  display: inline-block; font-size: 11px; font-weight: 700;
+  letter-spacing: 0.06em; text-transform: uppercase;
+  padding: 3px 10px; border-radius: 100px;
+  font-family: var(--font-mono);
+}
+.svc-monitor .svc-card-badge { background: rgba(56,189,248,0.12); color: var(--accent); }
+.svc-report .svc-card-badge { background: rgba(245,158,11,0.12); color: var(--accent-warm); }
+
+/* ===== MEMBER TYPE (개인/기업) ===== */
+.member-tabs {
+  display: flex; gap: 4px; margin-bottom: 32px;
+  background: var(--surface-alt); border-radius: 10px;
+  padding: 4px; width: fit-content;
+  border: 1px solid var(--border);
+}
+.member-tab {
+  padding: 10px 24px; border-radius: 8px; border: none;
+  background: transparent; color: var(--fg-muted);
+  font-family: var(--font-body); font-size: 14px; font-weight: 600;
+  cursor: pointer; transition: all 0.15s; white-space: nowrap;
+}
+[data-lang="ko"] .member-tab { font-family: var(--font-ko); }
+.member-tab.active {
+  background: var(--surface); color: var(--fg);
+  box-shadow: var(--card-shadow);
+}
+.member-tab:hover:not(.active) { color: var(--fg); }
+.member-note {
+  font-size: 13px; color: var(--fg-muted); margin-top: -16px;
+  margin-bottom: 24px; padding: 12px 16px;
+  background: rgba(56,189,248,0.06); border-radius: 8px;
+  border-left: 3px solid var(--accent); line-height: 1.5;
+}
+
+/* ===== DEMO DASHBOARD ===== */
+.demo-section { background: var(--hero-bg); color: var(--hero-fg); }
+.demo-section .section-label { color: var(--accent); }
+.demo-section .section-title { color: #FFFFFF; }
+.demo-section .section-desc { color: #94A3B8; }
+.demo-frame {
+  background: rgba(255,255,255,0.03); border: 1px solid rgba(255,255,255,0.1);
+  border-radius: 14px; overflow: hidden;
+  box-shadow: 0 20px 60px rgba(0,0,0,0.4);
+}
+.demo-titlebar {
+  display: flex; align-items: center; gap: 8px;
+  padding: 10px 16px; background: rgba(255,255,255,0.04);
+  border-bottom: 1px solid rgba(255,255,255,0.06);
+}
+.demo-dots { display: flex; gap: 6px; }
+.demo-dots span { width: 10px; height: 10px; border-radius: 50%; }
+.demo-url {
+  flex: 1; text-align: center; font-size: 12px;
+  color: #64748B; font-family: var(--font-mono);
+}
+.demo-body { padding: 24px; }
+.demo-grid {
+  display: grid; grid-template-columns: 200px 1fr; gap: 16px;
+}
+@media (max-width: 720px) { .demo-grid { grid-template-columns: 1fr; } }
+.demo-sidebar {
+  display: flex; flex-direction: column; gap: 8px;
+}
+.demo-nav-item {
+  display: flex; align-items: center; gap: 8px;
+  padding: 8px 12px; border-radius: 6px;
+  font-size: 13px; color: #94A3B8;
+}
+.demo-nav-item.active { background: rgba(56,189,248,0.1); color: var(--accent); }
+.demo-main { display: flex; flex-direction: column; gap: 16px; }
+.demo-stats-row { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; }
+@media (max-width: 520px) { .demo-stats-row { grid-template-columns: 1fr; } }
+.demo-stat-card {
+  background: rgba(255,255,255,0.04); border: 1px solid rgba(255,255,255,0.06);
+  border-radius: 8px; padding: 14px;
+}
+.demo-stat-label { font-size: 11px; color: #64748B; text-transform: uppercase; letter-spacing: 0.06em; }
+.demo-stat-val {
+  font-family: var(--font-display); font-size: 24px; font-weight: 700;
+  color: #FFFFFF; margin-top: 4px;
+}
+.demo-stat-delta { font-size: 11px; margin-top: 2px; }
+.demo-chart {
+  background: rgba(255,255,255,0.03); border: 1px solid rgba(255,255,255,0.06);
+  border-radius: 8px; padding: 16px; min-height: 160px;
+  display: flex; flex-direction: column; gap: 8px;
+}
+.demo-chart-title { font-size: 13px; font-weight: 600; color: #CBD5E1; }
+.demo-bars { display: flex; align-items: flex-end; gap: 6px; height: 120px; padding-top: 8px; }
+.demo-bar {
+  flex: 1; border-radius: 3px 3px 0 0;
+  transition: height 0.3s;
+}
+.demo-fab-list {
+  background: rgba(255,255,255,0.03); border: 1px solid rgba(255,255,255,0.06);
+  border-radius: 8px; overflow: hidden;
+}
+.demo-fab-header {
+  display: grid; grid-template-columns: 1.5fr 1fr 1fr 1fr;
+  padding: 8px 14px; font-size: 11px; color: #64748B;
+  text-transform: uppercase; letter-spacing: 0.05em;
+  border-bottom: 1px solid rgba(255,255,255,0.06);
+  background: rgba(255,255,255,0.02);
+}
+.demo-fab-row {
+  display: grid; grid-template-columns: 1.5fr 1fr 1fr 1fr;
+  padding: 10px 14px; font-size: 13px; color: #CBD5E1;
+  border-bottom: 1px solid rgba(255,255,255,0.03);
+}
+.demo-fab-row:last-child { border-bottom: none; }
+.demo-fab-row:hover { background: rgba(56,189,248,0.06); }
+.demo-fab-row:active { background: rgba(56,189,248,0.12); }
+.demo-status {
+  display: inline-flex; align-items: center; gap: 5px;
+  font-size: 12px; font-weight: 500;
+}
+.demo-status .dot { width: 6px; height: 6px; border-radius: 50%; display: inline-block; }
+.demo-badge-live {
+  display: inline-block; font-size: 10px; font-weight: 700;
+  background: rgba(56,189,248,0.15); color: var(--accent);
+  padding: 2px 8px; border-radius: 4px;
+  letter-spacing: 0.04em; margin-left: 12px;
+}
+
+/* ===== LOGIN MODAL ===== */
+.modal-overlay {
+  display: none; position: fixed; inset: 0; z-index: 1000;
+  background: rgba(0,0,0,0.6); backdrop-filter: blur(6px);
+  place-items: center; padding: 16px;
+}
+.modal-overlay.open { display: grid; }
+.modal {
+  background: var(--surface); border-radius: 16px;
+  width: min(440px, 100%); max-height: 90vh;
+  overflow-y: auto; position: relative;
+  box-shadow: 0 24px 80px rgba(0,0,0,0.25);
+}
+.modal-close {
+  position: absolute; top: 14px; right: 14px;
+  background: none; border: none; color: var(--fg-muted);
+  font-size: 20px; cursor: pointer; width: 32px; height: 32px;
+  border-radius: 8px; display: grid; place-items: center;
+}
+.modal-close:hover { background: var(--surface-alt); }
+.modal-header {
+  padding: 28px 28px 0;
+  text-align: center;
+}
+.modal-logo {
+  font-family: var(--font-display); font-weight: 800;
+  font-size: 24px; margin-bottom: 8px;
+  display: flex; align-items: center; justify-content: center; gap: 8px;
+}
+.modal-logo .logo-icon {
+  width: 28px; height: 28px; background: var(--accent);
+  border-radius: 6px; display: inline-grid; place-items: center;
+}
+.modal-subtitle { font-size: 14px; color: var(--fg-muted); margin-bottom: 20px; }
+.modal-tabs {
+  display: flex; gap: 0; border-bottom: 2px solid var(--border);
+}
+.modal-tab {
+  flex: 1; padding: 10px; text-align: center;
+  font-size: 14px; font-weight: 600; color: var(--fg-muted);
+  background: none; border: none; cursor: pointer;
+  border-bottom: 2px solid transparent; margin-bottom: -2px;
+  font-family: var(--font-body); transition: all 0.15s;
+}
+[data-lang="ko"] .modal-tab { font-family: var(--font-ko); }
+.modal-tab.active { color: var(--accent); border-bottom-color: var(--accent); }
+.modal-body { padding: 24px 28px 28px; }
+.form-group { margin-bottom: 16px; }
+.form-label {
+  display: block; font-size: 13px; font-weight: 600;
+  color: var(--fg); margin-bottom: 6px;
+}
+[data-lang="ko"] .form-label { font-family: var(--font-ko); }
+.form-input {
+  width: 100%; padding: 10px 14px; border-radius: 8px;
+  border: 1px solid var(--border); background: var(--surface-alt);
+  color: var(--fg); font-size: 14px; font-family: var(--font-body);
+  outline: none; transition: border-color 0.15s;
+}
+.form-input:focus { border-color: var(--accent); }
+.form-input::placeholder { color: var(--fg-muted); opacity: 0.6; }
+.member-type-select {
+  display: grid; grid-template-columns: 1fr 1fr; gap: 10px;
+}
+.type-option {
+  padding: 14px; border-radius: 10px;
+  border: 2px solid var(--border); background: var(--surface);
+  cursor: pointer; text-align: center; transition: all 0.15s;
+}
+.type-option:hover { border-color: var(--accent); }
+.type-option.selected {
+  border-color: var(--accent);
+  background: rgba(56,189,248,0.05);
+}
+.type-option-icon { font-size: 24px; margin-bottom: 6px; }
+.type-option-name {
+  font-size: 14px; font-weight: 700; margin-bottom: 2px;
+  font-family: var(--font-display);
+}
+[data-lang="ko"] .type-option-name { font-family: 'Noto Sans KR', var(--font-display), sans-serif; }
+.type-option-desc { font-size: 12px; color: var(--fg-muted); line-height: 1.4; }
+.form-submit {
+  width: 100%; padding: 12px; border-radius: 8px;
+  background: var(--accent); color: var(--hero-bg);
+  font-size: 15px; font-weight: 700; border: none;
+  cursor: pointer; font-family: var(--font-body);
+  transition: opacity 0.15s; margin-top: 8px;
+}
+[data-lang="ko"] .form-submit { font-family: var(--font-ko); }
+.form-submit:hover { opacity: 0.9; }
+.form-divider {
+  display: flex; align-items: center; gap: 12px;
+  margin: 20px 0; color: var(--fg-muted); font-size: 12px;
+}
+.form-divider::before, .form-divider::after {
+  content: ""; flex: 1; height: 1px; background: var(--border);
+}
+.social-logins { display: flex; flex-direction: column; gap: 10px; }
+.social-btn {
+  width: 100%; padding: 10px; border-radius: 8px;
+  border: 1px solid var(--border); background: var(--surface);
+  color: var(--fg); font-size: 14px; font-weight: 500;
+  cursor: pointer; font-family: var(--font-body);
+  display: flex; align-items: center; justify-content: center; gap: 8px;
+  transition: all 0.15s;
+}
+.social-btn:hover { border-color: var(--fg-muted); background: var(--surface-alt); }
+.form-footer {
+  text-align: center; font-size: 12px; color: var(--fg-muted);
+  margin-top: 16px; line-height: 1.5;
+}
+.form-footer a { color: var(--accent); text-decoration: none; }
+
+/* ===== WORLD MAP ===== */
+.worldmap { background: var(--hero-bg); color: var(--hero-fg); }
+.worldmap .section-label { color: var(--accent); }
+.worldmap .section-title { color: #FFFFFF; }
+.worldmap .section-desc { color: #94A3B8; }
+.map-wrap { position: relative; max-width: 800px; margin: 0 auto; }
+.map-svg { width: 100%; height: auto; display: block; }
+.map-marker { cursor: default; transition: r 0.15s; }
+.map-marker:hover { r: 5; }
+.map-legend {
+  display: flex; gap: 24px; justify-content: center;
+  margin-top: 24px; flex-wrap: wrap;
+}
+.map-legend-item { display: flex; align-items: center; gap: 6px; font-size: 12px; color: #94A3B8; }
+.map-legend-dot { width: 10px; height: 10px; border-radius: 50%; display: inline-block; }
+.map-stats {
+  display: grid; grid-template-columns: repeat(4, 1fr); gap: 12px;
+  margin-top: 32px;
+}
+@media (max-width: 520px) { .map-stats { grid-template-columns: repeat(2, 1fr); } }
+.map-stat-card {
+  text-align: center; padding: 16px 8px;
+  background: rgba(255,255,255,0.03);
+  border: 1px solid rgba(255,255,255,0.06);
+  border-radius: 8px;
+}
+.map-stat-num {
+  font-family: var(--font-display); font-size: 28px; font-weight: 700;
+  color: #FFFFFF;
+}
+.map-stat-label { font-size: 11px; color: #64748B; margin-top: 4px; text-transform: uppercase; letter-spacing: 0.06em; }
+
+/* ===== FAQ ===== */
+.faq { background: var(--surface-alt); }
+.faq-list { display: flex; flex-direction: column; gap: 8px; max-width: 720px; }
+.faq-item {
+  background: var(--surface); border: 1px solid var(--border);
+  border-radius: 10px; overflow: hidden;
+}
+.faq-q {
+  display: flex; justify-content: space-between; align-items: center;
+  padding: 18px 20px; cursor: pointer; gap: 12px;
+  font-family: var(--font-display); font-size: 15px; font-weight: 600;
+  color: var(--fg); transition: color 0.15s;
+  background: none; border: none; width: 100%; text-align: left;
+}
+[data-lang="ko"] .faq-q { font-family: 'Noto Sans KR', var(--font-display), sans-serif; }
+.faq-q:hover { color: var(--accent); }
+.faq-chevron {
+  flex-shrink: 0; width: 20px; height: 20px;
+  transition: transform 0.25s; color: var(--fg-muted);
+}
+.faq-item.open .faq-chevron { transform: rotate(180deg); }
+.faq-a {
+  max-height: 0; overflow: hidden;
+  transition: max-height 0.3s ease, padding 0.3s ease;
+}
+.faq-item.open .faq-a { max-height: 400px; }
+.faq-a-inner {
+  padding: 0 20px 18px; font-size: 14px;
+  color: var(--fg-muted); line-height: 1.7;
+}
+
+/* ===== USE CASES ===== */
+.usecases { background: var(--bg); }
+.usecase-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 20px; }
+@media (max-width: 640px) { .usecase-grid { grid-template-columns: 1fr; } }
+.usecase-card {
+  background: var(--surface); border: 1px solid var(--border);
+  border-radius: 12px; padding: 28px 24px;
+  display: flex; flex-direction: column; gap: 12px;
+  transition: box-shadow 0.2s;
+}
+.usecase-card:hover { box-shadow: var(--card-shadow); }
+.usecase-icon {
+  width: 48px; height: 48px; border-radius: 10px;
+  display: grid; place-items: center;
+}
+.usecase-icon svg { width: 24px; height: 24px; }
+.usecase-card h3 {
+  font-family: var(--font-display); font-size: 17px; font-weight: 700;
+}
+[data-lang="ko"] .usecase-card h3 { font-family: 'Noto Sans KR', var(--font-display), sans-serif; }
+.usecase-card p { font-size: 14px; color: var(--fg-muted); line-height: 1.6; }
+.usecase-tag {
+  display: inline-block; font-size: 11px; font-weight: 600;
+  padding: 3px 10px; border-radius: 100px;
+  letter-spacing: 0.04em; margin-top: auto;
+  width: fit-content;
+}
+
+/* ===== TEAM ===== */
+.team { background: var(--surface-alt); }
+.team-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; }
+@media (max-width: 640px) { .team-grid { grid-template-columns: 1fr; } }
+.team-card {
+  background: var(--surface); border: 1px solid var(--border);
+  border-radius: 12px; padding: 28px 24px; text-align: center;
+  display: flex; flex-direction: column; align-items: center; gap: 12px;
+}
+.team-avatar {
+  width: 72px; height: 72px; border-radius: 50%;
+  display: grid; place-items: center; font-size: 28px;
+  font-family: var(--font-display); font-weight: 700;
+  color: #FFFFFF;
+}
+.team-card h3 {
+  font-family: var(--font-display); font-size: 16px; font-weight: 700;
+}
+[data-lang="ko"] .team-card h3 { font-family: 'Noto Sans KR', var(--font-display), sans-serif; }
+.team-role {
+  font-size: 12px; color: var(--accent); font-weight: 600;
+  text-transform: uppercase; letter-spacing: 0.05em;
+  font-family: var(--font-mono);
+}
+.team-desc { font-size: 13px; color: var(--fg-muted); line-height: 1.5; }
+
+/* ===== NEWSLETTER ===== */
+.newsletter-box {
+  margin-top: 48px; padding: 32px;
+  background: var(--surface); border: 1px solid var(--border);
+  border-radius: 14px; text-align: center;
+}
+.newsletter-box h3 {
+  font-family: var(--font-display); font-size: 20px; font-weight: 700;
+  margin-bottom: 8px;
+}
+[data-lang="ko"] .newsletter-box h3 { font-family: 'Noto Sans KR', var(--font-display), sans-serif; }
+.newsletter-box p { font-size: 14px; color: var(--fg-muted); margin-bottom: 20px; }
+.nl-form {
+  display: flex; gap: 10px; max-width: 440px; margin: 0 auto;
+}
+@media (max-width: 520px) { .nl-form { flex-direction: column; } }
+.nl-input {
+  flex: 1; padding: 12px 16px; border-radius: 8px;
+  border: 1px solid var(--border); background: var(--surface-alt);
+  color: var(--fg); font-size: 14px; font-family: var(--font-body);
+  outline: none;
+}
+.nl-input:focus { border-color: var(--accent); }
+.nl-input::placeholder { color: var(--fg-muted); opacity: 0.6; }
+.nl-btn {
+  padding: 12px 24px; border-radius: 8px;
+  background: var(--accent); color: var(--hero-bg);
+  font-size: 14px; font-weight: 700; border: none;
+  cursor: pointer; white-space: nowrap;
+  font-family: var(--font-body); transition: opacity 0.15s;
+}
+[data-lang="ko"] .nl-btn { font-family: var(--font-ko); }
+.nl-btn:hover { opacity: 0.9; }
+.nl-success { display: none; color: var(--accent-green); font-size: 14px; font-weight: 600; margin-top: 12px; }
+.nl-success.show { display: block; }
+
+/* ===== SCROLL ANIMATIONS ===== */
+.reveal {
+  opacity: 0; transform: translateY(28px);
+  transition: opacity 0.6s ease, transform 0.6s ease;
+}
+.reveal.visible { opacity: 1; transform: translateY(0); }
+.reveal-delay-1 { transition-delay: 0.1s; }
+.reveal-delay-2 { transition-delay: 0.2s; }
+.reveal-delay-3 { transition-delay: 0.3s; }
+
+/* ===== DEMO INTERACTIVITY ===== */
+.demo-nav-item { cursor: pointer; transition: all 0.15s; }
+.demo-nav-item:hover { color: #CBD5E1; background: rgba(255,255,255,0.03); }
+.demo-filter-bar {
+  display: flex; gap: 6px; margin-bottom: 12px; flex-wrap: wrap;
+}
+.demo-filter-btn {
+  padding: 5px 12px; border-radius: 6px; font-size: 11px;
+  font-weight: 600; border: 1px solid rgba(255,255,255,0.1);
+  background: transparent; color: #94A3B8; cursor: pointer;
+  font-family: var(--font-body); transition: all 0.15s;
+}
+.demo-filter-btn.active, .demo-filter-btn:hover {
+  background: rgba(56,189,248,0.12); color: var(--accent);
+  border-color: rgba(56,189,248,0.3);
+}
+.demo-bar { position: relative; }
+.demo-bar-tooltip {
+  display: none; position: absolute; top: -28px; left: 50%;
+  transform: translateX(-50%); background: #1E293B;
+  color: #E2E8F0; font-size: 11px; padding: 3px 8px;
+  border-radius: 4px; white-space: nowrap;
+  font-family: var(--font-mono); pointer-events: none;
+  border: 1px solid rgba(255,255,255,0.1);
+}
+.demo-bar:hover .demo-bar-tooltip { display: block; }
+
+/* ===== DEMO VIEWS ===== */
+.demo-view { display: none; }
+.demo-view.active { display: block; }
+.demo-map-placeholder {
+  height: 200px; border-radius: 8px;
+  background: rgba(255,255,255,0.03); border: 1px solid rgba(255,255,255,0.06);
+  display: grid; place-items: center; color: #475569; font-size: 13px;
+}
+
+/* ===== FOOTER EXPANDED ===== */
+.footer-grid {
+  display: grid; grid-template-columns: 2fr 1fr 1fr 1fr;
+  gap: 32px; padding-bottom: 24px; margin-bottom: 24px;
+  border-bottom: 1px solid rgba(255,255,255,0.06);
+}
+@media (max-width: 640px) { .footer-grid { grid-template-columns: 1fr 1fr; gap: 24px; } }
+.footer-brand p { font-size: 13px; color: #64748B; line-height: 1.5; margin-top: 12px; max-width: 260px; }
+.footer-col h4 {
+  font-size: 12px; font-weight: 600; text-transform: uppercase;
+  letter-spacing: 0.06em; color: #94A3B8; margin-bottom: 12px;
+}
+.footer-col ul { list-style: none; display: flex; flex-direction: column; gap: 8px; }
+.footer-col a { font-size: 13px; color: #64748B; text-decoration: none; transition: color 0.15s; }
+.footer-col a:hover { color: #FFFFFF; }
+.footer-bottom {
+  display: flex; justify-content: space-between; align-items: center;
+  flex-wrap: wrap; gap: 12px; font-size: 12px; color: #475569;
+}
+</style>
+
+<!-- NAV -->
+<nav>
+  <div class="inner nav-inner">
+    <a href="#" class="logo">
+      <span class="logo-icon">
+        <svg viewBox="0 0 24 24" fill="none" stroke="#0B1628" stroke-width="2.5" stroke-linecap="round"><circle cx="12" cy="12" r="3"/><path d="M12 2v4M12 18v4M4.93 4.93l2.83 2.83M16.24 16.24l2.83 2.83M2 12h4M18 12h4M4.93 19.07l2.83-2.83M16.24 7.76l2.83-2.83"/></svg>
+      </span>
+      FabWatch
+    </a>
+    <ul class="nav-links">
+      <li><a href="#services" class="hide-mobile"><span class="en">Services</span><span class="ko">서비스</span></a></li>
+      <li><a href="#demo" class="hide-mobile"><span class="en">Demo</span><span class="ko">데모</span></a></li>
+      <li><a href="#map" class="hide-mobile"><span class="en">Coverage</span><span class="ko">커버리지</span></a></li>
+      <li><a href="#pricing"><span class="en">Pricing</span><span class="ko">요금제</span></a></li>
+      <li><a href="#" onclick="openModal('login');return false;" class="hide-mobile" style="color:#94A3B8;"><span class="en">Sign In</span><span class="ko">로그인</span></a></li>
+      <li><button class="lang-toggle" onclick="toggleLang()">KO / EN</button></li>
+      <li><a href="#" onclick="openModal('signup');return false;" class="nav-cta"><span class="en">Start Free</span><span class="ko">무료 시작</span></a></li>
+    </ul>
+  </div>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <!-- Twinkling stars -->
+  <div class="hero-stars">
+    <span class="hero-star" style="top:8%;left:12%"></span>
+    <span class="hero-star" style="top:15%;left:65%"></span>
+    <span class="hero-star" style="top:25%;left:82%"></span>
+    <span class="hero-star" style="top:40%;left:45%"></span>
+    <span class="hero-star" style="top:12%;left:35%"></span>
+    <span class="hero-star" style="top:55%;left:90%"></span>
+    <span class="hero-star" style="top:70%;left:20%"></span>
+    <span class="hero-star" style="top:30%;left:55%"></span>
+    <span class="hero-star" style="top:65%;left:75%"></span>
+    <span class="hero-star" style="top:5%;left:88%"></span>
+    <span class="hero-star" style="top:48%;left:8%"></span>
+    <span class="hero-star" style="top:80%;left:60%"></span>
+  </div>
+
+  <!-- Satellite + orbit illustration -->
+  <div class="hero-visual">
+    <svg viewBox="0 0 400 400" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <!-- Earth -->
+      <circle cx="200" cy="200" r="90" fill="url(#earthGrad)" opacity="0.9"/>
+      <circle cx="200" cy="200" r="90" stroke="rgba(56,189,248,0.3)" stroke-width="1"/>
+      <!-- Continents hint -->
+      <ellipse cx="175" cy="175" rx="30" ry="20" fill="rgba(34,197,94,0.25)" transform="rotate(-15 175 175)"/>
+      <ellipse cx="220" cy="210" rx="25" ry="35" fill="rgba(34,197,94,0.2)" transform="rotate(10 220 210)"/>
+      <ellipse cx="185" cy="230" rx="18" ry="12" fill="rgba(34,197,94,0.18)"/>
+      <!-- Atmosphere glow -->
+      <circle cx="200" cy="200" r="95" stroke="rgba(56,189,248,0.15)" stroke-width="6"/>
+      <circle cx="200" cy="200" r="102" stroke="rgba(56,189,248,0.06)" stroke-width="4"/>
+      <!-- Orbit ring -->
+      <g class="orbit-ring">
+        <ellipse cx="200" cy="200" rx="155" ry="55" stroke="rgba(56,189,248,0.25)" stroke-width="1.5" stroke-dasharray="6 4" transform="rotate(-25 200 200)"/>
+        <!-- Satellite on orbit -->
+        <g transform="translate(355,175)" class="satellite-body">
+          <!-- Solar panels -->
+          <rect x="-22" y="-3" width="16" height="6" rx="1" fill="#38BDF8" opacity="0.9"/>
+          <rect x="6" y="-3" width="16" height="6" rx="1" fill="#38BDF8" opacity="0.9"/>
+          <line x1="-22" y1="0" x2="-6" y2="0" stroke="rgba(255,255,255,0.4)" stroke-width="0.5"/>
+          <line x1="6" y1="0" x2="22" y2="0" stroke="rgba(255,255,255,0.4)" stroke-width="0.5"/>
+          <!-- Body -->
+          <rect x="-5" y="-5" width="10" height="10" rx="2" fill="#94A3B8"/>
+          <rect x="-3" y="-3" width="6" height="6" rx="1" fill="#CBD5E1"/>
+          <!-- Antenna -->
+          <line x1="0" y1="-5" x2="0" y2="-10" stroke="#94A3B8" stroke-width="1"/>
+          <circle cx="0" cy="-11" r="1.5" fill="#FBBF24"/>
+          <!-- Signal waves -->
+          <path d="M-4,-14 Q0,-18 4,-14" stroke="rgba(251,191,36,0.5)" stroke-width="0.8" fill="none"/>
+          <path d="M-7,-17 Q0,-22 7,-17" stroke="rgba(251,191,36,0.3)" stroke-width="0.8" fill="none"/>
+        </g>
+      </g>
+      <!-- Scan beam from satellite to earth -->
+      <path d="M340,172 L230,195 L240,215 Z" fill="url(#beamGrad)" opacity="0.15"/>
+      <!-- Fab markers on earth -->
+      <circle cx="180" cy="180" r="3" fill="#FBBF24" opacity="0.9"><animate attributeName="opacity" values="0.5;1;0.5" dur="2s" repeatCount="indefinite"/></circle>
+      <circle cx="215" cy="190" r="2.5" fill="#38BDF8" opacity="0.8"><animate attributeName="opacity" values="0.4;1;0.4" dur="2.5s" repeatCount="indefinite"/></circle>
+      <circle cx="195" cy="215" r="2" fill="#4ADE80" opacity="0.7"><animate attributeName="opacity" values="0.6;1;0.6" dur="1.8s" repeatCount="indefinite"/></circle>
+      <circle cx="225" cy="175" r="2" fill="#F97316" opacity="0.8"><animate attributeName="opacity" values="0.5;1;0.5" dur="2.2s" repeatCount="indefinite"/></circle>
+      <defs>
+        <radialGradient id="earthGrad" cx="40%" cy="35%">
+          <stop offset="0%" stop-color="#1E3A5F"/>
+          <stop offset="60%" stop-color="#0F2744"/>
+          <stop offset="100%" stop-color="#0B1628"/>
+        </radialGradient>
+        <linearGradient id="beamGrad" x1="0" y1="0" x2="0" y2="1">
+          <stop offset="0%" stop-color="#FBBF24" stop-opacity="0.6"/>
+          <stop offset="100%" stop-color="#FBBF24" stop-opacity="0"/>
+        </linearGradient>
+      </defs>
+    </svg>
+  </div>
+
+  <div class="inner">
+    <div class="hero-badge">
+      <span class="dot"></span>
+      <span class="en">Monitoring 66 fabs across 7 countries</span>
+      <span class="ko">7개국 66개 팹 실시간 모니터링 중</span>
+    </div>
+    <h1>
+      <span class="en">See What <span class="accent-word">Satellites</span> See.<br>Track Every Fab on Earth.</span>
+      <span class="ko"><span class="accent-word">위성</span>이 보는 것을<br>당신도 봅니다.</span>
+    </h1>
+    <p class="hero-sub">
+      <span class="en">The world's first multi-channel satellite intelligence platform for semiconductor fab monitoring. Independent verification of construction, operations, and capacity — updated weekly.</span>
+      <span class="ko">세계 최초의 다중 채널 위성 기반 반도체 팹 모니터링 플랫폼. 건설 진행, 가동 상태, 생산 능력을 독립적으로 검증합니다. 매주 업데이트.</span>
+    </p>
+    <div class="hero-actions">
+      <a href="#" onclick="openModal('signup');return false;" class="btn btn-primary">
+        <span class="en">Start Free Trial</span>
+        <span class="ko">무료 체험 시작</span>
+      </a>
+      <a href="#demo" class="btn btn-outline">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="5 3 19 12 5 21 5 3"/></svg>
+        <span class="en">See Dashboard</span>
+        <span class="ko">대시보드 보기</span>
+      </a>
+    </div>
+    <div class="stats-bar">
+      <div class="stat">
+        <div class="stat-num"><span class="highlight">66</span>+</div>
+        <div class="stat-label"><span class="en">Fabs Tracked</span><span class="ko">추적 팹 수</span></div>
+      </div>
+      <div class="stat">
+        <div class="stat-num">7</div>
+        <div class="stat-label"><span class="en">Countries</span><span class="ko">대상 국가</span></div>
+      </div>
+      <div class="stat">
+        <div class="stat-num"><span class="highlight">6</span></div>
+        <div class="stat-label"><span class="en">Satellite Channels</span><span class="ko">위성 채널</span></div>
+      </div>
+      <div class="stat">
+        <div class="stat-num"><span class="highlight">87</span>%+</div>
+        <div class="stat-label"><span class="en">Accuracy</span><span class="ko">정확도</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- DATA SOURCE TRUST STRIP -->
+<section class="trust-strip">
+  <div class="inner">
+    <div class="trust-label"><span class="en">Powered by open satellite data from</span><span class="ko">공개 위성 데이터 기반</span></div>
+    <div class="trust-logos">
+      <!-- NASA -->
+      <svg viewBox="0 0 110 30" fill="var(--fg)"><text x="0" y="22" font-family="var(--font-display)" font-weight="800" font-size="20" letter-spacing="3">NASA</text></svg>
+      <!-- ESA -->
+      <svg viewBox="0 0 80 30" fill="var(--fg)"><text x="0" y="22" font-family="var(--font-display)" font-weight="700" font-size="18" letter-spacing="2">ESA</text></svg>
+      <!-- USGS -->
+      <svg viewBox="0 0 90 30" fill="var(--fg)"><text x="0" y="22" font-family="var(--font-display)" font-weight="700" font-size="17" letter-spacing="1.5">USGS</text></svg>
+      <!-- Copernicus -->
+      <svg viewBox="0 0 140 30" fill="var(--fg)"><text x="0" y="22" font-family="var(--font-body)" font-weight="600" font-size="16">Copernicus</text></svg>
+      <!-- NOAA -->
+      <svg viewBox="0 0 90 30" fill="var(--fg)"><text x="0" y="22" font-family="var(--font-display)" font-weight="700" font-size="17" letter-spacing="1.5">NOAA</text></svg>
+    </div>
+  </div>
+</section>
+
+<!-- VALUE PROPOSITIONS -->
+<section class="values section">
+  <div class="inner">
+    <div class="section-label"><span class="en">Why FabWatch</span><span class="ko">왜 FabWatch인가</span></div>
+    <h2 class="section-title reveal">
+      <span class="en">What satellites reveal,<br>reports can't.</span>
+      <span class="ko">위성이 밝히는 진실,<br>보고서로는 알 수 없습니다.</span>
+    </h2>
+    <p class="section-desc">
+      <span class="en">Corporate disclosures tell you what companies want to say. Six satellite channels tell you what's actually happening on the ground.</span>
+      <span class="ko">기업 공시는 기업이 말하고 싶은 것만 알려줍니다. 6개 위성 채널은 현장에서 실제로 일어나는 일을 보여줍니다.</span>
+    </p>
+    <div class="value-grid">
+      <div class="value-card">
+        <div class="value-icon" style="background: rgba(56,189,248,0.1);">
+          <svg viewBox="0 0 24 24" fill="none" stroke="var(--accent)" stroke-width="2" stroke-linecap="round"><path d="M9 12l2 2 4-4"/><circle cx="12" cy="12" r="10"/></svg>
+        </div>
+        <h3><span class="en">Independent Verification</span><span class="ko">독립적 검증</span></h3>
+        <p>
+          <span class="en">No reliance on self-reported data. When a Chinese fab claims construction is on schedule, our satellites confirm — or contradict — the claim directly.</span>
+          <span class="ko">자체 보고 데이터에 의존하지 않습니다. 중국 팹이 일정대로 건설 중이라고 발표할 때, 우리 위성이 직접 확인하거나 반박합니다.</span>
+        </p>
+      </div>
+      <div class="value-card">
+        <div class="value-icon" style="background: rgba(245,158,11,0.1);">
+          <svg viewBox="0 0 24 24" fill="none" stroke="var(--accent-warm)" stroke-width="2" stroke-linecap="round"><path d="M2 12h4M18 12h4M12 2v4M12 18v4"/><circle cx="12" cy="12" r="5"/></svg>
+        </div>
+        <h3><span class="en">Multi-Channel Intelligence</span><span class="ko">다중 채널 인텔리전스</span></h3>
+        <p>
+          <span class="en">Nightlight, radar, thermal IR, NO2, vegetation, and optical — six channels cross-verify every signal. One channel can deceive. Six cannot.</span>
+          <span class="ko">야간조명, 레이더, 열적외선, NO2, 식생, 광학 — 6개 채널이 모든 신호를 교차 검증합니다. 하나는 속일 수 있어도, 여섯은 속일 수 없습니다.</span>
+        </p>
+      </div>
+      <div class="value-card">
+        <div class="value-icon" style="background: rgba(34,197,94,0.1);">
+          <svg viewBox="0 0 24 24" fill="none" stroke="var(--accent-green)" stroke-width="2" stroke-linecap="round"><path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/></svg>
+        </div>
+        <h3><span class="en">Early Signal Detection</span><span class="ko">조기 신호 감지</span></h3>
+        <p>
+          <span class="en">A nightlight drop detected 3 months before the official shutdown announcement. Our alerts catch capacity changes before the market does.</span>
+          <span class="ko">공식 셧다운 발표 3개월 전에 야간조명 하락을 감지했습니다. 시장보다 먼저 생산능력 변화를 포착합니다.</span>
+        </p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- COMPARISON TABLE -->
+<section class="comparison section">
+  <div class="inner">
+    <div class="section-label"><span class="en">How We Compare</span><span class="ko">기존 서비스와 비교</span></div>
+    <h2 class="section-title reveal">
+      <span class="en">Traditional reports vs. satellite truth</span>
+      <span class="ko">기존 보고서 vs. 위성 팩트</span>
+    </h2>
+    <p class="section-desc">
+      <span class="en">Existing services tell you what companies report. FabWatch shows you what physics reveals.</span>
+      <span class="ko">기존 서비스는 기업이 보고하는 것을 전달합니다. FabWatch는 물리 법칙이 밝히는 것을 보여줍니다.</span>
+    </p>
+    <div style="overflow-x: auto;">
+      <!-- EN table -->
+      <table class="cmp-table en">
+        <thead><tr><th></th><th>Traditional Reports</th><th>FabWatch</th></tr></thead>
+        <tbody>
+          <tr><td class="label-col">Data Source</td><td class="muted">Surveys &amp; interviews (self-reported)</td><td class="fw-col">6 satellite channels (physics-based)</td></tr>
+          <tr><td class="label-col">Verification</td><td class="muted">None — trust the respondent</td><td class="fw-col">Cross-verified by independent sensors</td></tr>
+          <tr><td class="label-col">Update Cycle</td><td class="muted">Quarterly</td><td class="fw-col">Weekly + real-time alerts</td></tr>
+          <tr><td class="label-col">China Coverage</td><td class="muted">Blind spots when firms don't cooperate</td><td class="fw-col">Satellites don't need cooperation</td></tr>
+          <tr><td class="label-col">Pricing</td><td class="muted">$3,800 – $11,100 / year</td><td class="fw-col">Free – $199 / month</td></tr>
+          <tr><td class="label-col">Access</td><td class="muted">Institutional only</td><td class="fw-col">Open to anyone</td></tr>
+        </tbody>
+      </table>
+      <!-- KO table -->
+      <table class="cmp-table ko">
+        <thead><tr><th></th><th>기존 보고서</th><th>FabWatch</th></tr></thead>
+        <tbody>
+          <tr><td class="label-col">데이터 출처</td><td class="muted">설문·인터뷰 (자체 보고)</td><td class="fw-col">6개 위성 채널 (물리 기반)</td></tr>
+          <tr><td class="label-col">검증</td><td class="muted">없음 — 응답자 신뢰</td><td class="fw-col">독립 센서 교차 검증</td></tr>
+          <tr><td class="label-col">업데이트 주기</td><td class="muted">분기별</td><td class="fw-col">주간 + 실시간 알림</td></tr>
+          <tr><td class="label-col">중국 커버리지</td><td class="muted">비협조 시 사각지대</td><td class="fw-col">위성에 협조는 불필요</td></tr>
+          <tr><td class="label-col">가격</td><td class="muted">연 500만~1,500만 원</td><td class="fw-col">무료 ~ 월 27만 원</td></tr>
+          <tr><td class="label-col">접근성</td><td class="muted">기관 전용</td><td class="fw-col">누구나 이용 가능</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</section>
+
+<!-- 6 CHANNELS -->
+<section class="channels section" id="how-it-works" style="position:relative;overflow:hidden;">
+  <!-- Fab building silhouette -->
+  <svg class="fab-illustration" viewBox="0 0 500 200" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <!-- Main fab building -->
+    <rect x="50" y="40" width="180" height="160" rx="2" fill="white"/>
+    <rect x="55" y="50" width="30" height="25" rx="1" fill="white" opacity="0.7"/>
+    <rect x="90" y="50" width="30" height="25" rx="1" fill="white" opacity="0.7"/>
+    <rect x="125" y="50" width="30" height="25" rx="1" fill="white" opacity="0.7"/>
+    <rect x="160" y="50" width="30" height="25" rx="1" fill="white" opacity="0.7"/>
+    <rect x="55" y="85" width="30" height="25" rx="1" fill="white" opacity="0.6"/>
+    <rect x="90" y="85" width="30" height="25" rx="1" fill="white" opacity="0.6"/>
+    <rect x="125" y="85" width="30" height="25" rx="1" fill="white" opacity="0.6"/>
+    <rect x="160" y="85" width="30" height="25" rx="1" fill="white" opacity="0.6"/>
+    <!-- Cleanroom tower -->
+    <rect x="240" y="20" width="60" height="180" rx="2" fill="white"/>
+    <rect x="248" y="30" width="15" height="10" rx="1" fill="white" opacity="0.5"/>
+    <rect x="268" y="30" width="15" height="10" rx="1" fill="white" opacity="0.5"/>
+    <!-- Chimney / exhaust -->
+    <rect x="255" y="0" width="8" height="20" fill="white"/>
+    <rect x="272" y="5" width="6" height="15" fill="white" opacity="0.8"/>
+    <!-- Cooling tower -->
+    <path d="M340,200 L340,100 Q365,80 390,100 L390,200 Z" fill="white"/>
+    <!-- Piping -->
+    <line x1="230" y1="140" x2="340" y2="140" stroke="white" stroke-width="3" opacity="0.5"/>
+    <line x1="230" y1="160" x2="340" y2="160" stroke="white" stroke-width="2" opacity="0.4"/>
+    <!-- Small utility building -->
+    <rect x="410" y="140" width="60" height="60" rx="2" fill="white"/>
+    <rect x="420" y="150" width="15" height="12" rx="1" fill="white" opacity="0.6"/>
+    <rect x="445" y="150" width="15" height="12" rx="1" fill="white" opacity="0.6"/>
+    <!-- Ground line -->
+    <line x1="0" y1="200" x2="500" y2="200" stroke="white" stroke-width="1" opacity="0.3"/>
+  </svg>
+  <div class="inner">
+    <div class="section-label"><span class="en">How It Works</span><span class="ko">작동 원리</span></div>
+    <h2 class="section-title reveal">
+      <span class="en">Six eyes on every fab</span>
+      <span class="ko">모든 팹에 6개의 눈</span>
+    </h2>
+    <p class="section-desc">
+      <span class="en">Each channel detects a different physical signal. Together, they form a complete operational picture no single sensor can provide.</span>
+      <span class="ko">각 채널은 서로 다른 물리적 신호를 감지합니다. 함께 작동하면 단일 센서로는 불가능한 완전한 운영 현황을 파악합니다.</span>
+    </p>
+    <div class="channel-grid">
+      <div class="channel-card">
+        <div class="channel-name"><span class="channel-dot" style="background:#FBBF24;"></span> <span class="en">Nightlight</span><span class="ko">야간조명</span></div>
+        <div class="channel-source">VIIRS/DNB</div>
+        <div class="channel-desc">
+          <span class="en">Nighttime illumination intensity reveals operational activity and shift patterns. A sudden drop = potential shutdown.</span>
+          <span class="ko">야간 조명 강도로 가동 상태와 교대 패턴을 파악합니다. 급격한 하락은 셧다운 가능성을 의미합니다.</span>
+        </div>
+      </div>
+      <div class="channel-card">
+        <div class="channel-name"><span class="channel-dot" style="background:#38BDF8;"></span> <span class="en">SAR Radar</span><span class="ko">SAR 레이더</span></div>
+        <div class="channel-source">Sentinel-1</div>
+        <div class="channel-desc">
+          <span class="en">Synthetic aperture radar detects structural changes through clouds, day or night. New buildings appear on radar before they're announced.</span>
+          <span class="ko">합성개구레이더로 구름과 낮밤에 관계없이 구조물 변화를 감지합니다. 새 건물은 발표 전에 레이더에 먼저 나타납니다.</span>
+        </div>
+      </div>
+      <div class="channel-card">
+        <div class="channel-name"><span class="channel-dot" style="background:#EF4444;"></span> <span class="en">Thermal IR</span><span class="ko">열적외선</span></div>
+        <div class="channel-source">Landsat TIRS</div>
+        <div class="channel-desc">
+          <span class="en">Heat emissions from equipment and cooling systems. Running fabs are hot; idle fabs go cold. Physics doesn't lie.</span>
+          <span class="ko">장비와 냉각 시스템의 열방출을 감지합니다. 가동 중인 팹은 뜨겁고, 유휴 팹은 차갑습니다. 물리 법칙은 거짓말하지 않습니다.</span>
+        </div>
+      </div>
+      <div class="channel-card">
+        <div class="channel-name"><span class="channel-dot" style="background:#A78BFA;"></span> NO&#8322;</div>
+        <div class="channel-source">Sentinel-5P TROPOMI</div>
+        <div class="channel-desc">
+          <span class="en">Nitrogen dioxide from cleanroom operations and chemical processes. Daily atmospheric readings trace fab activity at the molecular level.</span>
+          <span class="ko">클린룸 운영과 화학 공정에서 발생하는 이산화질소. 매일의 대기 측정으로 분자 수준에서 팹 가동을 추적합니다.</span>
+        </div>
+      </div>
+      <div class="channel-card">
+        <div class="channel-name"><span class="channel-dot" style="background:#4ADE80;"></span> <span class="en">Vegetation</span><span class="ko">식생지수</span></div>
+        <div class="channel-source">Sentinel-2 NDVI</div>
+        <div class="channel-desc">
+          <span class="en">Vegetation index drops when ground is broken. The first signal of a new fab — before concrete is poured.</span>
+          <span class="ko">착공 시 식생지수가 하락합니다. 콘크리트를 붓기 전, 새 팹의 첫 번째 신호입니다.</span>
+        </div>
+      </div>
+      <div class="channel-card">
+        <div class="channel-name"><span class="channel-dot" style="background:#FB923C;"></span> <span class="en">Optical</span><span class="ko">광학영상</span></div>
+        <div class="channel-source">Sentinel-2 RGB</div>
+        <div class="channel-desc">
+          <span class="en">Visual confirmation of site layout, building footprints, and construction milestones. The human-readable proof.</span>
+          <span class="ko">부지 배치, 건물 윤곽, 건설 마일스톤을 시각적으로 확인합니다. 사람이 직접 눈으로 볼 수 있는 증거입니다.</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- DATA PIPELINE -->
+<section class="pipeline section">
+  <div class="inner">
+    <div class="section-label"><span class="en">Data Pipeline</span><span class="ko">데이터 파이프라인</span></div>
+    <h2 class="section-title reveal">
+      <span class="en">From raw pixels to actionable intelligence</span>
+      <span class="ko">원시 픽셀에서 실행 가능한 인텔리전스로</span>
+    </h2>
+    <p class="section-desc">
+      <span class="en">Six satellite sources are ingested, calibrated, and fused into a single composite score — fully automated, updated weekly.</span>
+      <span class="ko">6개 위성 소스를 수집·보정·융합하여 단일 복합 점수로 변환합니다. 완전 자동화, 매주 업데이트.</span>
+    </p>
+    <div class="pipe-flow">
+      <div class="pipe-stage">
+        <div class="pipe-icon">
+          <svg viewBox="0 0 24 24"><path d="M12 2a7 7 0 017 7c0 5.25-7 13-7 13S5 14.25 5 9a7 7 0 017-7z"/><circle cx="12" cy="9" r="2.5"/></svg>
+        </div>
+        <div class="pipe-name"><span class="en">Collect</span><span class="ko">수집</span></div>
+        <div class="pipe-detail"><span class="en">6 channels<br>66+ fabs</span><span class="ko">6채널<br>66+ 팹</span></div>
+      </div>
+      <div class="pipe-stage">
+        <div class="pipe-icon">
+          <svg viewBox="0 0 24 24"><path d="M4 7h16M4 12h16M4 17h10"/><circle cx="20" cy="17" r="2"/></svg>
+        </div>
+        <div class="pipe-name"><span class="en">Calibrate</span><span class="ko">보정</span></div>
+        <div class="pipe-detail"><span class="en">Atmospheric<br>correction</span><span class="ko">대기 보정<br>정규화</span></div>
+      </div>
+      <div class="pipe-stage">
+        <div class="pipe-icon">
+          <svg viewBox="0 0 24 24"><path d="M12 2v4M12 18v4M4.93 4.93l2.83 2.83M16.24 16.24l2.83 2.83M2 12h4M18 12h4M4.93 19.07l2.83-2.83M16.24 7.76l2.83-2.83"/></svg>
+        </div>
+        <div class="pipe-name"><span class="en">Analyze</span><span class="ko">분석</span></div>
+        <div class="pipe-detail"><span class="en">AI cross-<br>verification</span><span class="ko">AI 교차<br>검증</span></div>
+      </div>
+      <div class="pipe-stage">
+        <div class="pipe-icon">
+          <svg viewBox="0 0 24 24"><path d="M22 12h-4l-3 9L9 3l-3 9H2"/></svg>
+        </div>
+        <div class="pipe-name"><span class="en">Score</span><span class="ko">스코어링</span></div>
+        <div class="pipe-detail"><span class="en">Composite<br>fab score</span><span class="ko">복합 팹<br>점수 산출</span></div>
+      </div>
+      <div class="pipe-stage">
+        <div class="pipe-icon" style="background:rgba(245,158,11,0.1);border-color:rgba(245,158,11,0.2);">
+          <svg viewBox="0 0 24 24" style="stroke:var(--accent-warm);"><path d="M18 8A6 6 0 006 8c0 7-3 9-3 9h18s-3-2-3-9"/><path d="M13.73 21a2 2 0 01-3.46 0"/></svg>
+        </div>
+        <div class="pipe-name"><span class="en">Alert</span><span class="ko">알림</span></div>
+        <div class="pipe-detail"><span class="en">Dashboard<br>& email</span><span class="ko">대시보드<br>& 이메일</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FAB LIFECYCLE -->
+<section class="lifecycle section" id="coverage">
+  <div class="inner">
+    <div class="section-label"><span class="en">Fab Lifecycle Tracking</span><span class="ko">팹 생애주기 추적</span></div>
+    <h2 class="section-title reveal">
+      <span class="en">Every stage, verified by satellite</span>
+      <span class="ko">모든 단계, 위성으로 검증</span>
+    </h2>
+    <p class="section-desc">
+      <span class="en">From announcement to full operation — and back to idle. Each transition is independently detected by our satellite channels.</span>
+      <span class="ko">발표부터 풀가동, 그리고 유휴까지. 모든 전환을 위성 채널이 독립적으로 감지합니다.</span>
+    </p>
+    <div class="lc-track">
+      <div class="lc-step">
+        <span class="lc-dot" style="background:#94A3B8;"></span>
+        <div class="lc-label"><span class="en">Announced</span><span class="ko">발표</span></div>
+        <div class="lc-signal"><span class="en">News / filings</span><span class="ko">뉴스 / 공시</span></div>
+      </div>
+      <div class="lc-step">
+        <span class="lc-dot" style="background:#FBBF24;"></span>
+        <div class="lc-label"><span class="en">Site Prep</span><span class="ko">부지 준비</span></div>
+        <div class="lc-signal"><span class="en">NDVI drop</span><span class="ko">NDVI 하락</span></div>
+      </div>
+      <div class="lc-step">
+        <span class="lc-dot" style="background:#FB923C;"></span>
+        <div class="lc-label"><span class="en">Construction</span><span class="ko">건설</span></div>
+        <div class="lc-signal"><span class="en">SAR structures</span><span class="ko">SAR 구조물</span></div>
+      </div>
+      <div class="lc-step">
+        <span class="lc-dot" style="background:#38BDF8;"></span>
+        <div class="lc-label"><span class="en">Equip Install</span><span class="ko">장비 반입</span></div>
+        <div class="lc-signal"><span class="en">Thermal + light</span><span class="ko">열 + 조명</span></div>
+      </div>
+      <div class="lc-step">
+        <span class="lc-dot" style="background:#A3E635;"></span>
+        <div class="lc-label"><span class="en">Ramping</span><span class="ko">램프업</span></div>
+        <div class="lc-signal"><span class="en">Light + NO&#8322; rising</span><span class="ko">조명 + NO&#8322; 상승</span></div>
+      </div>
+      <div class="lc-step">
+        <span class="lc-dot" style="background:#22C55E;"></span>
+        <div class="lc-label"><span class="en">Full Operation</span><span class="ko">풀가동</span></div>
+        <div class="lc-signal"><span class="en">All channels stable</span><span class="ko">전 채널 안정</span></div>
+      </div>
+      <div class="lc-step">
+        <span class="lc-dot" style="background:#EF4444;"></span>
+        <div class="lc-label"><span class="en">Reduced / Idle</span><span class="ko">감산 / 유휴</span></div>
+        <div class="lc-signal"><span class="en">Light + thermal drop</span><span class="ko">조명 + 열 하락</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SERVICE OVERVIEW: 모니터링 vs 리포트 -->
+<section class="svc-overview section" id="services">
+  <div class="inner">
+    <div class="section-label"><span class="en">Our Services</span><span class="ko">서비스 구성</span></div>
+    <h2 class="section-title reveal">
+      <span class="en">Two ways to use FabWatch</span>
+      <span class="ko">FabWatch를 활용하는 두 가지 방법</span>
+    </h2>
+    <p class="section-desc">
+      <span class="en">Choose real-time monitoring or curated reports — or both. Each serves a different decision-making need.</span>
+      <span class="ko">실시간 모니터링과 전문 리포트 중 선택하세요. 각각 다른 의사결정 니즈에 맞춰 설계되었습니다.</span>
+    </p>
+    <div class="svc-grid">
+      <!-- 모니터링 플랫폼 -->
+      <div class="svc-card svc-monitor">
+        <span class="svc-card-badge"><span class="en">PLATFORM</span><span class="ko">플랫폼</span></span>
+        <div class="svc-card-icon" style="background: rgba(56,189,248,0.1);">
+          <svg viewBox="0 0 24 24" fill="none" stroke="var(--accent)" stroke-width="2" stroke-linecap="round"><rect x="2" y="3" width="20" height="14" rx="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/></svg>
+        </div>
+        <h3><span class="en">Monitoring Dashboard</span><span class="ko">모니터링 대시보드</span></h3>
+        <p class="svc-desc">
+          <span class="en">Web-based real-time dashboard. Track 66+ fabs with weekly satellite updates, alerts, and trend visualization. Your own control tower.</span>
+          <span class="ko">웹 기반 실시간 대시보드입니다. 66개 이상의 팹을 주간 위성 업데이트, 알림, 트렌드 시각화로 추적하세요. 나만의 관제탑입니다.</span>
+        </p>
+        <ul class="svc-features">
+          <li><span class="ico" style="color:var(--accent);">&#9670;</span> <span class="en">Interactive global fab map</span><span class="ko">인터랙티브 글로벌 팹 지도</span></li>
+          <li><span class="ico" style="color:var(--accent);">&#9670;</span> <span class="en">6-channel signal dashboard per fab</span><span class="ko">팹별 6채널 신호 대시보드</span></li>
+          <li><span class="ico" style="color:var(--accent);">&#9670;</span> <span class="en">Email / Slack / Kakao alerts</span><span class="ko">이메일 / Slack / 카카오톡 알림</span></li>
+          <li><span class="ico" style="color:var(--accent);">&#9670;</span> <span class="en">API access for data integration</span><span class="ko">데이터 연동 API 제공</span></li>
+          <li><span class="ico" style="color:var(--accent);">&#9670;</span> <span class="en">Historical time-series (3 years)</span><span class="ko">과거 시계열 데이터 (3년분)</span></li>
+        </ul>
+        <div style="font-size:13px;color:var(--fg-muted);margin-top:4px;">
+          <span class="en">Included in Pro &amp; Enterprise plans</span>
+          <span class="ko">Pro / Enterprise 요금제에 포함</span>
+        </div>
+      </div>
+      <!-- 리포트 서비스 -->
+      <div class="svc-card svc-report">
+        <span class="svc-card-badge"><span class="en">REPORTS</span><span class="ko">리포트</span></span>
+        <div class="svc-card-icon" style="background: rgba(245,158,11,0.1);">
+          <svg viewBox="0 0 24 24" fill="none" stroke="var(--accent-warm)" stroke-width="2" stroke-linecap="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/></svg>
+        </div>
+        <h3><span class="en">Analysis Reports</span><span class="ko">분석 리포트</span></h3>
+        <p class="svc-desc">
+          <span class="en">Expert-written satellite analysis reports. Deep dives into individual fabs, regional trends, and strategic implications. Delivered as PDF/web.</span>
+          <span class="ko">전문가가 작성하는 위성 분석 리포트입니다. 개별 팹 심층 분석, 지역 동향, 전략적 시사점을 PDF/웹 형태로 제공합니다.</span>
+        </p>
+        <ul class="svc-features">
+          <li><span class="ico" style="color:var(--accent-warm);">&#9670;</span> <span class="en">Monthly highlight report (free)</span><span class="ko">월간 하이라이트 리포트 (무료)</span></li>
+          <li><span class="ico" style="color:var(--accent-warm);">&#9670;</span> <span class="en">Deep dive: single fab analysis</span><span class="ko">심층 분석: 개별 팹 리포트</span></li>
+          <li><span class="ico" style="color:var(--accent-warm);">&#9670;</span> <span class="en">Regional report (China / Korea / US)</span><span class="ko">지역 리포트 (중국 / 한국 / 미국)</span></li>
+          <li><span class="ico" style="color:var(--accent-warm);">&#9670;</span> <span class="en">Custom analysis on request</span><span class="ko">맞춤형 분석 의뢰 가능</span></li>
+          <li><span class="ico" style="color:var(--accent-warm);">&#9670;</span> <span class="en">Enterprise white-label available</span><span class="ko">기업 화이트라벨 리포트 제공</span></li>
+        </ul>
+        <div style="font-size:13px;color:var(--fg-muted);margin-top:4px;">
+          <span class="en">Free monthly report for all members — premium reports sold separately</span>
+          <span class="ko">월간 무료 리포트 전원 제공 — 프리미엄 리포트 별도 구매</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PRICING -->
+<section class="pricing section" id="pricing">
+  <div class="inner">
+    <div class="section-label"><span class="en">Pricing</span><span class="ko">요금제</span></div>
+    <h2 class="section-title reveal">
+      <span class="en">Start free. Scale when ready.</span>
+      <span class="ko">무료로 시작하고,<br>필요할 때 확장하세요.</span>
+    </h2>
+    <p class="section-desc">
+      <span class="en">From individual researchers to institutional intelligence teams. Pay only for the depth you need.</span>
+      <span class="ko">개인 연구자부터 기관 인텔리전스 팀까지. 필요한 깊이만큼만 결제하세요.</span>
+    </p>
+    <!-- 개인/기업 탭 -->
+    <div class="member-tabs">
+      <button class="member-tab active" onclick="switchMember('individual')" id="tab-individual">
+        <span class="en">Individual</span><span class="ko">개인 회원</span>
+      </button>
+      <button class="member-tab" onclick="switchMember('corporate')" id="tab-corporate">
+        <span class="en">Corporate</span><span class="ko">기업 회원</span>
+      </button>
+    </div>
+    <div class="member-note" id="note-individual">
+      <span class="en">For independent analysts, researchers, journalists, and investors tracking semiconductor capacity on their own.</span>
+      <span class="ko">반도체 생산능력을 독립적으로 추적하는 애널리스트, 연구자, 기자, 투자자를 위한 요금제입니다.</span>
+    </div>
+    <div class="member-note" id="note-corporate" style="display:none; border-left-color: var(--accent-warm);">
+      <span class="en">For asset managers, consulting firms, semiconductor companies, and government agencies requiring team access and custom analysis.</span>
+      <span class="ko">팀 단위 접근 및 맞춤 분석이 필요한 자산운용사, 컨설팅 펌, 반도체 기업, 정부 기관을 위한 요금제입니다.</span>
+    </div>
+    <div class="price-grid">
+      <!-- Free -->
+      <div class="price-card">
+        <div class="price-name">Free</div>
+        <div class="price-amount">$0</div>
+        <ul class="price-features">
+          <li><span class="check">&#10003;</span> <span class="en">Global fab map</span><span class="ko">글로벌 팹 지도</span></li>
+          <li><span class="check">&#10003;</span> <span class="en">Open data (CSV): fab list + status</span><span class="ko">오픈 데이터 (CSV): 팹 목록 + 상태</span></li>
+          <li><span class="check">&#10003;</span> <span class="en">1 monthly highlight report</span><span class="ko">월간 하이라이트 리포트 1편</span></li>
+          <li><span class="check">&#10003;</span> <span class="en">Weekly newsletter</span><span class="ko">주간 뉴스레터</span></li>
+          <li><span class="cross">&#10005;</span> <span class="en">Dashboard access</span><span class="ko">대시보드 접근</span></li>
+          <li><span class="cross">&#10005;</span> <span class="en">Alerts</span><span class="ko">알림</span></li>
+          <li><span class="cross">&#10005;</span> API</li>
+        </ul>
+        <a href="#" onclick="openModal('signup');return false;" class="price-btn"><span class="en">Get Started</span><span class="ko">시작하기</span></a>
+      </div>
+      <!-- Pro -->
+      <div class="price-card featured">
+        <div class="price-name">Pro</div>
+        <div class="price-amount en">$199<span> / month</span></div>
+        <div class="price-amount ko">$199<span> / 월</span></div>
+        <div class="price-sub ko">(약 27만 원 / 월)</div>
+        <ul class="price-features">
+          <li><span class="check">&#10003;</span> <span class="en">Full 66-fab dashboard + reports</span><span class="ko">66개 팹 전체 대시보드 + 리포트</span></li>
+          <li><span class="check">&#10003;</span> <span class="en">Weekly updates + Daily Digest</span><span class="ko">주간 업데이트 + Daily Digest</span></li>
+          <li><span class="check">&#10003;</span> <span class="en">Email alerts</span><span class="ko">이메일 알림</span></li>
+          <li><span class="check">&#10003;</span> <span class="en">Basic API (1,000 calls/mo)</span><span class="ko">기본 API (월 1,000콜)</span></li>
+          <li><span class="check">&#10003;</span> <span class="en">Satellite thumbnails</span><span class="ko">위성 썸네일 이미지</span></li>
+          <li><span class="check">&#10003;</span> <span class="en">Full open data access</span><span class="ko">전체 오픈 데이터 접근</span></li>
+          <li><span class="cross">&#10005;</span> <span class="en">Custom fabs / raw imagery</span><span class="ko">커스텀 팹 / 원본 영상</span></li>
+        </ul>
+        <a href="#" onclick="openModal('signup');return false;" class="price-btn primary"><span class="en">Start Free Trial</span><span class="ko">무료 체험 시작</span></a>
+      </div>
+      <!-- Enterprise -->
+      <div class="price-card">
+        <div class="price-name">Enterprise</div>
+        <div class="price-amount en">$999<span>+ / month</span></div>
+        <div class="price-amount ko">$999<span>+ / 월</span></div>
+        <div class="price-sub ko">(약 135만 원~ / 월)</div>
+        <ul class="price-features">
+          <li><span class="check">&#10003;</span> <span class="en">Everything in Pro</span><span class="ko">Pro 전체 포함</span></li>
+          <li><span class="check">&#10003;</span> <span class="en">Custom fab additions</span><span class="ko">커스텀 팹 추가</span></li>
+          <li><span class="check">&#10003;</span> <span class="en">Full API + raw satellite data</span><span class="ko">전체 API + 원본 위성 데이터</span></li>
+          <li><span class="check">&#10003;</span> <span class="en">Daily alerts + Slack + webhook</span><span class="ko">일일 알림 + Slack + 카카오톡</span></li>
+          <li><span class="check">&#10003;</span> <span class="en">Full-resolution imagery</span><span class="ko">풀해상도 위성 영상</span></li>
+          <li><span class="check">&#10003;</span> <span class="en">Dedicated analyst + custom reports</span><span class="ko">전담 애널리스트 + 맞춤 리포트</span></li>
+          <li><span class="check">&#10003;</span> <span class="en">Bloomberg / Refinitiv feed</span><span class="ko">Bloomberg / Refinitiv 피드</span></li>
+        </ul>
+        <a href="#" onclick="openModal('signup');return false;" class="price-btn"><span class="en">Contact Sales</span><span class="ko">도입 문의</span></a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- DEMO DASHBOARD -->
+<section class="demo-section section" id="demo">
+  <div class="inner">
+    <div class="section-label"><span class="en">Live Demo</span><span class="ko">데모 대시보드</span></div>
+    <h2 class="section-title reveal">
+      <span class="en">See the dashboard in action</span>
+      <span class="ko">대시보드를 직접 확인하세요</span>
+    </h2>
+    <p class="section-desc">
+      <span class="en">A preview of the FabWatch monitoring dashboard. Real interface, sample data.</span>
+      <span class="ko">FabWatch 모니터링 대시보드의 미리보기입니다. 실제 인터페이스, 샘플 데이터.</span>
+    </p>
+    <div class="demo-frame">
+      <div class="demo-titlebar">
+        <div class="demo-dots">
+          <span style="background:#EF4444;"></span>
+          <span style="background:#FBBF24;"></span>
+          <span style="background:#22C55E;"></span>
+        </div>
+        <div class="demo-url">app.fabwatch.io/dashboard</div>
+        <span class="demo-badge-live">LIVE DEMO</span>
+      </div>
+      <div class="demo-body">
+        <div class="demo-grid">
+          <!-- Sidebar -->
+          <div class="demo-sidebar">
+            <div class="demo-nav-item active" onclick="switchDemoTab(this,'overview')">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/></svg>
+              <span class="en">Overview</span><span class="ko">전체 현황</span>
+            </div>
+            <div class="demo-nav-item" onclick="switchDemoTab(this,'map')">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M2 12h20"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10A15.3 15.3 0 0 1 12 2z"/></svg>
+              <span class="en">Fab Map</span><span class="ko">팹 지도</span>
+            </div>
+            <div class="demo-nav-item" onclick="switchDemoTab(this,'signals')">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 20V10"/><path d="M12 20V4"/><path d="M6 20v-6"/></svg>
+              <span class="en">Signals</span><span class="ko">신호 분석</span>
+            </div>
+            <div class="demo-nav-item" onclick="switchDemoTab(this,'reports')">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>
+              <span class="en">Reports</span><span class="ko">리포트</span>
+            </div>
+            <div class="demo-nav-item" onclick="switchDemoTab(this,'alerts')">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"/><path d="M13.73 21a2 2 0 0 1-3.46 0"/></svg>
+              <span class="en">Alerts</span><span class="ko">알림</span>
+            </div>
+          </div>
+          <!-- Main content -->
+          <div class="demo-main">
+            <!-- VIEW: Overview (default) -->
+            <div class="demo-view active" id="demo-overview">
+            <!-- Stats row (populated from JSON) -->
+            <div class="demo-stats-row" id="demo-stats-row"></div>
+            <!-- Chart area -->
+            <div class="demo-chart">
+              <div class="demo-chart-title" id="demo-chart-title"></div>
+              <div class="demo-bars" id="demo-chart-bars"></div>
+            </div>
+            <!-- Fab filter -->
+            <div class="demo-filter-bar">
+              <button class="demo-filter-btn active" onclick="filterFabs(this,'all')"><span class="en">All</span><span class="ko">전체</span></button>
+              <button class="demo-filter-btn" onclick="filterFabs(this,'kr')">KR</button>
+              <button class="demo-filter-btn" onclick="filterFabs(this,'tw')">TW</button>
+              <button class="demo-filter-btn" onclick="filterFabs(this,'cn')">CN</button>
+              <button class="demo-filter-btn" onclick="filterFabs(this,'us')">US</button>
+              <button class="demo-filter-btn" onclick="filterFabs(this,'jp')">JP</button>
+              <button class="demo-filter-btn" onclick="filterFabs(this,'eu')">EU</button>
+              <button class="demo-filter-btn" onclick="filterFabs(this,'sg')">SG</button>
+            </div>
+            <!-- Fab list -->
+            <div class="demo-fab-list" id="demo-fab-table">
+              <div class="demo-fab-header">
+                <span><span class="en">Fab</span><span class="ko">팹</span></span>
+                <span><span class="en">Status</span><span class="ko">상태</span></span>
+                <span><span class="en">Nightlight</span><span class="ko">야간조명</span></span>
+                <span><span class="en">Change</span><span class="ko">변화</span></span>
+              </div>
+              <!-- Fab rows populated from JSON -->
+            </div>
+            </div><!-- /demo-overview -->
+            <!-- VIEW: Fab Map -->
+            <div class="demo-view" id="demo-map">
+              <div class="demo-map-placeholder">
+                <div style="text-align:center;">
+                  <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="#475569" stroke-width="1.5"><circle cx="12" cy="12" r="10"/><path d="M2 12h20"/><path d="M12 2a15.3 15.3 0 014 10 15.3 15.3 0 01-4 10 15.3 15.3 0 01-4-10 15.3 15.3 0 014-10z"/></svg>
+                  <div style="margin-top:8px;"><span class="en">Interactive map with 66 fabs</span><span class="ko">66개 팹 인터랙티브 지도</span></div>
+                  <div style="font-size:11px;color:#334155;margin-top:4px;"><span class="en">Available in full dashboard</span><span class="ko">풀 대시보드에서 이용 가능</span></div>
+                </div>
+              </div>
+            </div>
+            <!-- VIEW: Signals -->
+            <div class="demo-view" id="demo-signals">
+              <!-- Signal cards populated from JSON -->
+            </div>
+            <!-- VIEW: Reports -->
+            <div class="demo-view" id="demo-reports">
+              <div style="display:flex;flex-direction:column;gap:10px;">
+                <div style="padding:12px;background:rgba(255,255,255,0.03);border:1px solid rgba(255,255,255,0.06);border-radius:8px;display:flex;gap:12px;align-items:center;">
+                  <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#38BDF8" stroke-width="2"><path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/><path d="M14 2v6h6"/></svg>
+                  <div><div style="font-size:13px;color:#E2E8F0;font-weight:600;">Samsung Pyeongtaek Deep Dive</div><div style="font-size:11px;color:#64748B;">2026-11-04 · PDF · 24 pages</div></div>
+                </div>
+                <div style="padding:12px;background:rgba(255,255,255,0.03);border:1px solid rgba(255,255,255,0.06);border-radius:8px;display:flex;gap:12px;align-items:center;">
+                  <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#F59E0B" stroke-width="2"><path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/><path d="M14 2v6h6"/></svg>
+                  <div><div style="font-size:13px;color:#E2E8F0;font-weight:600;">China Fab Monthly — Oct 2026</div><div style="font-size:11px;color:#64748B;">2026-10-28 · PDF · 18 pages</div></div>
+                </div>
+                <div style="padding:12px;background:rgba(255,255,255,0.03);border:1px solid rgba(255,255,255,0.06);border-radius:8px;display:flex;gap:12px;align-items:center;">
+                  <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#22C55E" stroke-width="2"><path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/><path d="M14 2v6h6"/></svg>
+                  <div><div style="font-size:13px;color:#E2E8F0;font-weight:600;">Intel Arizona Progress Report</div><div style="font-size:11px;color:#64748B;">2026-10-21 · PDF · 12 pages</div></div>
+                </div>
+              </div>
+            </div>
+            <!-- VIEW: Alerts -->
+            <div class="demo-view" id="demo-alerts">
+              <div style="display:flex;flex-direction:column;gap:8px;">
+                <div style="padding:10px 12px;background:rgba(239,68,68,0.08);border:1px solid rgba(239,68,68,0.2);border-radius:8px;font-size:13px;">
+                  <div style="color:#F87171;font-weight:600;margin-bottom:2px;">⚠ SMIC SN1 — <span class="en">Nightlight drop -8.7%</span><span class="ko">야간조명 -8.7% 하락</span></div>
+                  <div style="color:#94A3B8;font-size:11px;">2026-11-08 · <span class="en">Possible utilization cut</span><span class="ko">가동률 하락 가능성</span></div>
+                </div>
+                <div style="padding:10px 12px;background:rgba(245,158,11,0.08);border:1px solid rgba(245,158,11,0.2);border-radius:8px;font-size:13px;">
+                  <div style="color:#FBBF24;font-weight:600;margin-bottom:2px;">⚡ Intel Fab 52 — <span class="en">Construction +34.1%</span><span class="ko">건설 진척 +34.1%</span></div>
+                  <div style="color:#94A3B8;font-size:11px;">2026-11-07 · <span class="en">Ahead of schedule</span><span class="ko">일정 앞섬</span></div>
+                </div>
+                <div style="padding:10px 12px;background:rgba(56,189,248,0.08);border:1px solid rgba(56,189,248,0.2);border-radius:8px;font-size:13px;">
+                  <div style="color:#38BDF8;font-weight:600;margin-bottom:2px;">📊 Samsung P3 — <span class="en">Ramp milestone 87%</span><span class="ko">램프업 87% 돌파</span></div>
+                  <div style="color:#94A3B8;font-size:11px;">2026-11-06 · <span class="en">Target: 90% by Q1</span><span class="ko">목표: Q1까지 90%</span></div>
+                </div>
+                <div style="padding:10px 12px;background:rgba(34,197,94,0.08);border:1px solid rgba(34,197,94,0.2);border-radius:8px;font-size:13px;">
+                  <div style="color:#4ADE80;font-weight:600;margin-bottom:2px;">✓ SK hynix M16 — <span class="en">Stable at 94%</span><span class="ko">94% 안정 가동</span></div>
+                  <div style="color:#94A3B8;font-size:11px;">2026-11-05 · <span class="en">No change</span><span class="ko">변동 없음</span></div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <p style="text-align:center; margin-top:24px; font-size:14px; color:#94A3B8;">
+      <span class="en">This is a preview with sample data. <a href="#cta" style="color:var(--accent);text-decoration:none;">Sign up free</a> to explore the live dashboard.</span>
+      <span class="ko">샘플 데이터가 포함된 미리보기입니다. <a href="#cta" style="color:var(--accent);text-decoration:none;">무료 가입</a> 후 실제 대시보드를 탐색하세요.</span>
+    </p>
+  </div>
+</section>
+
+<!-- WORLD MAP: 66 FABS -->
+<section class="worldmap section" id="map">
+  <div class="inner">
+    <div class="section-label"><span class="en">Global Coverage</span><span class="ko">글로벌 커버리지</span></div>
+    <h2 class="section-title reveal">
+      <span class="en">66 fabs. 7 countries.<br>One dashboard.</span>
+      <span class="ko">66개 팹. 7개국.<br>하나의 대시보드.</span>
+    </h2>
+    <p class="section-desc reveal">
+      <span class="en">Every major semiconductor fab on the planet, monitored around the clock with 6 satellite channels.</span>
+      <span class="ko">지구상의 모든 주요 반도체 팹을 6개 위성 채널로 24시간 모니터링합니다.</span>
+    </p>
+    <div class="map-wrap reveal">
+      <svg class="map-svg" viewBox="0 0 800 400" xmlns="http://www.w3.org/2000/svg">
+        <rect width="800" height="400" fill="transparent"/>
+        <!-- Simplified continent outlines -->
+        <g opacity="0.15" fill="#94A3B8">
+          <!-- North America -->
+          <path d="M80,80 L180,60 L220,80 L230,120 L210,160 L190,200 L160,220 L130,200 L100,160 L80,120Z"/>
+          <!-- Europe -->
+          <path d="M380,70 L420,60 L450,70 L460,100 L440,130 L420,140 L390,130 L375,100Z"/>
+          <!-- Asia -->
+          <path d="M460,60 L580,50 L650,80 L680,120 L670,160 L640,180 L600,200 L550,190 L500,170 L470,130 L460,100Z"/>
+          <!-- East Asia detail -->
+          <path d="M600,110 L650,100 L680,130 L690,170 L670,200 L640,210 L620,190 L610,160 L600,130Z"/>
+          <!-- Southeast Asia -->
+          <path d="M620,220 L650,210 L670,230 L660,260 L630,270 L610,250Z"/>
+        </g>
+        <!-- Grid lines for tech feel -->
+        <g stroke="rgba(56,189,248,0.04)" stroke-width="0.5">
+          <line x1="0" y1="100" x2="800" y2="100"/><line x1="0" y1="200" x2="800" y2="200"/>
+          <line x1="0" y1="300" x2="800" y2="300"/><line x1="200" y1="0" x2="200" y2="400"/>
+          <line x1="400" y1="0" x2="400" y2="400"/><line x1="600" y1="0" x2="600" y2="400"/>
+        </g>
+        <!-- Connection lines from fabs to center -->
+        <g stroke="rgba(56,189,248,0.06)" stroke-width="0.5" stroke-dasharray="4,4">
+          <line x1="175" y1="130" x2="400" y2="200"/><line x1="200" y1="140" x2="400" y2="200"/>
+          <line x1="625" y1="155" x2="400" y2="200"/><line x1="640" y1="170" x2="400" y2="200"/>
+          <line x1="660" y1="145" x2="400" y2="200"/><line x1="430" y1="110" x2="400" y2="200"/>
+          <line x1="635" y1="235" x2="400" y2="200"/>
+        </g>
+        <!-- USA fabs (Intel, GlobalFoundries, Samsung Austin, TSMC AZ, Micron) -->
+        <g class="map-cluster" data-country="usa">
+          <circle class="map-marker" cx="165" cy="125" r="3" fill="#38BDF8" opacity="0.9"><title>Intel Fab 52, Arizona</title></circle>
+          <circle class="map-marker" cx="170" cy="118" r="3" fill="#38BDF8" opacity="0.9"><title>Intel Fab 42, Arizona</title></circle>
+          <circle class="map-marker" cx="175" cy="130" r="3" fill="#38BDF8" opacity="0.9"><title>TSMC Fab 21, Arizona</title></circle>
+          <circle class="map-marker" cx="185" cy="142" r="3" fill="#38BDF8" opacity="0.9"><title>Samsung Austin</title></circle>
+          <circle class="map-marker" cx="200" cy="110" r="3" fill="#38BDF8" opacity="0.9"><title>GlobalFoundries, New York</title></circle>
+          <circle class="map-marker" cx="210" cy="115" r="3" fill="#38BDF8" opacity="0.9"><title>Micron, Virginia</title></circle>
+          <circle class="map-marker" cx="195" cy="105" r="2.5" fill="#38BDF8" opacity="0.7"><title>Intel Fab 28, Oregon</title></circle>
+          <circle class="map-marker" cx="205" cy="120" r="2.5" fill="#38BDF8" opacity="0.7"><title>GlobalFoundries, Vermont</title></circle>
+          <circle class="map-marker" cx="192" cy="135" r="2.5" fill="#38BDF8" opacity="0.7"><title>Texas Instruments</title></circle>
+          <circle class="map-marker" cx="178" cy="115" r="2.5" fill="#38BDF8" opacity="0.7"><title>Micron, Idaho</title></circle>
+          <text x="185" y="160" fill="#38BDF8" font-size="10" font-family="IBM Plex Mono" text-anchor="middle" opacity="0.8">USA · 10</text>
+        </g>
+        <!-- Europe fabs (STMicro, Infineon, NXP, ASML) -->
+        <g class="map-cluster" data-country="eu">
+          <circle class="map-marker" cx="415" cy="95" r="3" fill="#A78BFA" opacity="0.9"><title>Infineon, Dresden</title></circle>
+          <circle class="map-marker" cx="420" cy="105" r="3" fill="#A78BFA" opacity="0.9"><title>GlobalFoundries, Dresden</title></circle>
+          <circle class="map-marker" cx="430" cy="110" r="3" fill="#A78BFA" opacity="0.9"><title>STMicro, Crolles</title></circle>
+          <circle class="map-marker" cx="410" cy="100" r="2.5" fill="#A78BFA" opacity="0.7"><title>NXP, Netherlands</title></circle>
+          <circle class="map-marker" cx="425" cy="115" r="2.5" fill="#A78BFA" opacity="0.7"><title>Intel Ireland</title></circle>
+          <text x="420" y="132" fill="#A78BFA" font-size="10" font-family="IBM Plex Mono" text-anchor="middle" opacity="0.8">EU · 5</text>
+        </g>
+        <!-- Japan fabs (Kioxia, Renesas, Sony, Rapidus) -->
+        <g class="map-cluster" data-country="jp">
+          <circle class="map-marker" cx="688" cy="128" r="3" fill="#F59E0B" opacity="0.9"><title>Kioxia, Yokkaichi</title></circle>
+          <circle class="map-marker" cx="695" cy="135" r="3" fill="#F59E0B" opacity="0.9"><title>Renesas, Naka</title></circle>
+          <circle class="map-marker" cx="682" cy="122" r="3" fill="#F59E0B" opacity="0.9"><title>Sony, Kumamoto</title></circle>
+          <circle class="map-marker" cx="690" cy="118" r="2.5" fill="#F59E0B" opacity="0.7"><title>TSMC JASM, Kumamoto</title></circle>
+          <circle class="map-marker" cx="698" cy="125" r="2.5" fill="#F59E0B" opacity="0.7"><title>Rapidus, Chitose</title></circle>
+          <circle class="map-marker" cx="685" cy="140" r="2.5" fill="#F59E0B" opacity="0.7"><title>Kioxia, Kitakami</title></circle>
+          <circle class="map-marker" cx="693" cy="142" r="2.5" fill="#F59E0B" opacity="0.7"><title>Micron, Hiroshima</title></circle>
+          <circle class="map-marker" cx="680" cy="132" r="2.5" fill="#F59E0B" opacity="0.7"><title>Renesas, Takasaki</title></circle>
+          <text x="690" y="158" fill="#F59E0B" font-size="10" font-family="IBM Plex Mono" text-anchor="middle" opacity="0.8">JP · 8</text>
+        </g>
+        <!-- South Korea fabs (Samsung, SK hynix) -->
+        <g class="map-cluster" data-country="kr">
+          <circle class="map-marker" cx="660" cy="140" r="4" fill="#22C55E" opacity="0.9"><title>Samsung Pyeongtaek P1-P4</title></circle>
+          <circle class="map-marker" cx="655" cy="148" r="3.5" fill="#22C55E" opacity="0.9"><title>SK hynix Icheon M16</title></circle>
+          <circle class="map-marker" cx="665" cy="148" r="3" fill="#22C55E" opacity="0.9"><title>SK hynix Cheongju</title></circle>
+          <circle class="map-marker" cx="652" cy="140" r="3" fill="#22C55E" opacity="0.9"><title>Samsung Hwaseong</title></circle>
+          <circle class="map-marker" cx="668" cy="155" r="2.5" fill="#22C55E" opacity="0.7"><title>Samsung Giheung</title></circle>
+          <circle class="map-marker" cx="650" cy="155" r="2.5" fill="#22C55E" opacity="0.7"><title>SK hynix Yongin (계획)</title></circle>
+          <circle class="map-marker" cx="656" cy="135" r="2.5" fill="#22C55E" opacity="0.7"><title>DB HiTek</title></circle>
+          <!-- Glow effect for Korea cluster -->
+          <circle cx="658" cy="147" r="20" fill="rgba(34,197,94,0.06)"/>
+          <text x="658" y="172" fill="#22C55E" font-size="10" font-family="IBM Plex Mono" text-anchor="middle" opacity="0.8">KR · 12</text>
+        </g>
+        <!-- Taiwan fabs (TSMC, UMC, PSMC) -->
+        <g class="map-cluster" data-country="tw">
+          <circle class="map-marker" cx="648" cy="188" r="4" fill="#EC4899" opacity="0.9"><title>TSMC Fab 18, Tainan</title></circle>
+          <circle class="map-marker" cx="642" cy="182" r="3.5" fill="#EC4899" opacity="0.9"><title>TSMC Fab 15, Taichung</title></circle>
+          <circle class="map-marker" cx="654" cy="182" r="3" fill="#EC4899" opacity="0.9"><title>TSMC Fab 12, Hsinchu</title></circle>
+          <circle class="map-marker" cx="640" cy="192" r="3" fill="#EC4899" opacity="0.9"><title>UMC, Tainan</title></circle>
+          <circle class="map-marker" cx="652" cy="195" r="2.5" fill="#EC4899" opacity="0.7"><title>TSMC Fab 2, Kaohsiung</title></circle>
+          <circle class="map-marker" cx="636" cy="186" r="2.5" fill="#EC4899" opacity="0.7"><title>PSMC, Hsinchu</title></circle>
+          <circle class="map-marker" cx="644" cy="175" r="2.5" fill="#EC4899" opacity="0.7"><title>TSMC Fab 14, Tainan</title></circle>
+          <circle class="map-marker" cx="650" cy="175" r="2.5" fill="#EC4899" opacity="0.7"><title>Vanguard, Hsinchu</title></circle>
+          <circle class="map-marker" cx="656" cy="190" r="2.5" fill="#EC4899" opacity="0.7"><title>TSMC Fab 6, Tainan</title></circle>
+          <circle class="map-marker" cx="638" cy="178" r="2.5" fill="#EC4899" opacity="0.7"><title>UMC, Hsinchu</title></circle>
+          <!-- Glow effect for Taiwan cluster -->
+          <circle cx="647" cy="185" r="22" fill="rgba(236,72,153,0.05)"/>
+          <text x="647" y="212" fill="#EC4899" font-size="10" font-family="IBM Plex Mono" text-anchor="middle" opacity="0.8">TW · 15</text>
+        </g>
+        <!-- China fabs (SMIC, YMTC, CXMT, Hua Hong) -->
+        <g class="map-cluster" data-country="cn">
+          <circle class="map-marker" cx="625" cy="148" r="3.5" fill="#EF4444" opacity="0.9"><title>SMIC Shanghai SN1/SN2</title></circle>
+          <circle class="map-marker" cx="618" cy="142" r="3" fill="#EF4444" opacity="0.9"><title>SMIC Beijing</title></circle>
+          <circle class="map-marker" cx="610" cy="152" r="3" fill="#EF4444" opacity="0.9"><title>YMTC, Wuhan</title></circle>
+          <circle class="map-marker" cx="615" cy="160" r="3" fill="#EF4444" opacity="0.9"><title>CXMT, Hefei</title></circle>
+          <circle class="map-marker" cx="630" cy="155" r="3" fill="#EF4444" opacity="0.9"><title>SMIC Lingang</title></circle>
+          <circle class="map-marker" cx="622" cy="165" r="2.5" fill="#EF4444" opacity="0.7"><title>Hua Hong, Wuxi</title></circle>
+          <circle class="map-marker" cx="605" cy="145" r="2.5" fill="#EF4444" opacity="0.7"><title>SMIC Tianjin</title></circle>
+          <circle class="map-marker" cx="612" cy="168" r="2.5" fill="#EF4444" opacity="0.7"><title>Nexchip, Hefei</title></circle>
+          <circle class="map-marker" cx="628" cy="162" r="2.5" fill="#EF4444" opacity="0.7"><title>HLMC, Shanghai</title></circle>
+          <circle class="map-marker" cx="618" cy="155" r="2.5" fill="#EF4444" opacity="0.7"><title>Yangtze Memory</title></circle>
+          <circle class="map-marker" cx="632" cy="145" r="2.5" fill="#EF4444" opacity="0.7"><title>SMIC Shenzhen</title></circle>
+          <circle class="map-marker" cx="608" cy="162" r="2.5" fill="#EF4444" opacity="0.7"><title>GTA Semi, Chongqing</title></circle>
+          <circle class="map-marker" cx="620" cy="175" r="2.5" fill="#EF4444" opacity="0.7"><title>JCET, Wuxi</title></circle>
+          <text x="618" y="188" fill="#EF4444" font-size="10" font-family="IBM Plex Mono" text-anchor="middle" opacity="0.8">CN · 13</text>
+        </g>
+        <!-- Singapore fabs -->
+        <g class="map-cluster" data-country="sg">
+          <circle class="map-marker" cx="632" cy="240" r="3" fill="#14B8A6" opacity="0.9"><title>GlobalFoundries, Singapore</title></circle>
+          <circle class="map-marker" cx="638" cy="235" r="2.5" fill="#14B8A6" opacity="0.7"><title>Micron, Singapore</title></circle>
+          <circle class="map-marker" cx="626" cy="236" r="2.5" fill="#14B8A6" opacity="0.7"><title>UMC, Singapore</title></circle>
+          <text x="632" y="256" fill="#14B8A6" font-size="10" font-family="IBM Plex Mono" text-anchor="middle" opacity="0.8">SG · 3</text>
+        </g>
+        <!-- Pulsing animation on key clusters -->
+        <circle cx="658" cy="147" r="8" fill="none" stroke="#22C55E" stroke-width="1" opacity="0">
+          <animate attributeName="r" values="8;18;8" dur="3s" repeatCount="indefinite"/>
+          <animate attributeName="opacity" values="0.6;0;0.6" dur="3s" repeatCount="indefinite"/>
+        </circle>
+        <circle cx="647" cy="185" r="8" fill="none" stroke="#EC4899" stroke-width="1" opacity="0">
+          <animate attributeName="r" values="8;18;8" dur="3s" repeatCount="indefinite" begin="1s"/>
+          <animate attributeName="opacity" values="0.6;0;0.6" dur="3s" repeatCount="indefinite" begin="1s"/>
+        </circle>
+      </svg>
+    </div>
+    <div class="map-legend reveal">
+      <div class="map-legend-item"><span class="map-legend-dot" style="background:#22C55E"></span><span class="en">South Korea</span><span class="ko">한국</span></div>
+      <div class="map-legend-item"><span class="map-legend-dot" style="background:#EC4899"></span><span class="en">Taiwan</span><span class="ko">대만</span></div>
+      <div class="map-legend-item"><span class="map-legend-dot" style="background:#EF4444"></span><span class="en">China</span><span class="ko">중국</span></div>
+      <div class="map-legend-item"><span class="map-legend-dot" style="background:#38BDF8"></span><span class="en">USA</span><span class="ko">미국</span></div>
+      <div class="map-legend-item"><span class="map-legend-dot" style="background:#F59E0B"></span><span class="en">Japan</span><span class="ko">일본</span></div>
+      <div class="map-legend-item"><span class="map-legend-dot" style="background:#A78BFA"></span><span class="en">Europe</span><span class="ko">유럽</span></div>
+      <div class="map-legend-item"><span class="map-legend-dot" style="background:#14B8A6"></span><span class="en">Singapore</span><span class="ko">싱가포르</span></div>
+    </div>
+    <div class="map-stats reveal">
+      <div class="map-stat-card">
+        <div class="map-stat-num">66</div>
+        <div class="map-stat-label"><span class="en">Fabs Tracked</span><span class="ko">모니터링 팹</span></div>
+      </div>
+      <div class="map-stat-card">
+        <div class="map-stat-num">7</div>
+        <div class="map-stat-label"><span class="en">Countries</span><span class="ko">국가</span></div>
+      </div>
+      <div class="map-stat-card">
+        <div class="map-stat-num">6</div>
+        <div class="map-stat-label"><span class="en">Sat Channels</span><span class="ko">위성 채널</span></div>
+      </div>
+      <div class="map-stat-card">
+        <div class="map-stat-num">24/7</div>
+        <div class="map-stat-label"><span class="en">Monitoring</span><span class="ko">실시간 감시</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- INSIGHTS PREVIEW -->
+<section class="insights section" id="insights">
+  <div class="inner">
+    <div class="section-label"><span class="en">FabWatch Insights</span><span class="ko">FabWatch 인사이트</span></div>
+    <h2 class="section-title reveal">
+      <span class="en">Intelligence, not just data</span>
+      <span class="ko">데이터가 아닌, 인텔리전스</span>
+    </h2>
+    <p class="section-desc">
+      <span class="en">Free analysis reports showing what satellite intelligence can uncover. Subscribe to the newsletter for weekly updates.</span>
+      <span class="ko">위성 인텔리전스가 무엇을 밝힐 수 있는지 보여주는 무료 분석 리포트입니다. 주간 뉴스레터를 구독하세요.</span>
+    </p>
+    <div class="insight-grid">
+      <div class="insight-card">
+        <div class="insight-bar" style="background: linear-gradient(90deg, var(--accent), #818CF8);"></div>
+        <div class="insight-body">
+          <div class="insight-tag" style="color: var(--accent);"><span class="en">Deep Dive</span><span class="ko">심층 분석</span></div>
+          <h3>
+            <span class="en">Samsung Pyeongtaek Mega-Fab: 8 Years of Expansion Seen from Orbit</span>
+            <span class="ko">삼성 평택 메가팹: 궤도에서 본 8년간의 확장 기록</span>
+          </h3>
+          <p>
+            <span class="en">Satellite time-series analysis from 2018 to 2026 reveals the true pace of Samsung's largest investment.</span>
+            <span class="ko">2018~2026년 위성 시계열 분석으로 삼성 최대 투자의 실제 진행 속도를 밝힙니다.</span>
+          </p>
+        </div>
+      </div>
+      <div class="insight-card">
+        <div class="insight-bar" style="background: linear-gradient(90deg, var(--accent-warm), #F97316);"></div>
+        <div class="insight-body">
+          <div class="insight-tag" style="color: var(--accent-warm);"><span class="en">Geopolitical Watch</span><span class="ko">지정학 워치</span></div>
+          <h3>
+            <span class="en">SMIC / YMTC / CXMT — What Satellites Say About China's Real Progress</span>
+            <span class="ko">SMIC / YMTC / CXMT — 위성이 말하는 중국 반도체의 실제 진척도</span>
+          </h3>
+          <p>
+            <span class="en">Official announcements vs. satellite evidence. A gap analysis of China's semiconductor self-sufficiency drive.</span>
+            <span class="ko">공식 발표 vs. 위성 증거. 중국 반도체 자급자족 전략의 갭 분석입니다.</span>
+          </p>
+        </div>
+      </div>
+      <div class="insight-card">
+        <div class="insight-bar" style="background: linear-gradient(90deg, var(--accent-green), #14B8A6);"></div>
+        <div class="insight-body">
+          <div class="insight-tag" style="color: var(--accent-green);"><span class="en">Methodology</span><span class="ko">방법론</span></div>
+          <h3>
+            <span class="en">Reading Fab Utilization from Nightlight: Our Approach Explained</span>
+            <span class="ko">야간조명으로 팹 가동률 읽기: FabWatch 방법론 해설</span>
+          </h3>
+          <p>
+            <span class="en">How VIIRS/DNB nighttime radiance data correlates with semiconductor fab utilization rates.</span>
+            <span class="ko">VIIRS/DNB 야간 복사 데이터가 반도체 팹 가동률과 어떻게 상관관계를 갖는지 설명합니다.</span>
+          </p>
+        </div>
+      </div>
+      <div class="insight-card">
+        <div class="insight-bar" style="background: linear-gradient(90deg, #A78BFA, #EC4899);"></div>
+        <div class="insight-body">
+          <div class="insight-tag" style="color: #A78BFA;"><span class="en">Market + Satellite</span><span class="ko">시장 + 위성</span></div>
+          <h3>
+            <span class="en">TSMC Arizona vs Intel Ohio: The American Semiconductor Renaissance, Measured</span>
+            <span class="ko">SK하이닉스 용인 vs 삼성 평택 5기: 한국 반도체 투자 경쟁, 위성으로 측정</span>
+          </h3>
+          <p>
+            <span class="en">Combining TrendForce supply forecasts with FabWatch satellite data for a complete construction picture.</span>
+            <span class="ko">TrendForce 공급 전망과 FabWatch 위성 데이터를 결합한 건설 현황 종합 분석입니다.</span>
+          </p>
+        </div>
+      </div>
+    </div>
+    <!-- Newsletter signup -->
+    <div class="newsletter-box reveal">
+      <h3><span class="en">Weekly Satellite Intelligence</span><span class="ko">주간 위성 인텔리전스</span></h3>
+      <p><span class="en">Free analysis reports delivered to your inbox every Monday. Unsubscribe anytime.</span><span class="ko">매주 월요일, 무료 분석 리포트를 이메일로 받아보세요. 언제든 구독 해지 가능합니다.</span></p>
+      <div class="nl-form" onsubmit="event.preventDefault();">
+        <input type="email" class="nl-input" placeholder="name@company.com" id="nl-email">
+        <button class="nl-btn" onclick="handleNewsletter()"><span class="en">Subscribe</span><span class="ko">구독하기</span></button>
+      </div>
+      <div class="nl-success" id="nl-success">
+        <span class="en">Welcome aboard! Check your inbox for a confirmation.</span>
+        <span class="ko">구독 신청 완료! 확인 이메일을 확인해주세요.</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FAQ -->
+<section class="faq section" id="faq">
+  <div class="inner">
+    <div class="section-label"><span class="en">FAQ</span><span class="ko">자주 묻는 질문</span></div>
+    <h2 class="section-title reveal">
+      <span class="en">Questions answered</span>
+      <span class="ko">궁금하신 점</span>
+    </h2>
+    <div class="faq-list">
+      <div class="faq-item reveal">
+        <button class="faq-q" onclick="toggleFaq(this)">
+          <span><span class="en">How accurate is satellite-based fab monitoring?</span><span class="ko">위성 기반 팹 모니터링의 정확도는 어느 정도인가요?</span></span>
+          <svg class="faq-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l6 6 6-6"/></svg>
+        </button>
+        <div class="faq-a"><div class="faq-a-inner">
+          <span class="en">Our VIIRS nightlight index correlates at 0.87+ with actual fab utilization rates published by industry trackers like TrendForce. We cross-validate with SAR, thermal IR, and NO2 data for multi-channel confirmation. Accuracy improves with historical baseline — fabs monitored for 12+ months reach 90%+ correlation.</span>
+          <span class="ko">FabWatch의 VIIRS 야간조명 지수는 TrendForce 등 산업 트래커가 발표하는 실제 팹 가동률과 0.87 이상의 상관계수를 보입니다. SAR, 열적외선, NO2 데이터를 교차검증하여 다채널 확인을 수행합니다. 12개월 이상 모니터링된 팹은 90% 이상의 상관도를 달성합니다.</span>
+        </div></div>
+      </div>
+      <div class="faq-item reveal">
+        <button class="faq-q" onclick="toggleFaq(this)">
+          <span><span class="en">How often is the data updated?</span><span class="ko">데이터 업데이트 주기는 어떻게 되나요?</span></span>
+          <svg class="faq-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l6 6 6-6"/></svg>
+        </button>
+        <div class="faq-a"><div class="faq-a-inner">
+          <span class="en">VIIRS nightlight data updates daily. Sentinel-1 SAR revisits every 6-12 days. Sentinel-2 optical every 5 days (weather permitting). We aggregate these into a composite score updated at least twice weekly for each fab.</span>
+          <span class="ko">VIIRS 야간조명은 매일, Sentinel-1 SAR은 6~12일, Sentinel-2 광학은 5일 주기로 갱신됩니다. 이를 종합하여 각 팹별 복합 점수를 주 2회 이상 업데이트합니다.</span>
+        </div></div>
+      </div>
+      <div class="faq-item reveal">
+        <button class="faq-q" onclick="toggleFaq(this)">
+          <span><span class="en">Do you offer NDAs for enterprise clients?</span><span class="ko">기업 고객에게 NDA 제공이 가능한가요?</span></span>
+          <svg class="faq-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l6 6 6-6"/></svg>
+        </button>
+        <div class="faq-a"><div class="faq-a-inner">
+          <span class="en">Yes. Enterprise plans include a bilateral NDA, custom SLA, and data handling agreements. We can also accommodate specific compliance requirements (SOC 2, GDPR). Contact our enterprise team for details.</span>
+          <span class="ko">네, Enterprise 요금제에는 쌍방 NDA, 맞춤 SLA, 데이터 취급 계약이 포함됩니다. SOC 2, GDPR 등 특정 컴플라이언스 요구사항도 대응 가능합니다. 자세한 내용은 기업 영업팀에 문의하세요.</span>
+        </div></div>
+      </div>
+      <div class="faq-item reveal">
+        <button class="faq-q" onclick="toggleFaq(this)">
+          <span><span class="en">Can I request monitoring for a specific fab?</span><span class="ko">특정 팹 모니터링을 요청할 수 있나요?</span></span>
+          <svg class="faq-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l6 6 6-6"/></svg>
+        </button>
+        <div class="faq-a"><div class="faq-a-inner">
+          <span class="en">Absolutely. Pro users can request up to 5 custom fabs, and Enterprise users get unlimited custom monitoring targets. New fabs are typically onboarded within 48 hours with at least 6 months of historical baseline data.</span>
+          <span class="ko">물론입니다. Pro 사용자는 최대 5개, Enterprise 사용자는 무제한 맞춤 팹 요청이 가능합니다. 신규 팹은 보통 48시간 내 온보딩되며, 최소 6개월 이상의 과거 기준 데이터가 제공됩니다.</span>
+        </div></div>
+      </div>
+      <div class="faq-item reveal">
+        <button class="faq-q" onclick="toggleFaq(this)">
+          <span><span class="en">What's the difference between the dashboard and reports?</span><span class="ko">대시보드와 리포트의 차이는 무엇인가요?</span></span>
+          <svg class="faq-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l6 6 6-6"/></svg>
+        </button>
+        <div class="faq-a"><div class="faq-a-inner">
+          <span class="en">The dashboard is a real-time SaaS platform — you log in and see live data, charts, and alerts for all 66 fabs. Reports are curated PDF/slide analyses written by our team: deep dives on specific fabs, countries, or market events. Pro includes both; Free gets the monthly highlight report and open data.</span>
+          <span class="ko">대시보드는 실시간 SaaS 플랫폼입니다 — 로그인하면 66개 팹의 라이브 데이터, 차트, 알림을 볼 수 있습니다. 리포트는 FabWatch 팀이 작성하는 PDF/슬라이드 형태의 심층 분석입니다. Pro는 둘 다 포함하며, Free는 제한된 대시보드 접근과 샘플 리포트를 제공합니다.</span>
+        </div></div>
+      </div>
+      <div class="faq-item reveal">
+        <button class="faq-q" onclick="toggleFaq(this)">
+          <span><span class="en">Is the satellite data legally obtained?</span><span class="ko">위성 데이터는 합법적으로 수집되나요?</span></span>
+          <svg class="faq-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l6 6 6-6"/></svg>
+        </button>
+        <div class="faq-a"><div class="faq-a-inner">
+          <span class="en">100%. All data comes from publicly available satellite programs: NASA VIIRS, ESA Copernicus (Sentinel-1/2/5P), and USGS Landsat. These are open-access, government-operated Earth observation programs designed for environmental and commercial monitoring.</span>
+          <span class="ko">100% 합법입니다. 모든 데이터는 공개 위성 프로그램에서 수집됩니다: NASA VIIRS, ESA 코페르니쿠스(Sentinel-1/2/5P), USGS 랜드샛. 이들은 환경 및 상업적 모니터링을 위해 설계된 정부 운영 공개 지구관측 프로그램입니다.</span>
+        </div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- USE CASES -->
+<section class="usecases section" id="usecases">
+  <div class="inner">
+    <div class="section-label"><span class="en">Use Cases</span><span class="ko">활용 사례</span></div>
+    <h2 class="section-title reveal">
+      <span class="en">Built for decision-makers</span>
+      <span class="ko">의사결정자를 위한 인텔리전스</span>
+    </h2>
+    <p class="section-desc reveal">
+      <span class="en">From hedge funds to government agencies — wherever semiconductor supply intelligence drives better decisions.</span>
+      <span class="ko">헤지펀드부터 정부기관까지 — 반도체 공급 인텔리전스가 더 나은 결정을 만드는 곳이라면 어디든.</span>
+    </p>
+    <div class="usecase-grid">
+      <div class="usecase-card reveal">
+        <div class="usecase-icon" style="background: rgba(56,189,248,0.1);">
+          <svg viewBox="0 0 24 24" fill="none" stroke="#38BDF8" stroke-width="2" stroke-linecap="round"><path d="M12 2v20M2 12h20"/><path d="M17 7l-5 5-5-5"/></svg>
+        </div>
+        <h3><span class="en">Investment Firms</span><span class="ko">투자사 / 헤지펀드</span></h3>
+        <p><span class="en">Verify earnings guidance with satellite evidence. Detect ramp-ups or slowdowns weeks before quarterly reports. Alternative data edge for semiconductor equity and supply-chain trades.</span><span class="ko">실적 가이던스를 위성 증거로 검증합니다. 분기 보고서 발표 수주 전에 램프업이나 감산을 감지합니다. 반도체 주식 및 공급망 트레이딩을 위한 대체 데이터 우위.</span></p>
+        <span class="usecase-tag" style="background: rgba(56,189,248,0.1); color: var(--accent);">ALTERNATIVE DATA</span>
+      </div>
+      <div class="usecase-card reveal">
+        <div class="usecase-icon" style="background: rgba(245,158,11,0.1);">
+          <svg viewBox="0 0 24 24" fill="none" stroke="#F59E0B" stroke-width="2" stroke-linecap="round"><path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/><path d="M14 2v6h6M16 13H8M16 17H8M10 9H8"/></svg>
+        </div>
+        <h3><span class="en">Industry Analysts</span><span class="ko">산업 애널리스트</span></h3>
+        <p><span class="en">Ground-truth your supply forecasts. Cross-reference IDC/TrendForce projections with physical fab activity. Publish differentiated research backed by satellite evidence.</span><span class="ko">공급 전망을 현장 데이터로 검증합니다. IDC/TrendForce 전망을 실제 팹 활동과 교차 대조합니다. 위성 증거로 뒷받침되는 차별화된 리서치를 발행하세요.</span></p>
+        <span class="usecase-tag" style="background: rgba(245,158,11,0.1); color: var(--accent-warm);">RESEARCH</span>
+      </div>
+      <div class="usecase-card reveal">
+        <div class="usecase-icon" style="background: rgba(34,197,94,0.1);">
+          <svg viewBox="0 0 24 24" fill="none" stroke="#22C55E" stroke-width="2" stroke-linecap="round"><path d="M18 20V10M12 20V4M6 20v-6"/></svg>
+        </div>
+        <h3><span class="en">Procurement & Supply Chain</span><span class="ko">조달 / 공급망 관리</span></h3>
+        <p><span class="en">Early warning on supplier fab disruptions. Monitor construction progress of new capacity commitments. Validate vendor claims about expansion timelines.</span><span class="ko">공급업체 팹 차질에 대한 조기 경보. 신규 생산능력 건설 진행 상황 모니터링. 확장 일정에 대한 벤더 주장을 검증합니다.</span></p>
+        <span class="usecase-tag" style="background: rgba(34,197,94,0.1); color: var(--accent-green);">SUPPLY CHAIN</span>
+      </div>
+      <div class="usecase-card reveal">
+        <div class="usecase-icon" style="background: rgba(167,139,250,0.1);">
+          <svg viewBox="0 0 24 24" fill="none" stroke="#A78BFA" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="12" r="10"/><path d="M2 12h20M12 2a15.3 15.3 0 014 10 15.3 15.3 0 01-4 10 15.3 15.3 0 01-4-10 15.3 15.3 0 014-10z"/></svg>
+        </div>
+        <h3><span class="en">Government & Policy</span><span class="ko">정부 / 정책기관</span></h3>
+        <p><span class="en">Track foreign semiconductor capacity buildout for national security assessments. Monitor CHIPS Act and K-CHIPS Act investment outcomes. Evidence-based semiconductor policy analysis.</span><span class="ko">국가안보 평가를 위한 해외 반도체 생산능력 추적. CHIPS Act, K-반도체 전략 투자 성과 모니터링. 증거 기반 반도체 정책 분석.</span></p>
+        <span class="usecase-tag" style="background: rgba(167,139,250,0.1); color: #A78BFA;">GEOPOLITICAL</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- TEAM -->
+<section class="team section" id="team">
+  <div class="inner">
+    <div class="section-label"><span class="en">Our Team</span><span class="ko">팀 소개</span></div>
+    <h2 class="section-title reveal">
+      <span class="en">Semiconductor + satellite expertise</span>
+      <span class="ko">반도체 + 위성 전문가 팀</span>
+    </h2>
+    <p class="section-desc reveal">
+      <span class="en">Industry veterans who understand both the silicon and the signal.</span>
+      <span class="ko">실리콘과 위성 신호, 두 세계를 모두 이해하는 업계 베테랑.</span>
+    </p>
+    <div class="team-grid">
+      <div class="team-card reveal">
+        <div class="team-avatar" style="background: linear-gradient(135deg, #38BDF8, #818CF8);">
+          <svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="1.5" width="36" height="36"><circle cx="12" cy="12" r="3"/><path d="M12 2v4M12 18v4M4.93 4.93l2.83 2.83M16.24 16.24l2.83 2.83M2 12h4M18 12h4M4.93 19.07l2.83-2.83M16.24 7.76l2.83-2.83"/></svg>
+        </div>
+        <h3><span class="en">Satellite Analytics</span><span class="ko">위성 분석팀</span></h3>
+        <div class="team-role"><span class="en">GEOINT · Remote Sensing</span><span class="ko">GEOINT · 원격탐사</span></div>
+        <p class="team-desc"><span class="en">Former defense/intel satellite imagery analysts. 15+ years of experience in geospatial intelligence and change detection.</span><span class="ko">전 국방/정보기관 위성영상 분석관 출신. 지리공간정보 및 변화탐지 15년 이상 경력.</span></p>
+      </div>
+      <div class="team-card reveal">
+        <div class="team-avatar" style="background: linear-gradient(135deg, #F59E0B, #F97316);">
+          <svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="1.5" width="36" height="36"><path d="M20.84 4.61a5.5 5.5 0 00-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 00-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 000-7.78z"/></svg>
+        </div>
+        <h3><span class="en">Semiconductor Research</span><span class="ko">반도체 리서치팀</span></h3>
+        <div class="team-role"><span class="en">Industry · Market Analysis</span><span class="ko">산업 · 시장분석</span></div>
+        <p class="team-desc"><span class="en">Semiconductor industry researchers with deep expertise in fab economics, supply chain dynamics, and competitive intelligence.</span><span class="ko">팹 경제성, 공급망 역학, 경쟁 인텔리전스에 깊은 전문성을 가진 반도체 산업 리서처.</span></p>
+      </div>
+      <div class="team-card reveal">
+        <div class="team-avatar" style="background: linear-gradient(135deg, #22C55E, #14B8A6);">
+          <svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="1.5" width="36" height="36"><rect x="2" y="3" width="20" height="14" rx="2"/><path d="M8 21h8M12 17v4"/></svg>
+        </div>
+        <h3><span class="en">Engineering</span><span class="ko">엔지니어링팀</span></h3>
+        <div class="team-role"><span class="en">Platform · Data Pipeline</span><span class="ko">플랫폼 · 데이터 파이프라인</span></div>
+        <p class="team-desc"><span class="en">Full-stack engineers building scalable satellite data pipelines. Processing terabytes of imagery into actionable dashboards.</span><span class="ko">확장 가능한 위성 데이터 파이프라인을 구축하는 풀스택 엔지니어. 테라바이트 영상을 실행 가능한 대시보드로 변환.</span></p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FINAL CTA -->
+<section class="final-cta section" id="cta">
+  <!-- Earth glow -->
+  <svg class="cta-earth" viewBox="0 0 300 300" xmlns="http://www.w3.org/2000/svg">
+    <circle cx="150" cy="150" r="120" fill="url(#ctaEarth)"/>
+    <ellipse cx="120" cy="120" rx="40" ry="30" fill="rgba(34,197,94,0.2)" transform="rotate(-10 120 120)"/>
+    <ellipse cx="170" cy="160" rx="35" ry="45" fill="rgba(34,197,94,0.15)" transform="rotate(15 170 160)"/>
+    <circle cx="150" cy="150" r="125" stroke="rgba(56,189,248,0.2)" stroke-width="4"/>
+    <circle cx="150" cy="150" r="135" stroke="rgba(56,189,248,0.08)" stroke-width="3"/>
+    <defs>
+      <radialGradient id="ctaEarth" cx="35%" cy="35%">
+        <stop offset="0%" stop-color="#1E3A5F"/>
+        <stop offset="100%" stop-color="#0B1628"/>
+      </radialGradient>
+    </defs>
+  </svg>
+  <div class="inner" style="position:relative;z-index:1;">
+    <div class="section-label" style="text-align:center;"><span class="en">Get Started</span><span class="ko">시작하기</span></div>
+    <h2 class="section-title reveal">
+      <span class="en">Stop guessing.<br>Start seeing.</span>
+      <span class="ko">추측을 멈추세요.<br>직접 보세요.</span>
+    </h2>
+    <p class="section-desc">
+      <span class="en">Join the analysts, investors, and policymakers who verify semiconductor activity with satellite intelligence — not corporate press releases.</span>
+      <span class="ko">기업 보도자료가 아닌 위성 인텔리전스로 반도체 현장을 검증하는 애널리스트, 투자자, 정책 결정자의 대열에 합류하세요.</span>
+    </p>
+    <div class="hero-actions">
+      <a href="#" onclick="openModal('signup');return false;" class="btn btn-primary"><span class="en">Start Free Trial</span><span class="ko">무료 체험 시작</span></a>
+      <a href="#" onclick="openModal('signup');return false;" class="btn btn-outline"><span class="en">Request Enterprise Demo</span><span class="ko">기업 도입 데모 요청</span></a>
+    </div>
+  </div>
+</section>
+
+<!-- LOGIN MODAL -->
+<div class="modal-overlay" id="loginModal">
+  <div class="modal">
+    <button class="modal-close" onclick="closeModal()">&times;</button>
+    <div class="modal-header">
+      <div class="modal-logo">
+        <span class="logo-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="#0B1628" stroke-width="2.5" stroke-linecap="round" width="18" height="18"><circle cx="12" cy="12" r="3"/><path d="M12 2v4M12 18v4M4.93 4.93l2.83 2.83M16.24 16.24l2.83 2.83M2 12h4M18 12h4M4.93 19.07l2.83-2.83M16.24 7.76l2.83-2.83"/></svg>
+        </span>
+        FabWatch
+      </div>
+      <p class="modal-subtitle">
+        <span class="en">Satellite intelligence for semiconductor fabs</span>
+        <span class="ko">위성 기반 반도체 팹 인텔리전스</span>
+      </p>
+      <div class="modal-tabs">
+        <button class="modal-tab active" onclick="switchModalTab('login')" id="mtab-login">
+          <span class="en">Sign In</span><span class="ko">로그인</span>
+        </button>
+        <button class="modal-tab" onclick="switchModalTab('signup')" id="mtab-signup">
+          <span class="en">Sign Up</span><span class="ko">회원가입</span>
+        </button>
+      </div>
+    </div>
+    <div class="modal-body">
+      <!-- LOGIN FORM -->
+      <div id="form-login">
+        <div class="form-group">
+          <label class="form-label"><span class="en">Email</span><span class="ko">이메일</span></label>
+          <input type="email" class="form-input" placeholder="name@company.com">
+        </div>
+        <div class="form-group">
+          <label class="form-label"><span class="en">Password</span><span class="ko">비밀번호</span></label>
+          <input type="password" class="form-input" placeholder="&#8226;&#8226;&#8226;&#8226;&#8226;&#8226;&#8226;&#8226;">
+        </div>
+        <button class="form-submit" onclick="event.preventDefault();">
+          <span class="en">Sign In</span><span class="ko">로그인</span>
+        </button>
+        <div class="form-divider"><span class="en">or continue with</span><span class="ko">간편 로그인</span></div>
+        <div class="social-logins">
+          <button class="social-btn" onclick="event.preventDefault();">
+            <svg width="18" height="18" viewBox="0 0 24 24"><path d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92a5.06 5.06 0 0 1-2.2 3.32v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.1z" fill="#4285F4"/><path d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z" fill="#34A853"/><path d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l2.85-2.22.81-.62z" fill="#FBBC05"/><path d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z" fill="#EA4335"/></svg>
+            Google
+          </button>
+        </div>
+        <div class="form-footer">
+          <span class="en">Don't have an account? <a href="#" onclick="switchModalTab('signup');return false;">Sign up free</a></span>
+          <span class="ko">계정이 없으신가요? <a href="#" onclick="switchModalTab('signup');return false;">무료 회원가입</a></span>
+        </div>
+      </div>
+      <!-- SIGNUP FORM -->
+      <div id="form-signup" style="display:none;">
+        <div class="form-group">
+          <label class="form-label"><span class="en">Member Type</span><span class="ko">회원 유형</span></label>
+          <div class="member-type-select">
+            <div class="type-option selected" onclick="selectType(this)">
+              <div class="type-option-icon">
+                <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="var(--accent)" stroke-width="2" stroke-linecap="round"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+              </div>
+              <div class="type-option-name"><span class="en">Individual</span><span class="ko">개인 회원</span></div>
+              <div class="type-option-desc">
+                <span class="en">Analyst, researcher, investor</span>
+                <span class="ko">애널리스트, 연구자, 투자자</span>
+              </div>
+            </div>
+            <div class="type-option" onclick="selectType(this)">
+              <div class="type-option-icon">
+                <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="var(--accent)" stroke-width="2" stroke-linecap="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+              </div>
+              <div class="type-option-name"><span class="en">Corporate</span><span class="ko">기업 회원</span></div>
+              <div class="type-option-desc">
+                <span class="en">Team access, invoicing, NDA</span>
+                <span class="ko">팀 접근, 세금계산서, NDA</span>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="form-group">
+          <label class="form-label"><span class="en">Name</span><span class="ko">이름</span></label>
+          <input type="text" class="form-input" placeholder="">
+        </div>
+        <div class="form-group" id="company-field" style="display:none;">
+          <label class="form-label"><span class="en">Company</span><span class="ko">회사명</span></label>
+          <input type="text" class="form-input" placeholder="">
+        </div>
+        <div class="form-group">
+          <label class="form-label"><span class="en">Work Email</span><span class="ko">업무 이메일</span></label>
+          <input type="email" class="form-input" placeholder="name@company.com">
+        </div>
+        <div class="form-group">
+          <label class="form-label"><span class="en">Password</span><span class="ko">비밀번호</span></label>
+          <input type="password" class="form-input" placeholder="8+ characters">
+        </div>
+        <button class="form-submit" onclick="event.preventDefault();">
+          <span class="en">Create Free Account</span><span class="ko">무료 계정 만들기</span>
+        </button>
+        <div class="form-divider"><span class="en">or continue with</span><span class="ko">간편 가입</span></div>
+        <div class="social-logins">
+          <button class="social-btn" onclick="event.preventDefault();">
+            <svg width="18" height="18" viewBox="0 0 24 24"><path d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92a5.06 5.06 0 0 1-2.2 3.32v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.1z" fill="#4285F4"/><path d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z" fill="#34A853"/><path d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l2.85-2.22.81-.62z" fill="#FBBC05"/><path d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z" fill="#EA4335"/></svg>
+            Google
+          </button>
+        </div>
+        <div class="form-footer">
+          <span class="en">Already have an account? <a href="#" onclick="switchModalTab('login');return false;">Sign in</a></span>
+          <span class="ko">이미 계정이 있으신가요? <a href="#" onclick="switchModalTab('login');return false;">로그인</a></span>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- FOOTER -->
+<footer>
+  <div class="inner">
+    <div class="footer-grid">
+      <div class="footer-brand">
+        <div class="logo" style="font-size:18px;">
+          <span class="logo-icon"><svg viewBox="0 0 24 24" fill="none" stroke="#0B1628" stroke-width="2.5" stroke-linecap="round" width="16" height="16"><circle cx="12" cy="12" r="3"/><path d="M12 2v4M12 18v4M4.93 4.93l2.83 2.83M16.24 16.24l2.83 2.83M2 12h4M18 12h4M4.93 19.07l2.83-2.83M16.24 7.76l2.83-2.83"/></svg></span>
+          FabWatch
+        </div>
+        <p><span class="en">Satellite intelligence for the semiconductor industry. Monitoring 66 fabs across 7 countries with 6 independent satellite channels.</span><span class="ko">반도체 산업을 위한 위성 인텔리전스. 7개국 66개 팹을 6개 독립 위성 채널로 모니터링합니다.</span></p>
+      </div>
+      <div class="footer-col">
+        <h4><span class="en">Product</span><span class="ko">서비스</span></h4>
+        <ul>
+          <li><a href="#services"><span class="en">Dashboard</span><span class="ko">대시보드</span></a></li>
+          <li><a href="#services"><span class="en">Reports</span><span class="ko">리포트</span></a></li>
+          <li><a href="#pricing"><span class="en">Pricing</span><span class="ko">요금제</span></a></li>
+          <li><a href="#demo"><span class="en">Live Demo</span><span class="ko">데모</span></a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4><span class="en">Company</span><span class="ko">회사</span></h4>
+        <ul>
+          <li><a href="#team"><span class="en">About Us</span><span class="ko">팀 소개</span></a></li>
+          <li><a href="#insights"><span class="en">Blog</span><span class="ko">블로그</span></a></li>
+          <li><a href="#usecases"><span class="en">Use Cases</span><span class="ko">활용 사례</span></a></li>
+          <li><a href="#faq"><span class="en">FAQ</span><span class="ko">FAQ</span></a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4><span class="en">Legal</span><span class="ko">법적 고지</span></h4>
+        <ul>
+          <li><a href="#" onclick="event.preventDefault();"><span class="en">Privacy Policy</span><span class="ko">개인정보처리방침</span></a></li>
+          <li><a href="#" onclick="event.preventDefault();"><span class="en">Terms of Service</span><span class="ko">이용약관</span></a></li>
+          <li><a href="#" onclick="event.preventDefault();"><span class="en">Data Sources</span><span class="ko">데이터 출처</span></a></li>
+          <li><a href="mailto:contact@fabwatch.io">contact@fabwatch.io</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span>
+        <span class="en">&copy; 2026 FabWatch Inc. All rights reserved.</span>
+        <span class="ko">&copy; 2026 FabWatch Inc. All rights reserved.</span>
+      </span>
+      <span style="color:#475569;">
+        <span class="en">Data: NASA VIIRS · ESA Copernicus · USGS Landsat</span>
+        <span class="ko">데이터: NASA VIIRS · ESA Copernicus · USGS Landsat</span>
+      </span>
+    </div>
+  </div>
+</footer>
+
+<script>
+function getLang() {
+  try { return localStorage.getItem('fabwatch-lang') || 'en'; } catch(e) { return 'en'; }
+}
+function setLang(lang) {
+  document.documentElement.setAttribute('data-lang', lang);
+  try { localStorage.setItem('fabwatch-lang', lang); } catch(e) {}
+  var btn = document.querySelector('.lang-toggle');
+  if (btn) btn.textContent = lang === 'en' ? 'KO / EN' : 'EN / KO';
+}
+function toggleLang() {
+  setLang(getLang() === 'en' ? 'ko' : 'en');
+}
+setLang(getLang());
+
+// Login modal
+function openModal(tab) {
+  document.getElementById('loginModal').classList.add('open');
+  switchModalTab(tab || 'login');
+  document.body.style.overflow = 'hidden';
+}
+function closeModal() {
+  document.getElementById('loginModal').classList.remove('open');
+  document.body.style.overflow = '';
+}
+document.getElementById('loginModal').addEventListener('click', function(e) {
+  if (e.target === this) closeModal();
+});
+function switchModalTab(tab) {
+  document.getElementById('mtab-login').classList.toggle('active', tab === 'login');
+  document.getElementById('mtab-signup').classList.toggle('active', tab === 'signup');
+  document.getElementById('form-login').style.display = tab === 'login' ? '' : 'none';
+  document.getElementById('form-signup').style.display = tab === 'signup' ? '' : 'none';
+}
+
+// Member type selection in signup
+function selectType(el) {
+  document.querySelectorAll('.type-option').forEach(function(o) { o.classList.remove('selected'); });
+  el.classList.add('selected');
+  var isCorp = el.querySelector('.type-option-name .ko') && el.querySelector('.type-option-name .ko').textContent === '기업 회원';
+  if (!isCorp) isCorp = el.querySelector('.type-option-name .en') && el.querySelector('.type-option-name .en').textContent === 'Corporate';
+  document.getElementById('company-field').style.display = isCorp ? '' : 'none';
+}
+
+// Pricing member tabs
+function switchMember(type) {
+  document.getElementById('tab-individual').classList.toggle('active', type === 'individual');
+  document.getElementById('tab-corporate').classList.toggle('active', type === 'corporate');
+  document.getElementById('note-individual').style.display = type === 'individual' ? '' : 'none';
+  document.getElementById('note-corporate').style.display = type === 'corporate' ? '' : 'none';
+}
+
+// FAQ accordion
+function toggleFaq(btn) {
+  var item = btn.closest('.faq-item');
+  var wasOpen = item.classList.contains('open');
+  document.querySelectorAll('.faq-item.open').forEach(function(el) { el.classList.remove('open'); });
+  if (!wasOpen) item.classList.add('open');
+}
+
+// Demo tab switching
+function switchDemoTab(el, tab) {
+  document.querySelectorAll('.demo-nav-item').forEach(function(n) { n.classList.remove('active'); });
+  el.classList.add('active');
+  document.querySelectorAll('.demo-view').forEach(function(v) { v.classList.remove('active'); });
+  var target = document.getElementById('demo-' + tab);
+  if (target) target.classList.add('active');
+}
+
+// Fab list filter (data-driven)
+function filterFabs(btn, country) {
+  document.querySelectorAll('.demo-filter-btn').forEach(function(b) { b.classList.remove('active'); });
+  btn.classList.add('active');
+  renderFabList(country);
+}
+
+// Newsletter
+function handleNewsletter() {
+  var email = document.getElementById('nl-email').value;
+  if (email && email.indexOf('@') > 0) {
+    document.getElementById('nl-success').classList.add('show');
+    document.getElementById('nl-email').value = '';
+  }
+}
+
+// Scroll reveal animation
+(function() {
+  var observer = new IntersectionObserver(function(entries) {
+    entries.forEach(function(entry) {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('visible');
+      }
+    });
+  }, { threshold: 0.12, rootMargin: '0px 0px -40px 0px' });
+  document.querySelectorAll('.reveal').forEach(function(el) { observer.observe(el); });
+})();
+
+// ── FabWatch Demo Data (24 fabs × 6 channels, from GEE pipeline simulation) ──
+var FABS = [
+{id:"samsung-pyeongtaek",name:"Samsung Pyeongtaek P1-P4",company:"Samsung",country:"kr",status:"operating",score:74.2,nl:[57.3,62.0,63.2,69.5,68.4,69.0,58.5,59.5,53.8,54.5,57.2,54.0],sar:-10.9,thermal:32.9,no2:7.9,ndvi:0.126,nlChange:-5.8},
+{id:"samsung-hwaseong",name:"Samsung Hwaseong",company:"Samsung",country:"kr",status:"operating",score:74.1,nl:[67.8,69.6,65.5,64.0,66.8,64.7,61.9,66.9,64.1,57.6,60.9,59.7],sar:-7.2,thermal:30.5,no2:6.9,ndvi:0.121,nlChange:-11.9},
+{id:"samsung-giheung",name:"Samsung Giheung",company:"Samsung",country:"kr",status:"operating",score:75.5,nl:[33.1,35.4,37.0,34.9,33.0,36.0,33.9,27.3,27.1,24.3,27.3,28.6],sar:-11.5,thermal:34.0,no2:7.5,ndvi:0.117,nlChange:-13.6},
+{id:"sk-icheon",name:"SK hynix Icheon M16",company:"SK hynix",country:"kr",status:"operating",score:76.3,nl:[51.8,52.9,54.4,61.3,56.5,58.6,53.6,47.0,52.5,50.1,51.2,52.2],sar:-8.0,thermal:32.4,no2:8.3,ndvi:0.131,nlChange:0.8},
+{id:"sk-cheongju",name:"SK hynix Cheongju M15",company:"SK hynix",country:"kr",status:"operating",score:74.6,nl:[33.4,38.9,40.8,36.0,36.4,35.2,36.7,33.8,31.6,28.1,27.2,31.7],sar:-8.5,thermal:31.7,no2:4.1,ndvi:0.132,nlChange:-5.1},
+{id:"tsmc-fab18",name:"TSMC Fab 18 Tainan",company:"TSMC",country:"tw",status:"operating",score:80.2,nl:[73.1,78.1,74.1,84.6,83.3,83.1,78.6,76.9,65.1,71.9,67.5,75.5],sar:-8.1,thermal:37.4,no2:4.5,ndvi:0.121,nlChange:3.3},
+{id:"tsmc-fab15",name:"TSMC Fab 15 Taichung",company:"TSMC",country:"tw",status:"operating",score:77.1,nl:[48.2,49.8,48.3,49.1,49.5,47.9,44.9,41.3,41.4,43.7,42.1,44.9],sar:-9.1,thermal:33.8,no2:5.3,ndvi:0.129,nlChange:-6.8},
+{id:"tsmc-fab12",name:"TSMC Fab 12 Hsinchu",company:"TSMC",country:"tw",status:"operating",score:77.9,nl:[80.6,87.7,88.8,85.9,86.9,82.5,84.3,78.2,80.4,77.4,74.3,72.9],sar:-10.6,thermal:37.5,no2:7.2,ndvi:0.127,nlChange:-9.6},
+{id:"tsmc-kaohsiung",name:"TSMC Fab 2 Kaohsiung",company:"TSMC",country:"tw",status:"construction",score:73.8,nl:[3.3,3.3,3.8,3.9,4.4,4.5,4.9,5.6,5.5,6.2,6.6,6.3],sar:-11.1,thermal:26.2,no2:3.6,ndvi:0.209,nlChange:90.9},
+{id:"tsmc-arizona",name:"TSMC Fab 21 Arizona",company:"TSMC",country:"us",status:"construction",score:66.9,nl:[9.2,9.3,9.2,10.0,10.7,9.8,11.0,10.9,11.1,11.3,12.2,11.6],sar:-8.6,thermal:23.6,no2:4.1,ndvi:0.13,nlChange:26.1},
+{id:"samsung-austin",name:"Samsung Austin",company:"Samsung",country:"us",status:"operating",score:77.6,nl:[41.3,44.3,46.2,46.6,44.9,47.4,43.2,45.6,40.7,40.5,37.0,43.0],sar:-9.6,thermal:34.2,no2:5.6,ndvi:0.132,nlChange:4.1},
+{id:"intel-d1x",name:"Intel D1X Hillsboro",company:"Intel",country:"us",status:"operating",score:74.4,nl:[62.8,68.1,64.7,66.7,67.3,68.4,65.2,55.4,54.4,54.6,58.7,58.4],sar:-10.3,thermal:31.4,no2:5.1,ndvi:0.123,nlChange:-7.0},
+{id:"intel-ohio",name:"Intel Ohio Fab",company:"Intel",country:"us",status:"construction",score:67.4,nl:[4.6,5.2,5.4,5.8,5.6,6.2,6.9,6.7,7.3,6.9,8.3,8.1],sar:-10.8,thermal:22.8,no2:3.8,ndvi:0.18,nlChange:76.1},
+{id:"micron-hiroshima",name:"Micron Hiroshima",company:"Micron",country:"jp",status:"operating",score:76.7,nl:[66.4,70.6,67.3,63.1,67.8,67.1,67.7,65.1,58.8,58.5,58.0,61.8],sar:-9.8,thermal:33.8,no2:7.6,ndvi:0.135,nlChange:-6.9},
+{id:"tsmc-jasm",name:"TSMC JASM Kumamoto",company:"TSMC",country:"jp",status:"ramping",score:83.4,nl:[27.0,31.8,34.7,39.6,43.5,45.5,47.6,56.0,53.8,58.9,63.4,64.2],sar:-9.1,thermal:43.6,no2:9.9,ndvi:0.167,nlChange:137.8},
+{id:"smic-shanghai",name:"SMIC Shanghai",company:"SMIC",country:"cn",status:"operating",score:77.5,nl:[82.8,83.6,88.9,89.5,86.9,79.6,82.7,70.6,75.0,72.9,75.6,76.9],sar:-9.3,thermal:35.2,no2:9.3,ndvi:0.129,nlChange:-7.1},
+{id:"smic-beijing",name:"SMIC Beijing",company:"SMIC",country:"cn",status:"operating",score:75.3,nl:[63.0,59.5,69.3,64.3,62.6,65.8,58.5,62.9,55.6,54.6,60.7,57.0],sar:-11.1,thermal:33.2,no2:3.7,ndvi:0.115,nlChange:-9.5},
+{id:"ymtc-wuhan",name:"YMTC Wuhan",company:"YMTC",country:"cn",status:"operating",score:76.0,nl:[68.8,69.1,72.3,72.5,66.5,67.5,62.9,61.7,60.9,59.4,56.4,60.8],sar:-8.7,thermal:33.2,no2:7.3,ndvi:0.123,nlChange:-11.6},
+{id:"cxmt-hefei",name:"CXMT Hefei",company:"CXMT",country:"cn",status:"operating",score:73.3,nl:[37.9,36.5,42.9,40.2,41.1,39.1,37.0,36.6,34.8,32.5,30.1,31.2],sar:-11.3,thermal:32.0,no2:8.1,ndvi:0.115,nlChange:-17.7},
+{id:"infineon-dresden",name:"Infineon Dresden",company:"Infineon",country:"eu",status:"operating",score:74.6,nl:[69.3,75.7,76.7,75.9,74.4,73.3,71.0,66.7,68.6,63.2,67.5,73.2],sar:-10.2,thermal:28.1,no2:5.3,ndvi:0.115,nlChange:5.6},
+{id:"globalfoundries-malta",name:"GlobalFoundries Malta",company:"GlobalFoundries",country:"us",status:"operating",score:75.2,nl:[73.1,80.0,79.2,75.8,76.3,77.2,74.9,73.5,67.3,68.6,67.7,70.4],sar:-10.2,thermal:31.8,no2:7.1,ndvi:0.116,nlChange:-3.7},
+{id:"stmicro-crolles",name:"STMicroelectronics Crolles",company:"STMicro",country:"eu",status:"operating",score:74.0,nl:[46.2,54.0,55.3,56.5,50.5,51.3,48.8,48.4,43.2,43.6,42.5,47.1],sar:-9.8,thermal:29.2,no2:7.2,ndvi:0.116,nlChange:1.9},
+{id:"umc-tainan",name:"UMC Fab 12A Tainan",company:"UMC",country:"tw",status:"operating",score:76.7,nl:[64.7,62.3,64.8,67.5,73.6,68.8,68.4,63.8,57.7,58.3,58.6,57.3],sar:-9.8,thermal:36.1,no2:9.3,ndvi:0.117,nlChange:-11.4},
+{id:"micron-singapore",name:"Micron Singapore Fab 10N",company:"Micron",country:"sg",status:"operating",score:69.3,nl:[34.3,34.6,39.1,37.3,35.2,36.5,31.2,29.6,29.6,28.8,26.6,26.9],sar:-9.9,thermal:27.4,no2:7.6,ndvi:0.122,nlChange:-21.6}
+];
+
+var MONTHS = ['Dec','Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov'];
+var selectedFabIdx = 0;
+
+function renderDemoData() {
+  renderStats();
+  renderChart(selectedFabIdx);
+  var activeBtn = document.querySelector('.demo-filter-btn.active');
+  var activeCountry = 'all';
+  if (activeBtn) {
+    var m = (activeBtn.getAttribute('onclick')||'').match(/'(\w+)'/);
+    if (m) activeCountry = m[1];
+  }
+  renderFabList(activeCountry);
+  renderSignals(selectedFabIdx);
+  renderAlerts();
+}
+
+function renderStats() {
+  var op = FABS.filter(function(f){return f.status==='operating';}).length;
+  var con = FABS.filter(function(f){return f.status==='construction';}).length;
+  var ramp = FABS.filter(function(f){return f.status==='ramping';}).length;
+  var alerts = FABS.filter(function(f){return f.nlChange<-10||f.nlChange>30;}).length;
+  var critical = FABS.filter(function(f){return f.nlChange<-15;}).length;
+  document.getElementById('demo-stats-row').innerHTML =
+    '<div class="demo-stat-card">' +
+      '<div class="demo-stat-label"><span class="en">Active Fabs</span><span class="ko">가동 중</span></div>' +
+      '<div class="demo-stat-val">' + op + '</div>' +
+      '<div class="demo-stat-delta" style="color:var(--accent-green);"><span class="en">+' + ramp + ' ramping</span><span class="ko">' + ramp + '곳 램프업</span></div>' +
+    '</div>' +
+    '<div class="demo-stat-card">' +
+      '<div class="demo-stat-label"><span class="en">Under Construction</span><span class="ko">건설 중</span></div>' +
+      '<div class="demo-stat-val">' + con + '</div>' +
+      '<div class="demo-stat-delta" style="color:var(--accent-warm);"><span class="en">' + con + ' new fabs</span><span class="ko">' + con + '곳 신규</span></div>' +
+    '</div>' +
+    '<div class="demo-stat-card">' +
+      '<div class="demo-stat-label"><span class="en">Alerts (7d)</span><span class="ko">알림 (7일)</span></div>' +
+      '<div class="demo-stat-val" style="color:var(--accent-warm);">' + alerts + '</div>' +
+      '<div class="demo-stat-delta" style="color:var(--accent-red);"><span class="en">' + critical + ' critical</span><span class="ko">' + critical + '건 주의</span></div>' +
+    '</div>';
+}
+
+function renderChart(idx) {
+  var fab = FABS[idx];
+  var maxVal = Math.max.apply(null, fab.nl);
+  var titleEl = document.getElementById('demo-chart-title');
+  if (titleEl) {
+    titleEl.innerHTML = '<span class="en">Nightlight Index — ' + fab.name + '</span><span class="ko">야간조명 지수 — ' + fab.name + '</span>';
+  }
+  var barsEl = document.getElementById('demo-chart-bars');
+  var html = '';
+  fab.nl.forEach(function(val, i) {
+    var h = Math.max(5, (val / maxVal) * 95);
+    var op = (0.4 + (val / maxVal) * 0.6).toFixed(1);
+    html += '<div class="demo-bar" style="height:' + h.toFixed(0) + '%;background:var(--accent);opacity:' + op + ';" data-val="' + val + '"><span class="demo-bar-tooltip">' + MONTHS[i] + ': ' + val + '</span></div>';
+  });
+  barsEl.innerHTML = html;
+  animateChartBars();
+}
+
+function animateChartBars() {
+  var bars = document.getElementById('demo-chart-bars');
+  if (!bars) return;
+  var children = bars.querySelectorAll('.demo-bar');
+  children.forEach(function(bar, i) {
+    var h = bar.style.height;
+    bar.style.height = '0%';
+    bar.style.transition = 'height 0.5s ease ' + (i * 0.04) + 's';
+    requestAnimationFrame(function() {
+      requestAnimationFrame(function() { bar.style.height = h; });
+    });
+  });
+}
+
+function renderFabList(country) {
+  var el = document.getElementById('demo-fab-table');
+  var headerHTML = el.querySelector('.demo-fab-header').outerHTML;
+  var fabs = country === 'all' ? FABS : FABS.filter(function(f){return f.country===country;});
+  var html = headerHTML;
+  fabs.forEach(function(fab) {
+    var statusColor, statusEn, statusKo;
+    if (fab.status === 'operating') { statusColor='var(--accent-green)'; statusEn='Operating'; statusKo='가동 중'; }
+    else if (fab.status === 'construction') { statusColor='var(--accent-warm)'; statusEn='Building'; statusKo='건설 중'; }
+    else { statusColor='var(--accent)'; statusEn='Ramping'; statusKo='램프업'; }
+    var nlVal = fab.nl[11];
+    var nlColor = fab.status === 'construction' ? 'var(--fg-muted)' : 'var(--accent)';
+    var chgColor = fab.nlChange > 5 ? 'var(--accent-green)' : fab.nlChange < -5 ? 'var(--accent-red)' : 'var(--fg-muted)';
+    var chgStr = (fab.nlChange > 0 ? '+' : '') + fab.nlChange + '%';
+    var idx = FABS.indexOf(fab);
+    html += '<div class="demo-fab-row" data-country="' + fab.country + '" onclick="selectFab(' + idx + ')" style="cursor:pointer;">' +
+      '<span>' + fab.name + '</span>' +
+      '<span class="demo-status"><span class="dot" style="background:' + statusColor + ';"></span> <span class="en">' + statusEn + '</span><span class="ko">' + statusKo + '</span></span>' +
+      '<span style="color:' + nlColor + ';">' + nlVal + '</span>' +
+      '<span style="color:' + chgColor + ';">' + chgStr + '</span>' +
+    '</div>';
+  });
+  el.innerHTML = html;
+}
+
+function selectFab(idx) {
+  selectedFabIdx = idx;
+  renderChart(idx);
+  renderSignals(idx);
+}
+
+function renderSignals(idx) {
+  var fab = FABS[idx];
+  var nlVal = fab.nl[11];
+  var nlChg = fab.nlChange;
+  var nlChgStr = (nlChg > 0 ? '+' : '') + nlChg + '%';
+  var nlChgColor = nlChg > 0 ? 'var(--accent-green)' : 'var(--accent-red)';
+  document.getElementById('demo-signals').innerHTML =
+    '<div style="font-size:13px;color:var(--fg-muted);margin-bottom:12px;font-weight:600;">' + fab.name + '</div>' +
+    '<div class="demo-stat-card" style="margin-bottom:12px;">' +
+      '<div class="demo-stat-label">VIIRS NIGHTLIGHT</div>' +
+      '<div class="demo-stat-val" style="color:var(--accent);">' + nlVal + ' <span style="font-size:14px;color:' + nlChgColor + ';">' + nlChgStr + '</span></div>' +
+    '</div>' +
+    '<div class="demo-stat-card" style="margin-bottom:12px;">' +
+      '<div class="demo-stat-label">SAR BACKSCATTER</div>' +
+      '<div class="demo-stat-val" style="color:var(--accent-warm);">' + fab.sar + ' dB</div>' +
+    '</div>' +
+    '<div class="demo-stat-card" style="margin-bottom:12px;">' +
+      '<div class="demo-stat-label">THERMAL IR</div>' +
+      '<div class="demo-stat-val" style="color:#EF4444;">' + fab.thermal + '°C</div>' +
+    '</div>' +
+    '<div class="demo-stat-card" style="margin-bottom:12px;">' +
+      '<div class="demo-stat-label">NO₂ EMISSIONS</div>' +
+      '<div class="demo-stat-val" style="color:#A78BFA;">' + fab.no2 + '×10⁻⁵ mol/m²</div>' +
+    '</div>' +
+    '<div class="demo-stat-card">' +
+      '<div class="demo-stat-label">NDVI VEGETATION</div>' +
+      '<div class="demo-stat-val" style="color:#4ADE80;">' + fab.ndvi + '</div>' +
+    '</div>';
+}
+
+function renderAlerts() {
+  var el = document.getElementById('demo-alerts');
+  if (!el) return;
+  var alerts = [];
+  FABS.forEach(function(fab) {
+    if (fab.status === 'ramping' && fab.nlChange > 30) {
+      alerts.push({fab:fab, type:'milestone', icon:'📊', color:'#38BDF8', bgColor:'rgba(56,189,248,0.08)', borderColor:'rgba(56,189,248,0.2)',
+        en:'Ramp-up +' + fab.nlChange + '%', ko:'램프업 +' + fab.nlChange + '%',
+        detailEn:'Strong ramp-up signal', detailKo:'강한 램프업 신호'});
+    } else if (fab.nlChange < -15) {
+      alerts.push({fab:fab, type:'critical', icon:'⚠', color:'#EF4444', bgColor:'rgba(239,68,68,0.08)', borderColor:'rgba(239,68,68,0.2)',
+        en:'Nightlight drop ' + fab.nlChange + '%', ko:'야간조명 ' + fab.nlChange + '% 하락',
+        detailEn:'Possible utilization cut', detailKo:'가동률 하락 가능성'});
+    } else if (fab.status === 'construction' && fab.nlChange > 25) {
+      alerts.push({fab:fab, type:'progress', icon:'⚡', color:'#FBBF24', bgColor:'rgba(245,158,11,0.08)', borderColor:'rgba(245,158,11,0.2)',
+        en:'Construction +' + fab.nlChange + '%', ko:'건설 진척 +' + fab.nlChange + '%',
+        detailEn:'Ahead of schedule', detailKo:'일정 앞셈'});
+    }
+  });
+  var stableFabs = FABS.filter(function(f){return Math.abs(f.nlChange)<3 && f.status==='operating';});
+  if (stableFabs.length > 0) {
+    var sf = stableFabs[0];
+    alerts.push({fab:sf, type:'stable', icon:'✓', color:'#4ADE80', bgColor:'rgba(34,197,94,0.08)', borderColor:'rgba(34,197,94,0.2)',
+      en:'Stable at ' + sf.nl[11].toFixed(0), ko:sf.nl[11].toFixed(0) + ' 안정 가동',
+      detailEn:'No change', detailKo:'변동 없음'});
+  }
+  var html = '<div style="display:flex;flex-direction:column;gap:8px;">';
+  alerts.slice(0, 5).forEach(function(a) {
+    html += '<div style="padding:10px 12px;background:' + a.bgColor + ';border:1px solid ' + a.borderColor + ';border-radius:8px;font-size:13px;">' +
+      '<div style="color:' + a.color + ';font-weight:600;margin-bottom:2px;">' + a.icon + ' ' + a.fab.name + ' — <span class="en">' + a.en + '</span><span class="ko">' + a.ko + '</span></div>' +
+      '<div style="color:#94A3B8;font-size:11px;">2026-11 · <span class="en">' + a.detailEn + '</span><span class="ko">' + a.detailKo + '</span></div>' +
+    '</div>';
+  });
+  html += '</div>';
+  el.innerHTML = html;
+}
+
+// Chart bar animation on scroll
+(function() {
+  var bars = document.getElementById('demo-chart-bars');
+  if (!bars) return;
+  var observer = new IntersectionObserver(function(entries) {
+    if (entries[0].isIntersecting) {
+      renderDemoData();
+      observer.disconnect();
+    }
+  }, { threshold: 0.3 });
+  observer.observe(bars);
+})();
+</script>
