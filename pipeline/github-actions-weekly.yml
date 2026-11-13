@@ -1,0 +1,49 @@
+# .github/workflows/fabwatch-weekly.yml
+# 매주 월요일 09:00 KST (일요일 24:00 UTC)에 실행
+# GEE에서 66개 팹 데이터를 수집하여 JSON으로 출력 → GitHub Pages 배포
+
+name: FabWatch Weekly Data Update
+
+on:
+  schedule:
+    - cron: '0 0 * * 1'  # 매주 월요일 00:00 UTC (= KST 09:00)
+  workflow_dispatch:  # 수동 실행 가능
+
+jobs:
+  fetch-satellite-data:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+
+      - name: Install dependencies
+        run: pip install earthengine-api
+
+      - name: Authenticate GEE
+        env:
+          GEE_SERVICE_ACCOUNT_KEY: ${{ secrets.GEE_SERVICE_ACCOUNT_KEY }}
+        run: |
+          echo "$GEE_SERVICE_ACCOUNT_KEY" > gee-key.json
+          python -c "
+          import ee
+          credentials = ee.ServiceAccountCredentials('', 'gee-key.json')
+          ee.Initialize(credentials)
+          print('GEE auth OK')
+          "
+
+      - name: Fetch all fab data
+        run: python fabwatch-pipeline/fetch_fabwatch_data.py --all
+
+      - name: Deploy to GitHub Pages (or commit JSON)
+        run: |
+          cp fabwatch-pipeline/output/fabwatch_data.json docs/data/
+          git config user.name "FabWatch Bot"
+          git config user.email "bot@fabwatch.io"
+          git add docs/data/fabwatch_data.json
+          git diff --cached --quiet || git commit -m "Weekly data update $(date +%Y-%m-%d)"
+          git push
