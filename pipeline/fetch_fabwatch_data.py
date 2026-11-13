@@ -33,11 +33,13 @@ DATE_FMT = "%Y-%m-%d"
 BUFFER_M = 500
 
 
+GEE_PROJECT = "ee-panco88"
+
 def init_gee():
     """GEE 초기화. 인증이 안 되어 있으면 안내 메시지 출력."""
     try:
-        ee.Initialize(opt_url="https://earthengine-highvolume.googleapis.com")
-        print("[OK] GEE 초기화 성공")
+        ee.Initialize(project=GEE_PROJECT, opt_url="https://earthengine-highvolume.googleapis.com")
+        print(f"[OK] GEE 초기화 성공 (project: {GEE_PROJECT})")
     except Exception as e:
         print(f"[!] GEE 초기화 실패: {e}")
         print("    먼저 'earthengine authenticate'를 실행하세요.")
