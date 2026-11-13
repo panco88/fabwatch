@@ -3009,10 +3009,22 @@ function applyLiveData(data) {
       var v = p.properties ? p.properties.value : p.value;
       return v != null ? Math.round(v * 10) / 10 : null;
     }).filter(function(v) { return v != null; });
-    var thermalArr = (ch.thermal || []).map(function(p) {
-      var v = p.properties ? p.properties.value : p.value;
-      return v != null ? Math.round(v * 10) / 10 : null;
-    }).filter(function(v) { return v != null; });
+    var thermalArr = (function() {
+      var raw = (ch.thermal || []).map(function(p) {
+        var props = p.properties || p;
+        return {date: (props.date || '').substring(0, 7), value: props.value};
+      }).filter(function(r) { return r.value != null && r.date; });
+      var byMonth = {};
+      raw.forEach(function(r) {
+        if (!byMonth[r.date]) byMonth[r.date] = [];
+        byMonth[r.date].push(r.value);
+      });
+      var months = Object.keys(byMonth).sort();
+      return months.map(function(m) {
+        var vals = byMonth[m];
+        return Math.round(vals.reduce(function(a,b){return a+b;},0) / vals.length * 10) / 10;
+      });
+    })();
     var no2Arr = (ch.no2 || []).map(function(p) {
       var v = p.properties ? p.properties.value : p.value;
       return v != null ? Math.round(v * 1e7) / 100 : null;
