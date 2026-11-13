@@ -1,12 +1,12 @@
-# FabWatch — Satellite Intelligence for Semiconductor Fabs
+# FabWatch — Satellite Intelligence for Semiconductor Fabs & AI Data Centers
 
-FabWatch monitors **66 semiconductor fabs** across **7 countries** using **6 satellite channels** to track utilization, construction progress, and supply chain risks in near real-time.
+FabWatch monitors **24 semiconductor fabs** and **9 AI data centers** across **7 countries** using **6 satellite channels** to track utilization, construction progress, and supply chain risks in near real-time.
+
+**Live Demo:** [https://panco88.github.io/fabwatch/](https://panco88.github.io/fabwatch/)
 
 ## What This Is
 
-A concept homepage and interactive demo dashboard for the FabWatch satellite monitoring platform. The dashboard visualizes multi-channel satellite signals (nightlight, SAR, thermal IR, NO2, NDVI, optical) for 24 representative fabs.
-
-> **Note:** The dashboard currently uses **simulated demo data**, not live satellite measurements. The data patterns are modeled after realistic satellite signal behaviors for each fab status (operating, construction, ramping).
+An interactive dashboard for the FabWatch satellite monitoring platform. The dashboard visualizes multi-channel satellite signals (nightlight, SAR, thermal IR, NO2, NDVI, optical) collected via Google Earth Engine.
 
 ## Satellite Channels
 
@@ -23,24 +23,17 @@ A concept homepage and interactive demo dashboard for the FabWatch satellite mon
 
 - **Countries:** South Korea, Taiwan, China, USA, Japan, EU, Singapore
 - **Companies:** TSMC, Intel, SK hynix, Samsung, Micron, SMIC, YMTC, CXMT, Infineon, GlobalFoundries, STMicro, UMC
+- **AI Data Centers:** Meta, OpenAI/SoftBank, Microsoft, Google, xAI, Amazon, CoreWeave
 
 ## Tech Stack
 
 - Single-page static HTML (no framework, no build step)
-- Google Fonts (Noto Sans KR, Outfit, IBM Plex Sans/Mono)
+- Google Earth Engine satellite data pipeline
 - Bilingual: English / Korean toggle
-- Google Earth Engine pipeline planned for production data
-
-## Feedback Welcome
-
-This project is in its early concept stage. If you work in:
-- Semiconductor supply chain analysis
-- Satellite remote sensing / Earth observation
-- Investment research (semiconductor sector)
-- Geopolitical risk assessment
-
-I'd love to hear your thoughts. Please open an [Issue](../../issues) to share ideas, suggestions, or potential use cases.
 
 ## License
 
 All rights reserved. This repository is shared for review and feedback purposes.
+
+---
+*DS Planet Inc.*
