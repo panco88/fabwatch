@@ -1834,6 +1834,7 @@ footer a:hover { color: #FFFFFF; }
             <div class="demo-chart">
               <div class="demo-chart-title" id="demo-chart-title"></div>
               <div class="demo-bars" id="demo-chart-bars"></div>
+              <div id="demo-channel-dots" style="text-align:center;margin-top:8px;"></div>
             </div>
             <!-- Fab filter -->
             <div class="demo-filter-bar">
@@ -2719,10 +2720,19 @@ var FABS = [
 
 var MONTHS = ['Dec','Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov'];
 var selectedFabIdx = 0;
+var currentChannel = 0;
+var channelTimer = null;
+var CHANNELS = [
+  {key:'nl', labelEn:'Nightlight Index', labelKo:'야간조명 지수', color:'var(--accent)', unit:'nW/cm²/sr'},
+  {key:'sarArr', labelEn:'SAR Backscatter', labelKo:'SAR 백스캐터', color:'var(--accent-warm)', unit:'dB'},
+  {key:'thermalArr', labelEn:'Thermal IR', labelKo:'열적외선 온도', color:'#EF4444', unit:'°C'},
+  {key:'no2Arr', labelEn:'NO₂ Emissions', labelKo:'NO₂ 배출량', color:'#A78BFA', unit:'×10⁻⁵'},
+  {key:'ndviArr', labelEn:'NDVI Vegetation', labelKo:'NDVI 식생지수', color:'#4ADE80', unit:''}
+];
 
 function renderDemoData() {
   renderStats();
-  renderChart(selectedFabIdx);
+  renderChart(selectedFabIdx, currentChannel);
   var activeBtn = document.querySelector('.demo-filter-btn.active');
   var activeCountry = 'all';
   if (activeBtn) {
@@ -2732,6 +2742,28 @@ function renderDemoData() {
   renderFabList(activeCountry);
   renderSignals(selectedFabIdx);
   renderAlerts();
+  startChannelRotation();
+}
+
+function startChannelRotation() {
+  if (channelTimer) clearInterval(channelTimer);
+  channelTimer = setInterval(function() {
+    currentChannel = (currentChannel + 1) % CHANNELS.length;
+    renderChart(selectedFabIdx, currentChannel);
+    updateChannelIndicator();
+  }, 4000);
+}
+
+function updateChannelIndicator() {
+  var el = document.getElementById('demo-channel-dots');
+  if (!el) return;
+  var html = '';
+  CHANNELS.forEach(function(ch, i) {
+    var active = i === currentChannel;
+    html += '<span style="display:inline-block;width:8px;height:8px;border-radius:50%;margin:0 3px;cursor:pointer;transition:all 0.3s;' +
+      'background:' + (active ? ch.color : 'var(--fg-muted)') + ';opacity:' + (active ? '1' : '0.3') + ';" onclick="switchChannel(' + i + ')"></span>';
+  });
+  el.innerHTML = html;
 }
 
 function renderStats() {
@@ -2758,19 +2790,41 @@ function renderStats() {
     '</div>';
 }
 
-function renderChart(idx) {
+function switchChannel(idx) {
+  currentChannel = idx;
+  renderChart(selectedFabIdx, currentChannel);
+  updateChannelIndicator();
+  startChannelRotation();
+}
+
+function renderChart(idx, chIdx) {
+  if (chIdx === undefined) chIdx = currentChannel;
   var fab = FABS[idx];
-  var maxVal = Math.max.apply(null, fab.nl);
+  var ch = CHANNELS[chIdx];
+  var vals = fab[ch.key] || [];
+  if (vals.length === 0) {
+    for (var ci = 0; ci < CHANNELS.length; ci++) {
+      vals = fab[CHANNELS[ci].key] || [];
+      if (vals.length > 0) { ch = CHANNELS[ci]; break; }
+    }
+  }
+  if (vals.length === 0) return;
+  var maxVal = Math.max.apply(null, vals.map(function(v){return Math.abs(v);}));
+  if (maxVal === 0) maxVal = 1;
   var titleEl = document.getElementById('demo-chart-title');
   if (titleEl) {
-    titleEl.innerHTML = '<span class="en">Nightlight Index — ' + fab.name + '</span><span class="ko">야간조명 지수 — ' + fab.name + '</span>';
+    titleEl.innerHTML = '<span class="en">' + ch.labelEn + ' — ' + fab.name + '</span><span class="ko">' + ch.labelKo + ' — ' + fab.name + '</span>';
   }
   var barsEl = document.getElementById('demo-chart-bars');
   var html = '';
-  fab.nl.forEach(function(val, i) {
-    var h = Math.max(5, (val / maxVal) * 95);
-    var op = (0.4 + (val / maxVal) * 0.6).toFixed(1);
-    html += '<div class="demo-bar" style="height:' + h.toFixed(0) + '%;background:var(--accent);opacity:' + op + ';" data-val="' + val + '"><span class="demo-bar-tooltip">' + MONTHS[i] + ': ' + val + '</span></div>';
+  var hasNeg = vals.some(function(v){return v < 0;});
+  vals.forEach(function(val, i) {
+    var absVal = Math.abs(val);
+    var h = Math.max(5, (absVal / maxVal) * 95);
+    var op = (0.4 + (absVal / maxVal) * 0.6).toFixed(1);
+    var label = i < MONTHS.length ? MONTHS[i] : '';
+    var dispVal = hasNeg ? val.toFixed(1) : val;
+    html += '<div class="demo-bar" style="height:' + h.toFixed(0) + '%;background:' + ch.color + ';opacity:' + op + ';" data-val="' + val + '"><span class="demo-bar-tooltip">' + label + ': ' + dispVal + (ch.unit ? ' ' + ch.unit : '') + '</span></div>';
   });
   barsEl.innerHTML = html;
   animateChartBars();
@@ -2800,7 +2854,7 @@ function renderFabList(country) {
     if (fab.status === 'operating') { statusColor='var(--accent-green)'; statusEn='Operating'; statusKo='가동 중'; }
     else if (fab.status === 'construction') { statusColor='var(--accent-warm)'; statusEn='Building'; statusKo='건설 중'; }
     else { statusColor='var(--accent)'; statusEn='Ramping'; statusKo='램프업'; }
-    var nlVal = fab.nl[11];
+    var nlVal = fab.nl.length > 0 ? fab.nl[fab.nl.length - 1] : 0;
     var nlColor = fab.status === 'construction' ? 'var(--fg-muted)' : 'var(--accent)';
     var chgColor = fab.nlChange > 5 ? 'var(--accent-green)' : fab.nlChange < -5 ? 'var(--accent-red)' : 'var(--fg-muted)';
     var chgStr = (fab.nlChange > 0 ? '+' : '') + fab.nlChange + '%';
@@ -2817,13 +2871,16 @@ function renderFabList(country) {
 
 function selectFab(idx) {
   selectedFabIdx = idx;
-  renderChart(idx);
+  currentChannel = 0;
+  renderChart(idx, 0);
   renderSignals(idx);
+  updateChannelIndicator();
+  startChannelRotation();
 }
 
 function renderSignals(idx) {
   var fab = FABS[idx];
-  var nlVal = fab.nl[11];
+  var nlVal = fab.nl.length > 0 ? fab.nl[fab.nl.length - 1] : 0;
   var nlChg = fab.nlChange;
   var nlChgStr = (nlChg > 0 ? '+' : '') + nlChg + '%';
   var nlChgColor = nlChg > 0 ? 'var(--accent-green)' : 'var(--accent-red)';
@@ -2874,7 +2931,7 @@ function renderAlerts() {
   if (stableFabs.length > 0) {
     var sf = stableFabs[0];
     alerts.push({fab:sf, type:'stable', icon:'✓', color:'#4ADE80', bgColor:'rgba(34,197,94,0.08)', borderColor:'rgba(34,197,94,0.2)',
-      en:'Stable at ' + sf.nl[11].toFixed(0), ko:sf.nl[11].toFixed(0) + ' 안정 가동',
+      en:'Stable at ' + (sf.nl.length > 0 ? sf.nl[sf.nl.length-1] : 0).toFixed(0), ko:(sf.nl.length > 0 ? sf.nl[sf.nl.length-1] : 0).toFixed(0) + ' 안정 가동',
       detailEn:'No change', detailKo:'변동 없음'});
   }
   var html = '<div style="display:flex;flex-direction:column;gap:8px;">';
@@ -2917,10 +2974,27 @@ function applyLiveData(data) {
     var ndviVals = (ch.ndvi || []).map(function(p) {
       return p.properties ? p.properties.value : p.value;
     }).filter(function(v) { return v != null; });
+    var sarArr = (ch.sar || []).map(function(p) {
+      var v = p.properties ? p.properties.value : p.value;
+      return v != null ? Math.round(v * 10) / 10 : null;
+    }).filter(function(v) { return v != null; });
+    var thermalArr = (ch.thermal || []).map(function(p) {
+      var v = p.properties ? p.properties.value : p.value;
+      return v != null ? Math.round(v * 10) / 10 : null;
+    }).filter(function(v) { return v != null; });
+    var no2Arr = (ch.no2 || []).map(function(p) {
+      var v = p.properties ? p.properties.value : p.value;
+      return v != null ? Math.round(v * 1e7) / 100 : null;
+    }).filter(function(v) { return v != null; });
+    var ndviArr = (ch.ndvi || []).map(function(p) {
+      var v = p.properties ? p.properties.value : p.value;
+      return v != null ? Math.round(v * 1000) / 1000 : null;
+    }).filter(function(v) { return v != null; });
     return {
       id: f.id, name: f.name, company: f.company, country: f.country.toLowerCase(),
       status: f.status, score: f.composite_score || 0,
-      nl: nl.length >= 12 ? nl : nl.concat(new Array(Math.max(0, 12 - nl.length)).fill(0)),
+      nl: nl,
+      sarArr: sarArr, thermalArr: thermalArr, no2Arr: no2Arr, ndviArr: ndviArr,
       sar: sarVals.length > 0 ? Math.round(sarVals[sarVals.length - 1] * 10) / 10 : 0,
       thermal: thermalVals.length > 0 ? Math.round(thermalVals[thermalVals.length - 1] * 10) / 10 : 0,
       no2: no2Vals.length > 0 ? Math.round(no2Vals[no2Vals.length - 1] * 100000) / 10 : 0,
