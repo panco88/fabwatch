@@ -2863,8 +2863,8 @@ function getChannelVal(fab, chIdx) {
   var arr = fab[ch.key] || [];
   if (arr.length === 0) return {val: 0, change: 0};
   var latest = arr[arr.length - 1];
-  var first = arr[0];
-  var change = (first !== 0 && arr.length >= 2) ? Math.round((latest - first) / Math.abs(first) * 1000) / 10 : 0;
+  var prev = arr.length >= 2 ? arr[arr.length - 2] : latest;
+  var change = (prev !== 0 && arr.length >= 2) ? Math.round((latest - prev) / Math.abs(prev) * 1000) / 10 : 0;
   return {val: Math.round(latest * 100) / 100, change: change};
 }
 
@@ -2876,7 +2876,7 @@ function renderFabList(country, chIdx) {
     '<span><span class="en">Fab</span><span class="ko">팹</span></span>' +
     '<span><span class="en">Status</span><span class="ko">상태</span></span>' +
     '<span><span class="en">' + ch.labelEn.split(' ')[0] + '</span><span class="ko">' + ch.labelKo.split(' ')[0] + '</span></span>' +
-    '<span><span class="en">Change</span><span class="ko">변화</span></span>' +
+    '<span><span class="en">MoM</span><span class="ko">전월비</span></span>' +
   '</div>';
   var fabs = country === 'all' ? FABS : FABS.filter(function(f){return f.country===country;});
   var html = headerHTML;
@@ -2990,7 +2990,8 @@ function applyLiveData(data) {
         return v != null ? Math.round(v * 10) / 10 : 0;
       });
       if (nl.length >= 2 && nl[0] > 0) {
-        nlChange = Math.round((nl[nl.length - 1] - nl[0]) / nl[0] * 1000) / 10;
+        var nlPrev = nl.length >= 2 ? nl[nl.length - 2] : nl[0];
+        nlChange = nlPrev !== 0 ? Math.round((nl[nl.length - 1] - nlPrev) / Math.abs(nlPrev) * 1000) / 10 : 0;
       }
     }
     var sarVals = (ch.sar || []).map(function(p) {
