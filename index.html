@@ -2,14 +2,17 @@
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-8E0SRTKMRB"></script>
 <script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','G-8E0SRTKMRB');</script>
 <title>FabWatch</title>
-<meta name="robots" content="noindex, nofollow">
 <meta name="description" content="FabWatch monitors 66 semiconductor fabs and 9 AI data centers using 6 satellite channels. Real-time utilization tracking, construction progress, and supply chain intelligence for analysts, investors, and policymakers.">
 <meta property="og:title" content="FabWatch — Satellite Intelligence for Semiconductor Fabs & AI Data Centers">
 <meta property="og:description" content="Monitor 66 semiconductor fabs and 9 AI data centers with 6 satellite channels. Real-time utilization data, construction tracking, and supply chain intelligence.">
 <meta property="og:type" content="website">
+<meta property="og:url" content="https://fabwatch.co.kr">
+<meta property="og:image" content="https://fabwatch.co.kr/og-image.png">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:title" content="FabWatch — Satellite Intelligence for Semiconductor Fabs & AI Data Centers">
 <meta name="twitter:description" content="66 fabs + 9 data centers. 6 satellite channels. One dashboard.">
+<meta name="twitter:image" content="https://fabwatch.co.kr/og-image.png">
+<link rel="canonical" href="https://fabwatch.co.kr">
 <meta name="claude:viewport-fit-sides" content="cover">
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800;900&family=IBM+Plex+Sans:wght@300;400;500;600&family=IBM+Plex+Mono:wght@400;500&family=Noto+Sans+KR:wght@300;400;500;600;700;900&display=swap">
 
@@ -714,7 +717,7 @@ footer a:hover { color: #FFFFFF; }
   letter-spacing: 0.04em; margin-left: 12px;
 }
 
-/* ===== LOGIN MODAL ===== */
+/* ===== WAITLIST MODAL ===== */
 .modal-overlay {
   display: none; position: fixed; inset: 0; z-index: 1000;
   background: rgba(0,0,0,0.6); backdrop-filter: blur(6px);
@@ -748,19 +751,15 @@ footer a:hover { color: #FFFFFF; }
   border-radius: 6px; display: inline-grid; place-items: center;
 }
 .modal-subtitle { font-size: 14px; color: var(--fg-muted); margin-bottom: 20px; }
-.modal-tabs {
-  display: flex; gap: 0; border-bottom: 2px solid var(--border);
-}
-.modal-tab {
-  flex: 1; padding: 10px; text-align: center;
-  font-size: 14px; font-weight: 600; color: var(--fg-muted);
-  background: none; border: none; cursor: pointer;
-  border-bottom: 2px solid transparent; margin-bottom: -2px;
-  font-family: var(--font-body); transition: all 0.15s;
-}
-[data-lang="ko"] .modal-tab { font-family: var(--font-ko); }
-.modal-tab.active { color: var(--accent); border-bottom-color: var(--accent); }
 .modal-body { padding: 24px 28px 28px; }
+.legal-modal .modal { width: min(640px, 100%); }
+.legal-modal .modal-body { text-align: left; }
+.legal-content h3 { font-size: 16px; font-weight: 700; color: var(--fg); margin: 24px 0 8px; }
+.legal-content h3:first-child { margin-top: 0; }
+.legal-content p, .legal-content li { font-size: 13px; line-height: 1.8; color: var(--fg-muted); }
+.legal-content ul { padding-left: 20px; margin: 8px 0; }
+.legal-content li { margin-bottom: 4px; }
+.legal-content .effective { font-size: 12px; color: var(--fg-muted); opacity: 0.7; margin-bottom: 16px; }
 .form-group { margin-bottom: 16px; }
 .form-label {
   display: block; font-size: 13px; font-weight: 600;
@@ -775,26 +774,6 @@ footer a:hover { color: #FFFFFF; }
 }
 .form-input:focus { border-color: var(--accent); }
 .form-input::placeholder { color: var(--fg-muted); opacity: 0.6; }
-.member-type-select {
-  display: grid; grid-template-columns: 1fr 1fr; gap: 10px;
-}
-.type-option {
-  padding: 14px; border-radius: 10px;
-  border: 2px solid var(--border); background: var(--surface);
-  cursor: pointer; text-align: center; transition: all 0.15s;
-}
-.type-option:hover { border-color: var(--accent); }
-.type-option.selected {
-  border-color: var(--accent);
-  background: rgba(56,189,248,0.05);
-}
-.type-option-icon { font-size: 24px; margin-bottom: 6px; }
-.type-option-name {
-  font-size: 14px; font-weight: 700; margin-bottom: 2px;
-  font-family: var(--font-display);
-}
-[data-lang="ko"] .type-option-name { font-family: 'Noto Sans KR', var(--font-display), sans-serif; }
-.type-option-desc { font-size: 12px; color: var(--fg-muted); line-height: 1.4; }
 .form-submit {
   width: 100%; padding: 12px; border-radius: 8px;
   background: var(--accent); color: var(--hero-bg);
@@ -804,14 +783,6 @@ footer a:hover { color: #FFFFFF; }
 }
 [data-lang="ko"] .form-submit { font-family: var(--font-ko); }
 .form-submit:hover { opacity: 0.9; }
-.form-divider {
-  display: flex; align-items: center; gap: 12px;
-  margin: 20px 0; color: var(--fg-muted); font-size: 12px;
-}
-.form-divider::before, .form-divider::after {
-  content: ""; flex: 1; height: 1px; background: var(--border);
-}
-.social-logins { display: flex; flex-direction: column; gap: 10px; }
 .social-btn {
   width: 100%; padding: 10px; border-radius: 8px;
   border: 1px solid var(--border); background: var(--surface);
@@ -1047,12 +1018,6 @@ footer a:hover { color: #FFFFFF; }
 }
 </style>
 
-<!-- DEMO NOTICE -->
-<div class="demo-notice" style="background:#F59E0B;color:#1F2937;text-align:center;font-size:13px;font-weight:600;line-height:1.4;padding:7px 16px;">
-  <span class="en">Demo version — figures and charts are based on sample data.</span>
-  <span class="ko">데모 버전 — 화면의 수치와 차트는 샘플 데이터 기준입니다.</span>
-</div>
-
 <!-- NAV -->
 <nav>
   <div class="inner nav-inner">
@@ -1067,9 +1032,9 @@ footer a:hover { color: #FFFFFF; }
       <li><a href="#demo" class="hide-mobile"><span class="en">Demo</span><span class="ko">데모</span></a></li>
       <li><a href="#map" class="hide-mobile"><span class="en">Coverage</span><span class="ko">커버리지</span></a></li>
       <li><a href="#pricing"><span class="en">Pricing</span><span class="ko">요금제</span></a></li>
-      <li><a href="#" onclick="openModal('login');return false;" class="hide-mobile" style="color:#94A3B8;"><span class="en">Sign In</span><span class="ko">로그인</span></a></li>
+      <li><a href="#" onclick="openModal();return false;" class="hide-mobile" style="color:#94A3B8;"><span class="en">Join Waitlist</span><span class="ko">대기 등록</span></a></li>
       <li><button class="lang-toggle" onclick="toggleLang()">KO / EN</button></li>
-      <li><a href="#" onclick="openModal('signup');return false;" class="nav-cta"><span class="en">Start Free</span><span class="ko">무료 시작</span></a></li>
+      <li><a href="#" onclick="openModal();return false;" class="nav-cta"><span class="en">Get Early Access</span><span class="ko">얼리 액세스</span></a></li>
     </ul>
   </div>
 </nav>
@@ -1162,9 +1127,9 @@ footer a:hover { color: #FFFFFF; }
       <span class="ko">다중 채널 위성 기반 첨단산업 시설 모니터링 — 반도체 팹, AI 데이터센터, 그리고 그 너머. 위성 데이터와 공시 자료, 산업 통계를 교차 검증하여 공식 발표보다 빠른 인사이트를 제공합니다.</span>
     </p>
     <div class="hero-actions">
-      <a href="#" onclick="openModal('signup');return false;" class="btn btn-primary">
-        <span class="en">Start Free Trial</span>
-        <span class="ko">무료 체험 시작</span>
+      <a href="#" onclick="openModal();return false;" class="btn btn-primary">
+        <span class="en">Join the Waitlist</span>
+        <span class="ko">대기 등록하기</span>
       </a>
       <a href="#demo" class="btn btn-outline">
         <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="5 3 19 12 5 21 5 3"/></svg>
@@ -1740,7 +1705,7 @@ footer a:hover { color: #FFFFFF; }
           <li><span class="cross">&#10005;</span> <span class="en">Alerts</span><span class="ko">알림</span></li>
           <li><span class="cross">&#10005;</span> API</li>
         </ul>
-        <a href="#" onclick="openModal('signup');return false;" class="price-btn"><span class="en">Get Started</span><span class="ko">시작하기</span></a>
+        <a href="#" onclick="openModal();return false;" class="price-btn"><span class="en">Join Waitlist</span><span class="ko">대기 등록</span></a>
       </div>
       <!-- Pro -->
       <div class="price-card featured">
@@ -1757,7 +1722,7 @@ footer a:hover { color: #FFFFFF; }
           <li><span class="check">&#10003;</span> <span class="en">Full open data access</span><span class="ko">전체 오픈 데이터 접근</span></li>
           <li><span class="cross">&#10005;</span> <span class="en">Custom fabs / raw imagery</span><span class="ko">커스텀 팹 / 원본 영상</span></li>
         </ul>
-        <a href="#" onclick="openModal('signup');return false;" class="price-btn primary"><span class="en">Start Free Trial</span><span class="ko">무료 체험 시작</span></a>
+        <a href="#" onclick="openModal();return false;" class="price-btn primary"><span class="en">Join Waitlist</span><span class="ko">대기 등록</span></a>
       </div>
       <!-- Enterprise -->
       <div class="price-card">
@@ -1774,7 +1739,7 @@ footer a:hover { color: #FFFFFF; }
           <li><span class="check">&#10003;</span> <span class="en">Dedicated analyst + custom reports</span><span class="ko">전담 애널리스트 + 맞춤 리포트</span></li>
           <li><span class="check">&#10003;</span> <span class="en">Bloomberg / Refinitiv feed</span><span class="ko">Bloomberg / Refinitiv 피드</span></li>
         </ul>
-        <a href="#" onclick="openModal('signup');return false;" class="price-btn"><span class="en">Contact Sales</span><span class="ko">도입 문의</span></a>
+        <a href="#" onclick="openModal();return false;" class="price-btn"><span class="en">Contact Us</span><span class="ko">문의하기</span></a>
       </div>
     </div>
   </div>
@@ -2367,12 +2332,12 @@ footer a:hover { color: #FFFFFF; }
   <div class="inner">
     <div class="section-label"><span class="en">About Us</span><span class="ko">회사 소개</span></div>
     <h2 class="section-title reveal">
-      <span class="en">DS Planet — where data meets the real world</span>
-      <span class="ko">DS플래닛 — 데이터와 현실이 만나는 곳</span>
+      <span class="en">ATS — where data meets the real world</span>
+      <span class="ko">ATS — 데이터와 현실이 만나는 곳</span>
     </h2>
     <p class="section-desc reveal">
-      <span class="en">DS Planet is a geospatial intelligence company that builds satellite monitoring platforms for high-tech industries. FabWatch is our flagship product — born from the insight that physics-based observation can verify what corporate disclosures cannot.</span>
-      <span class="ko">DS플래닛은 첨단산업을 위한 위성 모니터링 플랫폼을 구축하는 지리공간 인텔리전스 기업입니다. FabWatch는 DS플래닛의 핵심 서비스로, 기업 공시가 말해주지 못하는 것을 물리 기반 관측으로 검증할 수 있다는 통찰에서 탄생했습니다.</span>
+      <span class="en">ATS Inc. is a technology company that builds satellite monitoring platforms for high-tech industries. FabWatch is our flagship product — born from the insight that physics-based observation can verify what corporate disclosures cannot.</span>
+      <span class="ko">주식회사 에이티에스(ATS)는 첨단산업을 위한 위성 모니터링 플랫폼을 구축하는 기술 기업입니다. FabWatch는 ATS의 핵심 서비스로, 기업 공시가 말해주지 못하는 것을 물리 기반 관측으로 검증할 수 있다는 통찰에서 탄생했습니다.</span>
     </p>
     <div class="team-grid">
       <div class="team-card reveal">
@@ -2430,13 +2395,211 @@ footer a:hover { color: #FFFFFF; }
       <span class="ko">기업 보도자료가 아닌 위성 인텔리전스로 반도체 현장을 검증하는 애널리스트, 투자자, 정책 결정자의 대열에 합류하세요.</span>
     </p>
     <div class="hero-actions">
-      <a href="#" onclick="openModal('signup');return false;" class="btn btn-primary"><span class="en">Start Free Trial</span><span class="ko">무료 체험 시작</span></a>
-      <a href="#" onclick="openModal('signup');return false;" class="btn btn-outline"><span class="en">Request Enterprise Demo</span><span class="ko">기업 도입 데모 요청</span></a>
+      <a href="#" onclick="openModal();return false;" class="btn btn-primary"><span class="en">Join the Waitlist</span><span class="ko">대기 등록하기</span></a>
+      <a href="#" onclick="openModal();return false;" class="btn btn-outline"><span class="en">Request Enterprise Demo</span><span class="ko">기업 도입 데모 요청</span></a>
     </div>
   </div>
 </section>
 
-<!-- LOGIN MODAL -->
+<!-- PRIVACY POLICY MODAL -->
+<div class="modal-overlay legal-modal" id="privacyModal">
+  <div class="modal">
+    <button class="modal-close" onclick="closeLegal('privacyModal')">&times;</button>
+    <div class="modal-header">
+      <div class="modal-logo">
+        <span class="logo-icon"><svg viewBox="0 0 24 24" fill="none" stroke="#0B1628" stroke-width="2.5" stroke-linecap="round" width="18" height="18"><circle cx="12" cy="12" r="3"/><path d="M12 2v4M12 18v4M4.93 4.93l2.83 2.83M16.24 16.24l2.83 2.83M2 12h4M18 12h4M4.93 19.07l2.83-2.83M16.24 7.76l2.83-2.83"/></svg></span>
+        FabWatch
+      </div>
+      <p class="modal-subtitle">
+        <span class="en">Privacy Policy</span>
+        <span class="ko">개인정보처리방침</span>
+      </p>
+    </div>
+    <div class="modal-body">
+      <div class="legal-content">
+        <div class="effective">
+          <span class="en">Effective: November 19, 2026</span>
+          <span class="ko">시행일: 2026년 11월 19일</span>
+        </div>
+        <span class="en">
+        <h3>1. Data controller</h3>
+        <p>FabWatch is operated by ATS Inc. (주식회사 에이티에스), CEO Wooyeon Son, located at 321-7 Opoan-ro, Gwangju-si, Gyeonggi-do, Republic of Korea (Business Registration No. 758-86-03148). For privacy inquiries, contact <a href="mailto:contact@fabwatch.co.kr" style="color:var(--accent);">contact@fabwatch.co.kr</a>.</p>
+        <h3>2. Personal information collected</h3>
+        <p>We collect only the minimum information necessary to provide our services:</p>
+        <ul>
+          <li><strong>Account registration:</strong> Name, email address, company name (optional), password (hashed)</li>
+          <li><strong>Newsletter subscription:</strong> Email address</li>
+          <li><strong>Service usage:</strong> Access logs, IP address, browser type, pages visited</li>
+          <li><strong>Cookies:</strong> Session cookies and analytics cookies (Google Analytics)</li>
+        </ul>
+        <h3>3. Purpose of collection</h3>
+        <ul>
+          <li>Account creation and authentication</li>
+          <li>Delivery of monitoring dashboard and analysis reports</li>
+          <li>Sending newsletters and service notifications</li>
+          <li>Service improvement through usage analytics</li>
+          <li>Customer support and inquiry handling</li>
+        </ul>
+        <h3>4. Retention and disposal</h3>
+        <p>Personal information is retained for the duration of service membership. Upon account deletion, all personal data is permanently destroyed within 30 days, except where retention is required by applicable law (e.g., electronic commerce records: 5 years).</p>
+        <h3>5. Third-party disclosure</h3>
+        <p>We do not sell, trade, or rent your personal information. Data may be shared with:</p>
+        <ul>
+          <li><strong>Google Analytics:</strong> Anonymized usage statistics for service improvement</li>
+          <li><strong>Payment processors:</strong> Billing information for paid subscriptions (processed by third-party payment gateway; we do not store card details)</li>
+        </ul>
+        <h3>6. User rights</h3>
+        <p>You may at any time: access, correct, or delete your personal information; withdraw consent for data processing; request data portability; or unsubscribe from communications. Contact <a href="mailto:contact@fabwatch.co.kr" style="color:var(--accent);">contact@fabwatch.co.kr</a> or use in-app settings.</p>
+        <h3>7. Data security</h3>
+        <p>We implement industry-standard security measures including HTTPS encryption, hashed password storage, access control, and regular security audits to protect your information.</p>
+        <h3>8. Cookies and tracking</h3>
+        <p>FabWatch uses essential cookies for site functionality and Google Analytics (GA4) for anonymous usage statistics. You may disable non-essential cookies through your browser settings. Disabling cookies may limit some features.</p>
+        <h3>9. Changes to this policy</h3>
+        <p>Material changes will be announced via email or on-site notice at least 7 days before taking effect. Continued use after the effective date constitutes acceptance.</p>
+        </span>
+        <span class="ko">
+        <h3>1. 개인정보처리자</h3>
+        <p>FabWatch는 주식회사 에이티에스(ATS, 대표 손우연)가 운영합니다. 소재지: 경기도 광주시 오포안로 321-7, 사업자등록번호: 758-86-03148. 개인정보 관련 문의: <a href="mailto:contact@fabwatch.co.kr" style="color:var(--accent);">contact@fabwatch.co.kr</a></p>
+        <h3>2. 수집하는 개인정보</h3>
+        <p>서비스 제공에 필요한 최소한의 정보만 수집합니다:</p>
+        <ul>
+          <li><strong>회원가입:</strong> 이름, 이메일 주소, 회사명(선택), 비밀번호(암호화 저장)</li>
+          <li><strong>뉴스레터 구독:</strong> 이메일 주소</li>
+          <li><strong>서비스 이용:</strong> 접속 로그, IP 주소, 브라우저 종류, 방문 페이지</li>
+          <li><strong>쿠키:</strong> 세션 쿠키 및 분석용 쿠키(Google Analytics)</li>
+        </ul>
+        <h3>3. 수집 목적</h3>
+        <ul>
+          <li>계정 생성 및 본인 인증</li>
+          <li>모니터링 대시보드 및 분석 리포트 제공</li>
+          <li>뉴스레터 및 서비스 알림 발송</li>
+          <li>이용 통계를 통한 서비스 개선</li>
+          <li>고객 문의 대응</li>
+        </ul>
+        <h3>4. 보유 및 파기</h3>
+        <p>개인정보는 서비스 이용 기간 동안 보유합니다. 회원 탈퇴 시 30일 이내에 모든 개인정보를 영구 삭제합니다. 단, 관계 법령에 따라 보존이 필요한 경우(전자상거래 기록: 5년 등)에는 해당 기간까지 보관합니다.</p>
+        <h3>5. 제3자 제공</h3>
+        <p>개인정보를 판매·교환·임대하지 않습니다. 다음의 경우에 한해 공유될 수 있습니다:</p>
+        <ul>
+          <li><strong>Google Analytics:</strong> 익명화된 이용 통계(서비스 개선 목적)</li>
+          <li><strong>결제 대행사:</strong> 유료 구독 결제 정보 처리(카드 정보는 당사에 저장하지 않음)</li>
+        </ul>
+        <h3>6. 이용자의 권리</h3>
+        <p>이용자는 언제든지 자신의 개인정보에 대해 열람, 정정, 삭제를 요청하거나, 처리 동의를 철회하거나, 데이터 이동을 요청하거나, 커뮤니케이션 수신을 거부할 수 있습니다. <a href="mailto:contact@fabwatch.co.kr" style="color:var(--accent);">contact@fabwatch.co.kr</a>으로 연락하거나 앱 내 설정에서 직접 처리하세요.</p>
+        <h3>7. 정보 보안</h3>
+        <p>HTTPS 암호화, 비밀번호 해시 저장, 접근 권한 관리, 정기 보안 점검 등 업계 표준 보안 조치를 적용하고 있습니다.</p>
+        <h3>8. 쿠키 및 추적</h3>
+        <p>FabWatch는 사이트 기능을 위한 필수 쿠키와 익명 이용 통계를 위한 Google Analytics(GA4)를 사용합니다. 브라우저 설정에서 비필수 쿠키를 비활성화할 수 있으며, 쿠키 비활성화 시 일부 기능이 제한될 수 있습니다.</p>
+        <h3>9. 방침 변경</h3>
+        <p>중요한 변경사항은 시행 최소 7일 전에 이메일 또는 사이트 공지를 통해 안내합니다. 시행일 이후 계속 이용 시 변경에 동의한 것으로 간주합니다.</p>
+        </span>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- TERMS OF SERVICE MODAL -->
+<div class="modal-overlay legal-modal" id="termsModal">
+  <div class="modal">
+    <button class="modal-close" onclick="closeLegal('termsModal')">&times;</button>
+    <div class="modal-header">
+      <div class="modal-logo">
+        <span class="logo-icon"><svg viewBox="0 0 24 24" fill="none" stroke="#0B1628" stroke-width="2.5" stroke-linecap="round" width="18" height="18"><circle cx="12" cy="12" r="3"/><path d="M12 2v4M12 18v4M4.93 4.93l2.83 2.83M16.24 16.24l2.83 2.83M2 12h4M18 12h4M4.93 19.07l2.83-2.83M16.24 7.76l2.83-2.83"/></svg></span>
+        FabWatch
+      </div>
+      <p class="modal-subtitle">
+        <span class="en">Terms of Service</span>
+        <span class="ko">이용약관</span>
+      </p>
+    </div>
+    <div class="modal-body">
+      <div class="legal-content">
+        <div class="effective">
+          <span class="en">Effective: November 19, 2026</span>
+          <span class="ko">시행일: 2026년 11월 19일</span>
+        </div>
+        <span class="en">
+        <h3>1. Service overview</h3>
+        <p>FabWatch provides satellite-based monitoring intelligence for semiconductor fabs and AI data centers. The service includes a web-based dashboard, analysis reports, data APIs, and email alerts. FabWatch is operated by ATS Inc. (주식회사 에이티에스).</p>
+        <h3>2. Acceptance of terms</h3>
+        <p>By creating an account or using FabWatch, you agree to these Terms of Service. If you do not agree, do not use the service. Corporate accounts bind the organization represented by the registering individual.</p>
+        <h3>3. Account responsibilities</h3>
+        <ul>
+          <li>You must provide accurate registration information</li>
+          <li>You are responsible for maintaining the confidentiality of your credentials</li>
+          <li>You must notify us immediately of any unauthorized use</li>
+          <li>One account per individual; corporate accounts may have multiple authorized users</li>
+        </ul>
+        <h3>4. Service tiers and payment</h3>
+        <p><strong>Free:</strong> Limited access to public fab data, monthly highlight report, and newsletter. <strong>Pro ($199/month):</strong> Full dashboard, weekly updates, email alerts, basic API. <strong>Enterprise ($999+/month):</strong> Custom fabs, full API, dedicated analyst, raw satellite data. Prices are in USD and exclude applicable taxes. Paid subscriptions renew automatically; cancel anytime before the next billing cycle.</p>
+        <h3>5. Data sources and accuracy</h3>
+        <p>FabWatch uses publicly available satellite data from NASA VIIRS, ESA Copernicus (Sentinel-1, Sentinel-2, Sentinel-5P), and USGS Landsat. While we strive for accuracy, satellite-derived insights are estimates based on remote sensing analysis and should not be the sole basis for investment or business decisions. We do not guarantee the accuracy, completeness, or timeliness of any data or analysis.</p>
+        <h3>6. Intellectual property</h3>
+        <p>All FabWatch content — including analysis reports, dashboard design, scoring algorithms, and proprietary datasets — is owned by ATS Inc. Underlying satellite imagery remains the property of its respective agencies (NASA, ESA, USGS) under their open-data licenses. Users may not redistribute, resell, or publicly display FabWatch content without written permission.</p>
+        <h3>7. Acceptable use</h3>
+        <p>You agree not to:</p>
+        <ul>
+          <li>Use the service for illegal purposes or to violate any applicable laws</li>
+          <li>Attempt to reverse-engineer, scrape, or extract data beyond API limits</li>
+          <li>Share account credentials or allow unauthorized access</li>
+          <li>Use the service to manipulate securities markets or engage in insider trading</li>
+          <li>Resell or redistribute FabWatch data without authorization</li>
+        </ul>
+        <h3>8. Disclaimer of warranties</h3>
+        <p>THE SERVICE IS PROVIDED "AS IS" WITHOUT WARRANTIES OF ANY KIND. ATS INC. DISCLAIMS ALL WARRANTIES, EXPRESS OR IMPLIED, INCLUDING MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE, AND NON-INFRINGEMENT. Satellite data may be affected by weather, sensor availability, and processing delays.</p>
+        <h3>9. Limitation of liability</h3>
+        <p>TO THE MAXIMUM EXTENT PERMITTED BY LAW, ATS INC. SHALL NOT BE LIABLE FOR ANY INDIRECT, INCIDENTAL, SPECIAL, OR CONSEQUENTIAL DAMAGES ARISING FROM USE OF THE SERVICE, INCLUDING BUT NOT LIMITED TO INVESTMENT LOSSES, LOST PROFITS, OR DATA LOSS. OUR TOTAL LIABILITY SHALL NOT EXCEED THE FEES PAID BY YOU IN THE 12 MONTHS PRECEDING THE CLAIM.</p>
+        <h3>10. Termination</h3>
+        <p>Either party may terminate at any time. We may suspend or terminate accounts that violate these terms. Upon termination, your right to access the service ceases; data export is available for 30 days.</p>
+        <h3>11. Governing law</h3>
+        <p>These terms are governed by the laws of the Republic of Korea. Disputes shall be submitted to the exclusive jurisdiction of the Suwon District Court.</p>
+        <h3>12. Changes to terms</h3>
+        <p>We may modify these terms with at least 7 days' notice via email or on-site announcement. Continued use after the effective date constitutes acceptance.</p>
+        </span>
+        <span class="ko">
+        <h3>1. 서비스 개요</h3>
+        <p>FabWatch는 반도체 팹과 AI 데이터센터를 위한 위성 기반 모니터링 인텔리전스를 제공합니다. 서비스에는 웹 대시보드, 분석 리포트, 데이터 API, 이메일 알림이 포함됩니다. FabWatch는 주식회사 에이티에스(ATS)가 운영합니다.</p>
+        <h3>2. 약관 동의</h3>
+        <p>계정을 생성하거나 FabWatch를 이용함으로써 본 이용약관에 동의하게 됩니다. 동의하지 않는 경우 서비스를 이용하지 마십시오. 기업 회원의 경우 등록자가 소속 조직을 대리하여 약관에 동의하는 것으로 간주합니다.</p>
+        <h3>3. 계정 책임</h3>
+        <ul>
+          <li>정확한 등록 정보를 제공해야 합니다</li>
+          <li>계정 자격 증명의 기밀 유지 책임은 이용자에게 있습니다</li>
+          <li>무단 사용 발견 시 즉시 통보해야 합니다</li>
+          <li>개인당 1개 계정; 기업 계정은 복수의 인가 사용자 가능</li>
+        </ul>
+        <h3>4. 요금제 및 결제</h3>
+        <p><strong>Free:</strong> 공개 팹 데이터 제한 접근, 월간 하이라이트 리포트, 뉴스레터. <strong>Pro ($199/월):</strong> 전체 대시보드, 주간 업데이트, 이메일 알림, 기본 API. <strong>Enterprise ($999+/월):</strong> 커스텀 팹, 전체 API, 전담 애널리스트, 원본 위성 데이터. 가격은 USD 기준이며 부가세 별도입니다. 유료 구독은 자동 갱신되며, 다음 결제 주기 전 언제든 해지 가능합니다.</p>
+        <h3>5. 데이터 출처 및 정확성</h3>
+        <p>FabWatch는 NASA VIIRS, ESA 코페르니쿠스(Sentinel-1, Sentinel-2, Sentinel-5P), USGS 랜드샛의 공개 위성 데이터를 사용합니다. 정확성을 위해 노력하지만, 위성 기반 인사이트는 원격탐사 분석에 기반한 추정치이며, 투자 또는 사업 결정의 유일한 근거로 사용되어서는 안 됩니다. 데이터 또는 분석의 정확성, 완전성, 적시성을 보장하지 않습니다.</p>
+        <h3>6. 지적재산권</h3>
+        <p>분석 리포트, 대시보드 디자인, 스코어링 알고리즘, 독점 데이터셋 등 모든 FabWatch 콘텐츠는 주식회사 에이티에스의 소유입니다. 기초 위성 영상은 해당 기관(NASA, ESA, USGS)의 공개 데이터 라이선스에 따릅니다. 서면 허가 없이 FabWatch 콘텐츠를 재배포, 재판매 또는 공개 게시할 수 없습니다.</p>
+        <h3>7. 허용 범위</h3>
+        <p>다음 행위는 금지됩니다:</p>
+        <ul>
+          <li>불법적 목적 또는 관련 법령 위반 목적으로 서비스 이용</li>
+          <li>API 제한을 초과하는 역공학, 스크래핑, 데이터 추출 시도</li>
+          <li>계정 자격 증명 공유 또는 무단 접근 허용</li>
+          <li>증권 시장 조작이나 내부자 거래에 서비스 활용</li>
+          <li>허가 없이 FabWatch 데이터 재판매 또는 재배포</li>
+        </ul>
+        <h3>8. 면책 조항</h3>
+        <p>서비스는 "있는 그대로" 제공되며 어떠한 종류의 보증도 하지 않습니다. 주식회사 에이티에스는 상품성, 특정 목적 적합성, 비침해를 포함한 모든 명시적·묵시적 보증을 부인합니다. 위성 데이터는 기상, 센서 가용성, 처리 지연의 영향을 받을 수 있습니다.</p>
+        <h3>9. 책임 제한</h3>
+        <p>관련 법률이 허용하는 최대 범위 내에서, 주식회사 에이티에스는 서비스 이용으로 인한 간접적, 부수적, 특별 또는 결과적 손해(투자 손실, 이익 손실, 데이터 손실 포함)에 대해 책임지지 않습니다. 당사의 총 책임은 청구 발생 전 12개월간 이용자가 지불한 요금을 초과하지 않습니다.</p>
+        <h3>10. 계약 해지</h3>
+        <p>어느 당사자든 언제든 해지할 수 있습니다. 약관 위반 계정은 정지 또는 해지될 수 있습니다. 해지 시 서비스 접근 권한이 중단되며, 30일간 데이터 내보내기가 가능합니다.</p>
+        <h3>11. 준거법</h3>
+        <p>본 약관은 대한민국 법률의 적용을 받습니다. 분쟁은 수원지방법원의 전속 관할로 합니다.</p>
+        <h3>12. 약관 변경</h3>
+        <p>약관 변경 시 최소 7일 전 이메일 또는 사이트 공지를 통해 안내합니다. 시행일 이후 계속 이용 시 변경에 동의한 것으로 간주합니다.</p>
+        </span>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- WAITLIST MODAL -->
 <div class="modal-overlay" id="loginModal">
   <div class="modal">
     <button class="modal-close" onclick="closeModal()">&times;</button>
@@ -2448,101 +2611,55 @@ footer a:hover { color: #FFFFFF; }
         FabWatch
       </div>
       <p class="modal-subtitle">
-        <span class="en">Satellite intelligence for semiconductor fabs</span>
-        <span class="ko">위성 기반 반도체 팹 인텔리전스</span>
+        <span class="en">Launching Q1 2027 — join the waitlist for early access</span>
+        <span class="ko">2027년 1분기 출시 예정 — 얼리 액세스 대기 등록</span>
       </p>
-      <div class="modal-tabs">
-        <button class="modal-tab active" onclick="switchModalTab('login')" id="mtab-login">
-          <span class="en">Sign In</span><span class="ko">로그인</span>
-        </button>
-        <button class="modal-tab" onclick="switchModalTab('signup')" id="mtab-signup">
-          <span class="en">Sign Up</span><span class="ko">회원가입</span>
-        </button>
-      </div>
     </div>
     <div class="modal-body">
-      <!-- LOGIN FORM -->
-      <div id="form-login">
-        <div class="form-group">
-          <label class="form-label"><span class="en">Email</span><span class="ko">이메일</span></label>
-          <input type="email" class="form-input" placeholder="name@company.com">
-        </div>
-        <div class="form-group">
-          <label class="form-label"><span class="en">Password</span><span class="ko">비밀번호</span></label>
-          <input type="password" class="form-input" placeholder="&#8226;&#8226;&#8226;&#8226;&#8226;&#8226;&#8226;&#8226;">
-        </div>
-        <button class="form-submit" onclick="event.preventDefault();">
-          <span class="en">Sign In</span><span class="ko">로그인</span>
-        </button>
-        <div class="form-divider"><span class="en">or continue with</span><span class="ko">간편 로그인</span></div>
-        <div class="social-logins">
-          <button class="social-btn" onclick="event.preventDefault();">
-            <svg width="18" height="18" viewBox="0 0 24 24"><path d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92a5.06 5.06 0 0 1-2.2 3.32v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.1z" fill="#4285F4"/><path d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z" fill="#34A853"/><path d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l2.85-2.22.81-.62z" fill="#FBBC05"/><path d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z" fill="#EA4335"/></svg>
-            Google
-          </button>
-        </div>
-        <div class="form-footer">
-          <span class="en">Don't have an account? <a href="#" onclick="switchModalTab('signup');return false;">Sign up free</a></span>
-          <span class="ko">계정이 없으신가요? <a href="#" onclick="switchModalTab('signup');return false;">무료 회원가입</a></span>
-        </div>
-      </div>
-      <!-- SIGNUP FORM -->
-      <div id="form-signup" style="display:none;">
-        <div class="form-group">
-          <label class="form-label"><span class="en">Member Type</span><span class="ko">회원 유형</span></label>
-          <div class="member-type-select">
-            <div class="type-option selected" onclick="selectType(this)">
-              <div class="type-option-icon">
-                <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="var(--accent)" stroke-width="2" stroke-linecap="round"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
-              </div>
-              <div class="type-option-name"><span class="en">Individual</span><span class="ko">개인 회원</span></div>
-              <div class="type-option-desc">
-                <span class="en">Analyst, researcher, investor</span>
-                <span class="ko">애널리스트, 연구자, 투자자</span>
-              </div>
-            </div>
-            <div class="type-option" onclick="selectType(this)">
-              <div class="type-option-icon">
-                <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="var(--accent)" stroke-width="2" stroke-linecap="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
-              </div>
-              <div class="type-option-name"><span class="en">Corporate</span><span class="ko">기업 회원</span></div>
-              <div class="type-option-desc">
-                <span class="en">Team access, invoicing, NDA</span>
-                <span class="ko">팀 접근, 세금계산서, NDA</span>
-              </div>
-            </div>
-          </div>
-        </div>
+      <div id="waitlist-form">
         <div class="form-group">
           <label class="form-label"><span class="en">Name</span><span class="ko">이름</span></label>
-          <input type="text" class="form-input" placeholder="">
-        </div>
-        <div class="form-group" id="company-field" style="display:none;">
-          <label class="form-label"><span class="en">Company</span><span class="ko">회사명</span></label>
-          <input type="text" class="form-input" placeholder="">
+          <input type="text" class="form-input" id="wl-name" placeholder="">
         </div>
         <div class="form-group">
           <label class="form-label"><span class="en">Work Email</span><span class="ko">업무 이메일</span></label>
-          <input type="email" class="form-input" placeholder="name@company.com">
+          <input type="email" class="form-input" id="wl-email" placeholder="name@company.com">
         </div>
         <div class="form-group">
-          <label class="form-label"><span class="en">Password</span><span class="ko">비밀번호</span></label>
-          <input type="password" class="form-input" placeholder="8+ characters">
+          <label class="form-label"><span class="en">Role</span><span class="ko">직종</span></label>
+          <select class="form-input" id="wl-role" style="cursor:pointer;">
+            <option value="" disabled selected><span class="en">Select your role</span></option>
+            <option value="analyst">Analyst / 애널리스트</option>
+            <option value="investor">Investor / 투자자</option>
+            <option value="researcher">Researcher / 연구원</option>
+            <option value="journalist">Journalist / 기자</option>
+            <option value="corporate">Corporate / 기업 담당자</option>
+            <option value="government">Government / 정부·공공</option>
+            <option value="other">Other / 기타</option>
+          </select>
         </div>
-        <button class="form-submit" onclick="event.preventDefault();">
-          <span class="en">Create Free Account</span><span class="ko">무료 계정 만들기</span>
+        <div class="form-group">
+          <label class="form-label"><span class="en">Company <span style="opacity:.5">(optional)</span></span><span class="ko">소속 <span style="opacity:.5">(선택)</span></span></label>
+          <input type="text" class="form-input" id="wl-company" placeholder="">
+        </div>
+        <button class="form-submit" onclick="submitWaitlist(event)">
+          <span class="en">Join the Waitlist</span><span class="ko">대기 등록하기</span>
         </button>
-        <div class="form-divider"><span class="en">or continue with</span><span class="ko">간편 가입</span></div>
-        <div class="social-logins">
-          <button class="social-btn" onclick="event.preventDefault();">
-            <svg width="18" height="18" viewBox="0 0 24 24"><path d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92a5.06 5.06 0 0 1-2.2 3.32v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.1z" fill="#4285F4"/><path d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z" fill="#34A853"/><path d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l2.85-2.22.81-.62z" fill="#FBBC05"/><path d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z" fill="#EA4335"/></svg>
-            Google
-          </button>
-        </div>
-        <div class="form-footer">
-          <span class="en">Already have an account? <a href="#" onclick="switchModalTab('login');return false;">Sign in</a></span>
-          <span class="ko">이미 계정이 있으신가요? <a href="#" onclick="switchModalTab('login');return false;">로그인</a></span>
-        </div>
+        <p style="text-align:center;font-size:12px;color:#94A3B8;margin-top:12px;line-height:1.6;">
+          <span class="en">We'll notify you when early access opens. No spam, unsubscribe anytime.</span>
+          <span class="ko">얼리 액세스가 시작되면 알려드립니다. 스팸 없음, 언제든 수신 거부 가능.</span>
+        </p>
+      </div>
+      <div id="waitlist-success" style="display:none;text-align:center;padding:24px 0;">
+        <div style="font-size:48px;margin-bottom:16px;">&#10003;</div>
+        <h3 style="font-size:20px;font-weight:700;margin-bottom:8px;">
+          <span class="en">You're on the list!</span>
+          <span class="ko">등록이 완료되었습니다!</span>
+        </h3>
+        <p style="color:#94A3B8;font-size:14px;line-height:1.6;">
+          <span class="en">We'll send you an email when early access is available.<br>Thank you for your interest in FabWatch.</span>
+          <span class="ko">얼리 액세스가 시작되면 이메일로 안내드리겠습니다.<br>FabWatch에 관심 가져주셔서 감사합니다.</span>
+        </p>
       </div>
     </div>
   </div>
@@ -2580,22 +2697,29 @@ footer a:hover { color: #FFFFFF; }
       <div class="footer-col">
         <h4><span class="en">Legal</span><span class="ko">법적 고지</span></h4>
         <ul>
-          <li><a href="#" onclick="event.preventDefault();"><span class="en">Privacy Policy</span><span class="ko">개인정보처리방침</span></a></li>
-          <li><a href="#" onclick="event.preventDefault();"><span class="en">Terms of Service</span><span class="ko">이용약관</span></a></li>
-          <li><a href="#" onclick="event.preventDefault();"><span class="en">Data Sources</span><span class="ko">데이터 출처</span></a></li>
-          <li><a href="mailto:contact@fabwatch.io">contact@fabwatch.io</a></li>
+          <li><a href="#" onclick="openLegal('privacyModal');return false;"><span class="en">Privacy Policy</span><span class="ko">개인정보처리방침</span></a></li>
+          <li><a href="#" onclick="openLegal('termsModal');return false;"><span class="en">Terms of Service</span><span class="ko">이용약관</span></a></li>
+          <li><a href="#" onclick="openLegal('privacyModal');return false;"><span class="en">Data Sources</span><span class="ko">데이터 출처</span></a></li>
+          <li><a href="mailto:contact@fabwatch.co.kr">contact@fabwatch.co.kr</a></li>
+          <li><a href="https://github.com/panco88/fabwatch" target="_blank" rel="noopener">GitHub</a></li>
         </ul>
       </div>
     </div>
-    <div class="footer-bottom">
-      <span>
-        <span class="en">&copy; 2026 DS Planet Inc. All rights reserved.</span>
-        <span class="ko">&copy; 2026 DS플래닛(주). All rights reserved.</span>
+    <div class="footer-bottom" style="flex-direction:column;align-items:flex-start;gap:8px;">
+      <span style="color:#64748B;font-size:12px;line-height:1.6;">
+        <span class="en">Operated by ATS Inc. (주식회사 에이티에스) · CEO: Wooyeon Son · Biz No. 758-86-03148<br>321-7, Opoan-ro, Gwangju-si, Gyeonggi-do, Republic of Korea</span>
+        <span class="ko">운영: 주식회사 에이티에스(ATS) · 대표: 손우연 · 사업자등록번호: 758-86-03148<br>경기도 광주시 오포안로 321-7(추자동)</span>
       </span>
-      <span style="color:#475569;">
-        <span class="en">Data: NASA VIIRS · ESA Copernicus · USGS Landsat</span>
-        <span class="ko">데이터: NASA VIIRS · ESA Copernicus · USGS Landsat</span>
-      </span>
+      <div style="display:flex;justify-content:space-between;width:100%;flex-wrap:wrap;gap:8px;">
+        <span>
+          <span class="en">&copy; 2026 ATS Inc. All rights reserved.</span>
+          <span class="ko">&copy; 2026 주식회사 에이티에스. All rights reserved.</span>
+        </span>
+        <span style="color:#475569;">
+          <span class="en">Data: NASA VIIRS · ESA Copernicus · USGS Landsat</span>
+          <span class="ko">데이터: NASA VIIRS · ESA Copernicus · USGS Landsat</span>
+        </span>
+      </div>
     </div>
   </div>
 </footer>
@@ -2615,34 +2739,68 @@ function toggleLang() {
 }
 setLang(getLang());
 
-// Login modal
-function openModal(tab) {
+// Waitlist modal
+function openModal() {
+  document.getElementById('waitlist-form').style.display = '';
+  document.getElementById('waitlist-success').style.display = 'none';
   document.getElementById('loginModal').classList.add('open');
-  switchModalTab(tab || 'login');
   document.body.style.overflow = 'hidden';
 }
 function closeModal() {
   document.getElementById('loginModal').classList.remove('open');
   document.body.style.overflow = '';
 }
+var WAITLIST_URL = 'https://script.google.com/macros/s/AKfycbxqExA94KdQwRJBnT20o1j9mbK7FeC2hDL_E3tSj-GvfCqC1ob65leTB8K6kfGu9ucL7A/exec';
+function submitWaitlist(e) {
+  e.preventDefault();
+  var name = document.getElementById('wl-name').value.trim();
+  var email = document.getElementById('wl-email').value.trim();
+  var role = document.getElementById('wl-role').value;
+  var company = document.getElementById('wl-company').value.trim();
+  if (!name || !email) {
+    alert(getLang() === 'ko' ? '이름과 이메일을 입력해주세요.' : 'Please enter your name and email.');
+    return;
+  }
+  var btn = document.querySelector('#waitlist-form .form-submit');
+  btn.disabled = true;
+  btn.style.opacity = '0.6';
+  btn.innerHTML = getLang() === 'ko' ? '등록 중...' : 'Submitting...';
+  if (WAITLIST_URL.indexOf('%%') === -1) {
+    fetch(WAITLIST_URL, {
+      method: 'POST', mode: 'no-cors',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ name: name, email: email, role: role, company: company })
+    }).then(function() {
+      showWaitlistSuccess();
+    }).catch(function() {
+      showWaitlistSuccess();
+    });
+  } else {
+    setTimeout(showWaitlistSuccess, 600);
+  }
+}
+function showWaitlistSuccess() {
+  document.getElementById('waitlist-form').style.display = 'none';
+  document.getElementById('waitlist-success').style.display = '';
+}
 document.getElementById('loginModal').addEventListener('click', function(e) {
   if (e.target === this) closeModal();
 });
-function switchModalTab(tab) {
-  document.getElementById('mtab-login').classList.toggle('active', tab === 'login');
-  document.getElementById('mtab-signup').classList.toggle('active', tab === 'signup');
-  document.getElementById('form-login').style.display = tab === 'login' ? '' : 'none';
-  document.getElementById('form-signup').style.display = tab === 'signup' ? '' : 'none';
-}
 
-// Member type selection in signup
-function selectType(el) {
-  document.querySelectorAll('.type-option').forEach(function(o) { o.classList.remove('selected'); });
-  el.classList.add('selected');
-  var isCorp = el.querySelector('.type-option-name .ko') && el.querySelector('.type-option-name .ko').textContent === '기업 회원';
-  if (!isCorp) isCorp = el.querySelector('.type-option-name .en') && el.querySelector('.type-option-name .en').textContent === 'Corporate';
-  document.getElementById('company-field').style.display = isCorp ? '' : 'none';
+function openLegal(id) {
+  document.getElementById(id).classList.add('open');
+  document.body.style.overflow = 'hidden';
 }
+function closeLegal(id) {
+  document.getElementById(id).classList.remove('open');
+  document.body.style.overflow = '';
+}
+document.getElementById('privacyModal').addEventListener('click', function(e) {
+  if (e.target === this) closeLegal('privacyModal');
+});
+document.getElementById('termsModal').addEventListener('click', function(e) {
+  if (e.target === this) closeLegal('termsModal');
+});
 
 // Pricing member tabs
 function switchMember(type) {
@@ -2678,10 +2836,32 @@ function filterFabs(btn, country) {
 
 // Newsletter
 function handleNewsletter() {
-  var email = document.getElementById('nl-email').value;
-  if (email && email.indexOf('@') > 0) {
+  var email = document.getElementById('nl-email').value.trim();
+  if (!email || email.indexOf('@') < 1) {
+    alert(getLang() === 'ko' ? '이메일을 입력해주세요.' : 'Please enter a valid email.');
+    return;
+  }
+  var btn = document.querySelector('.nl-btn');
+  btn.disabled = true;
+  btn.style.opacity = '0.6';
+  if (WAITLIST_URL.indexOf('%%') === -1) {
+    fetch(WAITLIST_URL, {
+      method: 'POST', mode: 'no-cors',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ type: 'newsletter', email: email })
+    }).then(function() {
+      document.getElementById('nl-success').classList.add('show');
+      document.getElementById('nl-email').value = '';
+      btn.disabled = false; btn.style.opacity = '';
+    }).catch(function() {
+      document.getElementById('nl-success').classList.add('show');
+      document.getElementById('nl-email').value = '';
+      btn.disabled = false; btn.style.opacity = '';
+    });
+  } else {
     document.getElementById('nl-success').classList.add('show');
     document.getElementById('nl-email').value = '';
+    btn.disabled = false; btn.style.opacity = '';
   }
 }
 
