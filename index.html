@@ -462,6 +462,27 @@ body::before {
 .final-cta .section-desc { margin-inline: auto; text-align: center; }
 .final-cta .hero-actions { justify-content: center; }
 
+/* PARENT COMPANY BANNER */
+.parent-banner {
+  background: linear-gradient(135deg, #0F1A2E 0%, #162040 100%);
+  border-top: 1px solid rgba(99,179,237,0.15);
+  border-bottom: 1px solid rgba(255,255,255,0.04);
+  padding: 18px 0; text-align: center; font-size: 13px;
+}
+.parent-banner .inner {
+  display: flex; align-items: center; justify-content: center;
+  gap: 8px; flex-wrap: wrap;
+}
+.parent-banner span.pb-label {
+  color: #94A3B8; letter-spacing: 0.02em;
+}
+.parent-banner a.pb-link {
+  color: #63B3ED; text-decoration: none; font-weight: 600;
+  transition: color 0.2s;
+}
+.parent-banner a.pb-link:hover { color: #90CDF4; }
+.parent-banner .pb-arrow { font-size: 11px; margin-left: 2px; }
+
 /* FOOTER */
 footer {
   background: var(--hero-bg); color: #64748B; padding-block: 32px;
@@ -2662,6 +2683,21 @@ footer a:hover { color: #FFFFFF; }
         </p>
       </div>
     </div>
+  </div>
+</div>
+
+<!-- PARENT COMPANY BANNER -->
+<div class="parent-banner">
+  <div class="inner">
+    <span class="pb-label">
+      <span class="en">A service of</span>
+      <span class="ko">운영사:</span>
+    </span>
+    <a class="pb-link" href="http://allths.com/sh_page/page33.php" target="_blank" rel="noopener">
+      <span class="en">ATS Inc. — Thermal Interface Materials Solution Provider</span>
+      <span class="ko">(주)에이티에스 — 방열소재 솔루션 기업</span>
+      <span class="pb-arrow">↗</span>
+    </a>
   </div>
 </div>
 
