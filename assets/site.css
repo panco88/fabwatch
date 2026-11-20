@@ -1105,3 +1105,9 @@ footer a:hover { color: #FFFFFF; }
 .nav-drawer a.nav-drawer-cta { border-bottom:none; margin-top:10px; text-align:center; background:var(--accent); color:var(--hero-bg); border-radius:8px; font-weight:600; }
 nav.menu-open .nav-drawer { display:block; }
 @media (max-width: 820px) { .nav-burger-li { display:list-item; list-style:none; } }
+
+/* 2026-11-20 아주 작은 휴대폰(360px 이하): 상단 신청 버튼은 접는 메뉴 안에 있으므로 숨김 */
+@media (max-width: 360px) {
+  .nav-links li:has(> .nav-cta) { display: none; }
+  .demo-url { display: none; }
+}
