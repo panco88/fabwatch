@@ -1065,3 +1065,24 @@ footer a:hover { color: #FFFFFF; }
 [data-lang="ja"] .team-card h3 { font-family: 'Noto Sans JP', var(--font-display), sans-serif; }
 [data-lang="ja"] .newsletter-box h3 { font-family: 'Noto Sans JP', var(--font-display), sans-serif; }
 [data-lang="ja"] .nl-btn { font-family: var(--font-ja); }
+
+/* ===== 2026-11-20 넓은 화면 활용 (PC) — 휴대폰 규칙은 그대로 ===== */
+@media (min-width: 768px) {
+  .inner { padding-left: 32px; padding-right: 32px; }
+}
+@media (min-width: 1024px) {
+  .inner { max-width: 1240px; }
+  .hero h1 { max-width: 860px; }
+  .hero-sub, .hero p { max-width: 680px; }
+  .section-desc { max-width: 720px; }
+  .map-wrap { max-width: 1040px; }
+  .insight-grid { grid-template-columns: repeat(3, 1fr); }
+  .usecase-grid { grid-template-columns: repeat(4, 1fr); }
+  .faq-list { max-width: none; display: grid; grid-template-columns: 1fr 1fr; gap: 12px 20px; align-items: start; }
+  .svc-grid { gap: 32px; }
+  .svc-card { padding: 40px 36px; }
+  .demo-grid { grid-template-columns: 220px 1fr; }
+}
+@media (min-width: 1440px) {
+  .inner { max-width: 1320px; }
+}

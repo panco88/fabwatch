@@ -3,7 +3,7 @@
 실행: python -I _src/build.py  → index.html, monitoring/, reports/, pricing/, about/ 의 index.html
 (_src 폴더는 GitHub Pages가 공개하지 않는다 — 밑줄로 시작하는 폴더)
 """
-import os, sys
+import os, sys, hashlib
 sys.stdout.reconfigure(encoding='utf-8')
 R = os.path.dirname(os.path.dirname(os.path.abspath(__file__))); P = f'{R}/_src/parts'
 def part(n): return open(f'{P}/{n}.html', encoding='utf-8').read()
@@ -56,11 +56,14 @@ PAGES = {
 }
 
 head, nav, modals, footer = part('head'), part('nav'), part('modals'), part('footer')
+# 캐시 무효화: CSS·JS 내용이 바뀌면 주소 뒤 ?v= 값이 바뀌어 방문자 브라우저가 새 파일을 받는다
+def ver(f): return hashlib.md5(open(f'{R}/assets/{f}', 'rb').read()).hexdigest()[:8]
+head = head.replace('/assets/site.css"', f'/assets/site.css?v={ver("site.css")}"')
 for slug, (title, blocks) in PAGES.items():
     path = f'/{slug}/' if slug else ''
     body = ''.join(b if b.lstrip().startswith('<') else part(b) for b in blocks)
     html = (head.replace('{TITLE}', title).replace('{PATH}', path) + '</head>\n<body>\n' + nav + body + modals + footer
-            + '<script src="/assets/site.js"></script>\n</body>\n</html>\n')
+            + f'<script src="/assets/site.js?v={ver("site.js")}"></script>\n</body>\n</html>\n')
     d = f'{R}/{slug}' if slug else R; os.makedirs(d, exist_ok=True)
     open(f'{d}/index.html', 'w', encoding='utf-8', newline='\n').write(html)
     print(f'/{slug}', len(html) // 1024, 'KB')
