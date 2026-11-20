@@ -18,7 +18,7 @@
 <meta name="twitter:image" content="https://fabwatch.co.kr/og-image.png">
 <link rel="canonical" href="https://fabwatch.co.kr">
 <meta name="claude:viewport-fit-sides" content="cover">
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800;900&family=IBM+Plex+Sans:wght@300;400;500;600&family=IBM+Plex+Mono:wght@400;500&family=Noto+Sans+KR:wght@300;400;500;600;700;900&display=swap">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800;900&family=IBM+Plex+Sans:wght@300;400;500;600&family=IBM+Plex+Mono:wght@400;500&family=Noto+Sans+KR:wght@300;400;500;600;700;900&family=Noto+Sans+JP:wght@300;400;500;600;700;900&display=swap">
 
 <style>
 :root {
@@ -39,6 +39,7 @@
   --font-body: 'IBM Plex Sans', system-ui, sans-serif;
   --font-mono: 'IBM Plex Mono', monospace;
   --font-ko: 'Noto Sans KR', 'Malgun Gothic', system-ui, sans-serif;
+  --font-ja: 'Noto Sans JP', 'Hiragino Sans', 'Yu Gothic', 'Meiryo', system-ui, sans-serif;
 }
 @media (prefers-color-scheme: dark) {
   :root:not([data-theme="light"]) {
@@ -62,6 +63,9 @@
 /* Language switch */
 [data-lang="en"] .ko { display: none !important; }
 [data-lang="ko"] .en { display: none !important; }
+[data-lang="en"] .ja, [data-lang="ko"] .ja { display: none !important; }
+[data-lang="ja"] .en, [data-lang="ja"] .ko { display: none !important; }
+.lang-toggle option { color: #0F172A; }
 [data-lang="ko"] body,
 [data-lang="ko"] .value-card p,
 [data-lang="ko"] .channel-desc,
@@ -127,6 +131,7 @@ body::before {
   text-decoration: none; transition: color 0.15s;
 }
 .nav-links a:hover { color: #FFFFFF; }
+.nav-links a, .nav-cta { white-space: nowrap; }
 .nav-cta {
   background: var(--accent) !important; color: var(--hero-bg) !important;
   padding: 8px 18px; border-radius: 6px;
@@ -142,7 +147,7 @@ body::before {
   white-space: nowrap; flex-shrink: 0;
 }
 .lang-toggle:hover { background: rgba(255,255,255,0.14); color: #FFFFFF; }
-@media (max-width: 720px) {
+@media (max-width: 820px) {
   .nav-links { gap: 10px; }
   .nav-links .hide-mobile { display: none; }
   .nav-cta { white-space: nowrap; padding: 7px 12px; }
@@ -427,6 +432,7 @@ body::before {
 }
 [data-lang="en"] .price-card.featured::before { content: "MOST POPULAR"; }
 [data-lang="ko"] .price-card.featured::before { content: "가장 인기"; }
+[data-lang="ja"] .price-card.featured::before { content: "人気No.1"; }
 .price-name { font-family: var(--font-display); font-size: 18px; font-weight: 700; }
 .price-amount {
   font-family: var(--font-display); font-size: 40px; font-weight: 800;
@@ -1054,6 +1060,34 @@ footer a:hover { color: #FFFFFF; }
   display: flex; justify-content: space-between; align-items: center;
   flex-wrap: wrap; gap: 12px; font-size: 12px; color: #475569;
 }
+
+/* Japanese fonts (mirrors Korean rules) */
+[data-lang="ja"] body,
+[data-lang="ja"] .value-card p,
+[data-lang="ja"] .channel-desc,
+[data-lang="ja"] .section-desc,
+[data-lang="ja"] .hero-sub,
+[data-lang="ja"] .price-features,
+[data-lang="ja"] .insight-card p,
+[data-lang="ja"] .insight-card h3,
+[data-lang="ja"] .cmp-table {
+  font-family: var(--font-ja);
+}
+[data-lang="ja"] h1, [data-lang="ja"] h2, [data-lang="ja"] h3,
+[data-lang="ja"] .section-title, [data-lang="ja"] .price-name,
+[data-lang="ja"] .price-amount, [data-lang="ja"] .stat-num,
+[data-lang="ja"] .lc-label, [data-lang="ja"] .value-card h3 {
+  font-family: 'Noto Sans JP', var(--font-display), sans-serif;
+}
+[data-lang="ja"] .svc-card h3 { font-family: 'Noto Sans JP', var(--font-display), sans-serif; }
+[data-lang="ja"] .member-tab { font-family: var(--font-ja); }
+[data-lang="ja"] .form-label { font-family: var(--font-ja); }
+[data-lang="ja"] .form-submit { font-family: var(--font-ja); }
+[data-lang="ja"] .faq-q { font-family: 'Noto Sans JP', var(--font-display), sans-serif; }
+[data-lang="ja"] .usecase-card h3 { font-family: 'Noto Sans JP', var(--font-display), sans-serif; }
+[data-lang="ja"] .team-card h3 { font-family: 'Noto Sans JP', var(--font-display), sans-serif; }
+[data-lang="ja"] .newsletter-box h3 { font-family: 'Noto Sans JP', var(--font-display), sans-serif; }
+[data-lang="ja"] .nl-btn { font-family: var(--font-ja); }
 </style>
 
 <!-- NAV -->
@@ -1066,13 +1100,13 @@ footer a:hover { color: #FFFFFF; }
       FabWatch
     </a>
     <ul class="nav-links">
-      <li><a href="#services" class="hide-mobile"><span class="en">Services</span><span class="ko">서비스</span></a></li>
-      <li><a href="#demo" class="hide-mobile"><span class="en">Demo</span><span class="ko">데모</span></a></li>
-      <li><a href="#map" class="hide-mobile"><span class="en">Coverage</span><span class="ko">커버리지</span></a></li>
-      <li><a href="#pricing" class="hide-xs"><span class="en">Pricing</span><span class="ko">요금제</span></a></li>
-      <li><a href="#" onclick="openModal();return false;" class="hide-mobile" style="color:#94A3B8;"><span class="en">Join Waitlist</span><span class="ko">대기 등록</span></a></li>
-      <li><button class="lang-toggle" onclick="toggleLang()">KO / EN</button></li>
-      <li><a href="#" onclick="openModal();return false;" class="nav-cta"><span class="en">Get Early Access</span><span class="ko">얼리 액세스</span></a></li>
+      <li><a href="#services" class="hide-mobile"><span class="en">Services</span><span class="ko">서비스</span><span class="ja">サービス</span></a></li>
+      <li><a href="#demo" class="hide-mobile"><span class="en">Demo</span><span class="ko">데모</span><span class="ja">デモ</span></a></li>
+      <li><a href="#map" class="hide-mobile"><span class="en">Coverage</span><span class="ko">커버리지</span><span class="ja">カバレッジ</span></a></li>
+      <li><a href="#pricing" class="hide-xs"><span class="en">Pricing</span><span class="ko">요금제</span><span class="ja">料金</span></a></li>
+      <li><a href="#" onclick="openModal();return false;" class="hide-mobile" style="color:#94A3B8;"><span class="en">Join Waitlist</span><span class="ko">대기 등록</span><span class="ja">事前登録</span></a></li>
+      <li><select class="lang-toggle" onchange="setLang(this.value)" aria-label="Language"><option value="en">EN</option><option value="ko">KO</option><option value="ja">JA</option></select></li>
+      <li><a href="#" onclick="openModal();return false;" class="nav-cta"><span class="en">Get Early Access</span><span class="ko">얼리 액세스</span><span class="ja">アーリーアクセス</span></a></li>
     </ul>
   </div>
 </nav>
@@ -1154,43 +1188,43 @@ footer a:hover { color: #FFFFFF; }
     <div class="hero-badge">
       <span class="dot"></span>
       <span class="en">Monitoring 33 industrial facilities in 6 countries + EU</span>
-      <span class="ko">6개국+EU 33개 첨단산업 시설 모니터링 중</span>
+      <span class="ko">6개국+EU 33개 첨단산업 시설 모니터링 중</span><span class="ja">6か国＋EUの先端産業施設33か所をモニタリング中</span>
     </div>
     <h1>
       <span class="en">See What <span class="accent-word">Satellites</span> See.<br>Track Every Critical Facility.</span>
-      <span class="ko"><span class="accent-word">위성</span>이 포착한 진실,<br>공시보다 빠르게.</span>
+      <span class="ko"><span class="accent-word">위성</span>이 포착한 진실,<br>공시보다 빠르게.</span><span class="ja"><span class="accent-word">衛星</span>が捉えた事実を、<br>開示よりも早く。</span>
     </h1>
     <p class="hero-sub">
       <span class="en">Six independent satellite channels monitoring semiconductor fabs and AI data centers worldwide. Cross-referencing orbital data with public filings to deliver intelligence weeks before official disclosures.</span>
-      <span class="ko">6개 독립 위성 채널로 전 세계 반도체 팹과 AI 데이터센터를 추적합니다. 궤도 데이터와 공시 자료를 교차 검증하여 공식 발표 수주 전에 인사이트를 제공합니다.</span>
+      <span class="ko">6개 독립 위성 채널로 전 세계 반도체 팹과 AI 데이터센터를 추적합니다. 궤도 데이터와 공시 자료를 교차 검증하여 공식 발표 수주 전에 인사이트를 제공합니다.</span><span class="ja">6つの独立した衛星チャネルで、世界の半導体ファブとAIデータセンターを追跡。軌道データと開示資料をクロスチェックし、公式発表の数週間前にインサイトを提供します。</span>
     </p>
     <div class="hero-actions">
       <a href="#" onclick="openModal();return false;" class="btn btn-primary">
         <span class="en">Join the Waitlist</span>
-        <span class="ko">대기 등록하기</span>
+        <span class="ko">대기 등록하기</span><span class="ja">ウェイトリストに登録</span>
       </a>
       <a href="#demo" class="btn btn-outline">
         <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="5 3 19 12 5 21 5 3"/></svg>
         <span class="en">See Dashboard</span>
-        <span class="ko">대시보드 보기</span>
+        <span class="ko">대시보드 보기</span><span class="ja">ダッシュボードを見る</span>
       </a>
     </div>
     <div class="stats-bar">
       <div class="stat">
         <div class="stat-num"><span class="highlight">24</span></div>
-        <div class="stat-label"><span class="en">Semiconductor Fabs</span><span class="ko">반도체 팹</span></div>
+        <div class="stat-label"><span class="en">Semiconductor Fabs</span><span class="ko">반도체 팹</span><span class="ja">半導体ファブ</span></div>
       </div>
       <div class="stat">
         <div class="stat-num"><span class="highlight">9</span>+</div>
-        <div class="stat-label"><span class="en">AI Data Centers</span><span class="ko">AI 데이터센터</span></div>
+        <div class="stat-label"><span class="en">AI Data Centers</span><span class="ko">AI 데이터센터</span><span class="ja">AIデータセンター</span></div>
       </div>
       <div class="stat">
         <div class="stat-num"><span class="highlight">6</span></div>
-        <div class="stat-label"><span class="en">Satellite Channels</span><span class="ko">위성 채널</span></div>
+        <div class="stat-label"><span class="en">Satellite Channels</span><span class="ko">위성 채널</span><span class="ja">衛星チャネル</span></div>
       </div>
       <div class="stat">
         <div class="stat-num"><span class="highlight">3</span></div>
-        <div class="stat-label"><span class="en">Reports Published</span><span class="ko">발행 리포트</span></div>
+        <div class="stat-label"><span class="en">Reports Published</span><span class="ko">발행 리포트</span><span class="ja">発行レポート</span></div>
       </div>
     </div>
   </div>
@@ -1199,7 +1233,7 @@ footer a:hover { color: #FFFFFF; }
 <!-- DATA SOURCE TRUST STRIP -->
 <section class="trust-strip">
   <div class="inner">
-    <div class="trust-label"><span class="en">Powered by open satellite data from</span><span class="ko">공개 위성 데이터 기반</span></div>
+    <div class="trust-label"><span class="en">Powered by open satellite data from</span><span class="ko">공개 위성 데이터 기반</span><span class="ja">オープン衛星データを活用</span></div>
     <div class="trust-logos">
       <!-- NASA -->
       <svg viewBox="0 0 110 30" fill="var(--fg)"><text x="0" y="22" font-family="var(--font-display)" font-weight="800" font-size="20" letter-spacing="3">NASA</text></svg>
@@ -1218,35 +1252,35 @@ footer a:hover { color: #FFFFFF; }
 <!-- PROBLEM STATEMENT -->
 <section class="values section" style="padding-bottom:20px;">
   <div class="inner">
-    <div class="section-label"><span class="en">The Problem</span><span class="ko">문제</span></div>
+    <div class="section-label"><span class="en">The Problem</span><span class="ko">문제</span><span class="ja">課題</span></div>
     <h2 class="section-title reveal">
       <span class="en">$500B industry, tracked by<br>surveys and press releases.</span>
-      <span class="ko">500조 원 산업을<br>설문조사와 보도자료로 추적하고 있습니다.</span>
+      <span class="ko">500조 원 산업을<br>설문조사와 보도자료로 추적하고 있습니다.</span><span class="ja">5,000億ドル規模の産業が、<br>アンケートとプレスリリースで追跡されている。</span>
     </h2>
     <p class="section-desc">
       <span class="en">The semiconductor industry spends billions on new fabs every quarter. Yet the best available intelligence — from SEMI, TrendForce, and traditional consultancies — relies on self-reported data, quarterly surveys, and corporate announcements. By the time a report says a fab is delayed, the market has already moved.</span>
-      <span class="ko">반도체 산업은 매 분기 수조 원을 새 팹에 투자합니다. 그런데 가장 좋다는 인텔리전스(SEMI, TrendForce, 기존 컨설팅사)마저 자체 보고 데이터, 분기별 설문, 기업 공시에 의존합니다. 보고서가 팹 지연을 전할 때쯤이면, 시장은 이미 움직인 뒤입니다.</span>
+      <span class="ko">반도체 산업은 매 분기 수조 원을 새 팹에 투자합니다. 그런데 가장 좋다는 인텔리전스(SEMI, TrendForce, 기존 컨설팅사)마저 자체 보고 데이터, 분기별 설문, 기업 공시에 의존합니다. 보고서가 팹 지연을 전할 때쯤이면, 시장은 이미 움직인 뒤입니다.</span><span class="ja">半導体業界は四半期ごとに数十億ドルを新規ファブに投じています。しかし、最良とされるインテリジェンス（SEMI、TrendForce、従来型コンサルティング）でさえ、自己申告データや四半期アンケート、企業開示に依存しています。レポートがファブの遅延を伝える頃には、市場はすでに動いています。</span>
     </p>
     <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:16px;margin-top:32px;">
       <div style="padding:20px;background:rgba(239,68,68,0.04);border:1px solid rgba(239,68,68,0.1);border-radius:12px;text-align:center;">
         <div style="font-size:28px;font-weight:800;color:#EF4444;font-family:var(--font-display);">90 days</div>
         <div style="font-size:13px;color:var(--muted);margin-top:4px;line-height:1.5;">
           <span class="en">Average delay in traditional<br>industry report updates</span>
-          <span class="ko">기존 산업 보고서의<br>평균 업데이트 지연</span>
+          <span class="ko">기존 산업 보고서의<br>평균 업데이트 지연</span><span class="ja">従来の業界レポートの<br>平均更新ラグ</span>
         </div>
       </div>
       <div style="padding:20px;background:rgba(245,158,11,0.04);border:1px solid rgba(245,158,11,0.1);border-radius:12px;text-align:center;">
         <div style="font-size:28px;font-weight:800;color:#FBBF24;font-family:var(--font-display);">30%</div>
         <div style="font-size:13px;color:var(--muted);margin-top:4px;line-height:1.5;">
           <span class="en">Of China's fab capacity operates<br>with no public disclosure</span>
-          <span class="ko">중국 팹 생산능력 중<br>공시 없이 운영되는 비율</span>
+          <span class="ko">중국 팹 생산능력 중<br>공시 없이 운영되는 비율</span><span class="ja">中国のファブ生産能力のうち<br>開示なしで稼働している割合</span>
         </div>
       </div>
       <div style="padding:20px;background:rgba(56,189,248,0.04);border:1px solid rgba(56,189,248,0.1);border-radius:12px;text-align:center;">
         <div style="font-size:28px;font-weight:800;color:#38BDF8;font-family:var(--font-display);">$4K–$11K</div>
         <div style="font-size:13px;color:var(--muted);margin-top:4px;line-height:1.5;">
           <span class="en">Annual cost of institutional<br>semiconductor research reports</span>
-          <span class="ko">기관용 반도체 리서치<br>보고서 연간 비용</span>
+          <span class="ko">기관용 반도체 리서치<br>보고서 연간 비용</span><span class="ja">機関向け半導体リサーチ<br>レポートの年間コスト</span>
         </div>
       </div>
     </div>
@@ -1256,44 +1290,44 @@ footer a:hover { color: #FFFFFF; }
 <!-- VALUE PROPOSITIONS -->
 <section class="values section">
   <div class="inner">
-    <div class="section-label"><span class="en">Why FabWatch</span><span class="ko">왜 FabWatch인가</span></div>
+    <div class="section-label"><span class="en">Why FabWatch</span><span class="ko">왜 FabWatch인가</span><span class="ja">FabWatchを選ぶ理由</span></div>
     <h2 class="section-title reveal">
       <span class="en">What satellites reveal,<br>reports can't.</span>
-      <span class="ko">위성이 밝히는 진실,<br>보고서로는 알 수 없습니다.</span>
+      <span class="ko">위성이 밝히는 진실,<br>보고서로는 알 수 없습니다.</span><span class="ja">衛星が明かす事実は、<br>レポートには載らない。</span>
     </h2>
     <p class="section-desc">
       <span class="en">Corporate disclosures tell you what companies want to say. Six satellite channels tell you what's actually happening on the ground.</span>
-      <span class="ko">기업 공시는 기업이 말하고 싶은 것만 알려줍니다. 6개 위성 채널은 현장에서 실제로 일어나는 일을 보여줍니다.</span>
+      <span class="ko">기업 공시는 기업이 말하고 싶은 것만 알려줍니다. 6개 위성 채널은 현장에서 실제로 일어나는 일을 보여줍니다.</span><span class="ja">企業開示は、企業が伝えたいことしか語りません。6つの衛星チャネルは、現場で実際に起きていることを示します。</span>
     </p>
     <div class="value-grid">
       <div class="value-card">
         <div class="value-icon" style="background: rgba(56,189,248,0.1);">
           <svg viewBox="0 0 24 24" fill="none" stroke="var(--accent)" stroke-width="2" stroke-linecap="round"><path d="M9 12l2 2 4-4"/><circle cx="12" cy="12" r="10"/></svg>
         </div>
-        <h3><span class="en">Independent Verification</span><span class="ko">독립적 검증</span></h3>
+        <h3><span class="en">Independent Verification</span><span class="ko">독립적 검증</span><span class="ja">独立した検証</span></h3>
         <p>
           <span class="en">No reliance on self-reported data. When a Chinese fab claims construction is on schedule, our satellites confirm — or contradict — the claim directly.</span>
-          <span class="ko">자체 보고 데이터에 의존하지 않습니다. 중국 팹이 일정대로 건설 중이라고 발표할 때, 우리 위성이 직접 확인하거나 반박합니다.</span>
+          <span class="ko">자체 보고 데이터에 의존하지 않습니다. 중국 팹이 일정대로 건설 중이라고 발표할 때, 우리 위성이 직접 확인하거나 반박합니다.</span><span class="ja">自己申告データには頼りません。中国のファブが「建設は予定どおり」と発表したとき、私たちの衛星がそれを直接裏付け、あるいは否定します。</span>
         </p>
       </div>
       <div class="value-card">
         <div class="value-icon" style="background: rgba(245,158,11,0.1);">
           <svg viewBox="0 0 24 24" fill="none" stroke="var(--accent-warm)" stroke-width="2" stroke-linecap="round"><path d="M2 12h4M18 12h4M12 2v4M12 18v4"/><circle cx="12" cy="12" r="5"/></svg>
         </div>
-        <h3><span class="en">Multi-Channel Intelligence</span><span class="ko">다중 채널 인텔리전스</span></h3>
+        <h3><span class="en">Multi-Channel Intelligence</span><span class="ko">다중 채널 인텔리전스</span><span class="ja">マルチチャネル・インテリジェンス</span></h3>
         <p>
           <span class="en">Nightlight, radar, thermal IR, NO2, vegetation, and optical — six channels cross-verify every signal. One channel can deceive. Six cannot.</span>
-          <span class="ko">야간조명, 레이더, 열적외선, NO2, 식생, 광학 — 6개 채널이 모든 신호를 교차 검증합니다. 하나는 속일 수 있어도, 여섯은 속일 수 없습니다.</span>
+          <span class="ko">야간조명, 레이더, 열적외선, NO2, 식생, 광학 — 6개 채널이 모든 신호를 교차 검증합니다. 하나는 속일 수 있어도, 여섯은 속일 수 없습니다.</span><span class="ja">夜間光、レーダー、熱赤外、NO2、植生、光学 — 6つのチャネルがすべてのシグナルをクロスチェックします。1つはごまかせても、6つはごまかせません。</span>
         </p>
       </div>
       <div class="value-card">
         <div class="value-icon" style="background: rgba(34,197,94,0.1);">
           <svg viewBox="0 0 24 24" fill="none" stroke="var(--accent-green)" stroke-width="2" stroke-linecap="round"><path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/></svg>
         </div>
-        <h3><span class="en">Early Signal Detection</span><span class="ko">조기 신호 감지</span></h3>
+        <h3><span class="en">Early Signal Detection</span><span class="ko">조기 신호 감지</span><span class="ja">早期シグナル検知</span></h3>
         <p>
           <span class="en">A nightlight drop detected 3 months before the official shutdown announcement. Our alerts catch capacity changes before the market does.</span>
-          <span class="ko">공식 셧다운 발표 3개월 전에 야간조명 하락을 감지했습니다. 시장보다 먼저 생산능력 변화를 포착합니다.</span>
+          <span class="ko">공식 셧다운 발표 3개월 전에 야간조명 하락을 감지했습니다. 시장보다 먼저 생산능력 변화를 포착합니다.</span><span class="ja">公式な停止発表の3か月前に夜間光の低下を検知しました。市場より先に生産能力の変化を捉えます。</span>
         </p>
       </div>
     </div>
@@ -1303,44 +1337,44 @@ footer a:hover { color: #FFFFFF; }
 <!-- WHY SEMICONDUCTOR FABS FIRST + EXPANSION -->
 <section class="values section" style="padding-top:40px;">
   <div class="inner">
-    <div class="section-label"><span class="en">Our Approach</span><span class="ko">접근 방식</span></div>
+    <div class="section-label"><span class="en">Our Approach</span><span class="ko">접근 방식</span><span class="ja">アプローチ</span></div>
     <h2 class="section-title reveal">
       <span class="en">Start deep, then go wide.</span>
-      <span class="ko">깊게 시작하고, 넓게 확장합니다.</span>
+      <span class="ko">깊게 시작하고, 넓게 확장합니다.</span><span class="ja">深く始め、広く展開する。</span>
     </h2>
     <p class="section-desc">
       <span class="en">Semiconductor fabs are our first target because their unique physical signatures — 24/7 lighting, extreme heat output, chemical emissions, massive construction footprints — make them ideal for multi-channel satellite analysis. The same methodology extends to any industrial facility with detectable signatures.</span>
-      <span class="ko">반도체 팹은 24시간 조명, 극심한 열 방출, 화학 배출, 대규모 건설 등 고유한 물리적 특성 덕분에 다중 채널 위성 분석에 가장 이상적인 대상입니다. 동일한 방법론을 탐지 가능한 신호가 있는 모든 산업 시설로 확장합니다.</span>
+      <span class="ko">반도체 팹은 24시간 조명, 극심한 열 방출, 화학 배출, 대규모 건설 등 고유한 물리적 특성 덕분에 다중 채널 위성 분석에 가장 이상적인 대상입니다. 동일한 방법론을 탐지 가능한 신호가 있는 모든 산업 시설로 확장합니다.</span><span class="ja">半導体ファブは、24時間の照明、強い排熱、化学物質の排出、大規模な建設といった固有の物理的特徴を持つため、マルチチャネル衛星分析に最適な対象です。同じ手法を、検知可能なシグナルを持つあらゆる産業施設へ広げていきます。</span>
     </p>
     <div class="value-grid">
       <div class="value-card">
         <div class="value-icon" style="background: rgba(56,189,248,0.1);">
           <svg viewBox="0 0 24 24" fill="none" stroke="var(--accent)" stroke-width="2" stroke-linecap="round"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9h18M9 3v18"/></svg>
         </div>
-        <h3><span class="en">Semiconductor Fabs</span><span class="ko">반도체 팹</span></h3>
+        <h3><span class="en">Semiconductor Fabs</span><span class="ko">반도체 팹</span><span class="ja">半導体ファブ</span></h3>
         <p>
           <span class="en">24 fabs across 12 companies. Nightlight, thermal, SAR, and NO2 signals provide real-time utilization and construction tracking. <strong>Active — 3 reports published.</strong></span>
-          <span class="ko">12개 기업, 24개 팹. 야간조명, 열적외선, SAR, NO2 신호로 실시간 가동률과 건설 추적. <strong>운영 중 — 3건의 리포트 발행.</strong></span>
+          <span class="ko">12개 기업, 24개 팹. 야간조명, 열적외선, SAR, NO2 신호로 실시간 가동률과 건설 추적. <strong>운영 중 — 3건의 리포트 발행.</strong></span><span class="ja">12社・24ファブ。夜間光、熱赤外、SAR、NO2のシグナルで稼働率と建設をリアルタイムに追跡。<strong>稼働中 — レポート3件発行。</strong></span>
         </p>
       </div>
       <div class="value-card">
         <div class="value-icon" style="background: rgba(168,85,247,0.1);">
           <svg viewBox="0 0 24 24" fill="none" stroke="#A855F7" stroke-width="2" stroke-linecap="round"><path d="M22 12h-4l-3 9L9 3l-3 9H2"/></svg>
         </div>
-        <h3><span class="en">AI Data Centers</span><span class="ko">AI 데이터센터</span></h3>
+        <h3><span class="en">AI Data Centers</span><span class="ko">AI 데이터센터</span><span class="ja">AIデータセンター</span></h3>
         <p>
           <span class="en">US hyperscale data center construction boom tracked via NDVI, SAR, and optical changes. 9 major sites validated including OpenAI Stargate and Meta Prometheus. <strong>Pilot complete.</strong></span>
-          <span class="ko">미국 초대형 데이터센터 건설 붐을 NDVI, SAR, 광학 변화로 추적. OpenAI Stargate, Meta Prometheus 등 9개 현장 검증 완료. <strong>파일럿 완료.</strong></span>
+          <span class="ko">미국 초대형 데이터센터 건설 붐을 NDVI, SAR, 광학 변화로 추적. OpenAI Stargate, Meta Prometheus 등 9개 현장 검증 완료. <strong>파일럿 완료.</strong></span><span class="ja">米国の超大型データセンター建設ブームをNDVI、SAR、光学変化で追跡。OpenAI Stargate、Meta Prometheusなど9か所で検証済み。<strong>パイロット完了。</strong></span>
         </p>
       </div>
       <div class="value-card">
         <div class="value-icon" style="background: rgba(34,197,94,0.1);">
           <svg viewBox="0 0 24 24" fill="none" stroke="var(--accent-green)" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="12" r="10"/><path d="M2 12h20M12 2a15.3 15.3 0 014 10 15.3 15.3 0 01-4 10 15.3 15.3 0 01-4-10 15.3 15.3 0 014-10z"/></svg>
         </div>
-        <h3><span class="en">Coming Next</span><span class="ko">향후 확장</span></h3>
+        <h3><span class="en">Coming Next</span><span class="ko">향후 확장</span><span class="ja">今後の展開</span></h3>
         <p>
           <span class="en">EV battery gigafactories (CATL, LG, Panasonic), automotive mega-plants, and LNG terminals — any facility with satellite-detectable signatures. The same 6-channel methodology applies wherever heat, light, and construction leave a physical trace.</span>
-          <span class="ko">EV 배터리 기가팩토리(CATL, LG, 파나소닉), 자동차 메가플랜트, LNG 터미널 — 위성으로 탐지 가능한 신호가 있는 모든 시설. 열, 조명, 건설이 물리적 흔적을 남기는 곳이라면 동일한 6채널 방법론을 적용합니다.</span>
+          <span class="ko">EV 배터리 기가팩토리(CATL, LG, 파나소닉), 자동차 메가플랜트, LNG 터미널 — 위성으로 탐지 가능한 신호가 있는 모든 시설. 열, 조명, 건설이 물리적 흔적을 남기는 곳이라면 동일한 6채널 방법론을 적용합니다.</span><span class="ja">EV電池ギガファクトリー（CATL、LG、パナソニック）、自動車メガプラント、LNGターミナル — 衛星で検知可能なシグナルを持つあらゆる施設。熱・光・建設が物理的な痕跡を残す場所であれば、同じ6チャネル手法を適用します。</span>
         </p>
       </div>
     </div>
@@ -1350,35 +1384,35 @@ footer a:hover { color: #FFFFFF; }
 <!-- RESTRICTED REGIONS INTELLIGENCE -->
 <section class="values section" style="padding-top:40px;">
   <div class="inner">
-    <div class="section-label"><span class="en">Where It Matters Most</span><span class="ko">가장 중요한 곳에서</span></div>
+    <div class="section-label"><span class="en">Where It Matters Most</span><span class="ko">가장 중요한 곳에서</span><span class="ja">最も重要な場所で</span></div>
     <h2 class="section-title reveal">
       <span class="en">Where disclosures exist, we're faster.<br>Where they don't, we're the only source.</span>
-      <span class="ko">공시가 있는 곳에서는 더 빠르게,<br>없는 곳에서는 유일한 소스.</span>
+      <span class="ko">공시가 있는 곳에서는 더 빠르게,<br>없는 곳에서는 유일한 소스.</span><span class="ja">開示がある場所ではより速く、<br>ない場所では唯一の情報源に。</span>
     </h2>
     <p class="section-desc">
       <span class="en">We cross-reference satellite data with industry databases (SEMI, TrendForce) and public filings to detect changes before official announcements. For opaque markets like China and fast-growing new hubs in Southeast Asia, satellite observation provides ground truth that no other method can deliver.</span>
-      <span class="ko">위성 데이터와 산업 통계(SEMI, TrendForce), 공시 자료를 교차 검증하여 공식 발표 이전에 변화를 감지합니다. 중국처럼 불투명한 시장과 동남아의 급성장하는 신흥 허브에서, 위성 관측이 다른 어떤 방법으로도 얻을 수 없는 현장 진실을 제공합니다.</span>
+      <span class="ko">위성 데이터와 산업 통계(SEMI, TrendForce), 공시 자료를 교차 검증하여 공식 발표 이전에 변화를 감지합니다. 중국처럼 불투명한 시장과 동남아의 급성장하는 신흥 허브에서, 위성 관측이 다른 어떤 방법으로도 얻을 수 없는 현장 진실을 제공합니다.</span><span class="ja">衛星データを業界統計（SEMI、TrendForce）や開示資料とクロスチェックし、公式発表の前に変化を検知します。中国のような不透明な市場や、急成長する東南アジアの新興ハブでは、衛星観測が他の方法では得られない現場の実態を提供します。</span>
     </p>
     <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:16px;margin-top:32px;">
       <div style="padding:20px;background:rgba(245,158,11,0.06);border:1px solid rgba(245,158,11,0.15);border-radius:12px;">
-        <div style="font-size:14px;font-weight:700;color:#FBBF24;margin-bottom:8px;">🇨🇳 <span class="en">China</span><span class="ko">중국</span></div>
+        <div style="font-size:14px;font-weight:700;color:#FBBF24;margin-bottom:8px;">🇨🇳 <span class="en">China</span><span class="ko">중국</span><span class="ja">中国</span></div>
         <p style="font-size:13px;line-height:1.6;color:var(--muted);">
           <span class="en">SMIC, CXMT, YMTC — official capacity numbers often diverge from reality. Our satellite monitoring caught a CXMT expansion phase 2 months before public disclosure.</span>
-          <span class="ko">SMIC, CXMT, YMTC — 공식 생산능력 수치가 실제와 다른 경우가 많습니다. 위성 모니터링으로 CXMT 증설을 공시 2개월 전에 포착했습니다.</span>
+          <span class="ko">SMIC, CXMT, YMTC — 공식 생산능력 수치가 실제와 다른 경우가 많습니다. 위성 모니터링으로 CXMT 증설을 공시 2개월 전에 포착했습니다.</span><span class="ja">SMIC、CXMT、YMTC — 公式の生産能力の数字は実態と食い違うことが少なくありません。衛星モニタリングで、CXMTの増設を開示の2か月前に捉えました。</span>
         </p>
       </div>
       <div style="padding:20px;background:rgba(239,68,68,0.06);border:1px solid rgba(239,68,68,0.15);border-radius:12px;">
-        <div style="font-size:14px;font-weight:700;color:#EF4444;margin-bottom:8px;">🇲🇾🇻🇳 <span class="en">Emerging Hubs — SE Asia</span><span class="ko">신흥 허브 — 동남아</span></div>
+        <div style="font-size:14px;font-weight:700;color:#EF4444;margin-bottom:8px;">🇲🇾🇻🇳 <span class="en">Emerging Hubs — SE Asia</span><span class="ko">신흥 허브 — 동남아</span><span class="ja">新興ハブ — 東南アジア</span></div>
         <p style="font-size:13px;line-height:1.6;color:var(--muted);">
           <span class="en">Malaysia and Vietnam are attracting massive fab investments from Intel, Samsung, and Infineon. New sites mean no historical baseline — satellite monitoring builds one from day zero.</span>
-          <span class="ko">말레이시아와 베트남에 Intel, Samsung, Infineon의 대규모 팹 투자가 집중되고 있습니다. 신규 부지는 과거 기준선이 없어, 위성 모니터링이 착공 첫날부터 기준선을 구축합니다.</span>
+          <span class="ko">말레이시아와 베트남에 Intel, Samsung, Infineon의 대규모 팹 투자가 집중되고 있습니다. 신규 부지는 과거 기준선이 없어, 위성 모니터링이 착공 첫날부터 기준선을 구축합니다.</span><span class="ja">マレーシアとベトナムには、Intel、Samsung、Infineonによる大規模なファブ投資が集中しています。新規用地には過去の基準データがないため、衛星モニタリングが着工初日からベースラインを構築します。</span>
         </p>
       </div>
       <div style="padding:20px;background:rgba(56,189,248,0.06);border:1px solid rgba(56,189,248,0.15);border-radius:12px;">
-        <div style="font-size:14px;font-weight:700;color:#38BDF8;margin-bottom:8px;">🇺🇸🇹🇼🇰🇷 <span class="en">Transparent Markets</span><span class="ko">투명한 시장</span></div>
+        <div style="font-size:14px;font-weight:700;color:#38BDF8;margin-bottom:8px;">🇺🇸🇹🇼🇰🇷 <span class="en">Transparent Markets</span><span class="ko">투명한 시장</span><span class="ja">透明性の高い市場</span></div>
         <p style="font-size:13px;line-height:1.6;color:var(--muted);">
           <span class="en">Even with quarterly earnings and industry reports, satellite data catches utilization drops and construction delays 1-3 months earlier. Speed is alpha.</span>
-          <span class="ko">분기 실적과 산업 리포트가 있어도, 위성 데이터는 가동률 하락과 건설 지연을 1~3개월 먼저 포착합니다. 속도가 곧 알파입니다.</span>
+          <span class="ko">분기 실적과 산업 리포트가 있어도, 위성 데이터는 가동률 하락과 건설 지연을 1~3개월 먼저 포착합니다. 속도가 곧 알파입니다.</span><span class="ja">四半期決算や業界レポートがあっても、衛星データは稼働率の低下や建設の遅れを1〜3か月早く捉えます。スピードこそがアルファです。</span>
         </p>
       </div>
     </div>
@@ -1388,14 +1422,14 @@ footer a:hover { color: #FFFFFF; }
 <!-- COMPARISON TABLE -->
 <section class="comparison section">
   <div class="inner">
-    <div class="section-label"><span class="en">How We Compare</span><span class="ko">기존 서비스와 비교</span></div>
+    <div class="section-label"><span class="en">How We Compare</span><span class="ko">기존 서비스와 비교</span><span class="ja">既存サービスとの比較</span></div>
     <h2 class="section-title reveal">
       <span class="en">Every source has blind spots.<br>We fill them.</span>
-      <span class="ko">모든 소스에는 사각지대가 있습니다.<br>FabWatch가 그것을 채웁니다.</span>
+      <span class="ko">모든 소스에는 사각지대가 있습니다.<br>FabWatch가 그것을 채웁니다.</span><span class="ja">どの情報源にも死角がある。<br>FabWatchがそれを埋める。</span>
     </h2>
     <p class="section-desc">
       <span class="en">SEMI tracks equipment orders. TrendForce surveys foundries. Planet Labs sells raw imagery. FabWatch fuses satellite physics with industry data to deliver verified intelligence.</span>
-      <span class="ko">SEMI는 장비 주문을 추적하고, TrendForce는 파운드리를 조사하고, Planet Labs는 원본 영상을 판매합니다. FabWatch는 위성 물리 데이터와 산업 데이터를 융합하여 검증된 인텔리전스를 전달합니다.</span>
+      <span class="ko">SEMI는 장비 주문을 추적하고, TrendForce는 파운드리를 조사하고, Planet Labs는 원본 영상을 판매합니다. FabWatch는 위성 물리 데이터와 산업 데이터를 융합하여 검증된 인텔리전스를 전달합니다.</span><span class="ja">SEMIは装置受注を追跡し、TrendForceはファウンドリーを調査し、Planet Labsは生の画像を販売します。FabWatchは衛星の物理データと業界データを融合し、検証済みのインテリジェンスを届けます。</span>
     </p>
     <div style="overflow-x: auto;">
       <!-- EN table -->
@@ -1464,38 +1498,38 @@ footer a:hover { color: #FFFFFF; }
     <line x1="0" y1="200" x2="500" y2="200" stroke="white" stroke-width="1" opacity="0.3"/>
   </svg>
   <div class="inner">
-    <div class="section-label"><span class="en">How It Works</span><span class="ko">작동 원리</span></div>
+    <div class="section-label"><span class="en">How It Works</span><span class="ko">작동 원리</span><span class="ja">仕組み</span></div>
     <h2 class="section-title reveal">
       <span class="en">Six eyes on every fab</span>
-      <span class="ko">모든 팹에 6개의 눈</span>
+      <span class="ko">모든 팹에 6개의 눈</span><span class="ja">すべてのファブに6つの目を</span>
     </h2>
     <p class="section-desc">
       <span class="en">Each channel detects a different physical signal. Together, they form a complete operational picture no single sensor can provide.</span>
-      <span class="ko">각 채널은 서로 다른 물리적 신호를 감지합니다. 함께 작동하면 단일 센서로는 불가능한 완전한 운영 현황을 파악합니다.</span>
+      <span class="ko">각 채널은 서로 다른 물리적 신호를 감지합니다. 함께 작동하면 단일 센서로는 불가능한 완전한 운영 현황을 파악합니다.</span><span class="ja">各チャネルは異なる物理シグナルを検知します。組み合わせることで、単一センサーでは得られない操業の全体像を把握できます。</span>
     </p>
     <div class="channel-grid">
       <div class="channel-card">
-        <div class="channel-name"><span class="channel-dot" style="background:#FBBF24;"></span> <span class="en">Nightlight</span><span class="ko">야간조명</span></div>
+        <div class="channel-name"><span class="channel-dot" style="background:#FBBF24;"></span> <span class="en">Nightlight</span><span class="ko">야간조명</span><span class="ja">夜間光</span></div>
         <div class="channel-source">VIIRS/DNB</div>
         <div class="channel-desc">
           <span class="en">24/7 illumination intensity tracks operational shifts. A 30% radiance drop over two weeks flags a potential line shutdown — before any quarterly filing mentions it.</span>
-          <span class="ko">24시간 조명 강도로 가동 패턴을 추적합니다. 2주간 복사 에너지 30% 하락은 라인 셧다운 가능성 — 분기 공시에 언급되기 전에 포착합니다.</span>
+          <span class="ko">24시간 조명 강도로 가동 패턴을 추적합니다. 2주간 복사 에너지 30% 하락은 라인 셧다운 가능성 — 분기 공시에 언급되기 전에 포착합니다.</span><span class="ja">24時間の照明強度から稼働パターンを追跡します。2週間で放射輝度が30%低下すればライン停止の可能性 — 四半期開示で触れられる前に捉えます。</span>
         </div>
       </div>
       <div class="channel-card">
-        <div class="channel-name"><span class="channel-dot" style="background:#38BDF8;"></span> <span class="en">SAR Radar</span><span class="ko">SAR 레이더</span></div>
+        <div class="channel-name"><span class="channel-dot" style="background:#38BDF8;"></span> <span class="en">SAR Radar</span><span class="ko">SAR 레이더</span><span class="ja">SARレーダー</span></div>
         <div class="channel-source">Sentinel-1</div>
         <div class="channel-desc">
           <span class="en">Synthetic aperture radar sees through clouds, day or night. A +0.4 dB backscatter jump means steel is going up — new cleanroom structures show on radar months before ribbon-cutting announcements.</span>
-          <span class="ko">합성개구레이더는 구름과 낮밤을 관통합니다. 후방산란 +0.4 dB 상승은 철골 구조 시공 중 — 새 클린룸이 준공식 발표 수개월 전에 레이더에 포착됩니다.</span>
+          <span class="ko">합성개구레이더는 구름과 낮밤을 관통합니다. 후방산란 +0.4 dB 상승은 철골 구조 시공 중 — 새 클린룸이 준공식 발표 수개월 전에 레이더에 포착됩니다.</span><span class="ja">合成開口レーダーは雲や昼夜に関係なく観測できます。後方散乱が+0.4 dB上昇すれば鉄骨工事が進行中 — 新しいクリーンルームが竣工式の発表の数か月前にレーダーに映ります。</span>
         </div>
       </div>
       <div class="channel-card">
-        <div class="channel-name"><span class="channel-dot" style="background:#EF4444;"></span> <span class="en">Thermal IR</span><span class="ko">열적외선</span></div>
+        <div class="channel-name"><span class="channel-dot" style="background:#EF4444;"></span> <span class="en">Thermal IR</span><span class="ko">열적외선</span><span class="ja">熱赤外</span></div>
         <div class="channel-source">Landsat TIRS</div>
         <div class="channel-desc">
           <span class="en">Running fabs emit 2-5°C above ambient. When thermal signatures cool, production is slowing — no survey needed, no disclosure waited for. Physics-based utilization proxy.</span>
-          <span class="ko">가동 중 팹은 주변보다 2-5°C 높습니다. 열 신호가 식으면 감산 중 — 설문도, 공시 대기도 필요 없습니다. 물리 기반 가동률 프록시.</span>
+          <span class="ko">가동 중 팹은 주변보다 2-5°C 높습니다. 열 신호가 식으면 감산 중 — 설문도, 공시 대기도 필요 없습니다. 물리 기반 가동률 프록시.</span><span class="ja">稼働中のファブは周辺より2〜5°C高温です。熱シグナルが下がれば減産中 — アンケートも開示待ちも不要。物理に基づく稼働率の代理指標です。</span>
         </div>
       </div>
       <div class="channel-card">
@@ -1503,23 +1537,23 @@ footer a:hover { color: #FFFFFF; }
         <div class="channel-source">Sentinel-5P TROPOMI</div>
         <div class="channel-desc">
           <span class="en">Cleanroom etching and chemical vapor deposition emit NO2. Daily TROPOMI readings at 5.5 km resolution track fab-level activity — a molecular fingerprint of semiconductor manufacturing.</span>
-          <span class="ko">클린룸 식각과 CVD 공정이 NO2를 배출합니다. 5.5km 해상도의 일일 TROPOMI 측정으로 팹 단위 활동을 추적 — 반도체 제조의 분자 지문입니다.</span>
+          <span class="ko">클린룸 식각과 CVD 공정이 NO2를 배출합니다. 5.5km 해상도의 일일 TROPOMI 측정으로 팹 단위 활동을 추적 — 반도체 제조의 분자 지문입니다.</span><span class="ja">クリーンルームのエッチングやCVD工程はNO2を排出します。5.5 km解像度のTROPOMI日次観測でファブ単位の活動を追跡 — 半導体製造の分子レベルの指紋です。</span>
         </div>
       </div>
       <div class="channel-card">
-        <div class="channel-name"><span class="channel-dot" style="background:#4ADE80;"></span> <span class="en">Vegetation</span><span class="ko">식생지수</span></div>
+        <div class="channel-name"><span class="channel-dot" style="background:#4ADE80;"></span> <span class="en">Vegetation</span><span class="ko">식생지수</span><span class="ja">植生指数</span></div>
         <div class="channel-source">Sentinel-2 NDVI</div>
         <div class="channel-desc">
           <span class="en">NDVI drops from 0.6 to 0.1 when ground is cleared for a new fab. The earliest signal of construction — 3-6 months before any permit filing or press release.</span>
-          <span class="ko">새 팹 부지 조성 시 NDVI가 0.6에서 0.1로 하락합니다. 건축 허가나 보도자료보다 3-6개월 빠른 최초 착공 신호입니다.</span>
+          <span class="ko">새 팹 부지 조성 시 NDVI가 0.6에서 0.1로 하락합니다. 건축 허가나 보도자료보다 3-6개월 빠른 최초 착공 신호입니다.</span><span class="ja">新しいファブ用地の造成でNDVIは0.6から0.1に低下します。建築許可やプレスリリースより3〜6か月早い、最初の着工シグナルです。</span>
         </div>
       </div>
       <div class="channel-card">
-        <div class="channel-name"><span class="channel-dot" style="background:#FB923C;"></span> <span class="en">Optical</span><span class="ko">광학영상</span></div>
+        <div class="channel-name"><span class="channel-dot" style="background:#FB923C;"></span> <span class="en">Optical</span><span class="ko">광학영상</span><span class="ja">光学画像</span></div>
         <div class="channel-source">Sentinel-2 RGB</div>
         <div class="channel-desc">
           <span class="en">10m-resolution true-color imagery confirms site layout and construction milestones. Side-by-side before/after comparisons that make the story visible to any stakeholder.</span>
-          <span class="ko">10m 해상도 트루컬러 영상으로 부지 배치와 건설 진행을 확인합니다. 전후 비교 영상으로 누구나 이해할 수 있는 시각적 증거를 제공합니다.</span>
+          <span class="ko">10m 해상도 트루컬러 영상으로 부지 배치와 건설 진행을 확인합니다. 전후 비교 영상으로 누구나 이해할 수 있는 시각적 증거를 제공합니다.</span><span class="ja">10m解像度のトゥルーカラー画像で敷地配置と建設の進捗を確認します。前後比較画像で、誰にでも分かる視覚的な証拠を示します。</span>
         </div>
       </div>
     </div>
@@ -1529,50 +1563,50 @@ footer a:hover { color: #FFFFFF; }
 <!-- DATA PIPELINE -->
 <section class="pipeline section">
   <div class="inner">
-    <div class="section-label"><span class="en">Data Pipeline</span><span class="ko">데이터 파이프라인</span></div>
+    <div class="section-label"><span class="en">Data Pipeline</span><span class="ko">데이터 파이프라인</span><span class="ja">データパイプライン</span></div>
     <h2 class="section-title reveal">
       <span class="en">From raw pixels to actionable intelligence</span>
-      <span class="ko">원시 픽셀에서 실행 가능한 인텔리전스로</span>
+      <span class="ko">원시 픽셀에서 실행 가능한 인텔리전스로</span><span class="ja">生のピクセルから実用的なインテリジェンスへ</span>
     </h2>
     <p class="section-desc">
       <span class="en">Six satellite sources are ingested, calibrated, and fused into a single composite score — fully automated, updated weekly.</span>
-      <span class="ko">6개 위성 소스를 수집·보정·융합하여 단일 복합 점수로 변환합니다. 완전 자동화, 매주 업데이트.</span>
+      <span class="ko">6개 위성 소스를 수집·보정·융합하여 단일 복합 점수로 변환합니다. 완전 자동화, 매주 업데이트.</span><span class="ja">6つの衛星ソースを収集・補正・融合し、単一の複合スコアに変換します。完全自動化、毎週更新。</span>
     </p>
     <div class="pipe-flow">
       <div class="pipe-stage">
         <div class="pipe-icon">
           <svg viewBox="0 0 24 24"><path d="M12 2a7 7 0 017 7c0 5.25-7 13-7 13S5 14.25 5 9a7 7 0 017-7z"/><circle cx="12" cy="9" r="2.5"/></svg>
         </div>
-        <div class="pipe-name"><span class="en">Collect</span><span class="ko">수집</span></div>
-        <div class="pipe-detail"><span class="en">6 channels<br>24 fabs</span><span class="ko">6채널<br>24개 팹</span></div>
+        <div class="pipe-name"><span class="en">Collect</span><span class="ko">수집</span><span class="ja">収集</span></div>
+        <div class="pipe-detail"><span class="en">6 channels<br>24 fabs</span><span class="ko">6채널<br>24개 팹</span><span class="ja">6チャネル<br>24ファブ</span></div>
       </div>
       <div class="pipe-stage">
         <div class="pipe-icon">
           <svg viewBox="0 0 24 24"><path d="M4 7h16M4 12h16M4 17h10"/><circle cx="20" cy="17" r="2"/></svg>
         </div>
-        <div class="pipe-name"><span class="en">Calibrate</span><span class="ko">보정</span></div>
-        <div class="pipe-detail"><span class="en">Atmospheric<br>correction</span><span class="ko">대기 보정<br>정규화</span></div>
+        <div class="pipe-name"><span class="en">Calibrate</span><span class="ko">보정</span><span class="ja">補正</span></div>
+        <div class="pipe-detail"><span class="en">Atmospheric<br>correction</span><span class="ko">대기 보정<br>정규화</span><span class="ja">大気補正<br>正規化</span></div>
       </div>
       <div class="pipe-stage">
         <div class="pipe-icon">
           <svg viewBox="0 0 24 24"><path d="M12 2v4M12 18v4M4.93 4.93l2.83 2.83M16.24 16.24l2.83 2.83M2 12h4M18 12h4M4.93 19.07l2.83-2.83M16.24 7.76l2.83-2.83"/></svg>
         </div>
-        <div class="pipe-name"><span class="en">Analyze</span><span class="ko">분석</span></div>
-        <div class="pipe-detail"><span class="en">AI cross-<br>verification</span><span class="ko">AI 교차<br>검증</span></div>
+        <div class="pipe-name"><span class="en">Analyze</span><span class="ko">분석</span><span class="ja">分析</span></div>
+        <div class="pipe-detail"><span class="en">AI cross-<br>verification</span><span class="ko">AI 교차<br>검증</span><span class="ja">AIによる<br>クロスチェック</span></div>
       </div>
       <div class="pipe-stage">
         <div class="pipe-icon">
           <svg viewBox="0 0 24 24"><path d="M22 12h-4l-3 9L9 3l-3 9H2"/></svg>
         </div>
-        <div class="pipe-name"><span class="en">Score</span><span class="ko">스코어링</span></div>
-        <div class="pipe-detail"><span class="en">Composite<br>fab score</span><span class="ko">복합 팹<br>점수 산출</span></div>
+        <div class="pipe-name"><span class="en">Score</span><span class="ko">스코어링</span><span class="ja">スコアリング</span></div>
+        <div class="pipe-detail"><span class="en">Composite<br>fab score</span><span class="ko">복합 팹<br>점수 산출</span><span class="ja">ファブ複合<br>スコア算出</span></div>
       </div>
       <div class="pipe-stage">
         <div class="pipe-icon" style="background:rgba(245,158,11,0.1);border-color:rgba(245,158,11,0.2);">
           <svg viewBox="0 0 24 24" style="stroke:var(--accent-warm);"><path d="M18 8A6 6 0 006 8c0 7-3 9-3 9h18s-3-2-3-9"/><path d="M13.73 21a2 2 0 01-3.46 0"/></svg>
         </div>
-        <div class="pipe-name"><span class="en">Alert</span><span class="ko">알림</span></div>
-        <div class="pipe-detail"><span class="en">Dashboard<br>& email</span><span class="ko">대시보드<br>& 이메일</span></div>
+        <div class="pipe-name"><span class="en">Alert</span><span class="ko">알림</span><span class="ja">アラート</span></div>
+        <div class="pipe-detail"><span class="en">Dashboard<br>& email</span><span class="ko">대시보드<br>& 이메일</span><span class="ja">ダッシュボード<br>＆メール</span></div>
       </div>
     </div>
   </div>
@@ -1581,56 +1615,56 @@ footer a:hover { color: #FFFFFF; }
 <!-- FAB LIFECYCLE -->
 <section class="lifecycle section" id="coverage">
   <div class="inner">
-    <div class="section-label"><span class="en">Fab Lifecycle Tracking</span><span class="ko">팹 생애주기 추적</span></div>
+    <div class="section-label"><span class="en">Fab Lifecycle Tracking</span><span class="ko">팹 생애주기 추적</span><span class="ja">ファブのライフサイクル追跡</span></div>
     <h2 class="section-title reveal">
       <span class="en">Every stage, verified by satellite</span>
-      <span class="ko">모든 단계, 위성으로 검증</span>
+      <span class="ko">모든 단계, 위성으로 검증</span><span class="ja">すべての段階を衛星で検証</span>
     </h2>
     <p class="section-desc">
       <span class="en">From announcement to full operation — and back to idle. Each transition is independently detected by our satellite channels.</span>
-      <span class="ko">발표부터 풀가동, 그리고 유휴까지. 모든 전환을 위성 채널이 독립적으로 감지합니다.</span>
+      <span class="ko">발표부터 풀가동, 그리고 유휴까지. 모든 전환을 위성 채널이 독립적으로 감지합니다.</span><span class="ja">発表から本格稼働、そして休止まで。すべての移行を衛星チャネルが独立して検知します。</span>
     </p>
     <div class="lc-track">
       <div class="lc-step">
         <span class="lc-dot" style="background:#94A3B8;"></span>
-        <div class="lc-label"><span class="en">Announced</span><span class="ko">발표</span></div>
-        <div class="lc-signal"><span class="en">News / filings</span><span class="ko">뉴스 / 공시</span></div>
+        <div class="lc-label"><span class="en">Announced</span><span class="ko">발표</span><span class="ja">発表</span></div>
+        <div class="lc-signal"><span class="en">News / filings</span><span class="ko">뉴스 / 공시</span><span class="ja">ニュース／開示</span></div>
         <div style="font-size:10px;color:var(--muted);margin-top:4px;opacity:0.7;">SK hynix Yongin</div>
       </div>
       <div class="lc-step">
         <span class="lc-dot" style="background:#FBBF24;"></span>
-        <div class="lc-label"><span class="en">Site Prep</span><span class="ko">부지 준비</span></div>
-        <div class="lc-signal"><span class="en">NDVI drop</span><span class="ko">NDVI 하락</span></div>
+        <div class="lc-label"><span class="en">Site Prep</span><span class="ko">부지 준비</span><span class="ja">用地造成</span></div>
+        <div class="lc-signal"><span class="en">NDVI drop</span><span class="ko">NDVI 하락</span><span class="ja">NDVI低下</span></div>
         <div style="font-size:10px;color:var(--muted);margin-top:4px;opacity:0.7;">Intel Ohio</div>
       </div>
       <div class="lc-step">
         <span class="lc-dot" style="background:#FB923C;"></span>
-        <div class="lc-label"><span class="en">Construction</span><span class="ko">건설</span></div>
-        <div class="lc-signal"><span class="en">SAR structures</span><span class="ko">SAR 구조물</span></div>
+        <div class="lc-label"><span class="en">Construction</span><span class="ko">건설</span><span class="ja">建設</span></div>
+        <div class="lc-signal"><span class="en">SAR structures</span><span class="ko">SAR 구조물</span><span class="ja">SAR構造物</span></div>
         <div style="font-size:10px;color:var(--muted);margin-top:4px;opacity:0.7;">TSMC Arizona</div>
       </div>
       <div class="lc-step">
         <span class="lc-dot" style="background:#38BDF8;"></span>
-        <div class="lc-label"><span class="en">Equip Install</span><span class="ko">장비 반입</span></div>
-        <div class="lc-signal"><span class="en">Thermal + light</span><span class="ko">열 + 조명</span></div>
+        <div class="lc-label"><span class="en">Equip Install</span><span class="ko">장비 반입</span><span class="ja">装置搬入</span></div>
+        <div class="lc-signal"><span class="en">Thermal + light</span><span class="ko">열 + 조명</span><span class="ja">熱＋光</span></div>
         <div style="font-size:10px;color:var(--muted);margin-top:4px;opacity:0.7;">TSMC Kaohsiung</div>
       </div>
       <div class="lc-step">
         <span class="lc-dot" style="background:#A3E635;"></span>
-        <div class="lc-label"><span class="en">Ramping</span><span class="ko">램프업</span></div>
-        <div class="lc-signal"><span class="en">Light + NO&#8322; rising</span><span class="ko">조명 + NO&#8322; 상승</span></div>
+        <div class="lc-label"><span class="en">Ramping</span><span class="ko">램프업</span><span class="ja">ランプアップ</span></div>
+        <div class="lc-signal"><span class="en">Light + NO&#8322; rising</span><span class="ko">조명 + NO&#8322; 상승</span><span class="ja">光＋NO&#8322;上昇</span></div>
         <div style="font-size:10px;color:var(--muted);margin-top:4px;opacity:0.7;">TSMC JASM</div>
       </div>
       <div class="lc-step">
         <span class="lc-dot" style="background:#22C55E;"></span>
-        <div class="lc-label"><span class="en">Full Operation</span><span class="ko">풀가동</span></div>
-        <div class="lc-signal"><span class="en">All channels stable</span><span class="ko">전 채널 안정</span></div>
+        <div class="lc-label"><span class="en">Full Operation</span><span class="ko">풀가동</span><span class="ja">本格稼働</span></div>
+        <div class="lc-signal"><span class="en">All channels stable</span><span class="ko">전 채널 안정</span><span class="ja">全チャネル安定</span></div>
         <div style="font-size:10px;color:var(--muted);margin-top:4px;opacity:0.7;">Samsung P1-P4</div>
       </div>
       <div class="lc-step">
         <span class="lc-dot" style="background:#EF4444;"></span>
-        <div class="lc-label"><span class="en">Reduced / Idle</span><span class="ko">감산 / 유휴</span></div>
-        <div class="lc-signal"><span class="en">Light + thermal drop</span><span class="ko">조명 + 열 하락</span></div>
+        <div class="lc-label"><span class="en">Reduced / Idle</span><span class="ko">감산 / 유휴</span><span class="ja">減産／休止</span></div>
+        <div class="lc-signal"><span class="en">Light + thermal drop</span><span class="ko">조명 + 열 하락</span><span class="ja">光＋熱の低下</span></div>
         <div style="font-size:10px;color:var(--muted);margin-top:4px;opacity:0.7;">CXMT Hefei</div>
       </div>
     </div>
@@ -1640,60 +1674,60 @@ footer a:hover { color: #FFFFFF; }
 <!-- SERVICE OVERVIEW: 모니터링 vs 리포트 -->
 <section class="svc-overview section" id="services">
   <div class="inner">
-    <div class="section-label"><span class="en">Our Services</span><span class="ko">서비스 구성</span></div>
+    <div class="section-label"><span class="en">Our Services</span><span class="ko">서비스 구성</span><span class="ja">サービス構成</span></div>
     <h2 class="section-title reveal">
       <span class="en">Two ways to use FabWatch</span>
-      <span class="ko">FabWatch를 활용하는 두 가지 방법</span>
+      <span class="ko">FabWatch를 활용하는 두 가지 방법</span><span class="ja">FabWatchの2つの使い方</span>
     </h2>
     <p class="section-desc">
       <span class="en">Choose real-time monitoring or curated reports — or both. Each serves a different decision-making need.</span>
-      <span class="ko">실시간 모니터링과 전문 리포트 중 선택하세요. 각각 다른 의사결정 니즈에 맞춰 설계되었습니다.</span>
+      <span class="ko">실시간 모니터링과 전문 리포트 중 선택하세요. 각각 다른 의사결정 니즈에 맞춰 설계되었습니다.</span><span class="ja">リアルタイムのモニタリングと専門レポートからお選びください。それぞれ異なる意思決定ニーズに合わせて設計されています。</span>
     </p>
     <div class="svc-grid">
       <!-- 모니터링 플랫폼 -->
       <div class="svc-card svc-monitor">
-        <span class="svc-card-badge"><span class="en">PLATFORM</span><span class="ko">플랫폼</span></span>
+        <span class="svc-card-badge"><span class="en">PLATFORM</span><span class="ko">플랫폼</span><span class="ja">プラットフォーム</span></span>
         <div class="svc-card-icon" style="background: rgba(56,189,248,0.1);">
           <svg viewBox="0 0 24 24" fill="none" stroke="var(--accent)" stroke-width="2" stroke-linecap="round"><rect x="2" y="3" width="20" height="14" rx="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/></svg>
         </div>
-        <h3><span class="en">Monitoring Dashboard</span><span class="ko">모니터링 대시보드</span></h3>
+        <h3><span class="en">Monitoring Dashboard</span><span class="ko">모니터링 대시보드</span><span class="ja">モニタリング・ダッシュボード</span></h3>
         <p class="svc-desc">
           <span class="en">Web-based intelligence dashboard. Track 24 fabs with weekly satellite updates, anomaly alerts, and 3-year trend visualization. Detect construction starts, utilization shifts, and capacity expansions — all from your browser.</span>
-          <span class="ko">웹 기반 인텔리전스 대시보드. 24개 팹을 주간 위성 업데이트, 이상 감지 알림, 3년치 트렌드 시각화로 추적합니다. 착공, 가동률 변동, 증설을 브라우저에서 한눈에 파악하세요.</span>
+          <span class="ko">웹 기반 인텔리전스 대시보드. 24개 팹을 주간 위성 업데이트, 이상 감지 알림, 3년치 트렌드 시각화로 추적합니다. 착공, 가동률 변동, 증설을 브라우저에서 한눈에 파악하세요.</span><span class="ja">Webベースのインテリジェンス・ダッシュボード。24のファブを、週次の衛星更新、異常検知アラート、3年分のトレンド可視化で追跡します。着工、稼働率の変動、増設をブラウザで一目で把握できます。</span>
         </p>
         <ul class="svc-features">
-          <li><span class="ico" style="color:var(--accent);">&#9670;</span> <span class="en">Interactive global fab map</span><span class="ko">인터랙티브 글로벌 팹 지도</span></li>
-          <li><span class="ico" style="color:var(--accent);">&#9670;</span> <span class="en">6-channel signal dashboard per fab</span><span class="ko">팹별 6채널 신호 대시보드</span></li>
-          <li><span class="ico" style="color:var(--accent);">&#9670;</span> <span class="en">Email / Slack / Kakao alerts</span><span class="ko">이메일 / Slack / 카카오톡 알림</span></li>
-          <li><span class="ico" style="color:var(--accent);">&#9670;</span> <span class="en">API access for data integration</span><span class="ko">데이터 연동 API 제공</span></li>
-          <li><span class="ico" style="color:var(--accent);">&#9670;</span> <span class="en">Historical time-series (3 years)</span><span class="ko">과거 시계열 데이터 (3년분)</span></li>
+          <li><span class="ico" style="color:var(--accent);">&#9670;</span> <span class="en">Interactive global fab map</span><span class="ko">인터랙티브 글로벌 팹 지도</span><span class="ja">インタラクティブな世界ファブマップ</span></li>
+          <li><span class="ico" style="color:var(--accent);">&#9670;</span> <span class="en">6-channel signal dashboard per fab</span><span class="ko">팹별 6채널 신호 대시보드</span><span class="ja">ファブごとの6チャネル・シグナルダッシュボード</span></li>
+          <li><span class="ico" style="color:var(--accent);">&#9670;</span> <span class="en">Email / Slack / Kakao alerts</span><span class="ko">이메일 / Slack / 카카오톡 알림</span><span class="ja">メール／Slack／カカオトークのアラート</span></li>
+          <li><span class="ico" style="color:var(--accent);">&#9670;</span> <span class="en">API access for data integration</span><span class="ko">데이터 연동 API 제공</span><span class="ja">データ連携用API</span></li>
+          <li><span class="ico" style="color:var(--accent);">&#9670;</span> <span class="en">Historical time-series (3 years)</span><span class="ko">과거 시계열 데이터 (3년분)</span><span class="ja">過去の時系列データ（3年分）</span></li>
         </ul>
         <div style="font-size:13px;color:var(--fg-muted);margin-top:4px;">
           <span class="en">Included in Pro &amp; Enterprise plans</span>
-          <span class="ko">Pro / Enterprise 요금제에 포함</span>
+          <span class="ko">Pro / Enterprise 요금제에 포함</span><span class="ja">Pro／Enterpriseプランに含まれます</span>
         </div>
       </div>
       <!-- 리포트 서비스 -->
       <div class="svc-card svc-report">
-        <span class="svc-card-badge"><span class="en">REPORTS</span><span class="ko">리포트</span></span>
+        <span class="svc-card-badge"><span class="en">REPORTS</span><span class="ko">리포트</span><span class="ja">レポート</span></span>
         <div class="svc-card-icon" style="background: rgba(245,158,11,0.1);">
           <svg viewBox="0 0 24 24" fill="none" stroke="var(--accent-warm)" stroke-width="2" stroke-linecap="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/></svg>
         </div>
-        <h3><span class="en">Analysis Reports</span><span class="ko">분석 리포트</span></h3>
+        <h3><span class="en">Analysis Reports</span><span class="ko">분석 리포트</span><span class="ja">分析レポート</span></h3>
         <p class="svc-desc">
           <span class="en">Analyst-grade satellite intelligence reports. Each report cross-validates satellite imagery with public filings, construction permits, and industry databases. Delivered as PDF with time-series charts, satellite comparisons, and strategic recommendations.</span>
-          <span class="ko">애널리스트급 위성 인텔리전스 리포트. 위성 영상을 공시 자료, 건축 허가, 산업 데이터베이스와 교차 검증합니다. 시계열 차트, 위성 비교 영상, 전략적 제언을 담은 PDF로 제공합니다.</span>
+          <span class="ko">애널리스트급 위성 인텔리전스 리포트. 위성 영상을 공시 자료, 건축 허가, 산업 데이터베이스와 교차 검증합니다. 시계열 차트, 위성 비교 영상, 전략적 제언을 담은 PDF로 제공합니다.</span><span class="ja">アナリスト水準の衛星インテリジェンス・レポート。衛星画像を開示資料、建築許可、業界データベースとクロスチェックします。時系列チャート、衛星比較画像、戦略的提言をまとめたPDFでお届けします。</span>
         </p>
         <ul class="svc-features">
-          <li><span class="ico" style="color:var(--accent-warm);">&#9670;</span> <span class="en">Monthly highlight report (free)</span><span class="ko">월간 하이라이트 리포트 (무료)</span></li>
-          <li><span class="ico" style="color:var(--accent-warm);">&#9670;</span> <span class="en">Deep dive: single fab analysis</span><span class="ko">심층 분석: 개별 팹 리포트</span></li>
-          <li><span class="ico" style="color:var(--accent-warm);">&#9670;</span> <span class="en">Regional report (China / Korea / US)</span><span class="ko">지역 리포트 (중국 / 한국 / 미국)</span></li>
-          <li><span class="ico" style="color:var(--accent-warm);">&#9670;</span> <span class="en">Custom analysis on request</span><span class="ko">맞춤형 분석 의뢰 가능</span></li>
-          <li><span class="ico" style="color:var(--accent-warm);">&#9670;</span> <span class="en">Enterprise white-label available</span><span class="ko">기업 화이트라벨 리포트 제공</span></li>
+          <li><span class="ico" style="color:var(--accent-warm);">&#9670;</span> <span class="en">Monthly highlight report (free)</span><span class="ko">월간 하이라이트 리포트 (무료)</span><span class="ja">月次ハイライトレポート（無料）</span></li>
+          <li><span class="ico" style="color:var(--accent-warm);">&#9670;</span> <span class="en">Deep dive: single fab analysis</span><span class="ko">심층 분석: 개별 팹 리포트</span><span class="ja">詳細分析：個別ファブレポート</span></li>
+          <li><span class="ico" style="color:var(--accent-warm);">&#9670;</span> <span class="en">Regional report (China / Korea / US)</span><span class="ko">지역 리포트 (중국 / 한국 / 미국)</span><span class="ja">地域レポート（中国／韓国／米国）</span></li>
+          <li><span class="ico" style="color:var(--accent-warm);">&#9670;</span> <span class="en">Custom analysis on request</span><span class="ko">맞춤형 분석 의뢰 가능</span><span class="ja">カスタム分析のご依頼に対応</span></li>
+          <li><span class="ico" style="color:var(--accent-warm);">&#9670;</span> <span class="en">Enterprise white-label available</span><span class="ko">기업 화이트라벨 리포트 제공</span><span class="ja">企業向けホワイトラベル提供</span></li>
         </ul>
         <div style="font-size:13px;color:var(--fg-muted);margin-top:4px;">
           <span class="en">Free monthly report for all members — premium reports sold separately</span>
-          <span class="ko">월간 무료 리포트 전원 제공 — 프리미엄 리포트 별도 구매</span>
+          <span class="ko">월간 무료 리포트 전원 제공 — 프리미엄 리포트 별도 구매</span><span class="ja">月次無料レポートを全会員に提供 — プレミアムレポートは別途販売</span>
         </div>
       </div>
     </div>
@@ -1703,31 +1737,31 @@ footer a:hover { color: #FFFFFF; }
 <!-- PRICING -->
 <section class="pricing section" id="pricing">
   <div class="inner">
-    <div class="section-label"><span class="en">Pricing</span><span class="ko">요금제</span></div>
+    <div class="section-label"><span class="en">Pricing</span><span class="ko">요금제</span><span class="ja">料金</span></div>
     <h2 class="section-title reveal">
       <span class="en">Start free. Scale when ready.</span>
-      <span class="ko">무료로 시작하고,<br>필요할 때 확장하세요.</span>
+      <span class="ko">무료로 시작하고,<br>필요할 때 확장하세요.</span><span class="ja">無料で始めて、<br>必要なときに拡張。</span>
     </h2>
     <p class="section-desc">
       <span class="en">From individual researchers to institutional intelligence teams. Pay only for the depth you need.</span>
-      <span class="ko">개인 연구자부터 기관 인텔리전스 팀까지. 필요한 깊이만큼만 결제하세요.</span>
+      <span class="ko">개인 연구자부터 기관 인텔리전스 팀까지. 필요한 깊이만큼만 결제하세요.</span><span class="ja">個人の研究者から機関のインテリジェンスチームまで。必要な深さの分だけお支払いください。</span>
     </p>
     <!-- 개인/기업 탭 -->
     <div class="member-tabs">
       <button class="member-tab active" onclick="switchMember('individual')" id="tab-individual">
-        <span class="en">Individual</span><span class="ko">개인 회원</span>
+        <span class="en">Individual</span><span class="ko">개인 회원</span><span class="ja">個人会員</span>
       </button>
       <button class="member-tab" onclick="switchMember('corporate')" id="tab-corporate">
-        <span class="en">Corporate</span><span class="ko">기업 회원</span>
+        <span class="en">Corporate</span><span class="ko">기업 회원</span><span class="ja">法人会員</span>
       </button>
     </div>
     <div class="member-note" id="note-individual">
       <span class="en">For independent analysts, researchers, journalists, and investors tracking semiconductor capacity on their own.</span>
-      <span class="ko">반도체 생산능력을 독립적으로 추적하는 애널리스트, 연구자, 기자, 투자자를 위한 요금제입니다.</span>
+      <span class="ko">반도체 생산능력을 독립적으로 추적하는 애널리스트, 연구자, 기자, 투자자를 위한 요금제입니다.</span><span class="ja">半導体の生産能力を独自に追跡するアナリスト、研究者、記者、投資家向けのプランです。</span>
     </div>
     <div class="member-note" id="note-corporate" style="display:none; border-left-color: var(--accent-warm);">
       <span class="en">For asset managers, consulting firms, semiconductor companies, and government agencies requiring team access and custom analysis.</span>
-      <span class="ko">팀 단위 접근 및 맞춤 분석이 필요한 자산운용사, 컨설팅 펌, 반도체 기업, 정부 기관을 위한 요금제입니다.</span>
+      <span class="ko">팀 단위 접근 및 맞춤 분석이 필요한 자산운용사, 컨설팅 펌, 반도체 기업, 정부 기관을 위한 요금제입니다.</span><span class="ja">チーム単位のアクセスとカスタム分析が必要な資産運用会社、コンサルティングファーム、半導体企業、政府機関向けのプランです。</span>
     </div>
     <div class="price-grid">
       <!-- Free -->
@@ -1735,15 +1769,15 @@ footer a:hover { color: #FFFFFF; }
         <div class="price-name">Free</div>
         <div class="price-amount">$0</div>
         <ul class="price-features">
-          <li><span class="check">&#10003;</span> <span class="en">Global fab map</span><span class="ko">글로벌 팹 지도</span></li>
-          <li><span class="check">&#10003;</span> <span class="en">Open data (CSV): fab list + status</span><span class="ko">오픈 데이터 (CSV): 팹 목록 + 상태</span></li>
-          <li><span class="check">&#10003;</span> <span class="en">1 monthly highlight report</span><span class="ko">월간 하이라이트 리포트 1편</span></li>
-          <li><span class="check">&#10003;</span> <span class="en">Weekly newsletter</span><span class="ko">주간 뉴스레터</span></li>
-          <li><span class="cross">&#10005;</span> <span class="en">Dashboard access</span><span class="ko">대시보드 접근</span></li>
-          <li><span class="cross">&#10005;</span> <span class="en">Alerts</span><span class="ko">알림</span></li>
+          <li><span class="check">&#10003;</span> <span class="en">Global fab map</span><span class="ko">글로벌 팹 지도</span><span class="ja">世界ファブマップ</span></li>
+          <li><span class="check">&#10003;</span> <span class="en">Open data (CSV): fab list + status</span><span class="ko">오픈 데이터 (CSV): 팹 목록 + 상태</span><span class="ja">オープンデータ（CSV）：ファブ一覧＋ステータス</span></li>
+          <li><span class="check">&#10003;</span> <span class="en">1 monthly highlight report</span><span class="ko">월간 하이라이트 리포트 1편</span><span class="ja">月次ハイライトレポート1本</span></li>
+          <li><span class="check">&#10003;</span> <span class="en">Weekly newsletter</span><span class="ko">주간 뉴스레터</span><span class="ja">週刊ニュースレター</span></li>
+          <li><span class="cross">&#10005;</span> <span class="en">Dashboard access</span><span class="ko">대시보드 접근</span><span class="ja">ダッシュボードへのアクセス</span></li>
+          <li><span class="cross">&#10005;</span> <span class="en">Alerts</span><span class="ko">알림</span><span class="ja">アラート</span></li>
           <li><span class="cross">&#10005;</span> API</li>
         </ul>
-        <a href="#" onclick="openModal();return false;" class="price-btn"><span class="en">Join Waitlist</span><span class="ko">대기 등록</span></a>
+        <a href="#" onclick="openModal();return false;" class="price-btn"><span class="en">Join Waitlist</span><span class="ko">대기 등록</span><span class="ja">事前登録</span></a>
       </div>
       <!-- Pro -->
       <div class="price-card featured">
@@ -1752,15 +1786,15 @@ footer a:hover { color: #FFFFFF; }
         <div class="price-amount ko">$199<span> / 월</span></div>
         <div class="price-sub ko">(약 27만 원 / 월)</div>
         <ul class="price-features">
-          <li><span class="check">&#10003;</span> <span class="en">Full 24-fab dashboard + reports</span><span class="ko">24개 팹 전체 대시보드 + 리포트</span></li>
-          <li><span class="check">&#10003;</span> <span class="en">Weekly updates + Daily Digest</span><span class="ko">주간 업데이트 + Daily Digest</span></li>
-          <li><span class="check">&#10003;</span> <span class="en">Email alerts</span><span class="ko">이메일 알림</span></li>
-          <li><span class="check">&#10003;</span> <span class="en">Basic API (1,000 calls/mo)</span><span class="ko">기본 API (월 1,000콜)</span></li>
-          <li><span class="check">&#10003;</span> <span class="en">Satellite thumbnails</span><span class="ko">위성 썸네일 이미지</span></li>
-          <li><span class="check">&#10003;</span> <span class="en">Full open data access</span><span class="ko">전체 오픈 데이터 접근</span></li>
-          <li><span class="cross">&#10005;</span> <span class="en">Custom fabs / raw imagery</span><span class="ko">커스텀 팹 / 원본 영상</span></li>
+          <li><span class="check">&#10003;</span> <span class="en">Full 24-fab dashboard + reports</span><span class="ko">24개 팹 전체 대시보드 + 리포트</span><span class="ja">24ファブすべてのダッシュボード＋レポート</span></li>
+          <li><span class="check">&#10003;</span> <span class="en">Weekly updates + Daily Digest</span><span class="ko">주간 업데이트 + Daily Digest</span><span class="ja">週次更新＋Daily Digest</span></li>
+          <li><span class="check">&#10003;</span> <span class="en">Email alerts</span><span class="ko">이메일 알림</span><span class="ja">メールアラート</span></li>
+          <li><span class="check">&#10003;</span> <span class="en">Basic API (1,000 calls/mo)</span><span class="ko">기본 API (월 1,000콜)</span><span class="ja">基本API（月1,000コール）</span></li>
+          <li><span class="check">&#10003;</span> <span class="en">Satellite thumbnails</span><span class="ko">위성 썸네일 이미지</span><span class="ja">衛星サムネイル画像</span></li>
+          <li><span class="check">&#10003;</span> <span class="en">Full open data access</span><span class="ko">전체 오픈 데이터 접근</span><span class="ja">全オープンデータへのアクセス</span></li>
+          <li><span class="cross">&#10005;</span> <span class="en">Custom fabs / raw imagery</span><span class="ko">커스텀 팹 / 원본 영상</span><span class="ja">カスタムファブ／元画像</span></li>
         </ul>
-        <a href="#" onclick="openModal();return false;" class="price-btn primary"><span class="en">Join Waitlist</span><span class="ko">대기 등록</span></a>
+        <a href="#" onclick="openModal();return false;" class="price-btn primary"><span class="en">Join Waitlist</span><span class="ko">대기 등록</span><span class="ja">事前登録</span></a>
       </div>
       <!-- Enterprise -->
       <div class="price-card">
@@ -1769,15 +1803,15 @@ footer a:hover { color: #FFFFFF; }
         <div class="price-amount ko">$999<span>+ / 월</span></div>
         <div class="price-sub ko">(약 135만 원~ / 월)</div>
         <ul class="price-features">
-          <li><span class="check">&#10003;</span> <span class="en">Everything in Pro</span><span class="ko">Pro 전체 포함</span></li>
-          <li><span class="check">&#10003;</span> <span class="en">Custom fab additions</span><span class="ko">커스텀 팹 추가</span></li>
-          <li><span class="check">&#10003;</span> <span class="en">Full API + raw satellite data</span><span class="ko">전체 API + 원본 위성 데이터</span></li>
-          <li><span class="check">&#10003;</span> <span class="en">Daily alerts + Slack + webhook</span><span class="ko">일일 알림 + Slack + 카카오톡</span></li>
-          <li><span class="check">&#10003;</span> <span class="en">Full-resolution imagery</span><span class="ko">풀해상도 위성 영상</span></li>
-          <li><span class="check">&#10003;</span> <span class="en">Dedicated analyst + custom reports</span><span class="ko">전담 애널리스트 + 맞춤 리포트</span></li>
-          <li><span class="check">&#10003;</span> <span class="en">Bloomberg / Refinitiv feed</span><span class="ko">Bloomberg / Refinitiv 피드</span></li>
+          <li><span class="check">&#10003;</span> <span class="en">Everything in Pro</span><span class="ko">Pro 전체 포함</span><span class="ja">Proの全機能</span></li>
+          <li><span class="check">&#10003;</span> <span class="en">Custom fab additions</span><span class="ko">커스텀 팹 추가</span><span class="ja">カスタムファブの追加</span></li>
+          <li><span class="check">&#10003;</span> <span class="en">Full API + raw satellite data</span><span class="ko">전체 API + 원본 위성 데이터</span><span class="ja">フルAPI＋元の衛星データ</span></li>
+          <li><span class="check">&#10003;</span> <span class="en">Daily alerts + Slack + webhook</span><span class="ko">일일 알림 + Slack + 카카오톡</span><span class="ja">日次アラート＋Slack＋カカオトーク</span></li>
+          <li><span class="check">&#10003;</span> <span class="en">Full-resolution imagery</span><span class="ko">풀해상도 위성 영상</span><span class="ja">フル解像度の衛星画像</span></li>
+          <li><span class="check">&#10003;</span> <span class="en">Dedicated analyst + custom reports</span><span class="ko">전담 애널리스트 + 맞춤 리포트</span><span class="ja">専任アナリスト＋カスタムレポート</span></li>
+          <li><span class="check">&#10003;</span> <span class="en">Bloomberg / Refinitiv feed</span><span class="ko">Bloomberg / Refinitiv 피드</span><span class="ja">Bloomberg／Refinitivフィード</span></li>
         </ul>
-        <a href="#" onclick="openModal();return false;" class="price-btn"><span class="en">Contact Us</span><span class="ko">문의하기</span></a>
+        <a href="#" onclick="openModal();return false;" class="price-btn"><span class="en">Contact Us</span><span class="ko">문의하기</span><span class="ja">お問い合わせ</span></a>
       </div>
     </div>
   </div>
@@ -1786,14 +1820,14 @@ footer a:hover { color: #FFFFFF; }
 <!-- DEMO DASHBOARD -->
 <section class="demo-section section" id="demo">
   <div class="inner">
-    <div class="section-label"><span class="en">Live Demo</span><span class="ko">데모 대시보드</span></div>
+    <div class="section-label"><span class="en">Live Demo</span><span class="ko">데모 대시보드</span><span class="ja">デモ・ダッシュボード</span></div>
     <h2 class="section-title reveal">
       <span class="en">See the dashboard in action</span>
-      <span class="ko">대시보드를 직접 확인하세요</span>
+      <span class="ko">대시보드를 직접 확인하세요</span><span class="ja">ダッシュボードを実際にご覧ください</span>
     </h2>
     <p class="section-desc">
       <span class="en">A preview of the FabWatch monitoring dashboard. Real interface, sample data.</span>
-      <span class="ko">FabWatch 모니터링 대시보드의 미리보기입니다. 실제 인터페이스, 샘플 데이터.</span>
+      <span class="ko">FabWatch 모니터링 대시보드의 미리보기입니다. 실제 인터페이스, 샘플 데이터.</span><span class="ja">FabWatchモニタリング・ダッシュボードのプレビューです。実際のインターフェース、サンプルデータ。</span>
     </p>
     <div class="demo-frame">
       <div class="demo-titlebar">
@@ -1811,27 +1845,27 @@ footer a:hover { color: #FFFFFF; }
           <div class="demo-sidebar">
             <div class="demo-nav-item active" onclick="switchDemoTab(this,'overview')">
               <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/></svg>
-              <span class="en">Overview</span><span class="ko">전체 현황</span>
+              <span class="en">Overview</span><span class="ko">전체 현황</span><span class="ja">全体概況</span>
             </div>
             <div class="demo-nav-item" onclick="switchDemoTab(this,'map')">
               <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M2 12h20"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10A15.3 15.3 0 0 1 12 2z"/></svg>
-              <span class="en">Fab Map</span><span class="ko">팹 지도</span>
+              <span class="en">Fab Map</span><span class="ko">팹 지도</span><span class="ja">ファブマップ</span>
             </div>
             <div class="demo-nav-item" onclick="switchDemoTab(this,'signals')">
               <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 20V10"/><path d="M12 20V4"/><path d="M6 20v-6"/></svg>
-              <span class="en">Signals</span><span class="ko">신호 분석</span>
+              <span class="en">Signals</span><span class="ko">신호 분석</span><span class="ja">シグナル分析</span>
             </div>
             <div class="demo-nav-item" onclick="switchDemoTab(this,'reports')">
               <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>
-              <span class="en">Reports</span><span class="ko">리포트</span>
+              <span class="en">Reports</span><span class="ko">리포트</span><span class="ja">レポート</span>
             </div>
             <div class="demo-nav-item" onclick="switchDemoTab(this,'alerts')">
               <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"/><path d="M13.73 21a2 2 0 0 1-3.46 0"/></svg>
-              <span class="en">Alerts</span><span class="ko">알림</span>
+              <span class="en">Alerts</span><span class="ko">알림</span><span class="ja">アラート</span>
             </div>
             <div class="demo-nav-item" onclick="switchDemoTab(this,'datacenters')">
               <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="2" width="20" height="8" rx="2"/><rect x="2" y="14" width="20" height="8" rx="2"/><circle cx="6" cy="6" r="1"/><circle cx="6" cy="18" r="1"/></svg>
-              <span class="en">Data Centers</span><span class="ko">데이터센터</span>
+              <span class="en">Data Centers</span><span class="ko">데이터센터</span><span class="ja">データセンター</span>
             </div>
           </div>
           <!-- Main content -->
@@ -1848,7 +1882,7 @@ footer a:hover { color: #FFFFFF; }
             </div>
             <!-- Fab filter -->
             <div class="demo-filter-bar">
-              <button class="demo-filter-btn active" onclick="filterFabs(this,'all')"><span class="en">All</span><span class="ko">전체</span></button>
+              <button class="demo-filter-btn active" onclick="filterFabs(this,'all')"><span class="en">All</span><span class="ko">전체</span><span class="ja">すべて</span></button>
               <button class="demo-filter-btn" onclick="filterFabs(this,'kr')">KR</button>
               <button class="demo-filter-btn" onclick="filterFabs(this,'tw')">TW</button>
               <button class="demo-filter-btn" onclick="filterFabs(this,'cn')">CN</button>
@@ -1860,10 +1894,10 @@ footer a:hover { color: #FFFFFF; }
             <!-- Fab list -->
             <div class="demo-fab-list" id="demo-fab-table">
               <div class="demo-fab-header">
-                <span><span class="en">Fab</span><span class="ko">팹</span></span>
-                <span><span class="en">Status</span><span class="ko">상태</span></span>
-                <span><span class="en">Nightlight</span><span class="ko">야간조명</span></span>
-                <span><span class="en">Change</span><span class="ko">변화</span></span>
+                <span><span class="en">Fab</span><span class="ko">팹</span><span class="ja">ファブ</span></span>
+                <span><span class="en">Status</span><span class="ko">상태</span><span class="ja">ステータス</span></span>
+                <span><span class="en">Nightlight</span><span class="ko">야간조명</span><span class="ja">夜間光</span></span>
+                <span><span class="en">Change</span><span class="ko">변화</span><span class="ja">変化</span></span>
               </div>
               <!-- Fab rows populated from JSON -->
             </div>
@@ -1873,8 +1907,8 @@ footer a:hover { color: #FFFFFF; }
               <div class="demo-map-placeholder">
                 <div style="text-align:center;">
                   <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="#475569" stroke-width="1.5"><circle cx="12" cy="12" r="10"/><path d="M2 12h20"/><path d="M12 2a15.3 15.3 0 014 10 15.3 15.3 0 01-4 10 15.3 15.3 0 01-4-10 15.3 15.3 0 014-10z"/></svg>
-                  <div style="margin-top:8px;"><span class="en">Interactive map with 24 fabs</span><span class="ko">24개 팹 인터랙티브 지도</span></div>
-                  <div style="font-size:11px;color:#334155;margin-top:4px;"><span class="en">Available in full dashboard</span><span class="ko">풀 대시보드에서 이용 가능</span></div>
+                  <div style="margin-top:8px;"><span class="en">Interactive map with 24 fabs</span><span class="ko">24개 팹 인터랙티브 지도</span><span class="ja">24ファブのインタラクティブマップ</span></div>
+                  <div style="font-size:11px;color:#334155;margin-top:4px;"><span class="en">Available in full dashboard</span><span class="ko">풀 대시보드에서 이용 가능</span><span class="ja">フル版ダッシュボードで利用可能</span></div>
                 </div>
               </div>
             </div>
@@ -1887,15 +1921,15 @@ footer a:hover { color: #FFFFFF; }
               <div style="display:flex;flex-direction:column;gap:10px;">
                 <div style="padding:12px;background:rgba(255,255,255,0.03);border:1px solid rgba(255,255,255,0.06);border-radius:8px;display:flex;gap:12px;align-items:center;">
                   <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#38BDF8" stroke-width="2"><path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/><path d="M14 2v6h6"/></svg>
-                  <div><div style="font-size:13px;color:#E2E8F0;font-weight:600;"><span class="en">[Example] Fab Deep Dive</span><span class="ko">[예시] 팹 심층 분석</span></div><div style="font-size:11px;color:#64748B;">2026-11-04 · PDF · 24 pages</div></div>
+                  <div><div style="font-size:13px;color:#E2E8F0;font-weight:600;"><span class="en">[Example] Fab Deep Dive</span><span class="ko">[예시] 팹 심층 분석</span><span class="ja">［例］ファブ詳細分析</span></div><div style="font-size:11px;color:#64748B;">2026-11-04 · PDF · 24 pages</div></div>
                 </div>
                 <div style="padding:12px;background:rgba(255,255,255,0.03);border:1px solid rgba(255,255,255,0.06);border-radius:8px;display:flex;gap:12px;align-items:center;">
                   <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#F59E0B" stroke-width="2"><path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/><path d="M14 2v6h6"/></svg>
-                  <div><div style="font-size:13px;color:#E2E8F0;font-weight:600;"><span class="en">[Example] Country Fab Monthly</span><span class="ko">[예시] 국가별 팹 월간 리포트</span></div><div style="font-size:11px;color:#64748B;">2026-10-28 · PDF · 18 pages</div></div>
+                  <div><div style="font-size:13px;color:#E2E8F0;font-weight:600;"><span class="en">[Example] Country Fab Monthly</span><span class="ko">[예시] 국가별 팹 월간 리포트</span><span class="ja">［例］国別ファブ月次レポート</span></div><div style="font-size:11px;color:#64748B;">2026-10-28 · PDF · 18 pages</div></div>
                 </div>
                 <div style="padding:12px;background:rgba(255,255,255,0.03);border:1px solid rgba(255,255,255,0.06);border-radius:8px;display:flex;gap:12px;align-items:center;">
                   <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#22C55E" stroke-width="2"><path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/><path d="M14 2v6h6"/></svg>
-                  <div><div style="font-size:13px;color:#E2E8F0;font-weight:600;"><span class="en">[Example] Construction Progress Report</span><span class="ko">[예시] 건설 진척 리포트</span></div><div style="font-size:11px;color:#64748B;">2026-10-21 · PDF · 12 pages</div></div>
+                  <div><div style="font-size:13px;color:#E2E8F0;font-weight:600;"><span class="en">[Example] Construction Progress Report</span><span class="ko">[예시] 건설 진척 리포트</span><span class="ja">［例］建設進捗レポート</span></div><div style="font-size:11px;color:#64748B;">2026-10-21 · PDF · 12 pages</div></div>
                 </div>
               </div>
             </div>
@@ -1903,20 +1937,20 @@ footer a:hover { color: #FFFFFF; }
             <div class="demo-view" id="demo-alerts">
               <div style="display:flex;flex-direction:column;gap:8px;">
                 <div style="padding:10px 12px;background:rgba(239,68,68,0.08);border:1px solid rgba(239,68,68,0.2);border-radius:8px;font-size:13px;">
-                  <div style="color:#F87171;font-weight:600;margin-bottom:2px;">⚠ <span class="en">[Example] Fab A (China)</span><span class="ko">[예시] 팹 A (중국)</span> — <span class="en">Nightlight drop -8.7%</span><span class="ko">야간조명 -8.7% 하락</span></div>
-                  <div style="color:#94A3B8;font-size:11px;">2026-11-08 · <span class="en">Possible utilization cut</span><span class="ko">가동률 하락 가능성</span></div>
+                  <div style="color:#F87171;font-weight:600;margin-bottom:2px;">⚠ <span class="en">[Example] Fab A (China)</span><span class="ko">[예시] 팹 A (중국)</span><span class="ja">［例］ファブA（中国）</span> — <span class="en">Nightlight drop -8.7%</span><span class="ko">야간조명 -8.7% 하락</span><span class="ja">夜間光 -8.7% 低下</span></div>
+                  <div style="color:#94A3B8;font-size:11px;">2026-11-08 · <span class="en">Possible utilization cut</span><span class="ko">가동률 하락 가능성</span><span class="ja">稼働率低下の可能性</span></div>
                 </div>
                 <div style="padding:10px 12px;background:rgba(245,158,11,0.08);border:1px solid rgba(245,158,11,0.2);border-radius:8px;font-size:13px;">
-                  <div style="color:#FBBF24;font-weight:600;margin-bottom:2px;">⚡ <span class="en">[Example] Fab B (USA)</span><span class="ko">[예시] 팹 B (미국)</span> — <span class="en">Construction +34.1%</span><span class="ko">건설 진척 +34.1%</span></div>
-                  <div style="color:#94A3B8;font-size:11px;">2026-11-07 · <span class="en">Ahead of schedule</span><span class="ko">일정 앞섬</span></div>
+                  <div style="color:#FBBF24;font-weight:600;margin-bottom:2px;">⚡ <span class="en">[Example] Fab B (USA)</span><span class="ko">[예시] 팹 B (미국)</span><span class="ja">［例］ファブB（米国）</span> — <span class="en">Construction +34.1%</span><span class="ko">건설 진척 +34.1%</span><span class="ja">建設進捗 +34.1%</span></div>
+                  <div style="color:#94A3B8;font-size:11px;">2026-11-07 · <span class="en">Ahead of schedule</span><span class="ko">일정 앞섬</span><span class="ja">予定より前倒し</span></div>
                 </div>
                 <div style="padding:10px 12px;background:rgba(56,189,248,0.08);border:1px solid rgba(56,189,248,0.2);border-radius:8px;font-size:13px;">
-                  <div style="color:#38BDF8;font-weight:600;margin-bottom:2px;">📊 <span class="en">[Example] Fab C (Japan)</span><span class="ko">[예시] 팹 C (일본)</span> — <span class="en">Ramp milestone 87%</span><span class="ko">램프업 87% 돌파</span></div>
-                  <div style="color:#94A3B8;font-size:11px;">2026-11-06 · <span class="en">Target: 90% by Q1</span><span class="ko">목표: Q1까지 90%</span></div>
+                  <div style="color:#38BDF8;font-weight:600;margin-bottom:2px;">📊 <span class="en">[Example] Fab C (Japan)</span><span class="ko">[예시] 팹 C (일본)</span><span class="ja">［例］ファブC（日本）</span> — <span class="en">Ramp milestone 87%</span><span class="ko">램프업 87% 돌파</span><span class="ja">ランプアップ87%到達</span></div>
+                  <div style="color:#94A3B8;font-size:11px;">2026-11-06 · <span class="en">Target: 90% by Q1</span><span class="ko">목표: Q1까지 90%</span><span class="ja">目標：Q1までに90%</span></div>
                 </div>
                 <div style="padding:10px 12px;background:rgba(34,197,94,0.08);border:1px solid rgba(34,197,94,0.2);border-radius:8px;font-size:13px;">
-                  <div style="color:#4ADE80;font-weight:600;margin-bottom:2px;">✓ <span class="en">[Example] Fab D (Korea)</span><span class="ko">[예시] 팹 D (한국)</span> — <span class="en">Stable at 94%</span><span class="ko">94% 안정 가동</span></div>
-                  <div style="color:#94A3B8;font-size:11px;">2026-11-05 · <span class="en">No change</span><span class="ko">변동 없음</span></div>
+                  <div style="color:#4ADE80;font-weight:600;margin-bottom:2px;">✓ <span class="en">[Example] Fab D (Korea)</span><span class="ko">[예시] 팹 D (한국)</span><span class="ja">［例］ファブD（韓国）</span> — <span class="en">Stable at 94%</span><span class="ko">94% 안정 가동</span><span class="ja">94%で安定稼働</span></div>
+                  <div style="color:#94A3B8;font-size:11px;">2026-11-05 · <span class="en">No change</span><span class="ko">변동 없음</span><span class="ja">変化なし</span></div>
                 </div>
               </div>
             </div>
@@ -1924,41 +1958,41 @@ footer a:hover { color: #FFFFFF; }
             <div class="demo-view" id="demo-datacenters">
               <div class="demo-stats-row">
                 <div class="demo-stat-card">
-                  <div class="demo-stat-label"><span class="en">Tracked Sites</span><span class="ko">추적 현장</span></div>
+                  <div class="demo-stat-label"><span class="en">Tracked Sites</span><span class="ko">추적 현장</span><span class="ja">追跡拠点</span></div>
                   <div class="demo-stat-val" style="color:#C084FC;">9</div>
-                  <div class="demo-stat-delta" style="color:var(--accent-warm);"><span class="en">US only (Phase 1)</span><span class="ko">미국만 (1단계)</span></div>
+                  <div class="demo-stat-delta" style="color:var(--accent-warm);"><span class="en">US only (Phase 1)</span><span class="ko">미국만 (1단계)</span><span class="ja">米国のみ（第1段階）</span></div>
                 </div>
                 <div class="demo-stat-card">
-                  <div class="demo-stat-label"><span class="en">Under Construction</span><span class="ko">건설 중</span></div>
+                  <div class="demo-stat-label"><span class="en">Under Construction</span><span class="ko">건설 중</span><span class="ja">建設中</span></div>
                   <div class="demo-stat-val" style="color:var(--accent-warm);">7</div>
-                  <div class="demo-stat-delta" style="color:var(--accent-green);"><span class="en">2 operational</span><span class="ko">2곳 가동</span></div>
+                  <div class="demo-stat-delta" style="color:var(--accent-green);"><span class="en">2 operational</span><span class="ko">2곳 가동</span><span class="ja">2か所稼働</span></div>
                 </div>
                 <div class="demo-stat-card">
-                  <div class="demo-stat-label"><span class="en">Total Investment</span><span class="ko">총 투자액</span></div>
+                  <div class="demo-stat-label"><span class="en">Total Investment</span><span class="ko">총 투자액</span><span class="ja">総投資額</span></div>
                   <div class="demo-stat-val">$280B+</div>
-                  <div class="demo-stat-delta" style="color:var(--fg-muted);"><span class="en">announced capex</span><span class="ko">발표 투자액</span></div>
+                  <div class="demo-stat-delta" style="color:var(--fg-muted);"><span class="en">announced capex</span><span class="ko">발표 투자액</span><span class="ja">発表済み投資額</span></div>
                 </div>
               </div>
               <div class="demo-fab-list" style="margin-top:16px;">
                 <div class="demo-fab-header">
-                  <span><span class="en">Data Center</span><span class="ko">데이터센터</span></span>
-                  <span><span class="en">Owner</span><span class="ko">사업자</span></span>
-                  <span><span class="en">Status</span><span class="ko">상태</span></span>
-                  <span><span class="en">Signal</span><span class="ko">신호</span></span>
+                  <span><span class="en">Data Center</span><span class="ko">데이터센터</span><span class="ja">データセンター</span></span>
+                  <span><span class="en">Owner</span><span class="ko">사업자</span><span class="ja">事業者</span></span>
+                  <span><span class="en">Status</span><span class="ko">상태</span><span class="ja">ステータス</span></span>
+                  <span><span class="en">Signal</span><span class="ko">신호</span><span class="ja">シグナル</span></span>
                 </div>
-                <div class="demo-fab-row"><span>Hyperion, Louisiana</span><span style="color:#C084FC;">Meta</span><span class="demo-status"><span class="dot" style="background:var(--accent-warm);"></span> <span class="en">Building</span><span class="ko">건설 중</span></span><span style="color:var(--accent-warm);">+42.3%</span></div>
-                <div class="demo-fab-row"><span>Stargate, Texas</span><span style="color:#C084FC;">OpenAI/SB</span><span class="demo-status"><span class="dot" style="background:var(--accent-warm);"></span> <span class="en">Site Prep</span><span class="ko">부지 정리</span></span><span style="color:var(--accent-warm);">+28.6%</span></div>
-                <div class="demo-fab-row"><span>Ashburn Campus, Virginia</span><span style="color:#C084FC;">Microsoft</span><span class="demo-status"><span class="dot" style="background:var(--accent-green);"></span> <span class="en">Operating</span><span class="ko">가동 중</span></span><span style="color:var(--accent-green);">+3.1%</span></div>
-                <div class="demo-fab-row"><span>Columbus Campus, Ohio</span><span style="color:#C084FC;">Google</span><span class="demo-status"><span class="dot" style="background:var(--accent-warm);"></span> <span class="en">Building</span><span class="ko">건설 중</span></span><span style="color:var(--accent-warm);">+35.7%</span></div>
-                <div class="demo-fab-row"><span>Prometheus, Indiana</span><span style="color:#C084FC;">Meta</span><span class="demo-status"><span class="dot" style="background:var(--accent-warm);"></span> <span class="en">Building</span><span class="ko">건설 중</span></span><span style="color:var(--accent-warm);">+31.2%</span></div>
-                <div class="demo-fab-row"><span>Memphis Gigafactory, TN</span><span style="color:#C084FC;">xAI</span><span class="demo-status"><span class="dot" style="background:var(--accent-green);"></span> <span class="en">Operating</span><span class="ko">가동 중</span></span><span style="color:var(--accent-green);">+5.8%</span></div>
-                <div class="demo-fab-row"><span>Gluckstadt, Mississippi</span><span style="color:#C084FC;">Amazon</span><span class="demo-status"><span class="dot" style="background:var(--accent-warm);"></span> <span class="en">Building</span><span class="ko">건설 중</span></span><span style="color:var(--accent-warm);">+22.4%</span></div>
-                <div class="demo-fab-row"><span>Sterling, Illinois</span><span style="color:#C084FC;">CoreWeave</span><span class="demo-status"><span class="dot" style="background:var(--accent-warm);"></span> <span class="en">Building</span><span class="ko">건설 중</span></span><span style="color:var(--accent-warm);">+18.9%</span></div>
-                <div class="demo-fab-row"><span>Midlothian, Texas</span><span style="color:#C084FC;">Google</span><span class="demo-status"><span class="dot" style="background:var(--accent-warm);"></span> <span class="en">Site Prep</span><span class="ko">부지 정리</span></span><span style="color:var(--accent-warm);">+15.3%</span></div>
+                <div class="demo-fab-row"><span>Hyperion, Louisiana</span><span style="color:#C084FC;">Meta</span><span class="demo-status"><span class="dot" style="background:var(--accent-warm);"></span> <span class="en">Building</span><span class="ko">건설 중</span><span class="ja">建設中</span></span><span style="color:var(--accent-warm);">+42.3%</span></div>
+                <div class="demo-fab-row"><span>Stargate, Texas</span><span style="color:#C084FC;">OpenAI/SB</span><span class="demo-status"><span class="dot" style="background:var(--accent-warm);"></span> <span class="en">Site Prep</span><span class="ko">부지 정리</span><span class="ja">用地造成</span></span><span style="color:var(--accent-warm);">+28.6%</span></div>
+                <div class="demo-fab-row"><span>Ashburn Campus, Virginia</span><span style="color:#C084FC;">Microsoft</span><span class="demo-status"><span class="dot" style="background:var(--accent-green);"></span> <span class="en">Operating</span><span class="ko">가동 중</span><span class="ja">稼働中</span></span><span style="color:var(--accent-green);">+3.1%</span></div>
+                <div class="demo-fab-row"><span>Columbus Campus, Ohio</span><span style="color:#C084FC;">Google</span><span class="demo-status"><span class="dot" style="background:var(--accent-warm);"></span> <span class="en">Building</span><span class="ko">건설 중</span><span class="ja">建設中</span></span><span style="color:var(--accent-warm);">+35.7%</span></div>
+                <div class="demo-fab-row"><span>Prometheus, Indiana</span><span style="color:#C084FC;">Meta</span><span class="demo-status"><span class="dot" style="background:var(--accent-warm);"></span> <span class="en">Building</span><span class="ko">건설 중</span><span class="ja">建設中</span></span><span style="color:var(--accent-warm);">+31.2%</span></div>
+                <div class="demo-fab-row"><span>Memphis Gigafactory, TN</span><span style="color:#C084FC;">xAI</span><span class="demo-status"><span class="dot" style="background:var(--accent-green);"></span> <span class="en">Operating</span><span class="ko">가동 중</span><span class="ja">稼働中</span></span><span style="color:var(--accent-green);">+5.8%</span></div>
+                <div class="demo-fab-row"><span>Gluckstadt, Mississippi</span><span style="color:#C084FC;">Amazon</span><span class="demo-status"><span class="dot" style="background:var(--accent-warm);"></span> <span class="en">Building</span><span class="ko">건설 중</span><span class="ja">建設中</span></span><span style="color:var(--accent-warm);">+22.4%</span></div>
+                <div class="demo-fab-row"><span>Sterling, Illinois</span><span style="color:#C084FC;">CoreWeave</span><span class="demo-status"><span class="dot" style="background:var(--accent-warm);"></span> <span class="en">Building</span><span class="ko">건설 중</span><span class="ja">建設中</span></span><span style="color:var(--accent-warm);">+18.9%</span></div>
+                <div class="demo-fab-row"><span>Midlothian, Texas</span><span style="color:#C084FC;">Google</span><span class="demo-status"><span class="dot" style="background:var(--accent-warm);"></span> <span class="en">Site Prep</span><span class="ko">부지 정리</span><span class="ja">用地造成</span></span><span style="color:var(--accent-warm);">+15.3%</span></div>
               </div>
               <div style="margin-top:12px;padding:10px 12px;background:rgba(192,132,252,0.06);border:1px solid rgba(192,132,252,0.15);border-radius:8px;font-size:12px;color:#C084FC;">
                 <span class="en">🛰 Data center monitoring uses nightlight + thermal IR + SAR to track construction progress and power consumption. Phase 2 will add Asia-Pacific sites.</span>
-                <span class="ko">🛰 데이터센터 모니터링은 야간조명 + 열적외선 + SAR로 건설 진척과 전력 소비를 추적합니다. 2단계에서 아시아-태평양 현장이 추가됩니다.</span>
+                <span class="ko">🛰 데이터센터 모니터링은 야간조명 + 열적외선 + SAR로 건설 진척과 전력 소비를 추적합니다. 2단계에서 아시아-태평양 현장이 추가됩니다.</span><span class="ja">🛰 データセンターのモニタリングでは、夜間光＋熱赤外＋SARで建設の進捗と電力消費を追跡します。第2段階でアジア太平洋の拠点を追加予定です。</span>
               </div>
             </div>
           </div>
@@ -1967,7 +2001,7 @@ footer a:hover { color: #FFFFFF; }
     </div>
     <p style="text-align:center; margin-top:24px; font-size:14px; color:#94A3B8;">
       <span class="en">This is a preview with sample data. <a href="#cta" style="color:var(--accent);text-decoration:none;">Sign up free</a> to explore the live dashboard.</span>
-      <span class="ko">샘플 데이터가 포함된 미리보기입니다. <a href="#cta" style="color:var(--accent);text-decoration:none;">무료 가입</a> 후 실제 대시보드를 탐색하세요.</span>
+      <span class="ko">샘플 데이터가 포함된 미리보기입니다. <a href="#cta" style="color:var(--accent);text-decoration:none;">무료 가입</a> 후 실제 대시보드를 탐색하세요.</span><span class="ja">サンプルデータを含むプレビューです。<a href="#cta" style="color:var(--accent);text-decoration:none;">無料登録</a>して、実際のダッシュボードをお試しください。</span>
     </p>
   </div>
 </section>
@@ -1975,14 +2009,14 @@ footer a:hover { color: #FFFFFF; }
 <!-- WORLD MAP: FABS + DATA CENTERS -->
 <section class="worldmap section" id="map">
   <div class="inner">
-    <div class="section-label"><span class="en">Global Coverage</span><span class="ko">글로벌 커버리지</span></div>
+    <div class="section-label"><span class="en">Global Coverage</span><span class="ko">글로벌 커버리지</span><span class="ja">グローバルカバレッジ</span></div>
     <h2 class="section-title reveal">
       <span class="en">24 fabs + 9 data centers.<br>One dashboard.</span>
-      <span class="ko">24개 팹 + 9개 데이터센터.<br>하나의 대시보드.</span>
+      <span class="ko">24개 팹 + 9개 데이터센터.<br>하나의 대시보드.</span><span class="ja">24ファブ＋9データセンター。<br>ひとつのダッシュボードで。</span>
     </h2>
     <p class="section-desc reveal">
       <span class="en">Every major semiconductor fab and hyperscale AI data center construction site, monitored around the clock with 6 satellite channels.</span>
-      <span class="ko">모든 주요 반도체 팹과 초대형 AI 데이터센터 건설 현장을 6개 위성 채널로 24시간 모니터링합니다.</span>
+      <span class="ko">모든 주요 반도체 팹과 초대형 AI 데이터센터 건설 현장을 6개 위성 채널로 24시간 모니터링합니다.</span><span class="ja">主要な半導体ファブと超大型AIデータセンターの建設現場を、6つの衛星チャネルで24時間モニタリングします。</span>
     </p>
     <div class="map-wrap reveal">
       <svg class="map-svg" viewBox="0 0 800 400" xmlns="http://www.w3.org/2000/svg">
@@ -2126,31 +2160,31 @@ footer a:hover { color: #FFFFFF; }
       </svg>
     </div>
     <div class="map-legend reveal">
-      <div class="map-legend-item"><span class="map-legend-dot" style="background:#22C55E"></span><span class="en">South Korea</span><span class="ko">한국</span></div>
-      <div class="map-legend-item"><span class="map-legend-dot" style="background:#EC4899"></span><span class="en">Taiwan</span><span class="ko">대만</span></div>
-      <div class="map-legend-item"><span class="map-legend-dot" style="background:#EF4444"></span><span class="en">China</span><span class="ko">중국</span></div>
-      <div class="map-legend-item"><span class="map-legend-dot" style="background:#38BDF8"></span><span class="en">USA</span><span class="ko">미국</span></div>
-      <div class="map-legend-item"><span class="map-legend-dot" style="background:#F59E0B"></span><span class="en">Japan</span><span class="ko">일본</span></div>
-      <div class="map-legend-item"><span class="map-legend-dot" style="background:#A78BFA"></span><span class="en">Europe</span><span class="ko">유럽</span></div>
-      <div class="map-legend-item"><span class="map-legend-dot" style="background:#14B8A6"></span><span class="en">Singapore</span><span class="ko">싱가포르</span></div>
-      <div class="map-legend-item"><span class="map-legend-dot" style="background:#C084FC;border-radius:2px;"></span><span class="en">AI Data Centers</span><span class="ko">AI 데이터센터</span></div>
+      <div class="map-legend-item"><span class="map-legend-dot" style="background:#22C55E"></span><span class="en">South Korea</span><span class="ko">한국</span><span class="ja">韓国</span></div>
+      <div class="map-legend-item"><span class="map-legend-dot" style="background:#EC4899"></span><span class="en">Taiwan</span><span class="ko">대만</span><span class="ja">台湾</span></div>
+      <div class="map-legend-item"><span class="map-legend-dot" style="background:#EF4444"></span><span class="en">China</span><span class="ko">중국</span><span class="ja">中国</span></div>
+      <div class="map-legend-item"><span class="map-legend-dot" style="background:#38BDF8"></span><span class="en">USA</span><span class="ko">미국</span><span class="ja">米国</span></div>
+      <div class="map-legend-item"><span class="map-legend-dot" style="background:#F59E0B"></span><span class="en">Japan</span><span class="ko">일본</span><span class="ja">日本</span></div>
+      <div class="map-legend-item"><span class="map-legend-dot" style="background:#A78BFA"></span><span class="en">Europe</span><span class="ko">유럽</span><span class="ja">欧州</span></div>
+      <div class="map-legend-item"><span class="map-legend-dot" style="background:#14B8A6"></span><span class="en">Singapore</span><span class="ko">싱가포르</span><span class="ja">シンガポール</span></div>
+      <div class="map-legend-item"><span class="map-legend-dot" style="background:#C084FC;border-radius:2px;"></span><span class="en">AI Data Centers</span><span class="ko">AI 데이터센터</span><span class="ja">AIデータセンター</span></div>
     </div>
     <div class="map-stats reveal">
       <div class="map-stat-card">
         <div class="map-stat-num">24</div>
-        <div class="map-stat-label"><span class="en">Fabs Tracked</span><span class="ko">모니터링 팹</span></div>
+        <div class="map-stat-label"><span class="en">Fabs Tracked</span><span class="ko">모니터링 팹</span><span class="ja">モニタリング中のファブ</span></div>
       </div>
       <div class="map-stat-card">
         <div class="map-stat-num">9</div>
-        <div class="map-stat-label"><span class="en">Data Centers</span><span class="ko">데이터센터</span></div>
+        <div class="map-stat-label"><span class="en">Data Centers</span><span class="ko">데이터센터</span><span class="ja">データセンター</span></div>
       </div>
       <div class="map-stat-card">
         <div class="map-stat-num">6</div>
-        <div class="map-stat-label"><span class="en">Sat Channels</span><span class="ko">위성 채널</span></div>
+        <div class="map-stat-label"><span class="en">Sat Channels</span><span class="ko">위성 채널</span><span class="ja">衛星チャネル</span></div>
       </div>
       <div class="map-stat-card">
         <div class="map-stat-num">24/7</div>
-        <div class="map-stat-label"><span class="en">Monitoring</span><span class="ko">실시간 감시</span></div>
+        <div class="map-stat-label"><span class="en">Monitoring</span><span class="ko">실시간 감시</span><span class="ja">常時監視</span></div>
       </div>
     </div>
   </div>
@@ -2159,32 +2193,32 @@ footer a:hover { color: #FFFFFF; }
 <!-- INSIGHTS PREVIEW -->
 <section class="insights section" id="insights">
   <div class="inner">
-    <div class="section-label"><span class="en">Published Reports</span><span class="ko">발행 리포트</span></div>
+    <div class="section-label"><span class="en">Published Reports</span><span class="ko">발행 리포트</span><span class="ja">発行レポート</span></div>
     <h2 class="section-title reveal">
       <span class="en">Real analysis, already delivered.</span>
-      <span class="ko">실제 분석, 이미 발행 완료.</span>
+      <span class="ko">실제 분석, 이미 발행 완료.</span><span class="ja">実際の分析、すでに発行済み。</span>
     </h2>
     <p class="section-desc">
       <span class="en">Three monitoring reports published to date — two for China's leading semiconductor companies and one for a US hyperscale data center. Each demonstrates how satellite data cross-referenced with public filings produces actionable intelligence.</span>
-      <span class="ko">지금까지 3건의 모니터링 리포트를 발행했습니다 — 중국 주요 반도체 기업 2곳과 미국 초대형 데이터센터 1곳. 각 리포트는 위성 데이터와 공시 자료를 교차 검증하여 실행 가능한 인텔리전스를 제공합니다.</span>
+      <span class="ko">지금까지 3건의 모니터링 리포트를 발행했습니다 — 중국 주요 반도체 기업 2곳과 미국 초대형 데이터센터 1곳. 각 리포트는 위성 데이터와 공시 자료를 교차 검증하여 실행 가능한 인텔리전스를 제공합니다.</span><span class="ja">これまでに3件のモニタリングレポートを発行しました — 中国の主要半導体企業2社と、米国の超大型データセンター1か所です。各レポートは衛星データと開示資料をクロスチェックし、実用的なインテリジェンスを提供します。</span>
     </p>
     <div class="insight-grid">
       <!-- SMIC Report -->
       <div class="insight-card">
         <div class="insight-bar" style="background: linear-gradient(90deg, #EF4444, #F97316);"></div>
         <div class="insight-body">
-          <div class="insight-tag" style="color: #EF4444;"><span class="en">China Semiconductor</span><span class="ko">중국 반도체</span></div>
+          <div class="insight-tag" style="color: #EF4444;"><span class="en">China Semiconductor</span><span class="ko">중국 반도체</span><span class="ja">中国半導体</span></div>
           <h3>
             <span class="en">SMIC — 4 Sites, 8 Years of Satellite Tracking</span>
-            <span class="ko">SMIC — 4개 사이트, 8년간의 위성 추적</span>
+            <span class="ko">SMIC — 4개 사이트, 8년간의 위성 추적</span><span class="ja">SMIC — 4拠点、8年間の衛星追跡</span>
           </h3>
           <p>
             <span class="en">Shanghai, Beijing, Shenzhen, Tianjin — nightlight and SAR time-series reveal SMIC's actual expansion pace vs. official announcements. Q2 2026 revenue hit $3B while satellite data shows continued capacity buildout.</span>
-            <span class="ko">상하이, 베이징, 선전, 톈진 — 야간조명과 SAR 시계열로 SMIC의 실제 확장 속도를 공식 발표와 비교합니다. 2026년 2분기 매출 30억 달러를 돌파한 가운데, 위성 데이터는 지속적인 생산능력 증설을 보여줍니다.</span>
+            <span class="ko">상하이, 베이징, 선전, 톈진 — 야간조명과 SAR 시계열로 SMIC의 실제 확장 속도를 공식 발표와 비교합니다. 2026년 2분기 매출 30억 달러를 돌파한 가운데, 위성 데이터는 지속적인 생산능력 증설을 보여줍니다.</span><span class="ja">上海、北京、深圳、天津 — 夜間光とSARの時系列で、SMICの実際の拡張ペースを公式発表と比較します。2026年第2四半期の売上高が30億ドルを突破するなか、衛星データは生産能力の継続的な増強を示しています。</span>
           </p>
           <div style="margin-top:12px;padding:10px;background:rgba(239,68,68,0.06);border-radius:8px;font-size:11px;color:var(--muted);">
             <span class="en">Published Oct 2026 · PDF 24p · 4-site cross-validation · Lead-lag analysis</span>
-            <span class="ko">2026년 10월 발행 · PDF 24p · 4개 사이트 교차 검증 · 선행-후행 분석</span>
+            <span class="ko">2026년 10월 발행 · PDF 24p · 4개 사이트 교차 검증 · 선행-후행 분석</span><span class="ja">2026年10月発行 · PDF 24ページ · 4拠点クロスチェック · 先行・遅行分析</span>
           </div>
         </div>
       </div>
@@ -2192,18 +2226,18 @@ footer a:hover { color: #FFFFFF; }
       <div class="insight-card">
         <div class="insight-bar" style="background: linear-gradient(90deg, #F59E0B, #FBBF24);"></div>
         <div class="insight-body">
-          <div class="insight-tag" style="color: #F59E0B;"><span class="en">China Semiconductor</span><span class="ko">중국 반도체</span></div>
+          <div class="insight-tag" style="color: #F59E0B;"><span class="en">China Semiconductor</span><span class="ko">중국 반도체</span><span class="ja">中国半導体</span></div>
           <h3>
             <span class="en">CXMT Hefei — IPO Meets Satellite Reality</span>
-            <span class="ko">CXMT 허페이 — IPO와 위성이 보여주는 현실</span>
+            <span class="ko">CXMT 허페이 — IPO와 위성이 보여주는 현실</span><span class="ja">CXMT合肥 — IPOと衛星が映す現実</span>
           </h3>
           <p>
             <span class="en">China's largest DRAM maker went public at $45B valuation. Satellite images from 2017 to 2026 show the Hefei campus doubling in footprint — the expansion that the market is pricing in, measured from orbit.</span>
-            <span class="ko">중국 최대 D램 회사가 45조원 시가총액으로 상장했습니다. 2017~2026년 위성 영상은 허페이 캠퍼스 면적이 2배로 확장된 것을 보여줍니다 — 시장이 반영하는 증설을 궤도에서 직접 측정했습니다.</span>
+            <span class="ko">중국 최대 D램 회사가 45조원 시가총액으로 상장했습니다. 2017~2026년 위성 영상은 허페이 캠퍼스 면적이 2배로 확장된 것을 보여줍니다 — 시장이 반영하는 증설을 궤도에서 직접 측정했습니다.</span><span class="ja">中国最大のDRAMメーカーが時価総額450億ドルで上場しました。2017〜2026年の衛星画像は、合肥キャンパスの敷地面積が2倍に拡大したことを示しています — 市場が織り込む増設を、軌道から直接測定しました。</span>
           </p>
           <div style="margin-top:12px;padding:10px;background:rgba(245,158,11,0.06);border-radius:8px;font-size:11px;color:var(--muted);">
             <span class="en">Published Oct 2026 · Satellite comparison 2017–2026 · Construction phase analysis</span>
-            <span class="ko">2026년 10월 발행 · 2017~2026년 위성 비교 · 건설 단계 분석</span>
+            <span class="ko">2026년 10월 발행 · 2017~2026년 위성 비교 · 건설 단계 분석</span><span class="ja">2026年10月発行 · 2017〜2026年の衛星比較 · 建設段階分析</span>
           </div>
         </div>
       </div>
@@ -2211,33 +2245,33 @@ footer a:hover { color: #FFFFFF; }
       <div class="insight-card">
         <div class="insight-bar" style="background: linear-gradient(90deg, #A855F7, #6366F1);"></div>
         <div class="insight-body">
-          <div class="insight-tag" style="color: #A855F7;"><span class="en">AI Data Center</span><span class="ko">AI 데이터센터</span></div>
+          <div class="insight-tag" style="color: #A855F7;"><span class="en">AI Data Center</span><span class="ko">AI 데이터센터</span><span class="ja">AIデータセンター</span></div>
           <h3>
             <span class="en">Meta Hyperion — 5-Zone Construction Progress from Space</span>
-            <span class="ko">Meta Hyperion — 궤도에서 본 5개 구역 건설 진행</span>
+            <span class="ko">Meta Hyperion — 궤도에서 본 5개 구역 건설 진행</span><span class="ja">Meta Hyperion — 軌道から見た5区画の建設進捗</span>
           </h3>
           <p>
             <span class="en">130 Sentinel-2 scenes (2023–2026) track Meta's hyperscale data center across 5 construction zones. SAR backscatter jumped 4.1→4.5 dB in 2026, confirming structural buildout accelerating ahead of schedule.</span>
-            <span class="ko">130장의 Sentinel-2 장면(2023~2026)으로 Meta 초대형 데이터센터의 5개 건설 구역을 추적합니다. SAR 후방산란이 2026년 4.1→4.5 dB로 상승하여 일정보다 빠른 구조물 건설을 확인했습니다.</span>
+            <span class="ko">130장의 Sentinel-2 장면(2023~2026)으로 Meta 초대형 데이터센터의 5개 건설 구역을 추적합니다. SAR 후방산란이 2026년 4.1→4.5 dB로 상승하여 일정보다 빠른 구조물 건설을 확인했습니다.</span><span class="ja">Sentinel-2の130シーン（2023〜2026年）で、Metaの超大型データセンターの5つの建設区画を追跡します。SARの後方散乱は2026年に4.1→4.5 dBへ上昇し、予定より早い構造物の建設を確認しました。</span>
           </p>
           <div style="margin-top:12px;padding:10px;background:rgba(168,85,247,0.06);border-radius:8px;font-size:11px;color:var(--muted);">
             <span class="en">Published Oct 2026 · PDF · 130 satellite scenes · 5-zone NDVI + SAR analysis</span>
-            <span class="ko">2026년 10월 발행 · PDF · 위성 130장면 · 5개 구역 NDVI + SAR 분석</span>
+            <span class="ko">2026년 10월 발행 · PDF · 위성 130장면 · 5개 구역 NDVI + SAR 분석</span><span class="ja">2026年10月発行 · PDF · 衛星130シーン · 5区画のNDVI＋SAR分析</span>
           </div>
         </div>
       </div>
     </div>
     <!-- Newsletter signup -->
     <div class="newsletter-box reveal">
-      <h3><span class="en">Weekly Satellite Intelligence</span><span class="ko">주간 위성 인텔리전스</span></h3>
-      <p><span class="en">Free analysis reports delivered to your inbox every Monday. Unsubscribe anytime.</span><span class="ko">매주 월요일, 무료 분석 리포트를 이메일로 받아보세요. 언제든 구독 해지 가능합니다.</span></p>
+      <h3><span class="en">Weekly Satellite Intelligence</span><span class="ko">주간 위성 인텔리전스</span><span class="ja">週刊衛星インテリジェンス</span></h3>
+      <p><span class="en">Free analysis reports delivered to your inbox every Monday. Unsubscribe anytime.</span><span class="ko">매주 월요일, 무료 분석 리포트를 이메일로 받아보세요. 언제든 구독 해지 가능합니다.</span><span class="ja">毎週月曜日、無料の分析レポートをメールでお届けします。いつでも配信停止できます。</span></p>
       <div class="nl-form" onsubmit="event.preventDefault();">
         <input type="email" class="nl-input" placeholder="name@company.com" id="nl-email">
-        <button class="nl-btn" onclick="handleNewsletter()"><span class="en">Subscribe</span><span class="ko">구독하기</span></button>
+        <button class="nl-btn" onclick="handleNewsletter()"><span class="en">Subscribe</span><span class="ko">구독하기</span><span class="ja">購読する</span></button>
       </div>
       <div class="nl-success" id="nl-success">
         <span class="en">Welcome aboard! Check your inbox for a confirmation.</span>
-        <span class="ko">구독 신청 완료! 확인 이메일을 확인해주세요.</span>
+        <span class="ko">구독 신청 완료! 확인 이메일을 확인해주세요.</span><span class="ja">購読のお申し込みが完了しました！確認メールをご確認ください。</span>
       </div>
     </div>
   </div>
@@ -2246,70 +2280,70 @@ footer a:hover { color: #FFFFFF; }
 <!-- FAQ -->
 <section class="faq section" id="faq">
   <div class="inner">
-    <div class="section-label"><span class="en">FAQ</span><span class="ko">자주 묻는 질문</span></div>
+    <div class="section-label"><span class="en">FAQ</span><span class="ko">자주 묻는 질문</span><span class="ja">よくある質問</span></div>
     <h2 class="section-title reveal">
       <span class="en">Questions answered</span>
-      <span class="ko">궁금하신 점</span>
+      <span class="ko">궁금하신 점</span><span class="ja">ご質問への回答</span>
     </h2>
     <div class="faq-list">
       <div class="faq-item reveal">
         <button class="faq-q" onclick="toggleFaq(this)">
-          <span><span class="en">How accurate is satellite-based fab monitoring?</span><span class="ko">위성 기반 팹 모니터링의 정확도는 어느 정도인가요?</span></span>
+          <span><span class="en">How accurate is satellite-based fab monitoring?</span><span class="ko">위성 기반 팹 모니터링의 정확도는 어느 정도인가요?</span><span class="ja">衛星によるファブモニタリングの精度はどの程度ですか？</span></span>
           <svg class="faq-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l6 6 6-6"/></svg>
         </button>
         <div class="faq-a"><div class="faq-a-inner">
           <span class="en">Our VIIRS nightlight index correlates at 0.87+ with actual fab utilization rates published by industry trackers like TrendForce. We cross-validate with SAR, thermal IR, and NO2 data for multi-channel confirmation. Accuracy improves with historical baseline — fabs monitored for 12+ months reach 90%+ correlation.</span>
-          <span class="ko">FabWatch의 VIIRS 야간조명 지수는 TrendForce 등 산업 트래커가 발표하는 실제 팹 가동률과 0.87 이상의 상관계수를 보입니다. SAR, 열적외선, NO2 데이터를 교차검증하여 다채널 확인을 수행합니다. 12개월 이상 모니터링된 팹은 90% 이상의 상관도를 달성합니다.</span>
+          <span class="ko">FabWatch의 VIIRS 야간조명 지수는 TrendForce 등 산업 트래커가 발표하는 실제 팹 가동률과 0.87 이상의 상관계수를 보입니다. SAR, 열적외선, NO2 데이터를 교차검증하여 다채널 확인을 수행합니다. 12개월 이상 모니터링된 팹은 90% 이상의 상관도를 달성합니다.</span><span class="ja">FabWatchのVIIRS夜間光指数は、TrendForceなどの業界トラッカーが発表する実際のファブ稼働率と0.87以上の相関を示します。SAR、熱赤外、NO2データでクロスチェックし、マルチチャネルで確認しています。12か月以上モニタリングしたファブでは90%以上の相関を達成しています。</span>
         </div></div>
       </div>
       <div class="faq-item reveal">
         <button class="faq-q" onclick="toggleFaq(this)">
-          <span><span class="en">How often is the data updated?</span><span class="ko">데이터 업데이트 주기는 어떻게 되나요?</span></span>
+          <span><span class="en">How often is the data updated?</span><span class="ko">데이터 업데이트 주기는 어떻게 되나요?</span><span class="ja">データの更新頻度は？</span></span>
           <svg class="faq-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l6 6 6-6"/></svg>
         </button>
         <div class="faq-a"><div class="faq-a-inner">
           <span class="en">VIIRS nightlight data updates daily. Sentinel-1 SAR revisits every 6-12 days. Sentinel-2 optical every 5 days (weather permitting). We aggregate these into a composite score updated at least twice weekly for each fab.</span>
-          <span class="ko">VIIRS 야간조명은 매일, Sentinel-1 SAR은 6~12일, Sentinel-2 광학은 5일 주기로 갱신됩니다. 이를 종합하여 각 팹별 복합 점수를 주 2회 이상 업데이트합니다.</span>
+          <span class="ko">VIIRS 야간조명은 매일, Sentinel-1 SAR은 6~12일, Sentinel-2 광학은 5일 주기로 갱신됩니다. 이를 종합하여 각 팹별 복합 점수를 주 2회 이상 업데이트합니다.</span><span class="ja">VIIRS夜間光は毎日、Sentinel-1 SARは6〜12日、Sentinel-2光学は5日周期（天候による）で更新されます。これらを統合し、各ファブの複合スコアを週2回以上更新します。</span>
         </div></div>
       </div>
       <div class="faq-item reveal">
         <button class="faq-q" onclick="toggleFaq(this)">
-          <span><span class="en">Do you offer NDAs for enterprise clients?</span><span class="ko">기업 고객에게 NDA 제공이 가능한가요?</span></span>
+          <span><span class="en">Do you offer NDAs for enterprise clients?</span><span class="ko">기업 고객에게 NDA 제공이 가능한가요?</span><span class="ja">法人のお客様とNDAを締結できますか？</span></span>
           <svg class="faq-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l6 6 6-6"/></svg>
         </button>
         <div class="faq-a"><div class="faq-a-inner">
           <span class="en">Yes. Enterprise plans include a bilateral NDA, custom SLA, and data handling agreements. We can also accommodate specific compliance requirements (SOC 2, GDPR). Contact our enterprise team for details.</span>
-          <span class="ko">네, Enterprise 요금제에는 쌍방 NDA, 맞춤 SLA, 데이터 취급 계약이 포함됩니다. SOC 2, GDPR 등 특정 컴플라이언스 요구사항도 대응 가능합니다. 자세한 내용은 기업 영업팀에 문의하세요.</span>
+          <span class="ko">네, Enterprise 요금제에는 쌍방 NDA, 맞춤 SLA, 데이터 취급 계약이 포함됩니다. SOC 2, GDPR 등 특정 컴플라이언스 요구사항도 대응 가능합니다. 자세한 내용은 기업 영업팀에 문의하세요.</span><span class="ja">はい。Enterpriseプランには相互NDA、カスタムSLA、データ取扱契約が含まれます。SOC 2、GDPRなど特定のコンプライアンス要件にも対応可能です。詳しくは法人営業チームにお問い合わせください。</span>
         </div></div>
       </div>
       <div class="faq-item reveal">
         <button class="faq-q" onclick="toggleFaq(this)">
-          <span><span class="en">Can I request monitoring for a specific fab?</span><span class="ko">특정 팹 모니터링을 요청할 수 있나요?</span></span>
+          <span><span class="en">Can I request monitoring for a specific fab?</span><span class="ko">특정 팹 모니터링을 요청할 수 있나요?</span><span class="ja">特定のファブのモニタリングを依頼できますか？</span></span>
           <svg class="faq-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l6 6 6-6"/></svg>
         </button>
         <div class="faq-a"><div class="faq-a-inner">
           <span class="en">Absolutely. Pro users can request up to 5 custom fabs, and Enterprise users get unlimited custom monitoring targets. New fabs are typically onboarded within 48 hours with at least 6 months of historical baseline data.</span>
-          <span class="ko">물론입니다. Pro 사용자는 최대 5개, Enterprise 사용자는 무제한 맞춤 팹 요청이 가능합니다. 신규 팹은 보통 48시간 내 온보딩되며, 최소 6개월 이상의 과거 기준 데이터가 제공됩니다.</span>
+          <span class="ko">물론입니다. Pro 사용자는 최대 5개, Enterprise 사용자는 무제한 맞춤 팹 요청이 가능합니다. 신규 팹은 보통 48시간 내 온보딩되며, 최소 6개월 이상의 과거 기준 데이터가 제공됩니다.</span><span class="ja">もちろんです。Proユーザーは最大5か所、Enterpriseユーザーは無制限にカスタムファブを依頼できます。新しいファブは通常48時間以内に追加され、少なくとも6か月分の過去の基準データが提供されます。</span>
         </div></div>
       </div>
       <div class="faq-item reveal">
         <button class="faq-q" onclick="toggleFaq(this)">
-          <span><span class="en">What's the difference between the dashboard and reports?</span><span class="ko">대시보드와 리포트의 차이는 무엇인가요?</span></span>
+          <span><span class="en">What's the difference between the dashboard and reports?</span><span class="ko">대시보드와 리포트의 차이는 무엇인가요?</span><span class="ja">ダッシュボードとレポートの違いは何ですか？</span></span>
           <svg class="faq-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l6 6 6-6"/></svg>
         </button>
         <div class="faq-a"><div class="faq-a-inner">
           <span class="en">The dashboard is a real-time SaaS platform — you log in and see live data, charts, and alerts for all 24 fabs. Reports are curated PDF/slide analyses written by our team: deep dives on specific fabs, countries, or market events. Pro includes both; Free gets the monthly highlight report and open data.</span>
-          <span class="ko">대시보드는 실시간 SaaS 플랫폼입니다 — 로그인하면 24개 팹의 라이브 데이터, 차트, 알림을 볼 수 있습니다. 리포트는 FabWatch 팀이 작성하는 PDF/슬라이드 형태의 심층 분석입니다. Pro는 둘 다 포함하며, Free는 제한된 대시보드 접근과 샘플 리포트를 제공합니다.</span>
+          <span class="ko">대시보드는 실시간 SaaS 플랫폼입니다 — 로그인하면 24개 팹의 라이브 데이터, 차트, 알림을 볼 수 있습니다. 리포트는 FabWatch 팀이 작성하는 PDF/슬라이드 형태의 심층 분석입니다. Pro는 둘 다 포함하며, Free는 제한된 대시보드 접근과 샘플 리포트를 제공합니다.</span><span class="ja">ダッシュボードはリアルタイムのSaaSプラットフォームです — ログインすると24ファブのライブデータ、チャート、アラートを確認できます。レポートはFabWatchチームが作成するPDF／スライド形式の詳細分析です。Proには両方が含まれ、Freeでは限定的なダッシュボードアクセスとサンプルレポートを提供します。</span>
         </div></div>
       </div>
       <div class="faq-item reveal">
         <button class="faq-q" onclick="toggleFaq(this)">
-          <span><span class="en">Is the satellite data legally obtained?</span><span class="ko">위성 데이터는 합법적으로 수집되나요?</span></span>
+          <span><span class="en">Is the satellite data legally obtained?</span><span class="ko">위성 데이터는 합법적으로 수집되나요?</span><span class="ja">衛星データは合法的に取得されていますか？</span></span>
           <svg class="faq-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l6 6 6-6"/></svg>
         </button>
         <div class="faq-a"><div class="faq-a-inner">
           <span class="en">100%. All data comes from publicly available satellite programs: NASA VIIRS, ESA Copernicus (Sentinel-1/2/5P), and USGS Landsat. These are open-access, government-operated Earth observation programs designed for environmental and commercial monitoring.</span>
-          <span class="ko">100% 합법입니다. 모든 데이터는 공개 위성 프로그램에서 수집됩니다: NASA VIIRS, ESA 코페르니쿠스(Sentinel-1/2/5P), USGS 랜드샛. 이들은 환경 및 상업적 모니터링을 위해 설계된 정부 운영 공개 지구관측 프로그램입니다.</span>
+          <span class="ko">100% 합법입니다. 모든 데이터는 공개 위성 프로그램에서 수집됩니다: NASA VIIRS, ESA 코페르니쿠스(Sentinel-1/2/5P), USGS 랜드샛. 이들은 환경 및 상업적 모니터링을 위해 설계된 정부 운영 공개 지구관측 프로그램입니다.</span><span class="ja">100%合法です。すべてのデータは公開衛星プログラムから取得しています：NASA VIIRS、ESAコペルニクス（Sentinel-1/2/5P）、USGSランドサット。これらは環境・商業モニタリングのために設計された、政府運営のオープンな地球観測プログラムです。</span>
         </div></div>
       </div>
     </div>
@@ -2319,46 +2353,46 @@ footer a:hover { color: #FFFFFF; }
 <!-- USE CASES -->
 <section class="usecases section" id="usecases">
   <div class="inner">
-    <div class="section-label"><span class="en">Use Cases</span><span class="ko">활용 사례</span></div>
+    <div class="section-label"><span class="en">Use Cases</span><span class="ko">활용 사례</span><span class="ja">活用事例</span></div>
     <h2 class="section-title reveal">
       <span class="en">Built for decision-makers</span>
-      <span class="ko">의사결정자를 위한 인텔리전스</span>
+      <span class="ko">의사결정자를 위한 인텔리전스</span><span class="ja">意思決定者のためのインテリジェンス</span>
     </h2>
     <p class="section-desc reveal">
       <span class="en">From hedge funds to government agencies — wherever semiconductor supply intelligence drives better decisions.</span>
-      <span class="ko">헤지펀드부터 정부기관까지 — 반도체 공급 인텔리전스가 더 나은 결정을 만드는 곳이라면 어디든.</span>
+      <span class="ko">헤지펀드부터 정부기관까지 — 반도체 공급 인텔리전스가 더 나은 결정을 만드는 곳이라면 어디든.</span><span class="ja">ヘッジファンドから政府機関まで — 半導体供給のインテリジェンスがより良い意思決定につながる場所なら、どこでも。</span>
     </p>
     <div class="usecase-grid">
       <div class="usecase-card reveal">
         <div class="usecase-icon" style="background: rgba(56,189,248,0.1);">
           <svg viewBox="0 0 24 24" fill="none" stroke="#38BDF8" stroke-width="2" stroke-linecap="round"><path d="M12 2v20M2 12h20"/><path d="M17 7l-5 5-5-5"/></svg>
         </div>
-        <h3><span class="en">Investment Firms</span><span class="ko">투자사 / 헤지펀드</span></h3>
-        <p><span class="en">Verify earnings guidance with satellite evidence. Detect ramp-ups or slowdowns weeks before quarterly reports. Alternative data edge for semiconductor equity and supply-chain trades.</span><span class="ko">실적 가이던스를 위성 증거로 검증합니다. 분기 보고서 발표 수주 전에 램프업이나 감산을 감지합니다. 반도체 주식 및 공급망 트레이딩을 위한 대체 데이터 우위.</span></p>
+        <h3><span class="en">Investment Firms</span><span class="ko">투자사 / 헤지펀드</span><span class="ja">投資会社／ヘッジファンド</span></h3>
+        <p><span class="en">Verify earnings guidance with satellite evidence. Detect ramp-ups or slowdowns weeks before quarterly reports. Alternative data edge for semiconductor equity and supply-chain trades.</span><span class="ko">실적 가이던스를 위성 증거로 검증합니다. 분기 보고서 발표 수주 전에 램프업이나 감산을 감지합니다. 반도체 주식 및 공급망 트레이딩을 위한 대체 데이터 우위.</span><span class="ja">業績ガイダンスを衛星の証拠で検証します。四半期報告の数週間前にランプアップや減産を検知。半導体株とサプライチェーン取引のためのオルタナティブデータの優位性です。</span></p>
         <span class="usecase-tag" style="background: rgba(56,189,248,0.1); color: var(--accent);">ALTERNATIVE DATA</span>
       </div>
       <div class="usecase-card reveal">
         <div class="usecase-icon" style="background: rgba(245,158,11,0.1);">
           <svg viewBox="0 0 24 24" fill="none" stroke="#F59E0B" stroke-width="2" stroke-linecap="round"><path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/><path d="M14 2v6h6M16 13H8M16 17H8M10 9H8"/></svg>
         </div>
-        <h3><span class="en">Industry Analysts</span><span class="ko">산업 애널리스트</span></h3>
-        <p><span class="en">Ground-truth your supply forecasts. Cross-reference IDC/TrendForce projections with physical fab activity. Publish differentiated research backed by satellite evidence.</span><span class="ko">공급 전망을 현장 데이터로 검증합니다. IDC/TrendForce 전망을 실제 팹 활동과 교차 대조합니다. 위성 증거로 뒷받침되는 차별화된 리서치를 발행하세요.</span></p>
+        <h3><span class="en">Industry Analysts</span><span class="ko">산업 애널리스트</span><span class="ja">業界アナリスト</span></h3>
+        <p><span class="en">Ground-truth your supply forecasts. Cross-reference IDC/TrendForce projections with physical fab activity. Publish differentiated research backed by satellite evidence.</span><span class="ko">공급 전망을 현장 데이터로 검증합니다. IDC/TrendForce 전망을 실제 팹 활동과 교차 대조합니다. 위성 증거로 뒷받침되는 차별화된 리서치를 발행하세요.</span><span class="ja">供給見通しを現場データで検証します。IDC／TrendForceの予測を実際のファブ活動とクロスチェック。衛星の証拠に裏付けられた差別化リサーチを発行できます。</span></p>
         <span class="usecase-tag" style="background: rgba(245,158,11,0.1); color: var(--accent-warm);">RESEARCH</span>
       </div>
       <div class="usecase-card reveal">
         <div class="usecase-icon" style="background: rgba(34,197,94,0.1);">
           <svg viewBox="0 0 24 24" fill="none" stroke="#22C55E" stroke-width="2" stroke-linecap="round"><path d="M18 20V10M12 20V4M6 20v-6"/></svg>
         </div>
-        <h3><span class="en">Procurement & Supply Chain</span><span class="ko">조달 / 공급망 관리</span></h3>
-        <p><span class="en">Early warning on supplier fab disruptions. Monitor construction progress of new capacity commitments. Validate vendor claims about expansion timelines.</span><span class="ko">공급업체 팹 차질에 대한 조기 경보. 신규 생산능력 건설 진행 상황 모니터링. 확장 일정에 대한 벤더 주장을 검증합니다.</span></p>
+        <h3><span class="en">Procurement & Supply Chain</span><span class="ko">조달 / 공급망 관리</span><span class="ja">調達／サプライチェーン管理</span></h3>
+        <p><span class="en">Early warning on supplier fab disruptions. Monitor construction progress of new capacity commitments. Validate vendor claims about expansion timelines.</span><span class="ko">공급업체 팹 차질에 대한 조기 경보. 신규 생산능력 건설 진행 상황 모니터링. 확장 일정에 대한 벤더 주장을 검증합니다.</span><span class="ja">サプライヤーのファブ障害を早期に警告。新規生産能力の建設進捗をモニタリング。増設スケジュールに関するベンダーの主張を検証します。</span></p>
         <span class="usecase-tag" style="background: rgba(34,197,94,0.1); color: var(--accent-green);">SUPPLY CHAIN</span>
       </div>
       <div class="usecase-card reveal">
         <div class="usecase-icon" style="background: rgba(167,139,250,0.1);">
           <svg viewBox="0 0 24 24" fill="none" stroke="#A78BFA" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="12" r="10"/><path d="M2 12h20M12 2a15.3 15.3 0 014 10 15.3 15.3 0 01-4 10 15.3 15.3 0 01-4-10 15.3 15.3 0 014-10z"/></svg>
         </div>
-        <h3><span class="en">Government & Policy</span><span class="ko">정부 / 정책기관</span></h3>
-        <p><span class="en">Track foreign semiconductor capacity buildout for national security assessments. Monitor CHIPS Act and K-CHIPS Act investment outcomes. Evidence-based semiconductor policy analysis.</span><span class="ko">국가안보 평가를 위한 해외 반도체 생산능력 추적. CHIPS Act, K-반도체 전략 투자 성과 모니터링. 증거 기반 반도체 정책 분석.</span></p>
+        <h3><span class="en">Government & Policy</span><span class="ko">정부 / 정책기관</span><span class="ja">政府／政策機関</span></h3>
+        <p><span class="en">Track foreign semiconductor capacity buildout for national security assessments. Monitor CHIPS Act and K-CHIPS Act investment outcomes. Evidence-based semiconductor policy analysis.</span><span class="ko">국가안보 평가를 위한 해외 반도체 생산능력 추적. CHIPS Act, K-반도체 전략 투자 성과 모니터링. 증거 기반 반도체 정책 분석.</span><span class="ja">国家安全保障評価のための海外半導体生産能力の追跡。CHIPS法やK-半導体戦略の投資成果をモニタリング。エビデンスに基づく半導体政策分析。</span></p>
         <span class="usecase-tag" style="background: rgba(167,139,250,0.1); color: #A78BFA;">GEOPOLITICAL</span>
       </div>
     </div>
@@ -2368,39 +2402,39 @@ footer a:hover { color: #FFFFFF; }
 <!-- ABOUT DS PLANET -->
 <section class="team section" id="team">
   <div class="inner">
-    <div class="section-label"><span class="en">About Us</span><span class="ko">회사 소개</span></div>
+    <div class="section-label"><span class="en">About Us</span><span class="ko">회사 소개</span><span class="ja">会社概要</span></div>
     <h2 class="section-title reveal">
       <span class="en">ATS — where data meets the real world</span>
-      <span class="ko">ATS — 데이터와 현실이 만나는 곳</span>
+      <span class="ko">ATS — 데이터와 현실이 만나는 곳</span><span class="ja">ATS — データと現実が出会う場所</span>
     </h2>
     <p class="section-desc reveal">
       <span class="en">ATS Inc. is a technology company specializing in satellite data analytics for industrial intelligence. FabWatch is our flagship platform — translating orbital physics into actionable business intelligence. Our sister brand DS Planet provides satellite-based land and construction monitoring for the domestic Korean market.</span>
-      <span class="ko">주식회사 에이티에스(ATS)는 산업 인텔리전스를 위한 위성 데이터 분석 전문 기업입니다. FabWatch는 ATS의 핵심 플랫폼으로, 궤도 물리학을 실행 가능한 비즈니스 인텔리전스로 변환합니다. 자매 브랜드 DS플래닛은 국내 토지·건설 현장 위성 모니터링을 제공합니다.</span>
+      <span class="ko">주식회사 에이티에스(ATS)는 산업 인텔리전스를 위한 위성 데이터 분석 전문 기업입니다. FabWatch는 ATS의 핵심 플랫폼으로, 궤도 물리학을 실행 가능한 비즈니스 인텔리전스로 변환합니다. 자매 브랜드 DS플래닛은 국내 토지·건설 현장 위성 모니터링을 제공합니다.</span><span class="ja">株式会社エイティーエス（ATS）は、産業インテリジェンスのための衛星データ分析を専門とする企業です。FabWatchはATSの中核プラットフォームとして、軌道物理を実用的なビジネスインテリジェンスに変換します。姉妹ブランドのDSプラネットは、韓国国内の土地・建設現場の衛星モニタリングを提供しています。</span>
     </p>
     <div class="team-grid">
       <div class="team-card reveal">
         <div class="team-avatar" style="background: linear-gradient(135deg, #38BDF8, #818CF8);">
           <svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="1.5" width="36" height="36"><circle cx="12" cy="12" r="3"/><path d="M12 2v4M12 18v4M4.93 4.93l2.83 2.83M16.24 16.24l2.83 2.83M2 12h4M18 12h4M4.93 19.07l2.83-2.83M16.24 7.76l2.83-2.83"/></svg>
         </div>
-        <h3><span class="en">Satellite Analytics</span><span class="ko">위성 분석</span></h3>
-        <div class="team-role"><span class="en">GEOINT · Remote Sensing</span><span class="ko">GEOINT · 원격탐사</span></div>
-        <p class="team-desc"><span class="en">Multi-channel satellite data processing, atmospheric correction, and change detection across 6 independent sensor types.</span><span class="ko">6개 독립 센서 유형에 걸쳐 다채널 위성 데이터 처리, 대기 보정, 변화 탐지를 수행합니다.</span></p>
+        <h3><span class="en">Satellite Analytics</span><span class="ko">위성 분석</span><span class="ja">衛星分析</span></h3>
+        <div class="team-role"><span class="en">GEOINT · Remote Sensing</span><span class="ko">GEOINT · 원격탐사</span><span class="ja">GEOINT · リモートセンシング</span></div>
+        <p class="team-desc"><span class="en">Multi-channel satellite data processing, atmospheric correction, and change detection across 6 independent sensor types.</span><span class="ko">6개 독립 센서 유형에 걸쳐 다채널 위성 데이터 처리, 대기 보정, 변화 탐지를 수행합니다.</span><span class="ja">6種類の独立したセンサーにわたり、マルチチャネル衛星データ処理、大気補正、変化検出を行います。</span></p>
       </div>
       <div class="team-card reveal">
         <div class="team-avatar" style="background: linear-gradient(135deg, #F59E0B, #F97316);">
           <svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="1.5" width="36" height="36"><path d="M20.84 4.61a5.5 5.5 0 00-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 00-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 000-7.78z"/></svg>
         </div>
-        <h3><span class="en">Industry Research</span><span class="ko">산업 리서치</span></h3>
-        <div class="team-role"><span class="en">Semiconductor · Data Center</span><span class="ko">반도체 · 데이터센터</span></div>
-        <p class="team-desc"><span class="en">Deep expertise in fab economics, supply chain dynamics, and competitive intelligence — cross-referencing satellite signals with industry databases.</span><span class="ko">팹 경제성, 공급망 역학, 경쟁 인텔리전스 전문성으로 위성 신호와 산업 데이터베이스를 교차 검증합니다.</span></p>
+        <h3><span class="en">Industry Research</span><span class="ko">산업 리서치</span><span class="ja">産業リサーチ</span></h3>
+        <div class="team-role"><span class="en">Semiconductor · Data Center</span><span class="ko">반도체 · 데이터센터</span><span class="ja">半導体 · データセンター</span></div>
+        <p class="team-desc"><span class="en">Deep expertise in fab economics, supply chain dynamics, and competitive intelligence — cross-referencing satellite signals with industry databases.</span><span class="ko">팹 경제성, 공급망 역학, 경쟁 인텔리전스 전문성으로 위성 신호와 산업 데이터베이스를 교차 검증합니다.</span><span class="ja">ファブの経済性、サプライチェーンの動態、競合インテリジェンスの専門知識で、衛星シグナルと業界データベースをクロスチェックします。</span></p>
       </div>
       <div class="team-card reveal">
         <div class="team-avatar" style="background: linear-gradient(135deg, #22C55E, #14B8A6);">
           <svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="1.5" width="36" height="36"><rect x="2" y="3" width="20" height="14" rx="2"/><path d="M8 21h8M12 17v4"/></svg>
         </div>
-        <h3><span class="en">Platform Engineering</span><span class="ko">플랫폼 엔지니어링</span></h3>
-        <div class="team-role"><span class="en">Data Pipeline · Dashboard</span><span class="ko">데이터 파이프라인 · 대시보드</span></div>
-        <p class="team-desc"><span class="en">Automated satellite data ingestion, calibration, and scoring pipelines. Turning terabytes of raw imagery into actionable intelligence dashboards.</span><span class="ko">위성 데이터 자동 수집·보정·스코어링 파이프라인을 구축합니다. 테라바이트 원시 영상을 실행 가능한 인텔리전스 대시보드로 변환합니다.</span></p>
+        <h3><span class="en">Platform Engineering</span><span class="ko">플랫폼 엔지니어링</span><span class="ja">プラットフォーム・エンジニアリング</span></h3>
+        <div class="team-role"><span class="en">Data Pipeline · Dashboard</span><span class="ko">데이터 파이프라인 · 대시보드</span><span class="ja">データパイプライン · ダッシュボード</span></div>
+        <p class="team-desc"><span class="en">Automated satellite data ingestion, calibration, and scoring pipelines. Turning terabytes of raw imagery into actionable intelligence dashboards.</span><span class="ko">위성 데이터 자동 수집·보정·스코어링 파이프라인을 구축합니다. 테라바이트 원시 영상을 실행 가능한 인텔리전스 대시보드로 변환합니다.</span><span class="ja">衛星データの自動収集・補正・スコアリングのパイプラインを構築します。テラバイト級の生画像を実用的なインテリジェンス・ダッシュボードに変換します。</span></p>
       </div>
     </div>
   </div>
@@ -2423,18 +2457,18 @@ footer a:hover { color: #FFFFFF; }
     </defs>
   </svg>
   <div class="inner" style="position:relative;z-index:1;">
-    <div class="section-label" style="text-align:center;"><span class="en">Get Started</span><span class="ko">시작하기</span></div>
+    <div class="section-label" style="text-align:center;"><span class="en">Get Started</span><span class="ko">시작하기</span><span class="ja">はじめる</span></div>
     <h2 class="section-title reveal">
       <span class="en">Stop guessing.<br>Start seeing.</span>
-      <span class="ko">추측을 멈추세요.<br>직접 보세요.</span>
+      <span class="ko">추측을 멈추세요.<br>직접 보세요.</span><span class="ja">推測をやめて、<br>自分の目で確かめよう。</span>
     </h2>
     <p class="section-desc">
       <span class="en">3 reports published. 24 fabs tracked. 6 satellite channels running. Join the analysts, investors, and policymakers who verify semiconductor activity from orbit — not from press releases.</span>
-      <span class="ko">3건의 리포트 발행. 24개 팹 추적 중. 6개 위성 채널 가동 중. 보도자료가 아닌 궤도에서 반도체 현장을 검증하는 전문가 대열에 합류하세요.</span>
+      <span class="ko">3건의 리포트 발행. 24개 팹 추적 중. 6개 위성 채널 가동 중. 보도자료가 아닌 궤도에서 반도체 현장을 검증하는 전문가 대열에 합류하세요.</span><span class="ja">レポート3件発行。24ファブを追跡中。6つの衛星チャネルが稼働中。プレスリリースではなく軌道から半導体の現場を検証する専門家の仲間に加わりましょう。</span>
     </p>
     <div class="hero-actions">
-      <a href="#" onclick="openModal();return false;" class="btn btn-primary"><span class="en">Join the Waitlist</span><span class="ko">대기 등록하기</span></a>
-      <a href="#" onclick="openModal();return false;" class="btn btn-outline"><span class="en">Request Enterprise Demo</span><span class="ko">기업 도입 데모 요청</span></a>
+      <a href="#" onclick="openModal();return false;" class="btn btn-primary"><span class="en">Join the Waitlist</span><span class="ko">대기 등록하기</span><span class="ja">ウェイトリストに登録</span></a>
+      <a href="#" onclick="openModal();return false;" class="btn btn-outline"><span class="en">Request Enterprise Demo</span><span class="ko">기업 도입 데모 요청</span><span class="ja">法人向けデモを依頼</span></a>
     </div>
   </div>
 </section>
@@ -2450,14 +2484,14 @@ footer a:hover { color: #FFFFFF; }
       </div>
       <p class="modal-subtitle">
         <span class="en">Privacy Policy</span>
-        <span class="ko">개인정보처리방침</span>
+        <span class="ko">개인정보처리방침</span><span class="ja">プライバシーポリシー</span>
       </p>
     </div>
     <div class="modal-body">
       <div class="legal-content">
         <div class="effective">
           <span class="en">Effective: November 19, 2026</span>
-          <span class="ko">시행일: 2026년 11월 19일</span>
+          <span class="ko">시행일: 2026년 11월 19일</span><span class="ja">施行日：2026年11月19日</span>
         </div>
         <span class="en">
         <h3>1. Data controller</h3>
@@ -2530,6 +2564,42 @@ footer a:hover { color: #FFFFFF; }
         <p>FabWatch는 사이트 기능을 위한 필수 쿠키와 익명 이용 통계를 위한 Google Analytics(GA4)를 사용합니다. 브라우저 설정에서 비필수 쿠키를 비활성화할 수 있으며, 쿠키 비활성화 시 일부 기능이 제한될 수 있습니다.</p>
         <h3>9. 방침 변경</h3>
         <p>중요한 변경사항은 시행 최소 7일 전에 이메일 또는 사이트 공지를 통해 안내합니다. 시행일 이후 계속 이용 시 변경에 동의한 것으로 간주합니다.</p>
+        </span><span class="ja">
+        <h3>1. 個人情報取扱事業者</h3>
+        <p>FabWatchは株式会社エイティーエス（ATS、代表 ソン・ウヨン）が運営しています。所在地：大韓民国 京畿道 広州市 梧浦安路321-7、事業者登録番号：758-86-03148。個人情報に関するお問い合わせ：<a href="mailto:contact@fabwatch.co.kr" style="color:var(--accent);">contact@fabwatch.co.kr</a></p>
+        <h3>2. 収集する個人情報</h3>
+        <p>サービス提供に必要な最小限の情報のみを収集します：</p>
+        <ul>
+          <li><strong>会員登録：</strong>氏名、メールアドレス、会社名（任意）、パスワード（暗号化して保存）</li>
+          <li><strong>ニュースレター購読：</strong>メールアドレス</li>
+          <li><strong>サービス利用：</strong>アクセスログ、IPアドレス、ブラウザの種類、閲覧ページ</li>
+          <li><strong>Cookie：</strong>セッションCookieおよび分析用Cookie（Google Analytics）</li>
+        </ul>
+        <h3>3. 利用目的</h3>
+        <ul>
+          <li>アカウント作成および本人確認</li>
+          <li>モニタリング・ダッシュボードおよび分析レポートの提供</li>
+          <li>ニュースレターおよびサービス通知の送信</li>
+          <li>利用統計によるサービス改善</li>
+          <li>お問い合わせへの対応</li>
+        </ul>
+        <h3>4. 保有期間および廃棄</h3>
+        <p>個人情報はサービス利用期間中保有します。退会時には30日以内にすべての個人情報を完全に削除します。ただし、関係法令により保存が必要な場合（電子商取引の記録：5年など）は、その期間まで保管します。</p>
+        <h3>5. 第三者提供</h3>
+        <p>個人情報を販売・交換・貸与することはありません。以下の場合に限り共有されることがあります：</p>
+        <ul>
+          <li><strong>Google Analytics：</strong>匿名化された利用統計（サービス改善の目的）</li>
+          <li><strong>決済代行会社：</strong>有料購読の決済情報の処理（カード情報は当社に保存しません）</li>
+        </ul>
+        <h3>6. 利用者の権利</h3>
+        <p>利用者はいつでも、ご自身の個人情報の閲覧・訂正・削除の請求、取扱いへの同意の撤回、データポータビリティの請求、通信の受信拒否を行うことができます。<a href="mailto:contact@fabwatch.co.kr" style="color:var(--accent);">contact@fabwatch.co.kr</a>までご連絡いただくか、アプリ内の設定から直接手続きしてください。</p>
+        <h3>7. 情報セキュリティ</h3>
+        <p>HTTPS暗号化、パスワードのハッシュ化保存、アクセス権限の管理、定期的なセキュリティ点検など、業界標準のセキュリティ対策を講じています。</p>
+        <h3>8. Cookieおよびトラッキング</h3>
+        <p>FabWatchは、サイト機能に必要なCookieと、匿名の利用統計のためのGoogle Analytics（GA4）を使用しています。ブラウザの設定で必須でないCookieを無効にできますが、その場合一部の機能が制限されることがあります。</p>
+        <h3>9. ポリシーの変更</h3>
+        <p>重要な変更は、施行の7日以上前にメールまたはサイト上のお知らせでご案内します。施行日以降もご利用を続けた場合、変更に同意したものとみなします。</p>
+        <p><small>本ポリシーは韓国語版を正本とし、日本語版は参考訳です。</small></p>
         </span>
       </div>
     </div>
@@ -2547,14 +2617,14 @@ footer a:hover { color: #FFFFFF; }
       </div>
       <p class="modal-subtitle">
         <span class="en">Terms of Service</span>
-        <span class="ko">이용약관</span>
+        <span class="ko">이용약관</span><span class="ja">利用規約</span>
       </p>
     </div>
     <div class="modal-body">
       <div class="legal-content">
         <div class="effective">
           <span class="en">Effective: November 19, 2026</span>
-          <span class="ko">시행일: 2026년 11월 19일</span>
+          <span class="ko">시행일: 2026년 11월 19일</span><span class="ja">施行日：2026年11月19日</span>
         </div>
         <span class="en">
         <h3>1. Service overview</h3>
@@ -2631,6 +2701,44 @@ footer a:hover { color: #FFFFFF; }
         <p>본 약관은 대한민국 법률의 적용을 받습니다. 분쟁은 수원지방법원의 전속 관할로 합니다.</p>
         <h3>12. 약관 변경</h3>
         <p>약관 변경 시 최소 7일 전 이메일 또는 사이트 공지를 통해 안내합니다. 시행일 이후 계속 이용 시 변경에 동의한 것으로 간주합니다.</p>
+        </span><span class="ja">
+        <h3>1. サービス概要</h3>
+        <p>FabWatchは、半導体ファブとAIデータセンターを対象とした衛星ベースのモニタリング・インテリジェンスを提供します。サービスにはWebダッシュボード、分析レポート、データAPI、メール通知が含まれます。FabWatchは株式会社エイティーエス（ATS）が運営しています。</p>
+        <h3>2. 規約への同意</h3>
+        <p>アカウントを作成し、またはFabWatchを利用することで、本利用規約に同意したものとみなされます。同意いただけない場合は、サービスをご利用にならないでください。法人会員の場合、登録者が所属組織を代理して規約に同意したものとみなします。</p>
+        <h3>3. アカウントの責任</h3>
+        <ul>
+          <li>正確な登録情報を提供する必要があります</li>
+          <li>アカウントの認証情報の管理責任は利用者にあります</li>
+          <li>不正利用を発見した場合は直ちに通知する必要があります</li>
+          <li>1人につき1アカウント。法人アカウントは複数の許可ユーザーが利用可能</li>
+        </ul>
+        <h3>4. 料金プランと支払い</h3>
+        <p><strong>Free：</strong>公開ファブデータへの限定アクセス、月次ハイライトレポート、ニュースレター。<strong>Pro（月額199ドル）：</strong>フルダッシュボード、週次更新、メールアラート、基本API。<strong>Enterprise（月額999ドル〜）：</strong>カスタムファブ、フルAPI、専任アナリスト、元の衛星データ。価格は米ドル建て・税別です。有料購読は自動更新され、次回の請求サイクル前であればいつでも解約できます。</p>
+        <h3>5. データの出典と正確性</h3>
+        <p>FabWatchは、NASA VIIRS、ESAコペルニクス（Sentinel-1、Sentinel-2、Sentinel-5P）、USGSランドサットの公開衛星データを使用しています。正確性に努めていますが、衛星ベースのインサイトはリモートセンシング分析に基づく推定値であり、投資または事業判断の唯一の根拠として使用すべきではありません。データまたは分析の正確性、完全性、適時性を保証するものではありません。</p>
+        <h3>6. 知的財産権</h3>
+        <p>分析レポート、ダッシュボードのデザイン、スコアリング・アルゴリズム、独自データセットなど、FabWatchのすべてのコンテンツは株式会社エイティーエスに帰属します。基礎となる衛星画像は、各機関（NASA、ESA、USGS）のオープンデータライセンスに従います。書面による許可なく、FabWatchのコンテンツを再配布、再販売、または公開掲載することはできません。</p>
+        <h3>7. 禁止事項</h3>
+        <p>以下の行為を禁止します：</p>
+        <ul>
+          <li>違法な目的または関係法令に違反する目的でのサービス利用</li>
+          <li>APIの制限を超えるリバースエンジニアリング、スクレイピング、データ抽出の試み</li>
+          <li>アカウント認証情報の共有または不正アクセスの許可</li>
+          <li>相場操縦やインサイダー取引へのサービスの利用</li>
+          <li>許可なくFabWatchのデータを再販売または再配布すること</li>
+        </ul>
+        <h3>8. 免責事項</h3>
+        <p>サービスは「現状有姿」で提供され、いかなる種類の保証も行いません。株式会社エイティーエスは、商品性、特定目的への適合性、非侵害を含む、明示または黙示のすべての保証を否認します。衛星データは、天候、センサーの稼働状況、処理の遅延の影響を受ける場合があります。</p>
+        <h3>9. 責任の制限</h3>
+        <p>適用法令が許す最大限の範囲で、株式会社エイティーエスは、サービスの利用によって生じた間接的、付随的、特別または結果的な損害（投資損失、逸失利益、データ損失を含む）について責任を負いません。当社の責任の総額は、請求発生前12か月間に利用者が支払った料金を上限とします。</p>
+        <h3>10. 契約の解除</h3>
+        <p>いずれの当事者もいつでも解約できます。規約に違反したアカウントは、停止または解約されることがあります。解約時にはサービスへのアクセスが停止され、30日間はデータのエクスポートが可能です。</p>
+        <h3>11. 準拠法</h3>
+        <p>本規約は大韓民国の法律に準拠します。紛争は水原地方法院を専属的合意管轄裁判所とします。</p>
+        <h3>12. 規約の変更</h3>
+        <p>規約を変更する場合は、7日以上前にメールまたはサイト上のお知らせでご案内します。施行日以降もご利用を続けた場合、変更に同意したものとみなします。</p>
+        <p><small>本規約は韓国語版を正本とし、日本語版は参考訳です。</small></p>
         </span>
       </div>
     </div>
@@ -2650,21 +2758,21 @@ footer a:hover { color: #FFFFFF; }
       </div>
       <p class="modal-subtitle">
         <span class="en">Launching Q1 2027 — join the waitlist for early access</span>
-        <span class="ko">2027년 1분기 출시 예정 — 얼리 액세스 대기 등록</span>
+        <span class="ko">2027년 1분기 출시 예정 — 얼리 액세스 대기 등록</span><span class="ja">2027年第1四半期リリース予定 — アーリーアクセスのウェイトリストに登録</span>
       </p>
     </div>
     <div class="modal-body">
       <div id="waitlist-form">
         <div class="form-group">
-          <label class="form-label"><span class="en">Name</span><span class="ko">이름</span></label>
+          <label class="form-label"><span class="en">Name</span><span class="ko">이름</span><span class="ja">お名前</span></label>
           <input type="text" class="form-input" id="wl-name" placeholder="">
         </div>
         <div class="form-group">
-          <label class="form-label"><span class="en">Work Email</span><span class="ko">업무 이메일</span></label>
+          <label class="form-label"><span class="en">Work Email</span><span class="ko">업무 이메일</span><span class="ja">勤務先メールアドレス</span></label>
           <input type="email" class="form-input" id="wl-email" placeholder="name@company.com">
         </div>
         <div class="form-group">
-          <label class="form-label"><span class="en">Role</span><span class="ko">직종</span></label>
+          <label class="form-label"><span class="en">Role</span><span class="ko">직종</span><span class="ja">職種</span></label>
           <select class="form-input" id="wl-role" style="cursor:pointer;">
             <option value="" disabled selected><span class="en">Select your role</span></option>
             <option value="analyst">Analyst / 애널리스트</option>
@@ -2677,26 +2785,26 @@ footer a:hover { color: #FFFFFF; }
           </select>
         </div>
         <div class="form-group">
-          <label class="form-label"><span class="en">Company <span style="opacity:.5">(optional)</span></span><span class="ko">소속 <span style="opacity:.5">(선택)</span></span></label>
+          <label class="form-label"><span class="en">Company <span style="opacity:.5">(optional)</span></span><span class="ko">소속 <span style="opacity:.5">(선택)</span></span><span class="ja">所属 <span style="opacity:.5">（任意）</span></span></label>
           <input type="text" class="form-input" id="wl-company" placeholder="">
         </div>
         <button class="form-submit" onclick="submitWaitlist(event)">
-          <span class="en">Join the Waitlist</span><span class="ko">대기 등록하기</span>
+          <span class="en">Join the Waitlist</span><span class="ko">대기 등록하기</span><span class="ja">ウェイトリストに登録</span>
         </button>
         <p style="text-align:center;font-size:12px;color:#94A3B8;margin-top:12px;line-height:1.6;">
           <span class="en">We'll notify you when early access opens. No spam, unsubscribe anytime.</span>
-          <span class="ko">얼리 액세스가 시작되면 알려드립니다. 스팸 없음, 언제든 수신 거부 가능.</span>
+          <span class="ko">얼리 액세스가 시작되면 알려드립니다. 스팸 없음, 언제든 수신 거부 가능.</span><span class="ja">アーリーアクセス開始時にお知らせします。スパムは送りません。いつでも配信停止できます。</span>
         </p>
       </div>
       <div id="waitlist-success" style="display:none;text-align:center;padding:24px 0;">
         <div style="font-size:48px;margin-bottom:16px;">&#10003;</div>
         <h3 style="font-size:20px;font-weight:700;margin-bottom:8px;">
           <span class="en">You're on the list!</span>
-          <span class="ko">등록이 완료되었습니다!</span>
+          <span class="ko">등록이 완료되었습니다!</span><span class="ja">登録が完了しました！</span>
         </h3>
         <p style="color:#94A3B8;font-size:14px;line-height:1.6;">
           <span class="en">We'll send you an email when early access is available.<br>Thank you for your interest in FabWatch.</span>
-          <span class="ko">얼리 액세스가 시작되면 이메일로 안내드리겠습니다.<br>FabWatch에 관심 가져주셔서 감사합니다.</span>
+          <span class="ko">얼리 액세스가 시작되면 이메일로 안내드리겠습니다.<br>FabWatch에 관심 가져주셔서 감사합니다.</span><span class="ja">アーリーアクセスの準備ができ次第、メールでご案内します。<br>FabWatchにご関心をお寄せいただき、ありがとうございます。</span>
         </p>
       </div>
     </div>
@@ -2708,11 +2816,11 @@ footer a:hover { color: #FFFFFF; }
   <div class="inner">
     <span class="pb-label">
       <span class="en">A service of</span>
-      <span class="ko">운영사:</span>
+      <span class="ko">운영사:</span><span class="ja">運営：</span>
     </span>
     <a class="pb-link" href="http://allths.com/sh_page/page33.php" target="_blank" rel="noopener">
       <span class="en">ATS Inc. — Thermal Interface Materials Solution Provider</span>
-      <span class="ko">(주)에이티에스 — 방열소재 솔루션 기업</span>
+      <span class="ko">(주)에이티에스 — 방열소재 솔루션 기업</span><span class="ja">株式会社エイティーエス — 放熱材料ソリューション企業</span>
       <span class="pb-arrow">↗</span>
     </a>
   </div>
@@ -2727,32 +2835,32 @@ footer a:hover { color: #FFFFFF; }
           <span class="logo-icon"><svg viewBox="0 0 24 24" fill="none" stroke="#0B1628" stroke-width="2.5" stroke-linecap="round" width="16" height="16"><circle cx="12" cy="12" r="3"/><path d="M12 2v4M12 18v4M4.93 4.93l2.83 2.83M16.24 16.24l2.83 2.83M2 12h4M18 12h4M4.93 19.07l2.83-2.83M16.24 7.76l2.83-2.83"/></svg></span>
           FabWatch
         </div>
-        <p><span class="en">Satellite intelligence for the semiconductor industry. Monitoring 24 fabs in 6 countries and the EU with 6 independent satellite channels.</span><span class="ko">반도체 산업을 위한 위성 인텔리전스. 6개국과 EU의 24개 팹을 6개 독립 위성 채널로 모니터링합니다.</span></p>
+        <p><span class="en">Satellite intelligence for the semiconductor industry. Monitoring 24 fabs in 6 countries and the EU with 6 independent satellite channels.</span><span class="ko">반도체 산업을 위한 위성 인텔리전스. 6개국과 EU의 24개 팹을 6개 독립 위성 채널로 모니터링합니다.</span><span class="ja">半導体産業のための衛星インテリジェンス。6か国とEUの24ファブを、6つの独立した衛星チャネルでモニタリングしています。</span></p>
       </div>
       <div class="footer-col">
-        <h4><span class="en">Product</span><span class="ko">서비스</span></h4>
+        <h4><span class="en">Product</span><span class="ko">서비스</span><span class="ja">サービス</span></h4>
         <ul>
-          <li><a href="#services"><span class="en">Dashboard</span><span class="ko">대시보드</span></a></li>
-          <li><a href="#services"><span class="en">Reports</span><span class="ko">리포트</span></a></li>
-          <li><a href="#pricing"><span class="en">Pricing</span><span class="ko">요금제</span></a></li>
-          <li><a href="#demo"><span class="en">Live Demo</span><span class="ko">데모</span></a></li>
+          <li><a href="#services"><span class="en">Dashboard</span><span class="ko">대시보드</span><span class="ja">ダッシュボード</span></a></li>
+          <li><a href="#services"><span class="en">Reports</span><span class="ko">리포트</span><span class="ja">レポート</span></a></li>
+          <li><a href="#pricing"><span class="en">Pricing</span><span class="ko">요금제</span><span class="ja">料金</span></a></li>
+          <li><a href="#demo"><span class="en">Live Demo</span><span class="ko">데모</span><span class="ja">デモ</span></a></li>
         </ul>
       </div>
       <div class="footer-col">
-        <h4><span class="en">Company</span><span class="ko">회사</span></h4>
+        <h4><span class="en">Company</span><span class="ko">회사</span><span class="ja">会社</span></h4>
         <ul>
-          <li><a href="#team"><span class="en">About Us</span><span class="ko">팀 소개</span></a></li>
-          <li><a href="#insights"><span class="en">Blog</span><span class="ko">블로그</span></a></li>
-          <li><a href="#usecases"><span class="en">Use Cases</span><span class="ko">활용 사례</span></a></li>
-          <li><a href="#faq"><span class="en">FAQ</span><span class="ko">FAQ</span></a></li>
+          <li><a href="#team"><span class="en">About Us</span><span class="ko">팀 소개</span><span class="ja">チーム紹介</span></a></li>
+          <li><a href="#insights"><span class="en">Blog</span><span class="ko">블로그</span><span class="ja">ブログ</span></a></li>
+          <li><a href="#usecases"><span class="en">Use Cases</span><span class="ko">활용 사례</span><span class="ja">活用事例</span></a></li>
+          <li><a href="#faq"><span class="en">FAQ</span><span class="ko">FAQ</span><span class="ja">FAQ</span></a></li>
         </ul>
       </div>
       <div class="footer-col">
-        <h4><span class="en">Legal</span><span class="ko">법적 고지</span></h4>
+        <h4><span class="en">Legal</span><span class="ko">법적 고지</span><span class="ja">法的情報</span></h4>
         <ul>
-          <li><a href="#" onclick="openLegal('privacyModal');return false;"><span class="en">Privacy Policy</span><span class="ko">개인정보처리방침</span></a></li>
-          <li><a href="#" onclick="openLegal('termsModal');return false;"><span class="en">Terms of Service</span><span class="ko">이용약관</span></a></li>
-          <li><a href="#" onclick="openLegal('privacyModal');return false;"><span class="en">Data Sources</span><span class="ko">데이터 출처</span></a></li>
+          <li><a href="#" onclick="openLegal('privacyModal');return false;"><span class="en">Privacy Policy</span><span class="ko">개인정보처리방침</span><span class="ja">プライバシーポリシー</span></a></li>
+          <li><a href="#" onclick="openLegal('termsModal');return false;"><span class="en">Terms of Service</span><span class="ko">이용약관</span><span class="ja">利用規約</span></a></li>
+          <li><a href="#" onclick="openLegal('privacyModal');return false;"><span class="en">Data Sources</span><span class="ko">데이터 출처</span><span class="ja">データの出典</span></a></li>
           <li><a href="mailto:contact@fabwatch.co.kr">contact@fabwatch.co.kr</a></li>
           <li><a href="https://github.com/panco88/fabwatch" target="_blank" rel="noopener">GitHub</a></li>
         </ul>
@@ -2761,16 +2869,16 @@ footer a:hover { color: #FFFFFF; }
     <div class="footer-bottom" style="flex-direction:column;align-items:flex-start;gap:8px;">
       <span style="color:#64748B;font-size:12px;line-height:1.6;">
         <span class="en">Operated by ATS Inc. (주식회사 에이티에스) · CEO: Wooyeon Son · Biz No. 758-86-03148<br>321-7, Opoan-ro, Gwangju-si, Gyeonggi-do, Republic of Korea</span>
-        <span class="ko">운영: 주식회사 에이티에스(ATS) · 대표: 손우연 · 사업자등록번호: 758-86-03148<br>경기도 광주시 오포안로 321-7(추자동)</span>
+        <span class="ko">운영: 주식회사 에이티에스(ATS) · 대표: 손우연 · 사업자등록번호: 758-86-03148<br>경기도 광주시 오포안로 321-7(추자동)</span><span class="ja">運営：株式会社エイティーエス（ATS）· 代表：ソン・ウヨン · 事業者登録番号：758-86-03148<br>大韓民国 京畿道 広州市 梧浦安路321-7（楸子洞）</span>
       </span>
       <div style="display:flex;justify-content:space-between;width:100%;flex-wrap:wrap;gap:8px;">
         <span>
           <span class="en">&copy; 2026 ATS Inc. All rights reserved.</span>
-          <span class="ko">&copy; 2026 주식회사 에이티에스. All rights reserved.</span>
+          <span class="ko">&copy; 2026 주식회사 에이티에스. All rights reserved.</span><span class="ja">&copy; 2026 株式会社エイティーエス. All rights reserved.</span>
         </span>
         <span style="color:#475569;">
           <span class="en">Data: NASA VIIRS · ESA Copernicus · USGS Landsat</span>
-          <span class="ko">데이터: NASA VIIRS · ESA Copernicus · USGS Landsat</span>
+          <span class="ko">데이터: NASA VIIRS · ESA Copernicus · USGS Landsat</span><span class="ja">データ：NASA VIIRS · ESA Copernicus · USGS Landsat</span>
         </span>
       </div>
     </div>
@@ -2779,16 +2887,18 @@ footer a:hover { color: #FFFFFF; }
 
 <script>
 function getLang() {
-  try { return localStorage.getItem('fabwatch-lang') || 'en'; } catch(e) { return 'en'; }
+  try { var l = localStorage.getItem('fabwatch-lang'); return (l === 'ko' || l === 'ja' || l === 'en') ? l : 'en'; } catch(e) { return 'en'; }
 }
 function setLang(lang) {
   document.documentElement.setAttribute('data-lang', lang);
   try { localStorage.setItem('fabwatch-lang', lang); } catch(e) {}
-  var btn = document.querySelector('.lang-toggle');
-  if (btn) btn.textContent = lang === 'en' ? 'KO / EN' : 'EN / KO';
+  document.documentElement.lang = lang;
+  var sel = document.querySelector('.lang-toggle');
+  if (sel) sel.value = lang;
 }
 function toggleLang() {
-  setLang(getLang() === 'en' ? 'ko' : 'en');
+  var order = ['en', 'ko', 'ja'];
+  setLang(order[(order.indexOf(getLang()) + 1) % order.length]);
 }
 setLang(getLang());
 
@@ -2811,13 +2921,13 @@ function submitWaitlist(e) {
   var role = document.getElementById('wl-role').value;
   var company = document.getElementById('wl-company').value.trim();
   if (!name || !email) {
-    alert(getLang() === 'ko' ? '이름과 이메일을 입력해주세요.' : 'Please enter your name and email.');
+    alert(({ko:'이름과 이메일을 입력해주세요.', ja:'お名前とメールアドレスを入力してください。'})[getLang()] || 'Please enter your name and email.');
     return;
   }
   var btn = document.querySelector('#waitlist-form .form-submit');
   btn.disabled = true;
   btn.style.opacity = '0.6';
-  btn.innerHTML = getLang() === 'ko' ? '등록 중...' : 'Submitting...';
+  btn.innerHTML = ({ko:'등록 중...', ja:'登録中...'})[getLang()] || 'Submitting...';
   if (WAITLIST_URL.indexOf('%%') === -1) {
     fetch(WAITLIST_URL, {
       method: 'POST', mode: 'no-cors',
@@ -2891,7 +3001,7 @@ function filterFabs(btn, country) {
 function handleNewsletter() {
   var email = document.getElementById('nl-email').value.trim();
   if (!email || email.indexOf('@') < 1) {
-    alert(getLang() === 'ko' ? '이메일을 입력해주세요.' : 'Please enter a valid email.');
+    alert(({ko:'이메일을 입력해주세요.', ja:'メールアドレスを入力してください。'})[getLang()] || 'Please enter a valid email.');
     return;
   }
   var btn = document.querySelector('.nl-btn');
@@ -2963,11 +3073,11 @@ var selectedFabIdx = 0;
 var currentChannel = 0;
 var channelTimer = null;
 var CHANNELS = [
-  {key:'nl', labelEn:'Nightlight Index', labelKo:'야간조명 지수', color:'var(--accent)', unit:'nW/cm²/sr'},
-  {key:'sarArr', labelEn:'SAR Backscatter', labelKo:'SAR 백스캐터', color:'var(--accent-warm)', unit:'dB'},
-  {key:'thermalArr', labelEn:'Thermal IR', labelKo:'열적외선 온도', color:'#EF4444', unit:'°C'},
-  {key:'no2Arr', labelEn:'NO₂ Emissions', labelKo:'NO₂ 배출량', color:'#A78BFA', unit:'×10⁻⁵'},
-  {key:'ndviArr', labelEn:'NDVI Vegetation', labelKo:'NDVI 식생지수', color:'#4ADE80', unit:''}
+  {key:'nl', labelEn:'Nightlight Index', labelKo:'야간조명 지수', labelJa:'夜間光指数', color:'var(--accent)', unit:'nW/cm²/sr'},
+  {key:'sarArr', labelEn:'SAR Backscatter', labelKo:'SAR 백스캐터', labelJa:'SAR 後方散乱', color:'var(--accent-warm)', unit:'dB'},
+  {key:'thermalArr', labelEn:'Thermal IR', labelKo:'열적외선 온도', labelJa:'熱赤外 温度', color:'#EF4444', unit:'°C'},
+  {key:'no2Arr', labelEn:'NO₂ Emissions', labelKo:'NO₂ 배출량', labelJa:'NO₂ 排出量', color:'#A78BFA', unit:'×10⁻⁵'},
+  {key:'ndviArr', labelEn:'NDVI Vegetation', labelKo:'NDVI 식생지수', labelJa:'NDVI 植生指数', color:'#4ADE80', unit:''}
 ];
 
 function renderDemoData() {
@@ -3021,19 +3131,19 @@ function renderStats() {
   var critical = FABS.filter(function(f){return f.nlChange<-15;}).length;
   document.getElementById('demo-stats-row').innerHTML =
     '<div class="demo-stat-card">' +
-      '<div class="demo-stat-label"><span class="en">Active Fabs</span><span class="ko">가동 중</span></div>' +
+      '<div class="demo-stat-label"><span class="en">Active Fabs</span><span class="ko">가동 중</span><span class="ja">稼働中</span></div>' +
       '<div class="demo-stat-val">' + op + '</div>' +
-      '<div class="demo-stat-delta" style="color:var(--accent-green);"><span class="en">+' + ramp + ' ramping</span><span class="ko">' + ramp + '곳 램프업</span></div>' +
+      '<div class="demo-stat-delta" style="color:var(--accent-green);"><span class="en">+' + ramp + ' ramping</span><span class="ko">' + ramp + '곳 램프업</span><span class="ja">' + ramp + 'か所ランプアップ</span></div>' +
     '</div>' +
     '<div class="demo-stat-card">' +
-      '<div class="demo-stat-label"><span class="en">Under Construction</span><span class="ko">건설 중</span></div>' +
+      '<div class="demo-stat-label"><span class="en">Under Construction</span><span class="ko">건설 중</span><span class="ja">建設中</span></div>' +
       '<div class="demo-stat-val">' + con + '</div>' +
-      '<div class="demo-stat-delta" style="color:var(--accent-warm);"><span class="en">' + con + ' new fabs</span><span class="ko">' + con + '곳 신규</span></div>' +
+      '<div class="demo-stat-delta" style="color:var(--accent-warm);"><span class="en">' + con + ' new fabs</span><span class="ko">' + con + '곳 신규</span><span class="ja">' + con + 'か所新規</span></div>' +
     '</div>' +
     '<div class="demo-stat-card">' +
-      '<div class="demo-stat-label"><span class="en">Alerts (7d)</span><span class="ko">알림 (7일)</span></div>' +
+      '<div class="demo-stat-label"><span class="en">Alerts (7d)</span><span class="ko">알림 (7일)</span><span class="ja">アラート（7日）</span></div>' +
       '<div class="demo-stat-val" style="color:var(--accent-warm);">' + alerts + '</div>' +
-      '<div class="demo-stat-delta" style="color:var(--accent-red);"><span class="en">' + critical + ' critical</span><span class="ko">' + critical + '건 주의</span></div>' +
+      '<div class="demo-stat-delta" style="color:var(--accent-red);"><span class="en">' + critical + ' critical</span><span class="ko">' + critical + '건 주의</span><span class="ja">' + critical + '件 要注意</span></div>' +
     '</div>';
 }
 
@@ -3067,7 +3177,7 @@ function renderChart(idx, chIdx) {
   if (maxVal === 0) maxVal = 1;
   var titleEl = document.getElementById('demo-chart-title');
   if (titleEl) {
-    titleEl.innerHTML = '<span class="en">' + ch.labelEn + ' — ' + fab.name + '</span><span class="ko">' + ch.labelKo + ' — ' + fab.name + '</span>';
+    titleEl.innerHTML = '<span class="en">' + ch.labelEn + ' — ' + fab.name + '</span><span class="ko">' + ch.labelKo + ' — ' + fab.name + '</span><span class="ja">' + ch.labelJa + ' — ' + fab.name + '</span>';
   }
   var barsEl = document.getElementById('demo-chart-bars');
   var html = '';
@@ -3113,18 +3223,18 @@ function renderFabList(country, chIdx) {
   var el = document.getElementById('demo-fab-table');
   var ch = CHANNELS[chIdx];
   var headerHTML = '<div class="demo-fab-header">' +
-    '<span><span class="en">Fab</span><span class="ko">팹</span></span>' +
-    '<span><span class="en">Status</span><span class="ko">상태</span></span>' +
-    '<span><span class="en">' + ch.labelEn.split(' ')[0] + '</span><span class="ko">' + ch.labelKo.split(' ')[0] + '</span></span>' +
-    '<span><span class="en">MoM</span><span class="ko">전월비</span></span>' +
+    '<span><span class="en">Fab</span><span class="ko">팹</span><span class="ja">ファブ</span></span>' +
+    '<span><span class="en">Status</span><span class="ko">상태</span><span class="ja">ステータス</span></span>' +
+    '<span><span class="en">' + ch.labelEn.split(' ')[0] + '</span><span class="ko">' + ch.labelKo.split(' ')[0] + '</span><span class="ja">' + ch.labelJa.split(' ')[0] + '</span></span>' +
+    '<span><span class="en">MoM</span><span class="ko">전월비</span><span class="ja">前月比</span></span>' +
   '</div>';
   var fabs = country === 'all' ? FABS : FABS.filter(function(f){return f.country===country;});
   var html = headerHTML;
   fabs.forEach(function(fab) {
-    var statusColor, statusEn, statusKo;
-    if (fab.status === 'operating') { statusColor='var(--accent-green)'; statusEn='Operating'; statusKo='가동 중'; }
-    else if (fab.status === 'construction') { statusColor='var(--accent-warm)'; statusEn='Building'; statusKo='건설 중'; }
-    else { statusColor='var(--accent)'; statusEn='Ramping'; statusKo='램프업'; }
+    var statusColor, statusEn, statusKo, statusJa;
+    if (fab.status === 'operating') { statusColor='var(--accent-green)'; statusEn='Operating'; statusKo='가동 중'; statusJa='稼働中'; }
+    else if (fab.status === 'construction') { statusColor='var(--accent-warm)'; statusEn='Building'; statusKo='건설 중'; statusJa='建設中'; }
+    else { statusColor='var(--accent)'; statusEn='Ramping'; statusKo='램프업'; statusJa='ランプアップ'; }
     var cv = getChannelVal(fab, chIdx);
     var valColor = ch.color;
     var chgColor = cv.change > 5 ? 'var(--accent-green)' : cv.change < -5 ? 'var(--accent-red)' : 'var(--fg-muted)';
@@ -3132,7 +3242,7 @@ function renderFabList(country, chIdx) {
     var idx = FABS.indexOf(fab);
     html += '<div class="demo-fab-row" data-country="' + fab.country + '" onclick="selectFab(' + idx + ')" style="cursor:pointer;">' +
       '<span>' + fab.name + '</span>' +
-      '<span class="demo-status"><span class="dot" style="background:' + statusColor + ';"></span> <span class="en">' + statusEn + '</span><span class="ko">' + statusKo + '</span></span>' +
+      '<span class="demo-status"><span class="dot" style="background:' + statusColor + ';"></span> <span class="en">' + statusEn + '</span><span class="ko">' + statusKo + '</span><span class="ja">' + statusJa + '</span></span>' +
       '<span style="color:' + valColor + ';">' + cv.val + '</span>' +
       '<span style="color:' + chgColor + ';">' + chgStr + '</span>' +
     '</div>';
@@ -3187,15 +3297,15 @@ function renderAlerts() {
     if (fab.status === 'ramping' && fab.nlChange > 30) {
       alerts.push({fab:fab, type:'milestone', icon:'📊', color:'#38BDF8', bgColor:'rgba(56,189,248,0.08)', borderColor:'rgba(56,189,248,0.2)',
         en:'Ramp-up +' + fab.nlChange + '%', ko:'램프업 +' + fab.nlChange + '%',
-        detailEn:'Strong ramp-up signal', detailKo:'강한 램프업 신호'});
+        detailEn:'Strong ramp-up signal', detailKo:'강한 램프업 신호', ja:'ランプアップ +' + fab.nlChange + '%', detailJa:'強いランプアップのシグナル'});
     } else if (fab.nlChange < -15) {
       alerts.push({fab:fab, type:'critical', icon:'⚠', color:'#EF4444', bgColor:'rgba(239,68,68,0.08)', borderColor:'rgba(239,68,68,0.2)',
         en:'Nightlight drop ' + fab.nlChange + '%', ko:'야간조명 ' + fab.nlChange + '% 하락',
-        detailEn:'Possible utilization cut', detailKo:'가동률 하락 가능성'});
+        detailEn:'Possible utilization cut', detailKo:'가동률 하락 가능성', ja:'夜間光 ' + fab.nlChange + '% 低下', detailJa:'稼働率低下の可能性'});
     } else if (fab.status === 'construction' && fab.nlChange > 25) {
       alerts.push({fab:fab, type:'progress', icon:'⚡', color:'#FBBF24', bgColor:'rgba(245,158,11,0.08)', borderColor:'rgba(245,158,11,0.2)',
         en:'Construction +' + fab.nlChange + '%', ko:'건설 진척 +' + fab.nlChange + '%',
-        detailEn:'Ahead of schedule', detailKo:'일정 앞섬'});
+        detailEn:'Ahead of schedule', detailKo:'일정 앞섬', ja:'建設進捗 +' + fab.nlChange + '%', detailJa:'予定より前倒し'});
     }
   });
   var stableFabs = FABS.filter(function(f){return Math.abs(f.nlChange)<3 && f.status==='operating';});
@@ -3203,17 +3313,17 @@ function renderAlerts() {
     var sf = stableFabs[0];
     alerts.push({fab:sf, type:'stable', icon:'✓', color:'#4ADE80', bgColor:'rgba(34,197,94,0.08)', borderColor:'rgba(34,197,94,0.2)',
       en:'Stable at ' + (sf.nl.length > 0 ? sf.nl[sf.nl.length-1] : 0).toFixed(0), ko:(sf.nl.length > 0 ? sf.nl[sf.nl.length-1] : 0).toFixed(0) + ' 안정 가동',
-      detailEn:'No change', detailKo:'변동 없음'});
+      detailEn:'No change', detailKo:'변동 없음', ja:(sf.nl.length > 0 ? sf.nl[sf.nl.length-1] : 0).toFixed(0) + 'で安定稼働', detailJa:'変化なし'});
   }
   // 2026-11-20: 데모 알림은 모의 수치라 실명 대신 익명 예시로 표시
-  var CN = {kr:['Korea','한국'], tw:['Taiwan','대만'], us:['USA','미국'], cn:['China','중국'], jp:['Japan','일본'], eu:['EU','EU'], sg:['Singapore','싱가포르']};
+  var CN = {kr:['Korea','한국','韓国'], tw:['Taiwan','대만','台湾'], us:['USA','미국','米国'], cn:['China','중국','中国'], jp:['Japan','일본','日本'], eu:['EU','EU','EU'], sg:['Singapore','싱가포르','シンガポール']};
   var html = '<div style="display:flex;flex-direction:column;gap:8px;">';
   alerts.slice(0, 5).forEach(function(a, ai) {
-    var c = CN[a.fab.country] || ['', ''], L = String.fromCharCode(65 + ai);
-    var anon = '<span class="en">[Example] Fab ' + L + (c[0] ? ' (' + c[0] + ')' : '') + '</span><span class="ko">[예시] 팹 ' + L + (c[1] ? ' (' + c[1] + ')' : '') + '</span>';
+    var c = CN[a.fab.country] || ['', '', ''], L = String.fromCharCode(65 + ai);
+    var anon = '<span class="en">[Example] Fab ' + L + (c[0] ? ' (' + c[0] + ')' : '') + '</span><span class="ko">[예시] 팹 ' + L + (c[1] ? ' (' + c[1] + ')' : '') + '</span><span class="ja">［例］ファブ' + L + (c[2] ? '（' + c[2] + '）' : '') + '</span>';
     html += '<div style="padding:10px 12px;background:' + a.bgColor + ';border:1px solid ' + a.borderColor + ';border-radius:8px;font-size:13px;">' +
-      '<div style="color:' + a.color + ';font-weight:600;margin-bottom:2px;">' + a.icon + ' ' + anon + ' — <span class="en">' + a.en + '</span><span class="ko">' + a.ko + '</span></div>' +
-      '<div style="color:#94A3B8;font-size:11px;">2026-11 · <span class="en">' + a.detailEn + '</span><span class="ko">' + a.detailKo + '</span></div>' +
+      '<div style="color:' + a.color + ';font-weight:600;margin-bottom:2px;">' + a.icon + ' ' + anon + ' — <span class="en">' + a.en + '</span><span class="ko">' + a.ko + '</span><span class="ja">' + a.ja + '</span></div>' +
+      '<div style="color:#94A3B8;font-size:11px;">2026-11 · <span class="en">' + a.detailEn + '</span><span class="ko">' + a.detailKo + '</span><span class="ja">' + a.detailJa + '</span></div>' +
     '</div>';
   });
   html += '</div>';
