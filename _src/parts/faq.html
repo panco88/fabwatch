@@ -1,0 +1,73 @@
+
+<!-- FAQ -->
+<section class="faq section" id="faq">
+  <div class="inner">
+    <div class="section-label"><span class="en">FAQ</span><span class="ko">자주 묻는 질문</span><span class="ja">よくある質問</span></div>
+    <h2 class="section-title reveal">
+      <span class="en">Questions answered</span>
+      <span class="ko">궁금하신 점</span><span class="ja">ご質問への回答</span>
+    </h2>
+    <div class="faq-list">
+      <div class="faq-item reveal">
+        <button class="faq-q" onclick="toggleFaq(this)">
+          <span><span class="en">How accurate is satellite-based fab monitoring?</span><span class="ko">위성 기반 팹 모니터링의 정확도는 어느 정도인가요?</span><span class="ja">衛星によるファブモニタリングの精度はどの程度ですか？</span></span>
+          <svg class="faq-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l6 6 6-6"/></svg>
+        </button>
+        <div class="faq-a"><div class="faq-a-inner">
+          <span class="en">We validate our VIIRS nightlight index against fab utilization figures published by industry trackers such as TrendForce, and cross-check every signal with SAR, thermal IR, and NO2 data. Fab-by-fab validation results will be published at launch; accuracy improves as the historical baseline grows.</span>
+          <span class="ko">FabWatch는 VIIRS 야간조명 지수를 TrendForce 등 산업 트래커가 발표하는 팹 가동률 자료와 대조해 검증하고, 모든 신호를 SAR·열적외선·NO2 데이터로 교차 확인합니다. 팹별 검증 결과는 출시와 함께 공개할 예정이며, 과거 기준 데이터가 쌓일수록 정확도가 높아집니다.</span><span class="ja">FabWatchはVIIRS夜間光指数を、TrendForceなどの業界トラッカーが発表するファブ稼働率と照合して検証し、すべてのシグナルをSAR・熱赤外・NO2データでクロスチェックしています。ファブごとの検証結果はリリース時に公開する予定で、過去の基準データが蓄積されるほど精度が高まります。</span>
+        </div></div>
+      </div>
+      <div class="faq-item reveal">
+        <button class="faq-q" onclick="toggleFaq(this)">
+          <span><span class="en">How often is the data updated?</span><span class="ko">데이터 업데이트 주기는 어떻게 되나요?</span><span class="ja">データの更新頻度は？</span></span>
+          <svg class="faq-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l6 6 6-6"/></svg>
+        </button>
+        <div class="faq-a"><div class="faq-a-inner">
+          <span class="en">VIIRS nightlight data updates daily. Sentinel-1 SAR revisits every 6-12 days. Sentinel-2 optical every 5 days (weather permitting). We aggregate these into a composite score updated at least twice weekly for each fab.</span>
+          <span class="ko">VIIRS 야간조명은 매일, Sentinel-1 SAR은 6~12일, Sentinel-2 광학은 5일 주기로 갱신됩니다. 이를 종합하여 각 팹별 복합 점수를 주 2회 이상 업데이트합니다.</span><span class="ja">VIIRS夜間光は毎日、Sentinel-1 SARは6〜12日、Sentinel-2光学は5日周期（天候による）で更新されます。これらを統合し、各ファブの複合スコアを週2回以上更新します。</span>
+        </div></div>
+      </div>
+      <div class="faq-item reveal">
+        <button class="faq-q" onclick="toggleFaq(this)">
+          <span><span class="en">Do you offer NDAs for enterprise clients?</span><span class="ko">기업 고객에게 NDA 제공이 가능한가요?</span><span class="ja">法人のお客様とNDAを締結できますか？</span></span>
+          <svg class="faq-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l6 6 6-6"/></svg>
+        </button>
+        <div class="faq-a"><div class="faq-a-inner">
+          <span class="en">Yes. Enterprise plans include a bilateral NDA, custom SLA, and data handling agreements. Specific compliance requirements can be discussed with our enterprise team.</span>
+          <span class="ko">네, Enterprise 요금제에는 쌍방 NDA, 맞춤 SLA, 데이터 취급 계약이 포함됩니다. 특정 컴플라이언스 요구사항은 기업 영업팀과 협의해 주세요.</span><span class="ja">はい。Enterpriseプランには相互NDA、カスタムSLA、データ取扱契約が含まれます。特定のコンプライアンス要件については、法人営業チームにご相談ください。</span>
+        </div></div>
+      </div>
+      <div class="faq-item reveal">
+        <button class="faq-q" onclick="toggleFaq(this)">
+          <span><span class="en">Can I request monitoring for a specific fab?</span><span class="ko">특정 팹 모니터링을 요청할 수 있나요?</span><span class="ja">特定のファブのモニタリングを依頼できますか？</span></span>
+          <svg class="faq-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l6 6 6-6"/></svg>
+        </button>
+        <div class="faq-a"><div class="faq-a-inner">
+          <span class="en">Absolutely. Pro users can request up to 5 custom fabs, and Enterprise users get unlimited custom monitoring targets. New fabs come with historical baseline data from public satellite archives.</span>
+          <span class="ko">물론입니다. Pro 사용자는 최대 5개, Enterprise 사용자는 무제한 맞춤 팹 요청이 가능합니다. 신규 팹에는 공개 위성 아카이브의 과거 기준 데이터가 함께 제공됩니다.</span><span class="ja">もちろんです。Proユーザーは最大5か所、Enterpriseユーザーは無制限にカスタムファブを依頼できます。新しいファブには、公開衛星アーカイブの過去の基準データが付きます。</span>
+        </div></div>
+      </div>
+      <div class="faq-item reveal">
+        <button class="faq-q" onclick="toggleFaq(this)">
+          <span><span class="en">What's the difference between the dashboard and reports?</span><span class="ko">대시보드와 리포트의 차이는 무엇인가요?</span><span class="ja">ダッシュボードとレポートの違いは何ですか？</span></span>
+          <svg class="faq-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l6 6 6-6"/></svg>
+        </button>
+        <div class="faq-a"><div class="faq-a-inner">
+          <span class="en">The dashboard is a real-time SaaS platform — you log in and see live data, charts, and alerts for all 24 fabs. Reports are curated PDF/slide analyses written by our team: deep dives on specific fabs, countries, or market events. Pro includes both; Free gets the monthly highlight report and open data.</span>
+          <span class="ko">대시보드는 실시간 SaaS 플랫폼입니다 — 로그인하면 24개 팹의 라이브 데이터, 차트, 알림을 볼 수 있습니다. 리포트는 FabWatch 팀이 작성하는 PDF/슬라이드 형태의 심층 분석입니다. Pro는 둘 다 포함하며, Free는 제한된 대시보드 접근과 샘플 리포트를 제공합니다.</span><span class="ja">ダッシュボードはリアルタイムのSaaSプラットフォームです — ログインすると24ファブのライブデータ、チャート、アラートを確認できます。レポートはFabWatchチームが作成するPDF／スライド形式の詳細分析です。Proには両方が含まれ、Freeでは限定的なダッシュボードアクセスとサンプルレポートを提供します。</span>
+        </div></div>
+      </div>
+      <div class="faq-item reveal">
+        <button class="faq-q" onclick="toggleFaq(this)">
+          <span><span class="en">Is the satellite data legally obtained?</span><span class="ko">위성 데이터는 합법적으로 수집되나요?</span><span class="ja">衛星データは合法的に取得されていますか？</span></span>
+          <svg class="faq-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l6 6 6-6"/></svg>
+        </button>
+        <div class="faq-a"><div class="faq-a-inner">
+          <span class="en">100%. All data comes from publicly available satellite programs: NASA VIIRS, ESA Copernicus (Sentinel-1/2/5P), and USGS Landsat. These are open-access, government-operated Earth observation programs designed for environmental and commercial monitoring.</span>
+          <span class="ko">100% 합법입니다. 모든 데이터는 공개 위성 프로그램에서 수집됩니다: NASA VIIRS, ESA 코페르니쿠스(Sentinel-1/2/5P), USGS 랜드샛. 이들은 환경 및 상업적 모니터링을 위해 설계된 정부 운영 공개 지구관측 프로그램입니다.</span><span class="ja">100%合法です。すべてのデータは公開衛星プログラムから取得しています：NASA VIIRS、ESAコペルニクス（Sentinel-1/2/5P）、USGSランドサット。これらは環境・商業モニタリングのために設計された、政府運営のオープンな地球観測プログラムです。</span>
+        </div></div>
+      </div>
+    </div>
+  </div>
+</section>

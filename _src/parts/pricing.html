@@ -1,0 +1,83 @@
+
+<!-- PRICING -->
+<section class="pricing section" id="pricing">
+  <div class="inner">
+    <div class="section-label"><span class="en">Pricing</span><span class="ko">요금제</span><span class="ja">料金</span></div>
+    <h2 class="section-title reveal">
+      <span class="en">Start free. Scale when ready.</span>
+      <span class="ko">무료로 시작하고,<br>필요할 때 확장하세요.</span><span class="ja">無料で始めて、<br>必要なときに拡張。</span>
+    </h2>
+    <p class="section-desc">
+      <span class="en">From individual researchers to institutional intelligence teams. Pay only for the depth you need.</span>
+      <span class="ko">개인 연구자부터 기관 인텔리전스 팀까지. 필요한 깊이만큼만 결제하세요.</span><span class="ja">個人の研究者から機関のインテリジェンスチームまで。必要な深さの分だけお支払いください。</span>
+    </p>
+    <!-- 개인/기업 탭 -->
+    <div class="member-tabs">
+      <button class="member-tab active" onclick="switchMember('individual')" id="tab-individual">
+        <span class="en">Individual</span><span class="ko">개인 회원</span><span class="ja">個人会員</span>
+      </button>
+      <button class="member-tab" onclick="switchMember('corporate')" id="tab-corporate">
+        <span class="en">Corporate</span><span class="ko">기업 회원</span><span class="ja">法人会員</span>
+      </button>
+    </div>
+    <div class="member-note" id="note-individual">
+      <span class="en">For independent analysts, researchers, journalists, and investors tracking semiconductor capacity on their own.</span>
+      <span class="ko">반도체 생산능력을 독립적으로 추적하는 애널리스트, 연구자, 기자, 투자자를 위한 요금제입니다.</span><span class="ja">半導体の生産能力を独自に追跡するアナリスト、研究者、記者、投資家向けのプランです。</span>
+    </div>
+    <div class="member-note" id="note-corporate" style="display:none; border-left-color: var(--accent-warm);">
+      <span class="en">For asset managers, consulting firms, semiconductor companies, and government agencies requiring team access and custom analysis.</span>
+      <span class="ko">팀 단위 접근 및 맞춤 분석이 필요한 자산운용사, 컨설팅 펌, 반도체 기업, 정부 기관을 위한 요금제입니다.</span><span class="ja">チーム単位のアクセスとカスタム分析が必要な資産運用会社、コンサルティングファーム、半導体企業、政府機関向けのプランです。</span>
+    </div>
+    <div class="price-grid">
+      <!-- Free -->
+      <div class="price-card">
+        <div class="price-name">Free</div>
+        <div class="price-amount">$0</div>
+        <ul class="price-features">
+          <li><span class="check">&#10003;</span> <span class="en">Global fab map</span><span class="ko">글로벌 팹 지도</span><span class="ja">世界ファブマップ</span></li>
+          <li><span class="check">&#10003;</span> <span class="en">Open data (CSV): fab list + status</span><span class="ko">오픈 데이터 (CSV): 팹 목록 + 상태</span><span class="ja">オープンデータ（CSV）：ファブ一覧＋ステータス</span></li>
+          <li><span class="check">&#10003;</span> <span class="en">1 monthly highlight report</span><span class="ko">월간 하이라이트 리포트 1편</span><span class="ja">月次ハイライトレポート1本</span></li>
+          <li><span class="check">&#10003;</span> <span class="en">Weekly newsletter</span><span class="ko">주간 뉴스레터</span><span class="ja">週刊ニュースレター</span></li>
+          <li><span class="cross">&#10005;</span> <span class="en">Dashboard access</span><span class="ko">대시보드 접근</span><span class="ja">ダッシュボードへのアクセス</span></li>
+          <li><span class="cross">&#10005;</span> <span class="en">Alerts</span><span class="ko">알림</span><span class="ja">アラート</span></li>
+          <li><span class="cross">&#10005;</span> API</li>
+        </ul>
+        <a href="#" onclick="openModal();return false;" class="price-btn"><span class="en">Join Waitlist</span><span class="ko">대기 등록</span><span class="ja">事前登録</span></a>
+      </div>
+      <!-- Pro -->
+      <div class="price-card featured">
+        <div class="price-name">Pro</div>
+        <div class="price-amount en">$199<span> / month</span></div>
+        <div class="price-amount ko">$199<span> / 월</span></div>
+        <div class="price-sub ko">(약 27만 원 / 월)</div>
+        <ul class="price-features">
+          <li><span class="check">&#10003;</span> <span class="en">Full 24-fab dashboard + reports</span><span class="ko">24개 팹 전체 대시보드 + 리포트</span><span class="ja">24ファブすべてのダッシュボード＋レポート</span></li>
+          <li><span class="check">&#10003;</span> <span class="en">Weekly updates + Daily Digest</span><span class="ko">주간 업데이트 + Daily Digest</span><span class="ja">週次更新＋Daily Digest</span></li>
+          <li><span class="check">&#10003;</span> <span class="en">Email alerts</span><span class="ko">이메일 알림</span><span class="ja">メールアラート</span></li>
+          <li><span class="check">&#10003;</span> <span class="en">Basic API (1,000 calls/mo)</span><span class="ko">기본 API (월 1,000콜)</span><span class="ja">基本API（月1,000コール）</span></li>
+          <li><span class="check">&#10003;</span> <span class="en">Satellite thumbnails</span><span class="ko">위성 썸네일 이미지</span><span class="ja">衛星サムネイル画像</span></li>
+          <li><span class="check">&#10003;</span> <span class="en">Full open data access</span><span class="ko">전체 오픈 데이터 접근</span><span class="ja">全オープンデータへのアクセス</span></li>
+          <li><span class="cross">&#10005;</span> <span class="en">Custom fabs / raw imagery</span><span class="ko">커스텀 팹 / 원본 영상</span><span class="ja">カスタムファブ／元画像</span></li>
+        </ul>
+        <a href="#" onclick="openModal();return false;" class="price-btn primary"><span class="en">Join Waitlist</span><span class="ko">대기 등록</span><span class="ja">事前登録</span></a>
+      </div>
+      <!-- Enterprise -->
+      <div class="price-card">
+        <div class="price-name">Enterprise</div>
+        <div class="price-amount en">$999<span>+ / month</span></div>
+        <div class="price-amount ko">$999<span>+ / 월</span></div>
+        <div class="price-sub ko">(약 135만 원~ / 월)</div>
+        <ul class="price-features">
+          <li><span class="check">&#10003;</span> <span class="en">Everything in Pro</span><span class="ko">Pro 전체 포함</span><span class="ja">Proの全機能</span></li>
+          <li><span class="check">&#10003;</span> <span class="en">Custom fab additions</span><span class="ko">커스텀 팹 추가</span><span class="ja">カスタムファブの追加</span></li>
+          <li><span class="check">&#10003;</span> <span class="en">Full API + raw satellite data</span><span class="ko">전체 API + 원본 위성 데이터</span><span class="ja">フルAPI＋元の衛星データ</span></li>
+          <li><span class="check">&#10003;</span> <span class="en">Daily alerts + Slack + webhook</span><span class="ko">일일 알림 + Slack + 카카오톡</span><span class="ja">日次アラート＋Slack＋カカオトーク</span></li>
+          <li><span class="check">&#10003;</span> <span class="en">Full-resolution imagery</span><span class="ko">풀해상도 위성 영상</span><span class="ja">フル解像度の衛星画像</span></li>
+          <li><span class="check">&#10003;</span> <span class="en">Dedicated analyst + custom reports</span><span class="ko">전담 애널리스트 + 맞춤 리포트</span><span class="ja">専任アナリスト＋カスタムレポート</span></li>
+          <li><span class="check">&#10003;</span> <span class="en">Custom data feed (on request)</span><span class="ko">맞춤 데이터 피드 (협의)</span><span class="ja">カスタムデータフィード（要相談）</span></li>
+        </ul>
+        <a href="#" onclick="openModal();return false;" class="price-btn"><span class="en">Contact Us</span><span class="ko">문의하기</span><span class="ja">お問い合わせ</span></a>
+      </div>
+    </div>
+  </div>
+</section>

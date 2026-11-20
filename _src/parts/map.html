@@ -1,0 +1,184 @@
+
+<!-- WORLD MAP: FABS + DATA CENTERS -->
+<section class="worldmap section" id="map">
+  <div class="inner">
+    <div class="section-label"><span class="en">Global Coverage</span><span class="ko">글로벌 커버리지</span><span class="ja">グローバルカバレッジ</span></div>
+    <h2 class="section-title reveal">
+      <span class="en">24 fabs + 9 data centers.<br>One dashboard.</span>
+      <span class="ko">24개 팹 + 9개 데이터센터.<br>하나의 대시보드.</span><span class="ja">24ファブ＋9データセンター。<br>ひとつのダッシュボードで。</span>
+    </h2>
+    <p class="section-desc reveal">
+      <span class="en">Every major semiconductor fab and hyperscale AI data center construction site, monitored around the clock with 6 satellite channels.</span>
+      <span class="ko">모든 주요 반도체 팹과 초대형 AI 데이터센터 건설 현장을 6개 위성 채널로 24시간 모니터링합니다.</span><span class="ja">主要な半導体ファブと超大型AIデータセンターの建設現場を、6つの衛星チャネルで24時間モニタリングします。</span>
+    </p>
+    <div class="map-wrap reveal">
+      <svg class="map-svg" viewBox="0 0 800 400" xmlns="http://www.w3.org/2000/svg">
+        <rect width="800" height="400" fill="transparent"/>
+        <!-- Simplified continent outlines -->
+        <g opacity="0.15" fill="#94A3B8">
+          <!-- North America -->
+          <path d="M80,80 L180,60 L220,80 L230,120 L210,160 L190,200 L160,220 L130,200 L100,160 L80,120Z"/>
+          <!-- Europe -->
+          <path d="M380,70 L420,60 L450,70 L460,100 L440,130 L420,140 L390,130 L375,100Z"/>
+          <!-- Asia -->
+          <path d="M460,60 L580,50 L650,80 L680,120 L670,160 L640,180 L600,200 L550,190 L500,170 L470,130 L460,100Z"/>
+          <!-- East Asia detail -->
+          <path d="M600,110 L650,100 L680,130 L690,170 L670,200 L640,210 L620,190 L610,160 L600,130Z"/>
+          <!-- Southeast Asia -->
+          <path d="M620,220 L650,210 L670,230 L660,260 L630,270 L610,250Z"/>
+        </g>
+        <!-- Grid lines for tech feel -->
+        <g stroke="rgba(56,189,248,0.04)" stroke-width="0.5">
+          <line x1="0" y1="100" x2="800" y2="100"/><line x1="0" y1="200" x2="800" y2="200"/>
+          <line x1="0" y1="300" x2="800" y2="300"/><line x1="200" y1="0" x2="200" y2="400"/>
+          <line x1="400" y1="0" x2="400" y2="400"/><line x1="600" y1="0" x2="600" y2="400"/>
+        </g>
+        <!-- Connection lines from fabs to center -->
+        <g stroke="rgba(56,189,248,0.06)" stroke-width="0.5" stroke-dasharray="4,4">
+          <line x1="175" y1="130" x2="400" y2="200"/><line x1="200" y1="140" x2="400" y2="200"/>
+          <line x1="625" y1="155" x2="400" y2="200"/><line x1="640" y1="170" x2="400" y2="200"/>
+          <line x1="660" y1="145" x2="400" y2="200"/><line x1="430" y1="110" x2="400" y2="200"/>
+          <line x1="635" y1="235" x2="400" y2="200"/>
+        </g>
+        <!-- USA fabs (Intel, GlobalFoundries, Samsung Austin, TSMC AZ, Micron) -->
+        <g class="map-cluster" data-country="usa">
+          <circle class="map-marker" cx="165" cy="125" r="3" fill="#38BDF8" opacity="0.9"><title>Intel Fab 52, Arizona</title></circle>
+          <circle class="map-marker" cx="170" cy="118" r="3" fill="#38BDF8" opacity="0.9"><title>Intel Fab 42, Arizona</title></circle>
+          <circle class="map-marker" cx="175" cy="130" r="3" fill="#38BDF8" opacity="0.9"><title>TSMC Fab 21, Arizona</title></circle>
+          <circle class="map-marker" cx="185" cy="142" r="3" fill="#38BDF8" opacity="0.9"><title>Samsung Austin</title></circle>
+          <circle class="map-marker" cx="200" cy="110" r="3" fill="#38BDF8" opacity="0.9"><title>GlobalFoundries, New York</title></circle>
+          <circle class="map-marker" cx="210" cy="115" r="3" fill="#38BDF8" opacity="0.9"><title>Micron, Virginia</title></circle>
+          <circle class="map-marker" cx="195" cy="105" r="2.5" fill="#38BDF8" opacity="0.7"><title>Intel Fab 28, Oregon</title></circle>
+          <circle class="map-marker" cx="205" cy="120" r="2.5" fill="#38BDF8" opacity="0.7"><title>GlobalFoundries, Vermont</title></circle>
+          <circle class="map-marker" cx="192" cy="135" r="2.5" fill="#38BDF8" opacity="0.7"><title>Texas Instruments</title></circle>
+          <circle class="map-marker" cx="178" cy="115" r="2.5" fill="#38BDF8" opacity="0.7"><title>Micron, Idaho</title></circle>
+          <text x="185" y="160" fill="#38BDF8" font-size="10" font-family="IBM Plex Mono" text-anchor="middle" opacity="0.8">USA · 10</text>
+        </g>
+        <!-- Europe fabs (STMicro, Infineon, NXP, ASML) -->
+        <g class="map-cluster" data-country="eu">
+          <circle class="map-marker" cx="415" cy="95" r="3" fill="#A78BFA" opacity="0.9"><title>Infineon, Dresden</title></circle>
+          <circle class="map-marker" cx="420" cy="105" r="3" fill="#A78BFA" opacity="0.9"><title>GlobalFoundries, Dresden</title></circle>
+          <circle class="map-marker" cx="430" cy="110" r="3" fill="#A78BFA" opacity="0.9"><title>STMicro, Crolles</title></circle>
+          <circle class="map-marker" cx="410" cy="100" r="2.5" fill="#A78BFA" opacity="0.7"><title>NXP, Netherlands</title></circle>
+          <circle class="map-marker" cx="425" cy="115" r="2.5" fill="#A78BFA" opacity="0.7"><title>Intel Ireland</title></circle>
+          <text x="420" y="132" fill="#A78BFA" font-size="10" font-family="IBM Plex Mono" text-anchor="middle" opacity="0.8">EU · 5</text>
+        </g>
+        <!-- Japan fabs (Kioxia, Renesas, Sony, Rapidus) -->
+        <g class="map-cluster" data-country="jp">
+          <circle class="map-marker" cx="688" cy="128" r="3" fill="#F59E0B" opacity="0.9"><title>Kioxia, Yokkaichi</title></circle>
+          <circle class="map-marker" cx="695" cy="135" r="3" fill="#F59E0B" opacity="0.9"><title>Renesas, Naka</title></circle>
+          <circle class="map-marker" cx="682" cy="122" r="3" fill="#F59E0B" opacity="0.9"><title>Sony, Kumamoto</title></circle>
+          <circle class="map-marker" cx="690" cy="118" r="2.5" fill="#F59E0B" opacity="0.7"><title>TSMC JASM, Kumamoto</title></circle>
+          <circle class="map-marker" cx="698" cy="125" r="2.5" fill="#F59E0B" opacity="0.7"><title>Rapidus, Chitose</title></circle>
+          <circle class="map-marker" cx="685" cy="140" r="2.5" fill="#F59E0B" opacity="0.7"><title>Kioxia, Kitakami</title></circle>
+          <circle class="map-marker" cx="693" cy="142" r="2.5" fill="#F59E0B" opacity="0.7"><title>Micron, Hiroshima</title></circle>
+          <circle class="map-marker" cx="680" cy="132" r="2.5" fill="#F59E0B" opacity="0.7"><title>Renesas, Takasaki</title></circle>
+          <text x="690" y="158" fill="#F59E0B" font-size="10" font-family="IBM Plex Mono" text-anchor="middle" opacity="0.8">JP · 8</text>
+        </g>
+        <!-- South Korea fabs (Samsung, SK hynix) -->
+        <g class="map-cluster" data-country="kr">
+          <circle class="map-marker" cx="660" cy="140" r="4" fill="#22C55E" opacity="0.9"><title>Samsung Pyeongtaek P1-P4</title></circle>
+          <circle class="map-marker" cx="655" cy="148" r="3.5" fill="#22C55E" opacity="0.9"><title>SK hynix Icheon M16</title></circle>
+          <circle class="map-marker" cx="665" cy="148" r="3" fill="#22C55E" opacity="0.9"><title>SK hynix Cheongju</title></circle>
+          <circle class="map-marker" cx="652" cy="140" r="3" fill="#22C55E" opacity="0.9"><title>Samsung Hwaseong</title></circle>
+          <circle class="map-marker" cx="668" cy="155" r="2.5" fill="#22C55E" opacity="0.7"><title>Samsung Giheung</title></circle>
+          <circle class="map-marker" cx="650" cy="155" r="2.5" fill="#22C55E" opacity="0.7"><title>SK hynix Yongin (계획)</title></circle>
+          <circle class="map-marker" cx="656" cy="135" r="2.5" fill="#22C55E" opacity="0.7"><title>DB HiTek</title></circle>
+          <!-- Glow effect for Korea cluster -->
+          <circle cx="658" cy="147" r="20" fill="rgba(34,197,94,0.06)"/>
+          <text x="658" y="172" fill="#22C55E" font-size="10" font-family="IBM Plex Mono" text-anchor="middle" opacity="0.8">KR · 12</text>
+        </g>
+        <!-- Taiwan fabs (TSMC, UMC, PSMC) -->
+        <g class="map-cluster" data-country="tw">
+          <circle class="map-marker" cx="648" cy="188" r="4" fill="#EC4899" opacity="0.9"><title>TSMC Fab 18, Tainan</title></circle>
+          <circle class="map-marker" cx="642" cy="182" r="3.5" fill="#EC4899" opacity="0.9"><title>TSMC Fab 15, Taichung</title></circle>
+          <circle class="map-marker" cx="654" cy="182" r="3" fill="#EC4899" opacity="0.9"><title>TSMC Fab 12, Hsinchu</title></circle>
+          <circle class="map-marker" cx="640" cy="192" r="3" fill="#EC4899" opacity="0.9"><title>UMC, Tainan</title></circle>
+          <circle class="map-marker" cx="652" cy="195" r="2.5" fill="#EC4899" opacity="0.7"><title>TSMC Fab 2, Kaohsiung</title></circle>
+          <circle class="map-marker" cx="636" cy="186" r="2.5" fill="#EC4899" opacity="0.7"><title>PSMC, Hsinchu</title></circle>
+          <circle class="map-marker" cx="644" cy="175" r="2.5" fill="#EC4899" opacity="0.7"><title>TSMC Fab 14, Tainan</title></circle>
+          <circle class="map-marker" cx="650" cy="175" r="2.5" fill="#EC4899" opacity="0.7"><title>Vanguard, Hsinchu</title></circle>
+          <circle class="map-marker" cx="656" cy="190" r="2.5" fill="#EC4899" opacity="0.7"><title>TSMC Fab 6, Tainan</title></circle>
+          <circle class="map-marker" cx="638" cy="178" r="2.5" fill="#EC4899" opacity="0.7"><title>UMC, Hsinchu</title></circle>
+          <!-- Glow effect for Taiwan cluster -->
+          <circle cx="647" cy="185" r="22" fill="rgba(236,72,153,0.05)"/>
+          <text x="647" y="212" fill="#EC4899" font-size="10" font-family="IBM Plex Mono" text-anchor="middle" opacity="0.8">TW · 15</text>
+        </g>
+        <!-- China fabs (SMIC, YMTC, CXMT, Hua Hong) -->
+        <g class="map-cluster" data-country="cn">
+          <circle class="map-marker" cx="625" cy="148" r="3.5" fill="#EF4444" opacity="0.9"><title>SMIC Shanghai SN1/SN2</title></circle>
+          <circle class="map-marker" cx="618" cy="142" r="3" fill="#EF4444" opacity="0.9"><title>SMIC Beijing</title></circle>
+          <circle class="map-marker" cx="610" cy="152" r="3" fill="#EF4444" opacity="0.9"><title>YMTC, Wuhan</title></circle>
+          <circle class="map-marker" cx="615" cy="160" r="3" fill="#EF4444" opacity="0.9"><title>CXMT, Hefei</title></circle>
+          <circle class="map-marker" cx="630" cy="155" r="3" fill="#EF4444" opacity="0.9"><title>SMIC Lingang</title></circle>
+          <circle class="map-marker" cx="622" cy="165" r="2.5" fill="#EF4444" opacity="0.7"><title>Hua Hong, Wuxi</title></circle>
+          <circle class="map-marker" cx="605" cy="145" r="2.5" fill="#EF4444" opacity="0.7"><title>SMIC Tianjin</title></circle>
+          <circle class="map-marker" cx="612" cy="168" r="2.5" fill="#EF4444" opacity="0.7"><title>Nexchip, Hefei</title></circle>
+          <circle class="map-marker" cx="628" cy="162" r="2.5" fill="#EF4444" opacity="0.7"><title>HLMC, Shanghai</title></circle>
+          <circle class="map-marker" cx="618" cy="155" r="2.5" fill="#EF4444" opacity="0.7"><title>Yangtze Memory</title></circle>
+          <circle class="map-marker" cx="632" cy="145" r="2.5" fill="#EF4444" opacity="0.7"><title>SMIC Shenzhen</title></circle>
+          <circle class="map-marker" cx="608" cy="162" r="2.5" fill="#EF4444" opacity="0.7"><title>GTA Semi, Chongqing</title></circle>
+          <circle class="map-marker" cx="620" cy="175" r="2.5" fill="#EF4444" opacity="0.7"><title>JCET, Wuxi</title></circle>
+          <text x="618" y="188" fill="#EF4444" font-size="10" font-family="IBM Plex Mono" text-anchor="middle" opacity="0.8">CN · 13</text>
+        </g>
+        <!-- Singapore fabs -->
+        <g class="map-cluster" data-country="sg">
+          <circle class="map-marker" cx="632" cy="240" r="3" fill="#14B8A6" opacity="0.9"><title>GlobalFoundries, Singapore</title></circle>
+          <circle class="map-marker" cx="638" cy="235" r="2.5" fill="#14B8A6" opacity="0.7"><title>Micron, Singapore</title></circle>
+          <circle class="map-marker" cx="626" cy="236" r="2.5" fill="#14B8A6" opacity="0.7"><title>UMC, Singapore</title></circle>
+          <text x="632" y="256" fill="#14B8A6" font-size="10" font-family="IBM Plex Mono" text-anchor="middle" opacity="0.8">SG · 3</text>
+        </g>
+        <!-- AI Data Center sites (US) -->
+        <g class="map-cluster" data-country="dc">
+          <rect class="map-marker" x="148" y="135" width="5" height="5" rx="1" fill="#C084FC" opacity="0.9" transform="rotate(45 150.5 137.5)"><title>Meta Hyperion, Louisiana</title></rect>
+          <rect class="map-marker" x="155" y="128" width="5" height="5" rx="1" fill="#C084FC" opacity="0.9" transform="rotate(45 157.5 130.5)"><title>OpenAI Stargate, Texas</title></rect>
+          <rect class="map-marker" x="190" y="127" width="5" height="5" rx="1" fill="#C084FC" opacity="0.9" transform="rotate(45 192.5 129.5)"><title>Microsoft, Virginia</title></rect>
+          <rect class="map-marker" x="180" y="120" width="4" height="4" rx="1" fill="#C084FC" opacity="0.7" transform="rotate(45 182 122)"><title>Google, Ohio</title></rect>
+          <rect class="map-marker" x="160" y="120" width="4" height="4" rx="1" fill="#C084FC" opacity="0.7" transform="rotate(45 162 122)"><title>Meta Prometheus, Indiana</title></rect>
+          <rect class="map-marker" x="145" y="125" width="4" height="4" rx="1" fill="#C084FC" opacity="0.7" transform="rotate(45 147 127)"><title>xAI Memphis, Tennessee</title></rect>
+          <rect class="map-marker" x="170" y="132" width="4" height="4" rx="1" fill="#C084FC" opacity="0.7" transform="rotate(45 172 134)"><title>Amazon, Mississippi</title></rect>
+          <rect class="map-marker" x="162" y="112" width="4" height="4" rx="1" fill="#C084FC" opacity="0.7" transform="rotate(45 164 114)"><title>CoreWeave, Illinois</title></rect>
+          <rect class="map-marker" x="152" y="140" width="4" height="4" rx="1" fill="#C084FC" opacity="0.7" transform="rotate(45 154 142)"><title>Google, Texas</title></rect>
+          <text x="168" y="155" fill="#C084FC" font-size="9" font-family="IBM Plex Mono" text-anchor="middle" opacity="0.7">DC · 9</text>
+        </g>
+        <!-- Pulsing animation on key clusters -->
+        <circle cx="658" cy="147" r="8" fill="none" stroke="#22C55E" stroke-width="1" opacity="0">
+          <animate attributeName="r" values="8;18;8" dur="3s" repeatCount="indefinite"/>
+          <animate attributeName="opacity" values="0.6;0;0.6" dur="3s" repeatCount="indefinite"/>
+        </circle>
+        <circle cx="647" cy="185" r="8" fill="none" stroke="#EC4899" stroke-width="1" opacity="0">
+          <animate attributeName="r" values="8;18;8" dur="3s" repeatCount="indefinite" begin="1s"/>
+          <animate attributeName="opacity" values="0.6;0;0.6" dur="3s" repeatCount="indefinite" begin="1s"/>
+        </circle>
+      </svg>
+    </div>
+    <div class="map-legend reveal">
+      <div class="map-legend-item"><span class="map-legend-dot" style="background:#22C55E"></span><span class="en">South Korea</span><span class="ko">한국</span><span class="ja">韓国</span></div>
+      <div class="map-legend-item"><span class="map-legend-dot" style="background:#EC4899"></span><span class="en">Taiwan</span><span class="ko">대만</span><span class="ja">台湾</span></div>
+      <div class="map-legend-item"><span class="map-legend-dot" style="background:#EF4444"></span><span class="en">China</span><span class="ko">중국</span><span class="ja">中国</span></div>
+      <div class="map-legend-item"><span class="map-legend-dot" style="background:#38BDF8"></span><span class="en">USA</span><span class="ko">미국</span><span class="ja">米国</span></div>
+      <div class="map-legend-item"><span class="map-legend-dot" style="background:#F59E0B"></span><span class="en">Japan</span><span class="ko">일본</span><span class="ja">日本</span></div>
+      <div class="map-legend-item"><span class="map-legend-dot" style="background:#A78BFA"></span><span class="en">Europe</span><span class="ko">유럽</span><span class="ja">欧州</span></div>
+      <div class="map-legend-item"><span class="map-legend-dot" style="background:#14B8A6"></span><span class="en">Singapore</span><span class="ko">싱가포르</span><span class="ja">シンガポール</span></div>
+      <div class="map-legend-item"><span class="map-legend-dot" style="background:#C084FC;border-radius:2px;"></span><span class="en">AI Data Centers</span><span class="ko">AI 데이터센터</span><span class="ja">AIデータセンター</span></div>
+    </div>
+    <div class="map-stats reveal">
+      <div class="map-stat-card">
+        <div class="map-stat-num">24</div>
+        <div class="map-stat-label"><span class="en">Fabs Tracked</span><span class="ko">모니터링 팹</span><span class="ja">モニタリング中のファブ</span></div>
+      </div>
+      <div class="map-stat-card">
+        <div class="map-stat-num">9</div>
+        <div class="map-stat-label"><span class="en">Data Centers</span><span class="ko">데이터센터</span><span class="ja">データセンター</span></div>
+      </div>
+      <div class="map-stat-card">
+        <div class="map-stat-num">6</div>
+        <div class="map-stat-label"><span class="en">Sat Channels</span><span class="ko">위성 채널</span><span class="ja">衛星チャネル</span></div>
+      </div>
+      <div class="map-stat-card">
+        <div class="map-stat-num">24/7</div>
+        <div class="map-stat-label"><span class="en">Monitoring</span><span class="ko">실시간 감시</span><span class="ja">常時監視</span></div>
+      </div>
+    </div>
+  </div>
+</section>

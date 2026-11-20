@@ -1,0 +1,123 @@
+
+<!-- HERO -->
+<section class="hero">
+  <!-- Twinkling stars -->
+  <div class="hero-stars">
+    <span class="hero-star" style="top:8%;left:12%"></span>
+    <span class="hero-star" style="top:15%;left:65%"></span>
+    <span class="hero-star" style="top:25%;left:82%"></span>
+    <span class="hero-star" style="top:40%;left:45%"></span>
+    <span class="hero-star" style="top:12%;left:35%"></span>
+    <span class="hero-star" style="top:55%;left:90%"></span>
+    <span class="hero-star" style="top:70%;left:20%"></span>
+    <span class="hero-star" style="top:30%;left:55%"></span>
+    <span class="hero-star" style="top:65%;left:75%"></span>
+    <span class="hero-star" style="top:5%;left:88%"></span>
+    <span class="hero-star" style="top:48%;left:8%"></span>
+    <span class="hero-star" style="top:80%;left:60%"></span>
+  </div>
+
+  <!-- Satellite + orbit illustration -->
+  <div class="hero-visual">
+    <svg viewBox="0 0 400 400" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <!-- Earth -->
+      <circle cx="200" cy="200" r="90" fill="url(#earthGrad)" opacity="0.9"/>
+      <circle cx="200" cy="200" r="90" stroke="rgba(56,189,248,0.3)" stroke-width="1"/>
+      <!-- Continents hint -->
+      <ellipse cx="175" cy="175" rx="30" ry="20" fill="rgba(34,197,94,0.25)" transform="rotate(-15 175 175)"/>
+      <ellipse cx="220" cy="210" rx="25" ry="35" fill="rgba(34,197,94,0.2)" transform="rotate(10 220 210)"/>
+      <ellipse cx="185" cy="230" rx="18" ry="12" fill="rgba(34,197,94,0.18)"/>
+      <!-- Atmosphere glow -->
+      <circle cx="200" cy="200" r="95" stroke="rgba(56,189,248,0.15)" stroke-width="6"/>
+      <circle cx="200" cy="200" r="102" stroke="rgba(56,189,248,0.06)" stroke-width="4"/>
+      <!-- Orbit ring -->
+      <g class="orbit-ring">
+        <ellipse cx="200" cy="200" rx="155" ry="55" stroke="rgba(56,189,248,0.25)" stroke-width="1.5" stroke-dasharray="6 4" transform="rotate(-25 200 200)"/>
+        <!-- Satellite on orbit -->
+        <g transform="translate(355,175)" class="satellite-body">
+          <!-- Solar panels -->
+          <rect x="-22" y="-3" width="16" height="6" rx="1" fill="#38BDF8" opacity="0.9"/>
+          <rect x="6" y="-3" width="16" height="6" rx="1" fill="#38BDF8" opacity="0.9"/>
+          <line x1="-22" y1="0" x2="-6" y2="0" stroke="rgba(255,255,255,0.4)" stroke-width="0.5"/>
+          <line x1="6" y1="0" x2="22" y2="0" stroke="rgba(255,255,255,0.4)" stroke-width="0.5"/>
+          <!-- Body -->
+          <rect x="-5" y="-5" width="10" height="10" rx="2" fill="#94A3B8"/>
+          <rect x="-3" y="-3" width="6" height="6" rx="1" fill="#CBD5E1"/>
+          <!-- Antenna -->
+          <line x1="0" y1="-5" x2="0" y2="-10" stroke="#94A3B8" stroke-width="1"/>
+          <circle cx="0" cy="-11" r="1.5" fill="#FBBF24"/>
+          <!-- Signal waves -->
+          <path d="M-4,-14 Q0,-18 4,-14" stroke="rgba(251,191,36,0.5)" stroke-width="0.8" fill="none"/>
+          <path d="M-7,-17 Q0,-22 7,-17" stroke="rgba(251,191,36,0.3)" stroke-width="0.8" fill="none"/>
+        </g>
+      </g>
+      <!-- Scan beam from satellite to earth -->
+      <path d="M340,172 L230,195 L240,215 Z" fill="url(#beamGrad)" opacity="0.15"/>
+      <!-- Fab markers on earth -->
+      <circle cx="180" cy="180" r="3" fill="#FBBF24" opacity="0.9"><animate attributeName="opacity" values="0.5;1;0.5" dur="2s" repeatCount="indefinite"/></circle>
+      <circle cx="215" cy="190" r="2.5" fill="#38BDF8" opacity="0.8"><animate attributeName="opacity" values="0.4;1;0.4" dur="2.5s" repeatCount="indefinite"/></circle>
+      <circle cx="195" cy="215" r="2" fill="#4ADE80" opacity="0.7"><animate attributeName="opacity" values="0.6;1;0.6" dur="1.8s" repeatCount="indefinite"/></circle>
+      <circle cx="225" cy="175" r="2" fill="#F97316" opacity="0.8"><animate attributeName="opacity" values="0.5;1;0.5" dur="2.2s" repeatCount="indefinite"/></circle>
+      <defs>
+        <radialGradient id="earthGrad" cx="40%" cy="35%">
+          <stop offset="0%" stop-color="#1E3A5F"/>
+          <stop offset="60%" stop-color="#0F2744"/>
+          <stop offset="100%" stop-color="#0B1628"/>
+        </radialGradient>
+        <linearGradient id="beamGrad" x1="0" y1="0" x2="0" y2="1">
+          <stop offset="0%" stop-color="#FBBF24" stop-opacity="0.6"/>
+          <stop offset="100%" stop-color="#FBBF24" stop-opacity="0"/>
+        </linearGradient>
+      </defs>
+    </svg>
+  </div>
+
+  <div class="inner">
+    <div class="hero-badge">
+      <span class="dot"></span>
+      <span class="en">Monitoring 33 industrial facilities in 6 countries + EU</span>
+      <span class="ko">6개국+EU 33개 첨단산업 시설 모니터링 중</span><span class="ja">6か国＋EUの先端産業施設33か所をモニタリング中</span>
+    </div>
+    <h1>
+      <span class="en">See What <span class="accent-word">Satellites</span> See.<br>Track Every Critical Facility.</span>
+      <span class="ko"><span class="accent-word">위성</span>이 포착한 진실,<br>공시보다 빠르게.</span><span class="ja"><span class="accent-word">衛星</span>が捉えた事実を、<br>開示よりも早く。</span>
+    </h1>
+    <p class="hero-sub">
+      <span class="en">Six independent satellite channels monitoring semiconductor fabs and AI data centers worldwide. Cross-referencing orbital data with public filings to deliver intelligence weeks before official disclosures.</span>
+      <span class="ko">6개 독립 위성 채널로 전 세계 반도체 팹과 AI 데이터센터를 추적합니다. 궤도 데이터와 공시 자료를 교차 검증하여 공식 발표 수주 전에 인사이트를 제공합니다.</span><span class="ja">6つの独立した衛星チャネルで、世界の半導体ファブとAIデータセンターを追跡。軌道データと開示資料をクロスチェックし、公式発表の数週間前にインサイトを提供します。</span>
+    </p>
+    <div class="hero-actions">
+      <a href="#" onclick="openModal();return false;" class="btn btn-primary">
+        <span class="en">Join the Waitlist</span>
+        <span class="ko">대기 등록하기</span><span class="ja">ウェイトリストに登録</span>
+      </a>
+      <a href="/monitoring/" class="btn btn-outline">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="5 3 19 12 5 21 5 3"/></svg>
+        <span class="en">See Dashboard</span>
+        <span class="ko">대시보드 보기</span><span class="ja">ダッシュボードを見る</span>
+      </a>
+      <a href="/reports/" class="btn btn-outline">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>
+        <span class="en">Sample Reports</span><span class="ko">샘플 리포트 보기</span><span class="ja">サンプルレポートを見る</span>
+      </a>
+    </div>
+    <div class="stats-bar">
+      <div class="stat">
+        <div class="stat-num"><span class="highlight">24</span></div>
+        <div class="stat-label"><span class="en">Semiconductor Fabs</span><span class="ko">반도체 팹</span><span class="ja">半導体ファブ</span></div>
+      </div>
+      <div class="stat">
+        <div class="stat-num"><span class="highlight">9</span>+</div>
+        <div class="stat-label"><span class="en">AI Data Centers</span><span class="ko">AI 데이터센터</span><span class="ja">AIデータセンター</span></div>
+      </div>
+      <div class="stat">
+        <div class="stat-num"><span class="highlight">6</span></div>
+        <div class="stat-label"><span class="en">Satellite Channels</span><span class="ko">위성 채널</span><span class="ja">衛星チャネル</span></div>
+      </div>
+      <div class="stat">
+        <div class="stat-num"><span class="highlight">3</span></div>
+        <div class="stat-label"><span class="en">Reports Published</span><span class="ko">발행 리포트</span><span class="ja">発行レポート</span></div>
+      </div>
+    </div>
+  </div>
+</section>

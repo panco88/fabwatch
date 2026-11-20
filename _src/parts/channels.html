@@ -1,0 +1,96 @@
+
+<!-- 6 CHANNELS -->
+<section class="channels section" id="how-it-works" style="position:relative;overflow:hidden;">
+  <!-- Fab building silhouette -->
+  <svg class="fab-illustration" viewBox="0 0 500 200" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <!-- Main fab building -->
+    <rect x="50" y="40" width="180" height="160" rx="2" fill="white"/>
+    <rect x="55" y="50" width="30" height="25" rx="1" fill="white" opacity="0.7"/>
+    <rect x="90" y="50" width="30" height="25" rx="1" fill="white" opacity="0.7"/>
+    <rect x="125" y="50" width="30" height="25" rx="1" fill="white" opacity="0.7"/>
+    <rect x="160" y="50" width="30" height="25" rx="1" fill="white" opacity="0.7"/>
+    <rect x="55" y="85" width="30" height="25" rx="1" fill="white" opacity="0.6"/>
+    <rect x="90" y="85" width="30" height="25" rx="1" fill="white" opacity="0.6"/>
+    <rect x="125" y="85" width="30" height="25" rx="1" fill="white" opacity="0.6"/>
+    <rect x="160" y="85" width="30" height="25" rx="1" fill="white" opacity="0.6"/>
+    <!-- Cleanroom tower -->
+    <rect x="240" y="20" width="60" height="180" rx="2" fill="white"/>
+    <rect x="248" y="30" width="15" height="10" rx="1" fill="white" opacity="0.5"/>
+    <rect x="268" y="30" width="15" height="10" rx="1" fill="white" opacity="0.5"/>
+    <!-- Chimney / exhaust -->
+    <rect x="255" y="0" width="8" height="20" fill="white"/>
+    <rect x="272" y="5" width="6" height="15" fill="white" opacity="0.8"/>
+    <!-- Cooling tower -->
+    <path d="M340,200 L340,100 Q365,80 390,100 L390,200 Z" fill="white"/>
+    <!-- Piping -->
+    <line x1="230" y1="140" x2="340" y2="140" stroke="white" stroke-width="3" opacity="0.5"/>
+    <line x1="230" y1="160" x2="340" y2="160" stroke="white" stroke-width="2" opacity="0.4"/>
+    <!-- Small utility building -->
+    <rect x="410" y="140" width="60" height="60" rx="2" fill="white"/>
+    <rect x="420" y="150" width="15" height="12" rx="1" fill="white" opacity="0.6"/>
+    <rect x="445" y="150" width="15" height="12" rx="1" fill="white" opacity="0.6"/>
+    <!-- Ground line -->
+    <line x1="0" y1="200" x2="500" y2="200" stroke="white" stroke-width="1" opacity="0.3"/>
+  </svg>
+  <div class="inner">
+    <div class="section-label"><span class="en">How It Works</span><span class="ko">작동 원리</span><span class="ja">仕組み</span></div>
+    <h2 class="section-title reveal">
+      <span class="en">Six eyes on every fab</span>
+      <span class="ko">모든 팹에 6개의 눈</span><span class="ja">すべてのファブに6つの目を</span>
+    </h2>
+    <p class="section-desc">
+      <span class="en">Each channel detects a different physical signal. Together, they form a complete operational picture no single sensor can provide.</span>
+      <span class="ko">각 채널은 서로 다른 물리적 신호를 감지합니다. 함께 작동하면 단일 센서로는 불가능한 완전한 운영 현황을 파악합니다.</span><span class="ja">各チャネルは異なる物理シグナルを検知します。組み合わせることで、単一センサーでは得られない操業の全体像を把握できます。</span>
+    </p>
+    <div class="channel-grid">
+      <div class="channel-card">
+        <div class="channel-name"><span class="channel-dot" style="background:#FBBF24;"></span> <span class="en">Nightlight</span><span class="ko">야간조명</span><span class="ja">夜間光</span></div>
+        <div class="channel-source">VIIRS/DNB</div>
+        <div class="channel-desc">
+          <span class="en">24/7 illumination intensity tracks operational shifts. A 30% radiance drop over two weeks flags a potential line shutdown — before any quarterly filing mentions it.</span>
+          <span class="ko">24시간 조명 강도로 가동 패턴을 추적합니다. 2주간 복사 에너지 30% 하락은 라인 셧다운 가능성 — 분기 공시에 언급되기 전에 포착합니다.</span><span class="ja">24時間の照明強度から稼働パターンを追跡します。2週間で放射輝度が30%低下すればライン停止の可能性 — 四半期開示で触れられる前に捉えます。</span>
+        </div>
+      </div>
+      <div class="channel-card">
+        <div class="channel-name"><span class="channel-dot" style="background:#38BDF8;"></span> <span class="en">SAR Radar</span><span class="ko">SAR 레이더</span><span class="ja">SARレーダー</span></div>
+        <div class="channel-source">Sentinel-1</div>
+        <div class="channel-desc">
+          <span class="en">Synthetic aperture radar sees through clouds, day or night. A +0.4 dB backscatter jump means steel is going up — new cleanroom structures show on radar months before ribbon-cutting announcements.</span>
+          <span class="ko">합성개구레이더는 구름과 낮밤을 관통합니다. 후방산란 +0.4 dB 상승은 철골 구조 시공 중 — 새 클린룸이 준공식 발표 수개월 전에 레이더에 포착됩니다.</span><span class="ja">合成開口レーダーは雲や昼夜に関係なく観測できます。後方散乱が+0.4 dB上昇すれば鉄骨工事が進行中 — 新しいクリーンルームが竣工式の発表の数か月前にレーダーに映ります。</span>
+        </div>
+      </div>
+      <div class="channel-card">
+        <div class="channel-name"><span class="channel-dot" style="background:#EF4444;"></span> <span class="en">Thermal IR</span><span class="ko">열적외선</span><span class="ja">熱赤外</span></div>
+        <div class="channel-source">Landsat TIRS</div>
+        <div class="channel-desc">
+          <span class="en">Running fabs emit 2-5°C above ambient. When thermal signatures cool, production is slowing — no survey needed, no disclosure waited for. Physics-based utilization proxy.</span>
+          <span class="ko">가동 중 팹은 주변보다 2-5°C 높습니다. 열 신호가 식으면 감산 중 — 설문도, 공시 대기도 필요 없습니다. 물리 기반 가동률 프록시.</span><span class="ja">稼働中のファブは周辺より2〜5°C高温です。熱シグナルが下がれば減産中 — アンケートも開示待ちも不要。物理に基づく稼働率の代理指標です。</span>
+        </div>
+      </div>
+      <div class="channel-card">
+        <div class="channel-name"><span class="channel-dot" style="background:#A78BFA;"></span> NO&#8322;</div>
+        <div class="channel-source">Sentinel-5P TROPOMI</div>
+        <div class="channel-desc">
+          <span class="en">Cleanroom etching and chemical vapor deposition emit NO2. Daily TROPOMI readings at 5.5 km resolution track fab-level activity — a molecular fingerprint of semiconductor manufacturing.</span>
+          <span class="ko">클린룸 식각과 CVD 공정이 NO2를 배출합니다. 5.5km 해상도의 일일 TROPOMI 측정으로 팹 단위 활동을 추적 — 반도체 제조의 분자 지문입니다.</span><span class="ja">クリーンルームのエッチングやCVD工程はNO2を排出します。5.5 km解像度のTROPOMI日次観測でファブ単位の活動を追跡 — 半導体製造の分子レベルの指紋です。</span>
+        </div>
+      </div>
+      <div class="channel-card">
+        <div class="channel-name"><span class="channel-dot" style="background:#4ADE80;"></span> <span class="en">Vegetation</span><span class="ko">식생지수</span><span class="ja">植生指数</span></div>
+        <div class="channel-source">Sentinel-2 NDVI</div>
+        <div class="channel-desc">
+          <span class="en">NDVI drops from 0.6 to 0.1 when ground is cleared for a new fab. The earliest signal of construction — 3-6 months before any permit filing or press release.</span>
+          <span class="ko">새 팹 부지 조성 시 NDVI가 0.6에서 0.1로 하락합니다. 건축 허가나 보도자료보다 3-6개월 빠른 최초 착공 신호입니다.</span><span class="ja">新しいファブ用地の造成でNDVIは0.6から0.1に低下します。建築許可やプレスリリースより3〜6か月早い、最初の着工シグナルです。</span>
+        </div>
+      </div>
+      <div class="channel-card">
+        <div class="channel-name"><span class="channel-dot" style="background:#FB923C;"></span> <span class="en">Optical</span><span class="ko">광학영상</span><span class="ja">光学画像</span></div>
+        <div class="channel-source">Sentinel-2 RGB</div>
+        <div class="channel-desc">
+          <span class="en">10m-resolution true-color imagery confirms site layout and construction milestones. Side-by-side before/after comparisons that make the story visible to any stakeholder.</span>
+          <span class="ko">10m 해상도 트루컬러 영상으로 부지 배치와 건설 진행을 확인합니다. 전후 비교 영상으로 누구나 이해할 수 있는 시각적 증거를 제공합니다.</span><span class="ja">10m解像度のトゥルーカラー画像で敷地配置と建設の進捗を確認します。前後比較画像で、誰にでも分かる視覚的な証拠を示します。</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

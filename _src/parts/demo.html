@@ -1,0 +1,189 @@
+
+<!-- DEMO DASHBOARD -->
+<section class="demo-section section" id="demo">
+  <div class="inner">
+    <div class="section-label"><span class="en">Live Demo</span><span class="ko">데모 대시보드</span><span class="ja">デモ・ダッシュボード</span></div>
+    <h2 class="section-title reveal">
+      <span class="en">See the dashboard in action</span>
+      <span class="ko">대시보드를 직접 확인하세요</span><span class="ja">ダッシュボードを実際にご覧ください</span>
+    </h2>
+    <p class="section-desc">
+      <span class="en">A preview of the FabWatch monitoring dashboard. Real interface, sample data.</span>
+      <span class="ko">FabWatch 모니터링 대시보드의 미리보기입니다. 실제 인터페이스, 샘플 데이터.</span><span class="ja">FabWatchモニタリング・ダッシュボードのプレビューです。実際のインターフェース、サンプルデータ。</span>
+    </p>
+    <div class="demo-frame">
+      <div class="demo-titlebar">
+        <div class="demo-dots">
+          <span style="background:#EF4444;"></span>
+          <span style="background:#FBBF24;"></span>
+          <span style="background:#22C55E;"></span>
+        </div>
+        <div class="demo-url">app.fabwatch.io/dashboard</div>
+        <span class="demo-badge-live">LIVE DEMO</span>
+      </div>
+      <div class="demo-body">
+        <div class="demo-grid">
+          <!-- Sidebar -->
+          <div class="demo-sidebar">
+            <div class="demo-nav-item active" onclick="switchDemoTab(this,'overview')">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/></svg>
+              <span class="en">Overview</span><span class="ko">전체 현황</span><span class="ja">全体概況</span>
+            </div>
+            <div class="demo-nav-item" onclick="switchDemoTab(this,'map')">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M2 12h20"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10A15.3 15.3 0 0 1 12 2z"/></svg>
+              <span class="en">Fab Map</span><span class="ko">팹 지도</span><span class="ja">ファブマップ</span>
+            </div>
+            <div class="demo-nav-item" onclick="switchDemoTab(this,'signals')">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 20V10"/><path d="M12 20V4"/><path d="M6 20v-6"/></svg>
+              <span class="en">Signals</span><span class="ko">신호 분석</span><span class="ja">シグナル分析</span>
+            </div>
+            <div class="demo-nav-item" onclick="switchDemoTab(this,'reports')">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>
+              <span class="en">Reports</span><span class="ko">리포트</span><span class="ja">レポート</span>
+            </div>
+            <div class="demo-nav-item" onclick="switchDemoTab(this,'alerts')">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"/><path d="M13.73 21a2 2 0 0 1-3.46 0"/></svg>
+              <span class="en">Alerts</span><span class="ko">알림</span><span class="ja">アラート</span>
+            </div>
+            <div class="demo-nav-item" onclick="switchDemoTab(this,'datacenters')">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="2" width="20" height="8" rx="2"/><rect x="2" y="14" width="20" height="8" rx="2"/><circle cx="6" cy="6" r="1"/><circle cx="6" cy="18" r="1"/></svg>
+              <span class="en">Data Centers</span><span class="ko">데이터센터</span><span class="ja">データセンター</span>
+            </div>
+          </div>
+          <!-- Main content -->
+          <div class="demo-main">
+            <!-- VIEW: Overview (default) -->
+            <div class="demo-view active" id="demo-overview">
+            <!-- Stats row (populated from JSON) -->
+            <div class="demo-stats-row" id="demo-stats-row"></div>
+            <!-- Chart area -->
+            <div class="demo-chart">
+              <div class="demo-chart-title" id="demo-chart-title"></div>
+              <div class="demo-bars" id="demo-chart-bars"></div>
+              <div id="demo-channel-dots" style="text-align:center;margin-top:8px;"></div>
+            </div>
+            <!-- Fab filter -->
+            <div class="demo-filter-bar">
+              <button class="demo-filter-btn active" onclick="filterFabs(this,'all')"><span class="en">All</span><span class="ko">전체</span><span class="ja">すべて</span></button>
+              <button class="demo-filter-btn" onclick="filterFabs(this,'kr')">KR</button>
+              <button class="demo-filter-btn" onclick="filterFabs(this,'tw')">TW</button>
+              <button class="demo-filter-btn" onclick="filterFabs(this,'cn')">CN</button>
+              <button class="demo-filter-btn" onclick="filterFabs(this,'us')">US</button>
+              <button class="demo-filter-btn" onclick="filterFabs(this,'jp')">JP</button>
+              <button class="demo-filter-btn" onclick="filterFabs(this,'eu')">EU</button>
+              <button class="demo-filter-btn" onclick="filterFabs(this,'sg')">SG</button>
+            </div>
+            <!-- Fab list -->
+            <div class="demo-fab-list" id="demo-fab-table">
+              <div class="demo-fab-header">
+                <span><span class="en">Fab</span><span class="ko">팹</span><span class="ja">ファブ</span></span>
+                <span><span class="en">Status</span><span class="ko">상태</span><span class="ja">ステータス</span></span>
+                <span><span class="en">Nightlight</span><span class="ko">야간조명</span><span class="ja">夜間光</span></span>
+                <span><span class="en">Change</span><span class="ko">변화</span><span class="ja">変化</span></span>
+              </div>
+              <!-- Fab rows populated from JSON -->
+            </div>
+            </div><!-- /demo-overview -->
+            <!-- VIEW: Fab Map -->
+            <div class="demo-view" id="demo-map">
+              <div class="demo-map-placeholder">
+                <div style="text-align:center;">
+                  <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="#475569" stroke-width="1.5"><circle cx="12" cy="12" r="10"/><path d="M2 12h20"/><path d="M12 2a15.3 15.3 0 014 10 15.3 15.3 0 01-4 10 15.3 15.3 0 01-4-10 15.3 15.3 0 014-10z"/></svg>
+                  <div style="margin-top:8px;"><span class="en">Interactive map with 24 fabs</span><span class="ko">24개 팹 인터랙티브 지도</span><span class="ja">24ファブのインタラクティブマップ</span></div>
+                  <div style="font-size:11px;color:#334155;margin-top:4px;"><span class="en">Available in full dashboard</span><span class="ko">풀 대시보드에서 이용 가능</span><span class="ja">フル版ダッシュボードで利用可能</span></div>
+                </div>
+              </div>
+            </div>
+            <!-- VIEW: Signals -->
+            <div class="demo-view" id="demo-signals">
+              <!-- Signal cards populated from JSON -->
+            </div>
+            <!-- VIEW: Reports -->
+            <div class="demo-view" id="demo-reports">
+              <div style="display:flex;flex-direction:column;gap:10px;">
+                <div style="padding:12px;background:rgba(255,255,255,0.03);border:1px solid rgba(255,255,255,0.06);border-radius:8px;display:flex;gap:12px;align-items:center;">
+                  <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#38BDF8" stroke-width="2"><path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/><path d="M14 2v6h6"/></svg>
+                  <div><div style="font-size:13px;color:#E2E8F0;font-weight:600;"><span class="en">[Example] Fab Deep Dive</span><span class="ko">[예시] 팹 심층 분석</span><span class="ja">［例］ファブ詳細分析</span></div><div style="font-size:11px;color:#64748B;">2026-11-04 · PDF · 24 pages</div></div>
+                </div>
+                <div style="padding:12px;background:rgba(255,255,255,0.03);border:1px solid rgba(255,255,255,0.06);border-radius:8px;display:flex;gap:12px;align-items:center;">
+                  <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#F59E0B" stroke-width="2"><path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/><path d="M14 2v6h6"/></svg>
+                  <div><div style="font-size:13px;color:#E2E8F0;font-weight:600;"><span class="en">[Example] Country Fab Monthly</span><span class="ko">[예시] 국가별 팹 월간 리포트</span><span class="ja">［例］国別ファブ月次レポート</span></div><div style="font-size:11px;color:#64748B;">2026-10-28 · PDF · 18 pages</div></div>
+                </div>
+                <div style="padding:12px;background:rgba(255,255,255,0.03);border:1px solid rgba(255,255,255,0.06);border-radius:8px;display:flex;gap:12px;align-items:center;">
+                  <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#22C55E" stroke-width="2"><path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/><path d="M14 2v6h6"/></svg>
+                  <div><div style="font-size:13px;color:#E2E8F0;font-weight:600;"><span class="en">[Example] Construction Progress Report</span><span class="ko">[예시] 건설 진척 리포트</span><span class="ja">［例］建設進捗レポート</span></div><div style="font-size:11px;color:#64748B;">2026-10-21 · PDF · 12 pages</div></div>
+                </div>
+              </div>
+            </div>
+            <!-- VIEW: Alerts -->
+            <div class="demo-view" id="demo-alerts">
+              <div style="display:flex;flex-direction:column;gap:8px;">
+                <div style="padding:10px 12px;background:rgba(239,68,68,0.08);border:1px solid rgba(239,68,68,0.2);border-radius:8px;font-size:13px;">
+                  <div style="color:#F87171;font-weight:600;margin-bottom:2px;">⚠ <span class="en">[Example] Fab A (China)</span><span class="ko">[예시] 팹 A (중국)</span><span class="ja">［例］ファブA（中国）</span> — <span class="en">Nightlight drop -8.7%</span><span class="ko">야간조명 -8.7% 하락</span><span class="ja">夜間光 -8.7% 低下</span></div>
+                  <div style="color:#94A3B8;font-size:11px;">2026-11-08 · <span class="en">Possible utilization cut</span><span class="ko">가동률 하락 가능성</span><span class="ja">稼働率低下の可能性</span></div>
+                </div>
+                <div style="padding:10px 12px;background:rgba(245,158,11,0.08);border:1px solid rgba(245,158,11,0.2);border-radius:8px;font-size:13px;">
+                  <div style="color:#FBBF24;font-weight:600;margin-bottom:2px;">⚡ <span class="en">[Example] Fab B (USA)</span><span class="ko">[예시] 팹 B (미국)</span><span class="ja">［例］ファブB（米国）</span> — <span class="en">Construction +34.1%</span><span class="ko">건설 진척 +34.1%</span><span class="ja">建設進捗 +34.1%</span></div>
+                  <div style="color:#94A3B8;font-size:11px;">2026-11-07 · <span class="en">Ahead of schedule</span><span class="ko">일정 앞섬</span><span class="ja">予定より前倒し</span></div>
+                </div>
+                <div style="padding:10px 12px;background:rgba(56,189,248,0.08);border:1px solid rgba(56,189,248,0.2);border-radius:8px;font-size:13px;">
+                  <div style="color:#38BDF8;font-weight:600;margin-bottom:2px;">📊 <span class="en">[Example] Fab C (Japan)</span><span class="ko">[예시] 팹 C (일본)</span><span class="ja">［例］ファブC（日本）</span> — <span class="en">Ramp milestone 87%</span><span class="ko">램프업 87% 돌파</span><span class="ja">ランプアップ87%到達</span></div>
+                  <div style="color:#94A3B8;font-size:11px;">2026-11-06 · <span class="en">Target: 90% by Q1</span><span class="ko">목표: Q1까지 90%</span><span class="ja">目標：Q1までに90%</span></div>
+                </div>
+                <div style="padding:10px 12px;background:rgba(34,197,94,0.08);border:1px solid rgba(34,197,94,0.2);border-radius:8px;font-size:13px;">
+                  <div style="color:#4ADE80;font-weight:600;margin-bottom:2px;">✓ <span class="en">[Example] Fab D (Korea)</span><span class="ko">[예시] 팹 D (한국)</span><span class="ja">［例］ファブD（韓国）</span> — <span class="en">Stable at 94%</span><span class="ko">94% 안정 가동</span><span class="ja">94%で安定稼働</span></div>
+                  <div style="color:#94A3B8;font-size:11px;">2026-11-05 · <span class="en">No change</span><span class="ko">변동 없음</span><span class="ja">変化なし</span></div>
+                </div>
+              </div>
+            </div>
+            <!-- VIEW: Data Centers -->
+            <div class="demo-view" id="demo-datacenters">
+              <div class="demo-stats-row">
+                <div class="demo-stat-card">
+                  <div class="demo-stat-label"><span class="en">Tracked Sites</span><span class="ko">추적 현장</span><span class="ja">追跡拠点</span></div>
+                  <div class="demo-stat-val" style="color:#C084FC;">9</div>
+                  <div class="demo-stat-delta" style="color:var(--accent-warm);"><span class="en">US only (Phase 1)</span><span class="ko">미국만 (1단계)</span><span class="ja">米国のみ（第1段階）</span></div>
+                </div>
+                <div class="demo-stat-card">
+                  <div class="demo-stat-label"><span class="en">Under Construction</span><span class="ko">건설 중</span><span class="ja">建設中</span></div>
+                  <div class="demo-stat-val" style="color:var(--accent-warm);">7</div>
+                  <div class="demo-stat-delta" style="color:var(--accent-green);"><span class="en">2 operational</span><span class="ko">2곳 가동</span><span class="ja">2か所稼働</span></div>
+                </div>
+                <div class="demo-stat-card">
+                  <div class="demo-stat-label"><span class="en">Total Investment</span><span class="ko">총 투자액</span><span class="ja">総投資額</span></div>
+                  <div class="demo-stat-val">$280B+</div>
+                  <div class="demo-stat-delta" style="color:var(--fg-muted);"><span class="en">announced capex</span><span class="ko">발표 투자액</span><span class="ja">発表済み投資額</span></div>
+                </div>
+              </div>
+              <div class="demo-fab-list" style="margin-top:16px;">
+                <div class="demo-fab-header">
+                  <span><span class="en">Data Center</span><span class="ko">데이터센터</span><span class="ja">データセンター</span></span>
+                  <span><span class="en">Owner</span><span class="ko">사업자</span><span class="ja">事業者</span></span>
+                  <span><span class="en">Status</span><span class="ko">상태</span><span class="ja">ステータス</span></span>
+                  <span><span class="en">Signal</span><span class="ko">신호</span><span class="ja">シグナル</span></span>
+                </div>
+                <div class="demo-fab-row"><span>Hyperion, Louisiana</span><span style="color:#C084FC;">Meta</span><span class="demo-status"><span class="dot" style="background:var(--accent-warm);"></span> <span class="en">Building</span><span class="ko">건설 중</span><span class="ja">建設中</span></span><span style="color:var(--accent-warm);">+42.3%</span></div>
+                <div class="demo-fab-row"><span>Stargate, Texas</span><span style="color:#C084FC;">OpenAI/SB</span><span class="demo-status"><span class="dot" style="background:var(--accent-warm);"></span> <span class="en">Site Prep</span><span class="ko">부지 정리</span><span class="ja">用地造成</span></span><span style="color:var(--accent-warm);">+28.6%</span></div>
+                <div class="demo-fab-row"><span>Ashburn Campus, Virginia</span><span style="color:#C084FC;">Microsoft</span><span class="demo-status"><span class="dot" style="background:var(--accent-green);"></span> <span class="en">Operating</span><span class="ko">가동 중</span><span class="ja">稼働中</span></span><span style="color:var(--accent-green);">+3.1%</span></div>
+                <div class="demo-fab-row"><span>Columbus Campus, Ohio</span><span style="color:#C084FC;">Google</span><span class="demo-status"><span class="dot" style="background:var(--accent-warm);"></span> <span class="en">Building</span><span class="ko">건설 중</span><span class="ja">建設中</span></span><span style="color:var(--accent-warm);">+35.7%</span></div>
+                <div class="demo-fab-row"><span>Prometheus, Indiana</span><span style="color:#C084FC;">Meta</span><span class="demo-status"><span class="dot" style="background:var(--accent-warm);"></span> <span class="en">Building</span><span class="ko">건설 중</span><span class="ja">建設中</span></span><span style="color:var(--accent-warm);">+31.2%</span></div>
+                <div class="demo-fab-row"><span>Memphis Gigafactory, TN</span><span style="color:#C084FC;">xAI</span><span class="demo-status"><span class="dot" style="background:var(--accent-green);"></span> <span class="en">Operating</span><span class="ko">가동 중</span><span class="ja">稼働中</span></span><span style="color:var(--accent-green);">+5.8%</span></div>
+                <div class="demo-fab-row"><span>Gluckstadt, Mississippi</span><span style="color:#C084FC;">Amazon</span><span class="demo-status"><span class="dot" style="background:var(--accent-warm);"></span> <span class="en">Building</span><span class="ko">건설 중</span><span class="ja">建設中</span></span><span style="color:var(--accent-warm);">+22.4%</span></div>
+                <div class="demo-fab-row"><span>Sterling, Illinois</span><span style="color:#C084FC;">CoreWeave</span><span class="demo-status"><span class="dot" style="background:var(--accent-warm);"></span> <span class="en">Building</span><span class="ko">건설 중</span><span class="ja">建設中</span></span><span style="color:var(--accent-warm);">+18.9%</span></div>
+                <div class="demo-fab-row"><span>Midlothian, Texas</span><span style="color:#C084FC;">Google</span><span class="demo-status"><span class="dot" style="background:var(--accent-warm);"></span> <span class="en">Site Prep</span><span class="ko">부지 정리</span><span class="ja">用地造成</span></span><span style="color:var(--accent-warm);">+15.3%</span></div>
+              </div>
+              <div style="margin-top:12px;padding:10px 12px;background:rgba(192,132,252,0.06);border:1px solid rgba(192,132,252,0.15);border-radius:8px;font-size:12px;color:#C084FC;">
+                <span class="en">🛰 Data center monitoring uses nightlight + thermal IR + SAR to track construction progress and power consumption. Phase 2 will add Asia-Pacific sites.</span>
+                <span class="ko">🛰 데이터센터 모니터링은 야간조명 + 열적외선 + SAR로 건설 진척과 전력 소비를 추적합니다. 2단계에서 아시아-태평양 현장이 추가됩니다.</span><span class="ja">🛰 データセンターのモニタリングでは、夜間光＋熱赤外＋SARで建設の進捗と電力消費を追跡します。第2段階でアジア太平洋の拠点を追加予定です。</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <p style="text-align:center; margin-top:24px; font-size:14px; color:#94A3B8;">
+      <span class="en">This is a preview with sample data. <a href="#cta" style="color:var(--accent);text-decoration:none;">Sign up free</a> to explore the live dashboard.</span>
+      <span class="ko">샘플 데이터가 포함된 미리보기입니다. <a href="#cta" style="color:var(--accent);text-decoration:none;">무료 가입</a> 후 실제 대시보드를 탐색하세요.</span><span class="ja">サンプルデータを含むプレビューです。<a href="#cta" style="color:var(--accent);text-decoration:none;">無料登録</a>して、実際のダッシュボードをお試しください。</span>
+    </p>
+  </div>
+</section>
