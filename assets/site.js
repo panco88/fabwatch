@@ -15,6 +15,9 @@
   });
 })();
 function getLang() {
+  // 주소에 ?lang=ko 처럼 붙이면 그 언어로 연다 (링크 공유·화면 캡처용)
+  var q = (location.search.match(/[?&]lang=(en|ko|ja)(?![a-z])/) || [])[1];
+  if (q) { try { localStorage.setItem('fabwatch-lang', q); } catch(e) {} return q; }
   try { var l = localStorage.getItem('fabwatch-lang'); return (l === 'ko' || l === 'ja' || l === 'en') ? l : 'en'; } catch(e) { return 'en'; }
 }
 function setLang(lang) {
@@ -560,3 +563,13 @@ function initDemoData() {
   }, { threshold: 0.3 });
   observer.observe(bars);
 })();
+
+// 2026-11-20 휴대폰 접는 메뉴
+function toggleNavMenu(force) {
+  var nav = document.querySelector('nav'); if (!nav) return;
+  var open = (typeof force === 'boolean') ? force : !nav.classList.contains('menu-open');
+  nav.classList.toggle('menu-open', open);
+  var b = document.querySelector('.nav-burger'); if (b) b.setAttribute('aria-expanded', open ? 'true' : 'false');
+}
+document.addEventListener('keydown', function(e) { if (e.key === 'Escape') toggleNavMenu(false); });
+window.addEventListener('resize', function() { if (innerWidth > 820) toggleNavMenu(false); });

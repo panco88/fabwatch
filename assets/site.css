@@ -1086,3 +1086,22 @@ footer a:hover { color: #FFFFFF; }
 @media (min-width: 1440px) {
   .inner { max-width: 1320px; }
 }
+
+/* 2026-11-20 홈 상품 카드 그림 */
+.svc-shot { display:block; border-radius:10px; overflow:hidden; border:1px solid var(--border); background:#0B1628; aspect-ratio:960/611; box-shadow: var(--card-shadow); transition: transform .2s; }
+.svc-shot:hover, .svc-covers:hover { transform: translateY(-2px); }
+.svc-shot img { width:100%; height:100%; object-fit:cover; object-position:top left; display:block; }
+.svc-covers { display:flex; gap:14px; aspect-ratio:960/611; padding:18px; border-radius:10px; background:var(--surface-alt); border:1px solid var(--border); transition: transform .2s; text-decoration:none; }
+.svc-cover { flex:1; border-radius:6px; overflow:hidden; background:#fff; box-shadow:0 4px 14px rgba(15,23,42,.12); }
+.svc-cover:nth-child(2) { transform: translateY(10px); }
+.svc-cover img { width:100%; height:100%; object-fit:cover; object-position:left top; display:block; }
+
+/* 2026-11-20 휴대폰 접는 메뉴 */
+.nav-burger-li { display:none; }
+.nav-burger { background:none; border:1px solid rgba(255,255,255,0.18); color:#E2E8F0; border-radius:6px; width:36px; height:34px; display:grid; place-items:center; cursor:pointer; padding:0; }
+.nav-drawer { display:none; border-top:1px solid rgba(255,255,255,0.08); padding:8px 16px 16px; }
+.nav-drawer a { display:block; padding:13px 4px; color:#CBD5E1; text-decoration:none; font-size:16px; border-bottom:1px solid rgba(255,255,255,0.06); }
+.nav-drawer a[aria-current="page"] { color:#FFFFFF; font-weight:600; }
+.nav-drawer a.nav-drawer-cta { border-bottom:none; margin-top:10px; text-align:center; background:var(--accent); color:var(--hero-bg); border-radius:8px; font-weight:600; }
+nav.menu-open .nav-drawer { display:block; }
+@media (max-width: 820px) { .nav-burger-li { display:list-item; list-style:none; } }

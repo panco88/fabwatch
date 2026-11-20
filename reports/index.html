@@ -19,7 +19,7 @@
 <link rel="canonical" href="https://fabwatch.co.kr/reports/">
 <meta name="claude:viewport-fit-sides" content="cover">
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800;900&family=IBM+Plex+Sans:wght@300;400;500;600&family=IBM+Plex+Mono:wght@400;500&family=Noto+Sans+KR:wght@300;400;500;600;700;900&family=Noto+Sans+JP:wght@300;400;500;600;700;900&display=swap">
-<link rel="stylesheet" href="/assets/site.css?v=ccfa489e">
+<link rel="stylesheet" href="/assets/site.css?v=36c7d8e3">
 </head>
 <body>
 
@@ -39,7 +39,15 @@
       <li><a href="/about/" class="hide-mobile" data-nav="about"><span class="en">About</span><span class="ko">회사 소개</span><span class="ja">会社概要</span></a></li>
       <li><select class="lang-toggle" onchange="setLang(this.value)" aria-label="Language"><option value="en">EN</option><option value="ko">KO</option><option value="ja">JA</option></select></li>
       <li><a href="#" onclick="openModal();return false;" class="nav-cta"><span class="en">Get Early Access</span><span class="ko">얼리 액세스</span><span class="ja">アーリーアクセス</span></a></li>
+      <li class="nav-burger-li"><button type="button" class="nav-burger" aria-label="Menu" aria-expanded="false" aria-controls="navDrawer" onclick="toggleNavMenu()"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="4" y1="7" x2="20" y2="7"/><line x1="4" y1="12" x2="20" y2="12"/><line x1="4" y1="17" x2="20" y2="17"/></svg></button></li>
     </ul>
+  </div>
+  <div class="nav-drawer" id="navDrawer">
+    <a href="/monitoring/" data-nav="monitoring"><span class="en">Monitoring Dashboard</span><span class="ko">모니터링 대시보드</span><span class="ja">モニタリング・ダッシュボード</span></a>
+    <a href="/reports/" data-nav="reports"><span class="en">Sample Reports</span><span class="ko">샘플 리포트</span><span class="ja">サンプルレポート</span></a>
+    <a href="/pricing/" data-nav="pricing"><span class="en">Pricing</span><span class="ko">요금제</span><span class="ja">料金</span></a>
+    <a href="/about/" data-nav="about"><span class="en">About</span><span class="ko">회사 소개</span><span class="ja">会社概要</span></a>
+    <a href="#" onclick="toggleNavMenu(false);openModal();return false;" class="nav-drawer-cta"><span class="en">Join the Waitlist</span><span class="ko">대기 등록하기</span><span class="ja">ウェイトリストに登録</span></a>
   </div>
 </nav>
 
@@ -586,6 +594,6 @@
   </div>
 </footer>
 
-<script src="/assets/site.js?v=95b2eee2"></script>
+<script src="/assets/site.js?v=91bb88e3"></script>
 </body>
 </html>
