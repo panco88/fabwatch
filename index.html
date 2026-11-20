@@ -1,3 +1,6 @@
+<!DOCTYPE html>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
 <!-- Google Analytics (GA4) -->
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-8E0SRTKMRB"></script>
 <script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','G-8E0SRTKMRB');</script>
@@ -141,6 +144,19 @@ body::before {
 @media (max-width: 720px) {
   .nav-links { gap: 10px; }
   .nav-links .hide-mobile { display: none; }
+  .nav-cta { white-space: nowrap; padding: 7px 12px; }
+}
+@media (max-width: 420px) {
+  .nav-links .hide-xs { display: none; }
+  .nav-inner { gap: 8px; }
+  .nav-links { gap: 6px; }
+  .logo { font-size: 18px; gap: 6px; }
+  .logo-icon { width: 24px; height: 24px; }
+  .lang-toggle { padding: 4px 8px; font-size: 12px; }
+  .nav-cta { padding: 6px 10px; font-size: 12px !important; }
+}
+@media (max-width: 360px) {
+  .logo-icon { display: none; }
 }
 
 /* HERO */
@@ -1052,7 +1068,7 @@ footer a:hover { color: #FFFFFF; }
       <li><a href="#services" class="hide-mobile"><span class="en">Services</span><span class="ko">서비스</span></a></li>
       <li><a href="#demo" class="hide-mobile"><span class="en">Demo</span><span class="ko">데모</span></a></li>
       <li><a href="#map" class="hide-mobile"><span class="en">Coverage</span><span class="ko">커버리지</span></a></li>
-      <li><a href="#pricing"><span class="en">Pricing</span><span class="ko">요금제</span></a></li>
+      <li><a href="#pricing" class="hide-xs"><span class="en">Pricing</span><span class="ko">요금제</span></a></li>
       <li><a href="#" onclick="openModal();return false;" class="hide-mobile" style="color:#94A3B8;"><span class="en">Join Waitlist</span><span class="ko">대기 등록</span></a></li>
       <li><button class="lang-toggle" onclick="toggleLang()">KO / EN</button></li>
       <li><a href="#" onclick="openModal();return false;" class="nav-cta"><span class="en">Get Early Access</span><span class="ko">얼리 액세스</span></a></li>
